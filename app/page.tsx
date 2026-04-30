@@ -6,10 +6,11 @@ import {
   useInView,
   useMotionValue,
   useTransform,
+  useReducedMotion,
   animate as framerAnimate,
   type Variants,
 } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /* ============================================================
    True Calling — Landing Page
@@ -161,7 +162,7 @@ function Navbar() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a href="#" aria-label="True Calling — accueil" className="cursor-pointer">
+        <a href="/" aria-label="True Calling — accueil" className="cursor-pointer">
           <Logo />
         </a>
 
@@ -328,17 +329,17 @@ function AuroraBackground() {
       {/* Blob 1 — magenta */}
       <div
         aria-hidden
-        className="absolute left-[10%] top-[10%] size-[60vw] max-w-[820px] rounded-full bg-accent/40 blur-[110px] animate-blob-1"
+        className="absolute left-[10%] top-[10%] size-[60vw] max-w-[820px] rounded-full bg-accent/40 blur-[60px] sm:blur-[110px] animate-blob-1"
       />
       {/* Blob 2 — navy surface */}
       <div
         aria-hidden
-        className="absolute right-[5%] top-[35%] size-[55vw] max-w-[740px] rounded-full bg-surface/70 blur-[120px] animate-blob-2"
+        className="absolute right-[5%] top-[35%] size-[55vw] max-w-[740px] rounded-full bg-surface/70 blur-[60px] sm:blur-[120px] animate-blob-2"
       />
       {/* Blob 3 — soft accent low */}
       <div
         aria-hidden
-        className="absolute bottom-[-10%] left-[30%] size-[50vw] max-w-[680px] rounded-full bg-accent/25 blur-[140px] animate-blob-1"
+        className="absolute bottom-[-10%] left-[30%] size-[50vw] max-w-[680px] rounded-full bg-accent/25 blur-[70px] sm:blur-[140px] animate-blob-1"
         style={{ animationDelay: "-8s" }}
       />
       {/* Subtle vignette */}
@@ -489,19 +490,29 @@ const WHATSAPP_MSG =
 function ProductDemo() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { once: false, margin: "-100px" });
+  const reduced = useReducedMotion();
   const [step, setStep] = useState(0); // 0..3
   const [runId, setRunId] = useState(0); // bumps to restart
 
-  // Step machine
+  // Step machine — disabled when user prefers reduced motion (jumps to final state)
   useEffect(() => {
     if (!inView) return;
+    if (reduced) {
+      setStep(3);
+      return;
+    }
     setStep(0);
-    const t1 = setTimeout(() => setStep(1), 3000); // 0 -> 1 at 3s
-    const t2 = setTimeout(() => setStep(2), 7000); // 1 -> 2 at 7s
-    const t3 = setTimeout(() => setStep(3), 10000); // 2 -> 3 at 10s
-    const t4 = setTimeout(() => setRunId((r) => r + 1), 13000); // loop at 13s
-    return () => [t1, t2, t3, t4].forEach(clearTimeout);
-  }, [inView, runId]);
+    const t1 = setTimeout(() => setStep(1), 3000);
+    const t2 = setTimeout(() => setStep(2), 7000);
+    const t3 = setTimeout(() => setStep(3), 10000);
+    const t4 = setTimeout(() => setRunId((r) => r + 1), 13000);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+    };
+  }, [inView, runId, reduced]);
 
   return (
     <section
@@ -598,9 +609,13 @@ function DemoStage({ step, runId }: { step: number; runId: number }) {
         <ResultsList step={step} runId={runId} />
       </div>
 
-      {/* Right column — WhatsApp panel */}
+      {/* Right column — WhatsApp panel + response toast */}
       <div className="relative">
-        <WhatsAppPanel step={step} runId={runId} />
+        <AnimatePresence mode="wait">
+          {step >= 2 && (
+            <WhatsAppPanel key={`wa-${runId}`} runId={runId} showResponse={step >= 3} />
+          )}
+        </AnimatePresence>
         <AnimatePresence>
           {step >= 3 && <ResponseToast key={`toast-${runId}`} />}
         </AnimatePresence>
@@ -677,7 +692,7 @@ function ResultsList({ step, runId }: { step: number; runId: number }) {
       </div>
 
       <div className="flex flex-col gap-2">
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout">
           {showCards &&
             CANDIDATES.map((c, i) => (
               <CandidateCard
@@ -747,36 +762,31 @@ function CandidateCard({
 
 function ScoreBadge({ value }: { value: number }) {
   const mv = useMotionValue(0);
-  const rounded = useTransform(mv, (v) => Math.round(v));
-  const [display, setDisplay] = useState(0);
+  const rounded = useTransform(mv, (v) => `${Math.round(v)}%`);
 
   useEffect(() => {
     const controls = framerAnimate(mv, value, { duration: 0.8, ease: [0.22, 1, 0.36, 1] });
-    const unsub = rounded.on("change", (v) => setDisplay(v as number));
-    return () => {
-      controls.stop();
-      unsub();
-    };
-  }, [value, mv, rounded]);
+    return () => controls.stop();
+  }, [value, mv]);
 
   return (
     <div className="ml-1 flex size-11 shrink-0 items-center justify-center rounded-full bg-accent/15 ring-1 ring-accent/40">
-      <span className="text-[12px] font-semibold tabular-nums text-accent">{display}%</span>
+      <motion.span className="text-[12px] font-semibold tabular-nums text-accent">
+        {rounded}
+      </motion.span>
     </div>
   );
 }
 
-/* --- Step 3: WhatsApp panel slide-in + typewriter --- */
-function WhatsAppPanel({ step, runId }: { step: number; runId: number }) {
-  const open = step >= 2;
-  const startTyping = step >= 2;
+/* --- Step 3: WhatsApp panel slide-in + typewriter ---
+   Mounts/unmounts per loop (keyed by runId at parent), so the typewriter
+   reliably restarts each cycle.
+*/
+function WhatsAppPanel({ runId, showResponse }: { runId: number; showResponse: boolean }) {
+  void runId; // key forces remount; effect runs once on mount
   const [typed, setTyped] = useState("");
 
   useEffect(() => {
-    if (!startTyping) {
-      setTyped("");
-      return;
-    }
     setTyped("");
     let i = 0;
     const id = setInterval(() => {
@@ -785,81 +795,76 @@ function WhatsAppPanel({ step, runId }: { step: number; runId: number }) {
       if (i >= WHATSAPP_MSG.length) clearInterval(id);
     }, 24);
     return () => clearInterval(id);
-  }, [startTyping, runId]);
+  }, []);
 
   return (
-    <AnimatePresence>
-      {open && (
+    <motion.div
+      initial={{ opacity: 0, x: 30 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 30 }}
+      transition={{ type: "spring", stiffness: 220, damping: 26 }}
+      className="absolute inset-0 flex flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-[#0B1A2E]"
+    >
+      {/* Header */}
+      <div className="flex items-center gap-3 border-b border-white/[0.06] bg-[#142A48] px-4 py-3">
+        <div className="flex size-9 items-center justify-center rounded-full bg-[#25D366]">
+          <WhatsAppGlyph />
+        </div>
+        <div className="flex-1">
+          <div className="text-[13px] font-medium text-ink">M. D.</div>
+          <div className="text-[10.5px] text-ink-muted">WhatsApp · en ligne</div>
+        </div>
+        <span className="rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent">
+          Score 96%
+        </span>
+      </div>
+
+      {/* Messages */}
+      <div
+        className="flex-1 space-y-3 overflow-hidden p-4"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)",
+          backgroundSize: "16px 16px",
+        }}
+      >
         <motion.div
-          key={`wa-${runId}`}
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 30 }}
-          transition={{ type: "spring", stiffness: 220, damping: 26 }}
-          className="absolute inset-0 flex flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-[#0B1A2E]"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-accent px-3.5 py-2.5 text-[12.5px] leading-relaxed text-white shadow-[0_8px_24px_-8px_rgba(233,30,140,0.6)]"
         >
-          {/* Header */}
-          <div className="flex items-center gap-3 border-b border-white/[0.06] bg-[#142A48] px-4 py-3">
-            <div className="flex size-9 items-center justify-center rounded-full bg-[#25D366]">
-              <WhatsAppGlyph />
-            </div>
-            <div className="flex-1">
-              <div className="text-[13px] font-medium text-ink">M. D.</div>
-              <div className="text-[10.5px] text-ink-muted">WhatsApp · en ligne</div>
-            </div>
-            <span className="rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent">
-              Score 96%
-            </span>
-          </div>
-
-          {/* Messages */}
-          <div
-            className="flex-1 space-y-3 overflow-hidden p-4"
-            style={{
-              backgroundImage:
-                "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)",
-              backgroundSize: "16px 16px",
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15 }}
-              className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-accent px-3.5 py-2.5 text-[12.5px] leading-relaxed text-white shadow-[0_8px_24px_-8px_rgba(233,30,140,0.6)]"
-            >
-              {typed}
-              {typed.length < WHATSAPP_MSG.length && (
-                <span className="ml-0.5 inline-block h-3 w-[2px] translate-y-0.5 bg-white/80 align-middle animate-pulse" />
-              )}
-            </motion.div>
-
-            {step >= 3 && (
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="max-w-[75%] rounded-2xl rounded-bl-sm bg-white/[0.06] px-3.5 py-2.5 text-[12.5px] leading-relaxed text-ink"
-              >
-                Bonjour, oui avec plaisir. Jeudi 14h ça vous convient&nbsp;?
-              </motion.div>
-            )}
-          </div>
-
-          {/* Composer */}
-          <div className="flex items-center gap-2 border-t border-white/[0.06] bg-[#0F2240] px-3 py-2.5">
-            <div className="flex-1 rounded-full bg-white/[0.04] px-3 py-1.5 text-[11.5px] text-ink-muted">
-              Tapez un message…
-            </div>
-            <div className="flex size-7 items-center justify-center rounded-full bg-accent">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <line x1="22" y1="2" x2="11" y2="13" />
-                <polygon points="22 2 15 22 11 13 2 9 22 2" />
-              </svg>
-            </div>
-          </div>
+          {typed}
+          {typed.length < WHATSAPP_MSG.length && (
+            <span className="ml-0.5 inline-block h-3 w-[2px] translate-y-0.5 bg-white/80 align-middle animate-pulse" />
+          )}
         </motion.div>
-      )}
-    </AnimatePresence>
+
+        {showResponse && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="max-w-[75%] rounded-2xl rounded-bl-sm bg-white/[0.06] px-3.5 py-2.5 text-[12.5px] leading-relaxed text-ink"
+          >
+            Bonjour, oui avec plaisir. Jeudi 14h ça vous convient&nbsp;?
+          </motion.div>
+        )}
+      </div>
+
+      {/* Composer */}
+      <div className="flex items-center gap-2 border-t border-white/[0.06] bg-[#0F2240] px-3 py-2.5">
+        <div className="flex-1 rounded-full bg-white/[0.04] px-3 py-1.5 text-[11.5px] text-ink-muted">
+          Tapez un message…
+        </div>
+        <div className="flex size-7 items-center justify-center rounded-full bg-accent">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <line x1="22" y1="2" x2="11" y2="13" />
+            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+          </svg>
+        </div>
+      </div>
+    </motion.div>
   );
 }
 
@@ -896,59 +901,56 @@ function ResponseToast() {
 /* ----------------------------------------------------------
    PRICING — toggle + 3 tiers
 ---------------------------------------------------------- */
+const TIERS = [
+  {
+    name: "Starter",
+    priceMonthly: 595,
+    tagline: "Pour les équipes qui structurent leur sourcing.",
+    features: [
+      "Jusqu'à 10 fiches de poste",
+      "Outreach multi-canal (WhatsApp, email, téléphone)",
+      "Collaboration d'équipe",
+      "Top Ranking",
+      "EMILY™ AI Copilot",
+      "Employer Branding",
+      "TrueFit 360 Assessment ($5/test)",
+    ],
+    cta: "Commencer",
+    ctaVariant: "outline" as const,
+    highlight: false,
+  },
+  {
+    name: "Core",
+    priceMonthly: 895,
+    tagline: "Pour les équipes qui scalent leurs recrutements.",
+    features: [
+      "Fiches de poste illimitées",
+      "Tout ce qui est dans Starter",
+      "1 intégration ATS",
+      "Workflows IA personnalisés",
+    ],
+    cta: "Réserver une démo",
+    ctaVariant: "primary" as const,
+    highlight: true,
+  },
+  {
+    name: "Enterprise",
+    priceMonthly: null,
+    tagline: "Pour les grandes organisations.",
+    features: [
+      "Tout ce qui est dans Core",
+      "Intégrations ATS illimitées",
+      "Recherche avancée",
+      "Accompagnement dédié",
+    ],
+    cta: "Nous contacter",
+    ctaVariant: "outline" as const,
+    highlight: false,
+  },
+];
+
 function Pricing() {
   const [annual, setAnnual] = useState(false);
-
-  const tiers = useMemo(
-    () => [
-      {
-        name: "Starter",
-        priceMonthly: 595,
-        tagline: "Pour les équipes qui structurent leur sourcing.",
-        features: [
-          "Jusqu'à 10 fiches de poste",
-          "Outreach multi-canal (WhatsApp, email, téléphone)",
-          "Collaboration d'équipe",
-          "Top Ranking",
-          "EMILY™ AI Copilot",
-          "Employer Branding",
-          "TrueFit 360 Assessment ($5/test)",
-        ],
-        cta: "Commencer",
-        ctaVariant: "outline" as const,
-        highlight: false,
-      },
-      {
-        name: "Core",
-        priceMonthly: 895,
-        tagline: "Pour les équipes qui scalent leurs recrutements.",
-        features: [
-          "Fiches de poste illimitées",
-          "Tout ce qui est dans Starter",
-          "1 intégration ATS",
-          "Workflows IA personnalisés",
-        ],
-        cta: "Réserver une démo",
-        ctaVariant: "primary" as const,
-        highlight: true,
-      },
-      {
-        name: "Enterprise",
-        priceMonthly: null,
-        tagline: "Pour les grandes organisations.",
-        features: [
-          "Tout ce qui est dans Core",
-          "Intégrations ATS illimitées",
-          "Recherche avancée",
-          "Accompagnement dédié",
-        ],
-        cta: "Nous contacter",
-        ctaVariant: "outline" as const,
-        highlight: false,
-      },
-    ],
-    []
-  );
 
   return (
     <section id="pricing" className="relative py-28 sm:py-36 border-t border-white/[0.06]">
@@ -974,7 +976,7 @@ function Pricing() {
         </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-3 lg:items-stretch">
-          {tiers.map((t, i) => (
+          {TIERS.map((t, i) => (
             <motion.div
               key={t.name}
               initial={{ opacity: 0, y: 24 }}
@@ -1034,9 +1036,15 @@ function Pricing() {
 
 function BillingToggle({ annual, onChange }: { annual: boolean; onChange: (v: boolean) => void }) {
   return (
-    <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] p-1 backdrop-blur-md">
+    <div
+      role="radiogroup"
+      aria-label="Période de facturation"
+      className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] p-1 backdrop-blur-md"
+    >
       <button
         type="button"
+        role="radio"
+        aria-checked={!annual}
         onClick={() => onChange(false)}
         className={`relative cursor-pointer rounded-full px-4 py-1.5 text-sm transition-colors ${
           !annual ? "text-bg" : "text-ink-muted hover:text-ink"
@@ -1053,6 +1061,8 @@ function BillingToggle({ annual, onChange }: { annual: boolean; onChange: (v: bo
       </button>
       <button
         type="button"
+        role="radio"
+        aria-checked={annual}
         onClick={() => onChange(true)}
         className={`relative cursor-pointer rounded-full px-4 py-1.5 text-sm transition-colors ${
           annual ? "text-bg" : "text-ink-muted hover:text-ink"
@@ -1084,8 +1094,8 @@ function FinalCTA() {
     <section className="relative overflow-hidden py-28 sm:py-36">
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-bg via-surface to-accent/40" />
-        <div className="absolute -left-20 top-10 size-[60vw] max-w-[700px] rounded-full bg-accent/40 blur-[110px] animate-blob-1" />
-        <div className="absolute -right-10 bottom-0 size-[55vw] max-w-[640px] rounded-full bg-fuchsia-500/35 blur-[120px] animate-blob-2" />
+        <div className="absolute -left-20 top-10 size-[60vw] max-w-[700px] rounded-full bg-accent/40 blur-[60px] sm:blur-[110px] animate-blob-1" />
+        <div className="absolute -right-10 bottom-0 size-[55vw] max-w-[640px] rounded-full bg-fuchsia-500/35 blur-[70px] sm:blur-[120px] animate-blob-2" />
       </div>
 
       <div className="mx-auto max-w-4xl px-5 sm:px-8 text-center">

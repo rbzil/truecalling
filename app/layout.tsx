@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -9,13 +9,14 @@ const inter = Inter({
 });
 
 const siteUrl = "https://truecalling.app";
-const title = "True Calling — Sourcing IA, matching et outreach pour les recruteurs";
+const titleDefault = "True Calling — Sourcing IA, matching et outreach pour les recruteurs";
 const description =
   "True Calling combine sourcing IA, matching intelligent et outreach multi-canal pour transformer le recrutement en conversations qui aboutissent.";
+const ogImage = "/brand/truecalling-vertical.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title,
+  title: { default: titleDefault, template: "%s · True Calling" },
   description,
   alternates: {
     canonical: "/",
@@ -25,16 +26,24 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     siteName: "True Calling",
-    title,
+    title: titleDefault,
     description,
     locale: "fr_FR",
+    images: [{ url: ogImage, width: 1080, height: 1080, alt: "True Calling — Hire with precision" }],
   },
   twitter: {
     card: "summary_large_image",
-    title,
+    title: titleDefault,
     description,
+    images: [ogImage],
   },
   robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0A1628",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -45,13 +54,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     description,
+    url: siteUrl,
+    image: `${siteUrl}${ogImage}`,
+    inLanguage: "fr-FR",
     offers: {
       "@type": "AggregateOffer",
       priceCurrency: "USD",
       lowPrice: "595",
       highPrice: "895",
+      offerCount: "3",
     },
-    inLanguage: "fr-FR",
   };
 
   return (
