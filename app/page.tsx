@@ -5,15 +5,18 @@ import {
   motion,
   useInView,
   useMotionValue,
+  useSpring,
   useTransform,
-  useReducedMotion,
   animate as framerAnimate,
+  type MotionValue,
   type Variants,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { useT } from "./_i18n/locale-context";
+import { LanguageSwitcher } from "./_i18n/language-switcher";
 
 /* ============================================================
-   True Calling — Landing Page
+   TrueCalling — Landing Page
    Single-file page (sub-components below) per user spec.
    Stack: Next.js 14 App Router + TS + Tailwind + Framer Motion
    ============================================================ */
@@ -24,6 +27,8 @@ export default function Page() {
       <Navbar />
       <Hero />
       <Features />
+      <HowItWorks />
+      <Benefits />
       <ProductDemo />
       <Pricing />
       <FinalCTA />
@@ -120,7 +125,7 @@ function Logo({
           className="font-bold uppercase tracking-[0.06em]"
           style={{ color: wordColor, fontSize: size * 0.62, letterSpacing: "0.04em" }}
         >
-          True Calling
+          TrueCalling
         </span>
         {showTagline && (
           <span
@@ -147,10 +152,16 @@ function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const t = useT();
   const links = [
-    { label: "Fonctionnalités", href: "#features" },
-    { label: "Démo", href: "#demo" },
-    { label: "Tarifs", href: "#pricing" },
+    { label: t("nav_features"), href: "/#features" },
+    { label: t("nav_how"), href: "/#how-it-works" },
+    { label: t("nav_benefits"), href: "/#benefits" },
+    { label: t("nav_demo"), href: "/#demo" },
+    { label: t("nav_pricing"), href: "/#pricing" },
+    { label: t("nav_blog"), href: "/blog" },
+    { label: t("nav_faq"), href: "/faq" },
+    { label: t("nav_contact"), href: "/contact" },
   ];
 
   return (
@@ -161,32 +172,38 @@ function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a href="/" aria-label="True Calling — accueil" className="cursor-pointer">
+      <div className="flex h-16 items-center justify-between px-5 sm:px-8">
+        {/* Far left: logo + name */}
+        <a href="/" aria-label="TrueCalling — accueil" className="shrink-0 cursor-pointer">
           <Logo />
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        {/* Center: nav links pill */}
+        <nav className="hidden items-center gap-0.5 rounded-full border border-white/[0.06] bg-white/[0.02] p-1 backdrop-blur-md xl:flex">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-ink-muted transition-colors hover:text-ink cursor-pointer"
+              className="whitespace-nowrap rounded-full px-2.5 py-1.5 text-[12px] font-medium text-ink-muted transition-colors hover:bg-white/[0.06] hover:text-ink cursor-pointer 2xl:px-3.5 2xl:text-[13px]"
             >
               {l.label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        {/* Far right: language switcher + login + primary CTA */}
+        <div className="flex shrink-0 items-center gap-2.5">
+          <LanguageSwitcher />
           <a
-            href="#"
-            className="hidden text-sm text-ink-muted transition-colors hover:text-ink sm:inline-block cursor-pointer"
+            href="https://truecalling.vercel.app/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden h-9 items-center rounded-full border border-white/15 bg-white/[0.03] px-4 text-[13px] font-medium text-ink transition-colors hover:border-white/30 hover:bg-white/[0.06] sm:inline-flex cursor-pointer"
           >
-            Se connecter
+            {t("nav_login")}
           </a>
-          <CTAButton href="#demo" size="sm">
-            Réserver une démo
+          <CTAButton href="/reserver-une-demo" size="sm">
+            {t("nav_book")}
           </CTAButton>
         </div>
       </div>
@@ -256,9 +273,7 @@ function CTAButton({
    HERO — Aurora gradient + H1 + subtitle + CTAs
 ---------------------------------------------------------- */
 function Hero() {
-  // Variantes alternatives de H1 (gardées en commentaire pour A/B):
-  // "Recrutez sans chasser."
-  // "L'IA trouve. Vous choisissez. Ils répondent."
+  const t = useT();
   return (
     <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-24">
       <AuroraBackground />
@@ -270,7 +285,7 @@ function Hero() {
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-xs text-ink-muted backdrop-blur-md"
           >
             <span className="size-1.5 rounded-full bg-accent shadow-[0_0_12px_rgba(233,30,140,0.8)]" />
-            Sourcing IA pour équipes recrutement
+            {t("hero_badge")}
           </motion.div>
 
           <motion.h1
@@ -278,11 +293,10 @@ function Hero() {
             className="max-w-5xl text-balance font-semibold leading-[1.02] tracking-tighter2"
             style={{ fontSize: "clamp(3rem, 6.5vw, 5.5rem)" }}
           >
-            Le bon candidat.{" "}
-            <span className="text-ink-muted">Au bon moment.</span>
+            {t("hero_h1_a")}{" "}
             <br className="hidden sm:block" />
             <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
-              Sur le bon canal.
+              {t("hero_h1_b")}
             </span>
           </motion.h1>
 
@@ -290,16 +304,15 @@ function Hero() {
             variants={fadeUp}
             className="mt-7 max-w-2xl text-balance text-base leading-relaxed text-ink-muted sm:text-lg"
           >
-            True Calling combine sourcing IA, matching intelligent et outreach multi-canal pour
-            transformer le recrutement en conversations qui aboutissent.
+            {t("hero_subtitle")}
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
-            <CTAButton href="#pricing" size="lg">
-              Réserver une démo
+            <CTAButton href="/reserver-une-demo" size="lg">
+              {t("hero_cta_demo")}
             </CTAButton>
             <CTAButton href="#demo" size="lg" variant="outline">
-              <PlayIcon /> Voir la démo produit
+              <PlayIcon /> {t("hero_cta_video")}
             </CTAButton>
           </motion.div>
 
@@ -307,7 +320,7 @@ function Hero() {
             variants={fadeUp}
             className="mt-14 flex flex-col items-center gap-4 text-xs uppercase tracking-[0.2em] text-ink-muted/70"
           >
-            <span>Utilisé par des équipes recrutement de</span>
+            <span>{t("hero_social")}</span>
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 opacity-60">
               {["Lattice", "Notion", "Alan", "Doctolib", "Qonto", "Spendesk"].map((c) => (
                 <span key={c} className="text-sm font-semibold tracking-normal text-white/55">
@@ -323,36 +336,247 @@ function Hero() {
 }
 
 function AuroraBackground() {
+  // Mouse-following spotlight via motion values + spring smoothing
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mx = useMotionValue(50);
+  const my = useMotionValue(20);
+  const smoothX = useSpring(mx, { stiffness: 60, damping: 18, mass: 0.6 });
+  const smoothY = useSpring(my, { stiffness: 60, damping: 18, mass: 0.6 });
+  const spotlight = useTransform(
+    [smoothX, smoothY] as unknown as MotionValue<number>[],
+    ([x, y]) =>
+      `radial-gradient(600px circle at ${x}% ${y}%, rgba(233,30,140,0.22), transparent 55%)`,
+  );
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const onMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      mx.set(((e.clientX - rect.left) / rect.width) * 100);
+      my.set(((e.clientY - rect.top) / rect.height) * 100);
+    };
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, [mx, my]);
+
+  // Static-but-randomized particles (deterministic seed → SSR-safe)
+  const particles = [
+    { left: 12, top: 22, delay: 0, size: 4 },
+    { left: 28, top: 78, delay: 1.2, size: 3 },
+    { left: 41, top: 34, delay: 2.4, size: 5 },
+    { left: 58, top: 68, delay: 0.8, size: 3 },
+    { left: 71, top: 18, delay: 3.1, size: 4 },
+    { left: 84, top: 55, delay: 1.7, size: 5 },
+    { left: 19, top: 60, delay: 2.9, size: 3 },
+    { left: 92, top: 30, delay: 0.4, size: 4 },
+    { left: 36, top: 88, delay: 4.2, size: 3 },
+    { left: 65, top: 8, delay: 2.0, size: 5 },
+  ];
+
   return (
-    <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+    <div ref={containerRef} className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
       <div className="absolute inset-0 bg-bg" />
-      {/* Blob 1 — magenta */}
-      <div
+
+      {/* Slow rotating conic halo behind everything */}
+      <motion.div
         aria-hidden
-        className="absolute left-[10%] top-[10%] size-[60vw] max-w-[820px] rounded-full bg-accent/40 blur-[60px] sm:blur-[110px] animate-blob-1"
+        className="absolute left-1/2 top-1/2 size-[140vw] max-w-[1800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.22] blur-3xl"
+        style={{
+          background:
+            "conic-gradient(from 0deg at 50% 50%, transparent, #E91E8C 25%, transparent 50%, #1B3A5C 75%, transparent)",
+        }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
       />
-      {/* Blob 2 — navy surface */}
-      <div
+
+      {/* Blob 1 — magenta, scale + drift */}
+      <motion.div
         aria-hidden
-        className="absolute right-[5%] top-[35%] size-[55vw] max-w-[740px] rounded-full bg-surface/70 blur-[60px] sm:blur-[120px] animate-blob-2"
+        className="absolute left-[8%] top-[8%] size-[55vw] max-w-[780px] rounded-full bg-accent/45 blur-[60px] sm:blur-[110px]"
+        animate={{
+          x: [0, 60, -30, 0],
+          y: [0, -40, 30, 0],
+          scale: [1, 1.15, 0.95, 1],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
+
+      {/* Blob 2 — navy surface, counter motion */}
+      <motion.div
+        aria-hidden
+        className="absolute right-[5%] top-[28%] size-[55vw] max-w-[740px] rounded-full bg-surface/80 blur-[60px] sm:blur-[120px]"
+        animate={{
+          x: [0, -50, 40, 0],
+          y: [0, 50, -20, 0],
+          scale: [1, 1.2, 0.9, 1],
+        }}
+        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+      />
+
       {/* Blob 3 — soft accent low */}
+      <motion.div
+        aria-hidden
+        className="absolute bottom-[-12%] left-[28%] size-[55vw] max-w-[720px] rounded-full bg-accent/30 blur-[70px] sm:blur-[140px]"
+        animate={{
+          x: [0, 40, -40, 0],
+          y: [0, -30, 20, 0],
+          scale: [1, 1.18, 0.92, 1],
+        }}
+        transition={{ duration: 24, repeat: Infinity, ease: "easeInOut", delay: -4 }}
+      />
+
+      {/* Blob 4 — fuchsia top-right, new */}
+      <motion.div
+        aria-hidden
+        className="absolute right-[20%] top-[-10%] size-[40vw] max-w-[520px] rounded-full bg-fuchsia-500/30 blur-[60px] sm:blur-[110px]"
+        animate={{
+          x: [0, -60, 30, 0],
+          y: [0, 50, -20, 0],
+          scale: [1, 0.85, 1.15, 1],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: -7 }}
+      />
+
+      {/* Mouse-following spotlight */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 mix-blend-screen"
+        style={{ backgroundImage: spotlight }}
+      />
+
+      {/* Floating particles drifting upward */}
+      {particles.map((p, i) => (
+        <motion.span
+          key={i}
+          aria-hidden
+          className="absolute rounded-full bg-accent shadow-[0_0_12px_rgba(233,30,140,0.7)]"
+          style={{
+            left: `${p.left}%`,
+            top: `${p.top}%`,
+            width: p.size,
+            height: p.size,
+          }}
+          animate={{
+            y: [0, -60, 0],
+            opacity: [0, 0.85, 0],
+            scale: [0.6, 1.1, 0.6],
+          }}
+          transition={{
+            duration: 8 + (i % 3),
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: p.delay,
+          }}
+        />
+      ))}
+
+      {/* Comet streak — diagonally across once every ~12s */}
+      <motion.div
+        aria-hidden
+        className="absolute -left-[15%] top-[22%] h-[2px] w-[260px] rotate-[18deg] bg-gradient-to-r from-transparent via-pink-300 to-transparent"
+        animate={{ x: ["0vw", "130vw"], opacity: [0, 1, 0] }}
+        transition={{
+          duration: 2.4,
+          repeat: Infinity,
+          repeatDelay: 9,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      />
+      <motion.div
+        aria-hidden
+        className="absolute -left-[15%] top-[64%] h-[1px] w-[180px] -rotate-[12deg] bg-gradient-to-r from-transparent via-pink-200 to-transparent"
+        animate={{ x: ["0vw", "130vw"], opacity: [0, 0.85, 0] }}
+        transition={{
+          duration: 2.8,
+          repeat: Infinity,
+          repeatDelay: 13,
+          delay: 5,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      />
+
+      {/* Soft radial vignette — much wider falloff than before */}
       <div
         aria-hidden
-        className="absolute bottom-[-10%] left-[30%] size-[50vw] max-w-[680px] rounded-full bg-accent/25 blur-[70px] sm:blur-[140px] animate-blob-1"
-        style={{ animationDelay: "-8s" }}
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 90% 70% at 50% 35%, transparent 35%, rgba(10,22,40,0.55) 75%, rgba(10,22,40,0.95) 100%)",
+        }}
       />
-      {/* Subtle vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,#0A1628_85%)]" />
-      {/* Noise / grid feel */}
+      {/* Smooth bottom blend into next section — eliminates the hard cut */}
       <div
-        className="absolute inset-0 opacity-[0.04] mix-blend-overlay"
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-[45%]"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent 0%, rgba(10,22,40,0.4) 35%, rgba(10,22,40,0.85) 75%, #0A1628 100%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-[0.035] mix-blend-overlay"
         style={{
           backgroundImage:
             "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
           backgroundSize: "44px 44px",
         }}
       />
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------
+   Section ambience — soft glowing orbs at section transitions
+   to keep the aurora vibe flowing through the whole page.
+---------------------------------------------------------- */
+function SectionAmbience({
+  top = false,
+  bottom = false,
+  intensity = 0.4,
+}: {
+  top?: boolean;
+  bottom?: boolean;
+  intensity?: number;
+}) {
+  return (
+    <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden>
+      {top && (
+        <>
+          <motion.div
+            className="absolute -top-[30%] left-[10%] size-[55vw] max-w-[700px] rounded-full bg-accent blur-[110px]"
+            style={{ opacity: intensity * 0.4 }}
+            animate={{
+              x: [0, 50, -30, 0],
+              y: [0, 30, -20, 0],
+              scale: [1, 1.1, 0.95, 1],
+            }}
+            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute -top-[40%] right-[5%] size-[50vw] max-w-[640px] rounded-full bg-fuchsia-500 blur-[120px]"
+            style={{ opacity: intensity * 0.25 }}
+            animate={{
+              x: [0, -40, 30, 0],
+              y: [0, 40, -20, 0],
+              scale: [1, 0.95, 1.1, 1],
+            }}
+            transition={{ duration: 26, repeat: Infinity, ease: "easeInOut", delay: -6 }}
+          />
+        </>
+      )}
+      {bottom && (
+        <motion.div
+          className="absolute -bottom-[30%] left-1/2 size-[60vw] max-w-[760px] -translate-x-1/2 rounded-full bg-accent blur-[110px]"
+          style={{ opacity: intensity * 0.35 }}
+          animate={{
+            x: [-30, 30, -30],
+            scale: [1, 1.12, 1],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
+      )}
     </div>
   );
 }
@@ -398,74 +622,811 @@ function CheckIcon({ className }: { className?: string }) {
   );
 }
 
+/* ----- Extended icon set used by Features, HowItWorks and Benefits ----- */
+function BrainIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M9.5 2A2.5 2.5 0 0 0 7 4.5v15A2.5 2.5 0 0 0 9.5 22a2.5 2.5 0 0 0 2.5-2.5V4.5A2.5 2.5 0 0 0 9.5 2z" />
+      <path d="M14.5 2A2.5 2.5 0 0 1 17 4.5v15a2.5 2.5 0 0 1-2.5 2.5 2.5 2.5 0 0 1-2.5-2.5V4.5A2.5 2.5 0 0 1 14.5 2z" />
+      <path d="M3 10h4M3 14h4M17 10h4M17 14h4" />
+    </svg>
+  );
+}
+function DatabaseIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <ellipse cx="12" cy="5" rx="9" ry="3" />
+      <path d="M3 5v6c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
+      <path d="M3 11v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6" />
+    </svg>
+  );
+}
+function WhatsAppCircleIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M20.52 3.48A11.94 11.94 0 0 0 12 0C5.37 0 0 5.37 0 12a11.94 11.94 0 0 0 1.62 6L0 24l6.18-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12a11.94 11.94 0 0 0-3.48-8.52zM12 21.82a9.8 9.8 0 0 1-5-1.36l-.36-.21-3.66.96.98-3.57-.24-.37A9.83 9.83 0 1 1 12 21.82zm5.4-7.36c-.3-.15-1.74-.86-2-.96-.27-.1-.46-.15-.66.15s-.76.96-.93 1.16-.34.22-.64.07a8.05 8.05 0 0 1-2.37-1.46 8.86 8.86 0 0 1-1.64-2.04c-.17-.3 0-.46.13-.6.13-.13.3-.34.45-.5.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52s-.66-1.6-.9-2.18c-.24-.58-.48-.5-.66-.5h-.56a1.07 1.07 0 0 0-.78.36 3.27 3.27 0 0 0-1.02 2.43 5.7 5.7 0 0 0 1.18 3 13 13 0 0 0 4.92 4.36c.69.3 1.23.48 1.65.6a4 4 0 0 0 1.83.12 3 3 0 0 0 1.97-1.4 2.45 2.45 0 0 0 .17-1.4c-.07-.13-.27-.2-.57-.35z" />
+    </svg>
+  );
+}
+function BoltIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+    </svg>
+  );
+}
+function RobotIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="8" width="18" height="12" rx="3" />
+      <circle cx="9" cy="14" r="1.5" fill="currentColor" />
+      <circle cx="15" cy="14" r="1.5" fill="currentColor" />
+      <path d="M12 4v4M9 4h6" />
+    </svg>
+  );
+}
+function CalendarIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="18" rx="2" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="8" y1="2" x2="8" y2="6" />
+      <line x1="3" y1="10" x2="21" y2="10" />
+    </svg>
+  );
+}
+function SparkleIconSmall() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="text-accent" aria-hidden="true">
+      <path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z" />
+    </svg>
+  );
+}
+function UploadIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="17 8 12 3 7 8" />
+      <line x1="12" y1="3" x2="12" y2="15" />
+    </svg>
+  );
+}
+function UsersGroupIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  );
+}
+function ChatBubbleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </svg>
+  );
+}
+function TransferIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="17 1 21 5 17 9" />
+      <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+      <polyline points="7 23 3 19 7 15" />
+      <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+    </svg>
+  );
+}
+function ClockIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
+    </svg>
+  );
+}
+function DollarIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="12" y1="1" x2="12" y2="23" />
+      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+    </svg>
+  );
+}
+function TrendingUpIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+      <polyline points="17 6 23 6 23 12" />
+    </svg>
+  );
+}
+function ShieldIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  );
+}
+function RocketIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+      <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+      <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+    </svg>
+  );
+}
+function TwoWayIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="17 1 21 5 17 9" />
+      <line x1="3" y1="5" x2="21" y2="5" />
+      <polyline points="7 23 3 19 7 15" />
+      <line x1="3" y1="19" x2="21" y2="19" />
+    </svg>
+  );
+}
+function SyncIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="23 4 23 10 17 10" />
+      <polyline points="1 20 1 14 7 14" />
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+    </svg>
+  );
+}
+function CogIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="3" />
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9 1.65 1.65 0 0 0 4.27 7.18l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+    </svg>
+  );
+}
+
 /* ----------------------------------------------------------
-   FEATURES — 3 cards
+   FEATURES — 6 cards (Core Capabilities) + Meet EMILY subsection
 ---------------------------------------------------------- */
 function Features() {
   const features = [
+    { icon: <BrainIcon />, title: "Intelligence des talents explicable", desc: "Nos modèles IA analysent l'expérience, les compétences et les signaux contextuels des candidats pour identifier la meilleure adéquation — et expliquent pourquoi." },
+    { icon: <SparkleIcon />, title: "EMILY™ — copilote IA de sourcing", desc: "EMILY engage et qualifie les candidats sur WhatsApp avant même que les recruteurs n'entrent dans la conversation." },
+    { icon: <TargetIcon />, title: "Matching candidat multi-couches", desc: "Les candidats sont classés par analyse sémantique et signaux contextuels — pas seulement par mots-clés." },
+    { icon: <DatabaseIcon />, title: "1,2 Md+ profils candidats", desc: "Accédez à plus de 1,2 milliard de profils sourcés à l'échelle mondiale, mis à jour en continu." },
+    { icon: <WhatsAppCircleIcon />, title: "Engagez les candidats sur WhatsApp", desc: "Touchez les candidats où ils sont vraiment actifs, avec des relances et des suivis automatisés." },
+    { icon: <BoltIcon />, title: "Découverte sémantique de talents", desc: "Trouvez les candidats pertinents en quelques minutes grâce à la recherche domain-aware et l'intelligence sémantique." },
+  ];
+
+  return (
+    <section id="features" className="relative overflow-hidden py-28 sm:py-36">
+      {/* Ambient bleed from hero — a soft top glow that continues the aurora */}
+      <SectionAmbience top intensity={0.5} />
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
+        <Reveal className="mb-16 text-center">
+          <motion.span variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-accent">
+            Fonctionnalités
+          </motion.span>
+          <motion.h2
+            variants={fadeUp}
+            className="mx-auto mt-3 max-w-3xl text-balance font-semibold leading-[1.05] tracking-tighter2"
+            style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
+          >
+            Capacités cœur de{" "}
+            <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
+              TrueCalling
+            </span>
+          </motion.h2>
+          <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-2xl text-lg text-ink-muted">
+            Sourcing IA, matching et engagement candidat — sur une seule plateforme.
+          </motion.p>
+        </Reveal>
+
+        <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((f, i) => (
+            <motion.div
+              key={f.title}
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 260, damping: 22 }}
+              className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md transition-shadow hover:shadow-[0_0_0_1px_rgba(233,30,140,0.35),0_20px_60px_-20px_rgba(233,30,140,0.35)]"
+            >
+              <motion.div
+                className="mb-6 inline-flex size-11 items-center justify-center rounded-xl bg-accent text-white shadow-[0_8px_20px_-6px_rgba(233,30,140,0.45)]"
+                whileHover={{ rotate: -6, scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 280, damping: 18 }}
+              >
+                {f.icon}
+              </motion.div>
+              <h3 className="text-[17px] font-semibold leading-snug tracking-tight">{f.title}</h3>
+              <p className="mt-3 text-[14.5px] leading-relaxed text-ink-muted">{f.desc}</p>
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -bottom-12 -right-12 size-32 rounded-full bg-accent/10 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                style={{ transitionDelay: `${i * 30}ms` }}
+              />
+            </motion.div>
+          ))}
+        </Reveal>
+
+        <MeetEmily />
+      </div>
+    </section>
+  );
+}
+
+/* ----- Meet EMILY subsection ----- */
+function MeetEmily() {
+  const cards = [
     {
-      icon: <SparkleIcon />,
-      title: "Sourcing piloté par EMILY™",
-      desc: "Notre IA copilote analyse vos briefs, sonde les bons viviers et remonte les profils qui matchent vraiment. Vous arrêtez de chercher, vous commencez à choisir.",
+      icon: <WhatsAppCircleIcon />,
+      title: "90 %+ de taux d'ouverture",
+      desc: "Quand LinkedIn InMail plafonne à 18-25 %, EMILY atteint les candidats là où ils répondent vraiment.",
     },
     {
-      icon: <TargetIcon />,
-      title: "Matching TrueFit 360",
-      desc: "Au-delà du CV : compétences, contexte, soft skills. Chaque candidat reçoit un score de compatibilité avec votre poste, basé sur ce qui compte vraiment pour réussir.",
+      icon: <RobotIcon />,
+      title: "Qualification automatisée",
+      desc: "EMILY pose les bonnes questions, filtre les profils et ne transmet que les candidats qualifiés.",
     },
     {
-      icon: <ChannelsIcon />,
-      title: "Outreach multi-canal",
-      desc: "WhatsApp, email, téléphone — atteignez chaque candidat sur le canal où il répond. Messages pré-rédigés, suivi automatisé, taux de réponse multiplié.",
+      icon: <CalendarIcon />,
+      title: "Planification intégrée",
+      desc: "Relances intelligentes et planification automatique sans intervention humaine.",
     },
   ];
 
   return (
-    <section id="features" className="relative py-28 sm:py-36">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <Reveal className="mb-16 max-w-2xl">
-          <motion.span variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-accent">
-            Plateforme
-          </motion.span>
-          <motion.h2
-            variants={fadeUp}
-            className="mt-3 text-balance font-semibold leading-[1.05] tracking-tighter2"
-            style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)" }}
-          >
-            Trois piliers pour recruter sans friction.
-          </motion.h2>
-          <motion.p variants={fadeUp} className="mt-5 text-lg text-ink-muted">
-            Conçu pour les équipes qui veulent passer moins de temps à chercher et plus de temps à
-            convaincre.
-          </motion.p>
-        </Reveal>
+    <div className="relative mt-32 overflow-hidden rounded-3xl border border-white/[0.06] bg-bg/40 px-5 py-20 sm:px-10 sm:py-24">
+      {/* Soft animated glow background */}
+      <motion.span
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-0 size-[60%] -translate-x-1/2 rounded-full bg-accent/30 blur-[100px]"
+        animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.span
+        aria-hidden
+        className="pointer-events-none absolute -bottom-20 right-[10%] size-[40%] rounded-full bg-fuchsia-500/20 blur-[80px]"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
 
-        <Reveal className="grid grid-cols-1 gap-5 md:grid-cols-3">
-          {features.map((f) => (
+      <Reveal className="relative text-center">
+        <motion.span
+          variants={fadeUp}
+          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-ink-muted backdrop-blur-md"
+        >
+          <SparkleIconSmall /> IA conversationnelle pour WhatsApp
+        </motion.span>
+
+        <motion.h3
+          variants={fadeUp}
+          className="mt-5 font-semibold leading-[1.05] tracking-tighter2"
+          style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
+        >
+          Découvrez{" "}
+          <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
+            EMILY™
+          </span>
+        </motion.h3>
+
+        <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-2xl text-lg text-ink-muted">
+          Le premier copilote IA qui engage les candidats directement sur WhatsApp, avec plus de
+          90 % de taux d'ouverture.
+        </motion.p>
+
+        <Reveal className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
+          {cards.map((c) => (
             <motion.div
-              key={f.title}
+              key={c.title}
               variants={fadeUp}
-              whileHover={{ y: -4, scale: 1.01 }}
+              whileHover={{ y: -3 }}
               transition={{ type: "spring", stiffness: 260, damping: 22 }}
-              className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md transition-shadow hover:shadow-[0_0_0_1px_rgba(233,30,140,0.35),0_20px_60px_-20px_rgba(233,30,140,0.35)]"
+              className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-surface/40 p-7 text-left backdrop-blur-md hover:border-accent/40"
             >
-              <div
-                className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                style={{
-                  background:
-                    "radial-gradient(600px circle at var(--x,50%) var(--y,0%), rgba(233,30,140,0.18), transparent 40%)",
-                }}
-              />
-              <div className="mb-6 inline-flex size-11 items-center justify-center rounded-xl bg-accent/10 text-accent ring-1 ring-accent/30">
-                {f.icon}
-              </div>
-              <h3 className="text-xl font-semibold tracking-tighter2">{f.title}</h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">{f.desc}</p>
+              <motion.div
+                className="mb-5 inline-flex size-11 items-center justify-center rounded-xl bg-accent text-white shadow-[0_8px_20px_-6px_rgba(233,30,140,0.45)]"
+                whileHover={{ rotate: -6, scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 280, damping: 18 }}
+              >
+                {c.icon}
+              </motion.div>
+              <div className="text-[17px] font-semibold tracking-tight">{c.title}</div>
+              <p className="mt-2 text-[14px] leading-relaxed text-ink-muted">{c.desc}</p>
             </motion.div>
           ))}
         </Reveal>
+      </Reveal>
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------
+   HOW IT WORKS — vertical timeline
+---------------------------------------------------------- */
+function HowItWorks() {
+  const steps = [
+    {
+      icon: <UploadIcon />,
+      title: "Définissez vos critères",
+      desc: "Décrivez votre candidat idéal en langage naturel. Notre IA comprend vos exigences instantanément.",
+    },
+    {
+      icon: <BrainIcon />,
+      title: "Lancez la recherche",
+      desc: "Notre IA scanne 1,2 Md+ profils et identifie les meilleurs candidats en quelques minutes.",
+    },
+    {
+      icon: <UsersGroupIcon />,
+      title: "Construisez votre présélection",
+      desc: "Évaluez les candidats avec le score IA (matching, résilience et réputation digitale) et bâtissez votre présélection.",
+    },
+    {
+      icon: <ChatBubbleIcon />,
+      title: "EMILY™ engage les candidats sur WhatsApp",
+      desc: "En un clic, EMILY contacte les candidats sélectionnés sur WhatsApp avec des messages personnalisés.",
+    },
+    {
+      icon: <TransferIcon />,
+      title: "Transfert vers votre ATS",
+      desc: "Les candidats qualifiés sont transférés automatiquement vers votre ATS (Workday, Greenhouse, SAP SuccessFactors, etc.).",
+    },
+  ];
+
+  return (
+    <section id="how-it-works" className="relative overflow-hidden py-28 sm:py-36">
+      <SectionAmbience top intensity={0.35} />
+      <div className="relative mx-auto max-w-5xl px-5 sm:px-8">
+        <Reveal className="mb-20 text-center">
+          <motion.span variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-accent">
+            Comment ça marche
+          </motion.span>
+          <motion.h2
+            variants={fadeUp}
+            className="mx-auto mt-3 max-w-3xl text-balance font-semibold leading-[1.05] tracking-tighter2"
+            style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
+          >
+            Comment fonctionne{" "}
+            <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
+              TrueCalling
+            </span>
+          </motion.h2>
+          <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-ink-muted">
+            Du brief au candidat qualifié, en cinq étapes — sans changer d'outil.
+          </motion.p>
+        </Reveal>
+
+        <Timeline steps={steps} />
       </div>
     </section>
+  );
+}
+
+function Timeline({
+  steps,
+}: {
+  steps: { icon: React.ReactNode; title: string; desc: string }[];
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <div ref={ref} className="relative">
+      {/* Animated central line */}
+      <motion.span
+        aria-hidden
+        initial={{ scaleY: 0 }}
+        animate={inView ? { scaleY: 1 } : { scaleY: 0 }}
+        transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+        style={{ transformOrigin: "top" }}
+        className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-accent/0 via-accent/50 to-accent/0 md:block"
+      />
+
+      <ol className="relative space-y-10 md:space-y-16">
+        {steps.map((s, i) => (
+          <TimelineItem key={s.title} step={s} index={i} total={steps.length} />
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function TimelineItem({
+  step,
+  index,
+  total,
+}: {
+  step: { icon: React.ReactNode; title: string; desc: string };
+  index: number;
+  total: number;
+}) {
+  const ref = useRef<HTMLLIElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const isLeft = index % 2 === 0;
+  void total;
+
+  const card = (
+    <motion.div
+      initial={{ opacity: 0, x: isLeft ? -20 : 20, y: 8 }}
+      animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
+      transition={{ duration: 0.55, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      className={`rounded-2xl border border-white/[0.08] bg-surface/40 p-6 backdrop-blur-md transition-colors hover:border-accent/40 ${
+        isLeft ? "md:text-right" : ""
+      }`}
+    >
+      <div className={`flex items-center gap-3 ${isLeft ? "md:flex-row-reverse" : ""}`}>
+        <span className="inline-flex size-9 items-center justify-center rounded-lg bg-accent/15 text-accent ring-1 ring-accent/30">
+          {step.icon}
+        </span>
+        <h3 className="text-[16px] font-semibold tracking-tight">{step.title}</h3>
+      </div>
+      <p className="mt-3 text-[14px] leading-relaxed text-ink-muted">{step.desc}</p>
+    </motion.div>
+  );
+
+  const dot = (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.4 }}
+      animate={inView ? { opacity: 1, scale: 1 } : {}}
+      transition={{ duration: 0.45, delay: index * 0.1 + 0.15, type: "spring", stiffness: 240, damping: 18 }}
+      className="relative z-10 hidden md:flex md:items-center md:justify-center"
+    >
+      <div className="relative flex size-12 items-center justify-center rounded-full bg-accent text-[13px] font-bold text-white shadow-[0_0_0_4px_rgba(10,22,40,1),0_0_30px_rgba(233,30,140,0.6)]">
+        <motion.span
+          aria-hidden
+          className="absolute inset-0 rounded-full bg-accent"
+          animate={{ scale: [1, 1.5, 1], opacity: [0.45, 0, 0.45] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut", delay: index * 0.3 }}
+        />
+        <span className="relative">{String(index + 1).padStart(2, "0")}</span>
+      </div>
+    </motion.div>
+  );
+
+  return (
+    <li
+      ref={ref}
+      className="relative md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-6"
+    >
+      {/* Mobile-only inline number — always first in DOM, hidden on md+ */}
+      <div className="mb-3 flex items-center gap-2 md:hidden">
+        <span className="flex size-8 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-white">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <span className="h-px flex-1 bg-white/10" />
+      </div>
+
+      {/* Desktop layout — DOM order matches column order so the grid keeps everything on row 1 */}
+      {isLeft ? (
+        <>
+          {card}
+          {dot}
+          <div className="hidden md:block" aria-hidden />
+        </>
+      ) : (
+        <>
+          <div className="hidden md:block" aria-hidden />
+          {dot}
+          {card}
+        </>
+      )}
+    </li>
+  );
+}
+
+/* ----------------------------------------------------------
+   BENEFITS — Stats + ATS integrations + Case study
+---------------------------------------------------------- */
+function Benefits() {
+  return (
+    <section id="benefits" className="relative overflow-hidden py-28 sm:py-36">
+      <SectionAmbience top intensity={0.4} />
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
+        <Reveal className="mb-16 text-center">
+          <motion.span variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-accent">
+            Bénéfices
+          </motion.span>
+          <motion.h2
+            variants={fadeUp}
+            className="mx-auto mt-3 max-w-3xl text-balance font-semibold leading-[1.05] tracking-tighter2"
+            style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
+          >
+            L'impact de{" "}
+            <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
+              TrueCalling
+            </span>
+          </motion.h2>
+          <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-ink-muted">
+            Des résultats mesurables sur l'ensemble de votre workflow de sourcing et de
+            recrutement.
+          </motion.p>
+        </Reveal>
+
+        <StatsGrid />
+        <ATSBlock />
+        <CaseStudyBlock />
+      </div>
+    </section>
+  );
+}
+
+const STATS = [
+  { value: 80, suffix: "%", icon: <ClockIcon />, title: "Sourcing plus rapide", desc: "Trouvez des candidats qualifiés en minutes plutôt qu'en jours." },
+  { value: 90, suffix: "%", icon: <DollarIcon />, title: "Taux d'ouverture WhatsApp", desc: "Engagez les candidats là où ils lisent vraiment leurs messages." },
+  { value: 95, suffix: "%", icon: <TargetIcon />, title: "Précision de matching", desc: "Le score IA identifie le meilleur candidat." },
+  { value: 60, suffix: "%", icon: <TrendingUpIcon />, title: "Coûts de recrutement réduits", desc: "Réduisez le sourcing manuel, l'outreach et le screening." },
+  { value: 70, suffix: "%", icon: <ShieldIcon />, title: "Rétention plus élevée", desc: "Recrutez des candidats alignés avec le poste et la culture." },
+  { value: null, suffix: "∞", icon: <RocketIcon />, title: "Scalabilité illimitée", desc: "Scalez votre recrutement sans agrandir l'équipe." },
+];
+
+function StatsGrid() {
+  return (
+    <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {STATS.map((s, i) => (
+        <motion.div
+          key={s.title}
+          variants={fadeUp}
+          whileHover={{ y: -3 }}
+          transition={{ type: "spring", stiffness: 260, damping: 22 }}
+          className={`group relative overflow-hidden rounded-2xl border bg-surface/40 p-6 backdrop-blur-md transition-colors ${
+            i === 0 ? "border-accent/50 shadow-[0_0_0_1px_rgba(233,30,140,0.35),0_20px_60px_-20px_rgba(233,30,140,0.4)]" : "border-white/[0.08] hover:border-accent/30"
+          }`}
+        >
+          <div className="flex items-start justify-between gap-3">
+            <span className="inline-flex size-10 items-center justify-center rounded-lg bg-white/[0.04] text-accent/80 ring-1 ring-white/[0.06]">
+              {s.icon}
+            </span>
+            <StatNumber value={s.value} suffix={s.suffix} />
+          </div>
+          <h3 className="mt-5 text-[16px] font-semibold tracking-tight">{s.title}</h3>
+          <p className="mt-2 text-[13.5px] leading-relaxed text-ink-muted">{s.desc}</p>
+        </motion.div>
+      ))}
+    </Reveal>
+  );
+}
+
+function StatNumber({ value, suffix }: { value: number | null; suffix: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const mv = useMotionValue(0);
+  const rounded = useTransform(mv, (v) => `${Math.round(v)}${suffix}`);
+  const [display, setDisplay] = useState(value === null ? suffix : `0${suffix}`);
+
+  useEffect(() => {
+    if (value === null || !inView) return;
+    const controls = framerAnimate(mv, value, { duration: 1.4, ease: [0.22, 1, 0.36, 1] });
+    const unsub = rounded.on("change", (v) => setDisplay(String(v)));
+    return () => {
+      controls.stop();
+      unsub();
+    };
+  }, [value, inView, mv, rounded]);
+
+  return (
+    <span
+      ref={ref}
+      className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-3xl font-bold tabular-nums text-transparent sm:text-4xl"
+    >
+      {value === null ? suffix : display}
+    </span>
+  );
+}
+
+/* ----- ATS Integrations block ----- */
+function ATSBlock() {
+  const items = [
+    { icon: <TwoWayIcon />, title: "Synchronisation bidirectionnelle", desc: "Candidats et offres se synchronisent automatiquement entre TrueCalling et votre ATS." },
+    { icon: <BoltIcon />, title: "Mises à jour en temps réel", desc: "Recevez des updates instantanées dès qu'un statut candidat change." },
+    { icon: <SyncIcon />, title: "Statuts mis à jour automatiquement", desc: "Les statuts candidats et offres restent synchronisés sans travail manuel." },
+    { icon: <CogIcon />, title: "Paramètres flexibles", desc: "Personnalisez le mapping et les règles de sync pour matcher votre process." },
+  ];
+
+  return (
+    <div className="mt-24">
+      <Reveal className="mb-12 text-center">
+        <motion.h3
+          variants={fadeUp}
+          className="font-semibold leading-tight tracking-tighter2"
+          style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)" }}
+        >
+          Intégrations ATS{" "}
+          <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
+            sans friction
+          </span>
+        </motion.h3>
+        <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-xl text-lg text-ink-muted">
+          Connectez TrueCalling à votre ATS et conservez votre workflow de recrutement intact.
+        </motion.p>
+      </Reveal>
+
+      <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        {items.map((it) => (
+          <motion.div
+            key={it.title}
+            variants={fadeUp}
+            whileHover={{ y: -3 }}
+            transition={{ type: "spring", stiffness: 260, damping: 22 }}
+            className="rounded-2xl border border-white/[0.08] bg-surface/40 p-6 backdrop-blur-md transition-colors hover:border-accent/30"
+          >
+            <div className="flex items-center gap-3">
+              <motion.span
+                whileHover={{ rotate: -6, scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 280, damping: 18 }}
+                className="inline-flex size-10 items-center justify-center rounded-lg bg-accent text-white shadow-[0_8px_20px_-6px_rgba(233,30,140,0.45)]"
+              >
+                {it.icon}
+              </motion.span>
+              <h4 className="text-[16px] font-semibold tracking-tight">{it.title}</h4>
+            </div>
+            <p className="mt-3 text-[14px] leading-relaxed text-ink-muted">{it.desc}</p>
+          </motion.div>
+        ))}
+      </Reveal>
+
+      <Reveal className="mt-8 rounded-2xl border border-white/[0.06] bg-bg/40 p-6 backdrop-blur-md sm:p-8">
+        <motion.div variants={fadeUp} className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-[11.5px] font-medium text-emerald-300">
+          <CheckIcon className="size-3" /> Compatible avec votre stack actuel
+        </motion.div>
+
+        <motion.div variants={fadeUp} className="mt-2 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-12">
+          {/* TrueCalling node */}
+          <div className="flex flex-col items-center gap-2">
+            <span className="flex size-14 items-center justify-center rounded-xl bg-accent text-white shadow-[0_10px_30px_-8px_rgba(233,30,140,0.55)]">
+              <BoltIcon />
+            </span>
+            <div className="text-center">
+              <div className="text-[14px] font-semibold">TrueCalling</div>
+              <div className="text-[11.5px] text-ink-muted">Sourcing IA</div>
+            </div>
+          </div>
+
+          {/* Animated sync line */}
+          <div className="relative h-px w-32 sm:w-44">
+            <span className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/60 to-accent/0" />
+            <motion.span
+              className="absolute -top-2 left-0 flex size-5 items-center justify-center rounded-full bg-accent/15 text-accent ring-1 ring-accent/40"
+              animate={{ x: ["0%", "100%", "0%"], rotate: [0, 180, 360] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <SyncIcon />
+            </motion.span>
+          </div>
+
+          {/* ATS node */}
+          <div className="flex flex-col items-center gap-2">
+            <span className="flex size-14 items-center justify-center rounded-xl bg-accent text-[12px] font-bold text-white shadow-[0_10px_30px_-8px_rgba(233,30,140,0.55)]">
+              ATS
+            </span>
+            <div className="text-center">
+              <div className="text-[14px] font-semibold">ATS</div>
+              <div className="text-[11.5px] text-ink-muted">Gestion candidats</div>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div variants={fadeUp} className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {[
+            { label: "Candidats", value: "Auto sync" },
+            { label: "Offres", value: "Import / Export" },
+            { label: "Statuts", value: "Temps réel" },
+          ].map((it) => (
+            <div
+              key={it.label}
+              className="rounded-xl border border-white/[0.06] bg-surface/30 px-4 py-3 text-center"
+            >
+              <div className="text-[12.5px] font-semibold text-accent">{it.label}</div>
+              <div className="mt-0.5 text-[12px] text-ink-muted">{it.value}</div>
+            </div>
+          ))}
+        </motion.div>
+      </Reveal>
+    </div>
+  );
+}
+
+/* ----- Case study block ----- */
+function CaseStudyBlock() {
+  const stages = [
+    { label: "Rôle", value: "Senior Data Engineer — Paris" },
+    { label: "Candidats identifiés", value: "26" },
+    { label: "Candidats présélectionnés", value: "11" },
+    { label: "Candidats contactés via WhatsApp", value: "7" },
+    { label: "Réponses sous 24 heures", value: "7" },
+  ];
+
+  return (
+    <div className="mt-24">
+      <Reveal className="mb-12 text-center">
+        <motion.h3
+          variants={fadeUp}
+          className="font-semibold leading-tight tracking-tighter2"
+          style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)" }}
+        >
+          Du sourcing aux candidats qualifiés{" "}
+          <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
+            en quelques heures
+          </span>
+        </motion.h3>
+        <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-xl text-lg text-ink-muted">
+          Voilà à quoi ressemble un vrai workflow de sourcing avec TrueCalling.
+        </motion.p>
+      </Reveal>
+
+      <Reveal className="overflow-hidden rounded-3xl border border-white/[0.08] bg-surface/30 p-7 backdrop-blur-md sm:p-10">
+        <motion.span
+          variants={fadeUp}
+          className="text-[11px] uppercase tracking-[0.2em] text-accent"
+        >
+          Exemple
+        </motion.span>
+        <motion.h4
+          variants={fadeUp}
+          className="mt-2 text-2xl font-semibold tracking-tight"
+        >
+          Du sourcing à la conversation en moins de 24 h
+        </motion.h4>
+
+        <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-10">
+          <motion.ol variants={stagger} className="space-y-4">
+            {stages.map((s, i) => (
+              <motion.li
+                key={s.label}
+                variants={fadeUp}
+                className="flex items-start gap-4"
+              >
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent text-[13px] font-bold text-white">
+                  {i + 1}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="text-[12px] uppercase tracking-[0.14em] text-ink-muted">
+                    {s.label}
+                  </div>
+                  <div className="mt-0.5 text-[15px] font-semibold tracking-tight">{s.value}</div>
+                </div>
+              </motion.li>
+            ))}
+          </motion.ol>
+
+          <motion.div
+            variants={fadeUp}
+            className="relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/15 via-bg/60 to-fuchsia-500/10 p-8 text-center"
+          >
+            <motion.span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(233,30,140,0.25),transparent_60%)]"
+              animate={{ scale: [1, 1.15, 1], opacity: [0.6, 1, 0.6] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <div className="relative">
+              <div className="text-[11px] uppercase tracking-[0.22em] text-accent">Résultat</div>
+              <div className="mt-3 bg-gradient-to-r from-white via-pink-200 to-white bg-clip-text text-7xl font-bold leading-none text-transparent sm:text-8xl">
+                7
+              </div>
+              <p className="mx-auto mt-4 max-w-[18ch] text-[14px] leading-relaxed text-ink-muted">
+                candidats joints en moins de 24 heures
+              </p>
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.blockquote
+          variants={fadeUp}
+          className="mt-10 rounded-2xl border-l-2 border-accent bg-bg/40 p-6 text-[14.5px] leading-relaxed text-ink/90"
+        >
+          <span className="text-accent">«</span> LinkedIn est une base de données ; TrueCalling
+          lance la conversation. Trouver les bonnes personnes est facile, les faire répondre est le
+          vrai défi. En moins de 24 heures, nous avions 7 candidats top dans notre boîte de
+          réception, prêts à parler. C'est un niveau d'engagement que je n'avais jamais vu
+          ailleurs. <span className="text-accent">»</span>
+          <footer className="mt-3 text-[12.5px] not-italic text-ink-muted">
+            — Talent Management Director, Leading IT Services Group, Espagne
+          </footer>
+        </motion.blockquote>
+      </Reveal>
+    </div>
   );
 }
 
@@ -481,6 +1442,7 @@ type Candidate = {
   city: string;
   years: number;
   score: number;
+  locScore: number;
   matched: string[];
   missing: string[];
   avatar: string;
@@ -489,28 +1451,28 @@ type Candidate = {
 const CANDIDATES: Candidate[] = [
   {
     rank: 1, initials: "MD", name: "M. Dubois", role: "Senior Product Designer",
-    company: "Doctolib", city: "Paris", years: 7.2, score: 96,
+    company: "Doctolib", city: "Paris", years: 7.2, score: 96, locScore: 40,
     matched: ["Figma", "Design Systems", "User Research", "Prototyping"],
     missing: [],
     avatar: "from-pink-500 to-fuchsia-600",
   },
   {
     rank: 2, initials: "SK", name: "S. Klein", role: "Lead Product Designer",
-    company: "Alan", city: "Remote FR", years: 5.8, score: 92,
+    company: "Alan", city: "Remote FR", years: 5.8, score: 92, locScore: 40,
     matched: ["Figma", "Design Systems", "User Research", "Prototyping"],
     missing: ["Motion"],
     avatar: "from-violet-500 to-indigo-600",
   },
   {
     rank: 3, initials: "LP", name: "L. Petit", role: "Senior UX Designer",
-    company: "Qonto", city: "Lyon", years: 6.4, score: 88,
+    company: "Qonto", city: "Lyon", years: 6.4, score: 88, locScore: 40,
     matched: ["Figma", "User Research", "Prototyping"],
     missing: ["Design Systems"],
     avatar: "from-cyan-500 to-blue-600",
   },
   {
     rank: 4, initials: "AB", name: "A. Bernard", role: "Product Designer",
-    company: "Spendesk", city: "Bordeaux", years: 4.1, score: 85,
+    company: "Spendesk", city: "Bordeaux", years: 4.1, score: 85, locScore: 40,
     matched: ["Figma", "Design Systems", "Prototyping"],
     missing: ["Accessibility"],
     avatar: "from-amber-500 to-orange-600",
@@ -525,17 +1487,11 @@ const WHATSAPP_MSG =
 function ProductDemo() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { once: false, margin: "-100px" });
-  const reduced = useReducedMotion();
   const [step, setStep] = useState(0); // 0..3
   const [runId, setRunId] = useState(0); // bumps to restart
 
-  // Step machine — disabled when user prefers reduced motion (jumps to final state)
   useEffect(() => {
     if (!inView) return;
-    if (reduced) {
-      setStep(3);
-      return;
-    }
     setStep(0);
     const t1 = setTimeout(() => setStep(1), 3000);
     const t2 = setTimeout(() => setStep(2), 7000);
@@ -547,15 +1503,16 @@ function ProductDemo() {
       clearTimeout(t3);
       clearTimeout(t4);
     };
-  }, [inView, runId, reduced]);
+  }, [inView, runId]);
 
   return (
     <section
       id="demo"
       ref={sectionRef}
-      className="relative py-28 sm:py-36 border-t border-white/[0.06]"
+      className="relative overflow-hidden py-28 sm:py-36"
     >
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <SectionAmbience top intensity={0.3} />
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <Reveal className="mb-14 text-center">
           <motion.span variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-accent">
             Démo produit
@@ -565,7 +1522,7 @@ function ProductDemo() {
             className="mt-3 text-balance font-semibold leading-[1.05] tracking-tighter2"
             style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)" }}
           >
-            Voyez True Calling en action.
+            Du brief au candidat qualifié en quelques minutes.
           </motion.h2>
           <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-ink-muted">
             Du brief au candidat qui répond, en moins d'une minute.
@@ -680,18 +1637,26 @@ function DemoSidebar({ step }: { step: number }) {
   ];
   return (
     <aside className="absolute inset-y-0 left-0 flex w-[58px] flex-col items-center gap-1 border-r border-slate-200 bg-white py-3">
-      <div className="mb-2">
+      <div className="relative mb-2">
         <FingerprintMark size={22} color="#E91E8C" />
+        <span className="absolute -right-0.5 -top-0.5 size-1.5 rounded-full bg-accent shadow-[0_0_6px_rgba(233,30,140,0.7)]" />
       </div>
       {items.map((it) => (
         <div
           key={it.id}
-          className={`flex size-9 items-center justify-center rounded-lg transition-colors ${
+          className={`relative flex size-9 items-center justify-center rounded-lg transition-colors ${
             it.active
               ? "bg-pink-50 text-accent ring-1 ring-pink-100"
               : "text-slate-400"
           }`}
         >
+          {it.active && (
+            <motion.span
+              layoutId="sidebar-active"
+              className="absolute -left-1.5 h-5 w-[3px] rounded-r-full bg-accent"
+              transition={{ type: "spring", stiffness: 280, damping: 26 }}
+            />
+          )}
           {it.icon}
         </div>
       ))}
@@ -861,40 +1826,45 @@ function ResultsView({ step, runId }: { step: number; runId: number }) {
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       className="absolute inset-0 overflow-hidden p-4 sm:p-5"
     >
-      {/* Filter strip */}
-      <div className="mb-3 flex items-center gap-2 text-[10.5px]">
-        <span className="rounded-full bg-pink-50 px-2.5 py-1 font-semibold text-accent ring-1 ring-pink-100">
-          {BRIEF_TITLE}
-        </span>
-        <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700">Paris</span>
-        <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700">Remote</span>
-        <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700">Figma · Design Systems · UX +2</span>
+      {/* Refine search criteria — inline text with pink links */}
+      <div className="mb-3 flex items-center gap-2 text-[11px] text-slate-700">
+        <FilterIcon />
+        <span className="font-semibold text-slate-900">Refine search criteria</span>
+        <span className="text-accent">Paris</span>
+        <span className="text-slate-300">·</span>
+        <span className="text-accent">Figma, Design Systems, User Research, Prototyping</span>
+        <span className="text-slate-300">·</span>
+        <span className="text-accent">Remote, Senior</span>
       </div>
 
       {/* Status line */}
       <div className="mb-3 flex items-center gap-2 text-[11px]">
         {analyzing ? (
           <>
-            <span className="inline-flex gap-0.5">
+            <SparkleIconSm />
+            <span className="font-semibold text-violet-700">
+              AI analysis in progress…{" "}
+              <span className="font-medium text-violet-400">(12/50)</span>
+            </span>
+            <span className="ml-1 inline-flex gap-0.5">
               {[0, 1, 2].map((i) => (
                 <span
                   key={i}
-                  className="size-1 rounded-full bg-accent animate-pulse-soft"
+                  className="size-1 rounded-full bg-violet-500 animate-pulse-soft"
                   style={{ animationDelay: `${i * 0.15}s` }}
                 />
               ))}
             </span>
-            <span className="font-medium text-slate-700">
-              AI analysis in progress…{" "}
-              <span className="text-slate-400">(12/50)</span>
-            </span>
           </>
         ) : (
           <>
-            <span className="size-1.5 rounded-full bg-emerald-500" />
-            <span className="font-medium text-slate-700">
-              50 candidats analysés ·{" "}
-              <span className="text-slate-500">top 4 affichés</span>
+            <span className="relative flex size-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500" />
+            </span>
+            <span className="font-semibold text-slate-700">
+              50 candidats analysés{" "}
+              <span className="font-medium text-slate-500">· top 4 affichés</span>
             </span>
           </>
         )}
@@ -962,9 +1932,10 @@ function ResultCard({
           {c.initials}
         </div>
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <span className="truncate text-[12px] font-semibold text-slate-900">{c.name}</span>
             <ScoreBadge value={c.score} />
+            <LocScoreBadge value={c.locScore} />
             {highlighted && (
               <motion.button
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -1016,12 +1987,57 @@ function ScoreBadge({ value }: { value: number }) {
   }, [value, mv]);
 
   return (
-    <div className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-1.5 py-0.5 ring-1 ring-emerald-100">
-      <span className="size-1 rounded-full bg-emerald-500" />
+    <div className="inline-flex items-center gap-0.5 rounded-full bg-emerald-50 px-1.5 py-0.5 ring-1 ring-emerald-100">
+      <CheckIcon className="size-2.5 text-emerald-600" />
       <motion.span className="text-[10px] font-bold tabular-nums text-emerald-700">
         {rounded}
       </motion.span>
     </div>
+  );
+}
+
+function LocScoreBadge({ value }: { value: number }) {
+  const mv = useMotionValue(0);
+  const rounded = useTransform(mv, (v) => `${Math.round(v)}%`);
+
+  useEffect(() => {
+    const controls = framerAnimate(mv, value, { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 });
+    return () => controls.stop();
+  }, [value, mv]);
+
+  return (
+    <div className="inline-flex items-center gap-0.5 rounded-full bg-cyan-50 px-1.5 py-0.5 ring-1 ring-cyan-100">
+      <GlobeIcon />
+      <motion.span className="text-[10px] font-bold tabular-nums text-cyan-700">
+        {rounded}
+      </motion.span>
+    </div>
+  );
+}
+
+function GlobeIcon() {
+  return (
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-cyan-600" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="2" y1="12" x2="22" y2="12" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    </svg>
+  );
+}
+
+function FilterIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500" aria-hidden="true">
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+    </svg>
+  );
+}
+
+function SparkleIconSm() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-violet-500" aria-hidden="true">
+      <path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z" />
+    </svg>
   );
 }
 
@@ -1062,35 +2078,37 @@ function WhatsAppOverlay({ runId, showResponse }: { runId: number; showResponse:
       animate={{ x: 0 }}
       exit={{ x: "105%" }}
       transition={{ type: "spring", stiffness: 220, damping: 28 }}
-      className="absolute inset-y-0 right-0 flex w-[58%] flex-col border-l border-slate-200 bg-[#0B1A2E] shadow-[-20px_0_60px_-20px_rgba(15,23,42,0.35)]"
+      className="absolute inset-y-0 right-0 flex w-[58%] flex-col border-l border-slate-200 bg-white shadow-[-20px_0_60px_-20px_rgba(15,23,42,0.18)]"
     >
       {/* Header */}
-      <div className="flex items-center gap-3 border-b border-white/[0.06] bg-[#142A48] px-4 py-3">
+      <div className="flex items-center gap-3 border-b border-slate-200 bg-white px-4 py-3">
         <div className="flex size-9 items-center justify-center rounded-full bg-[#25D366]">
           <WhatsAppGlyph />
         </div>
         <div className="flex-1">
-          <div className="text-[12.5px] font-medium text-white">M. Dubois</div>
-          <div className="text-[10.5px] text-white/60">WhatsApp · en ligne</div>
+          <div className="text-[12.5px] font-semibold text-slate-900">M. Dubois</div>
+          <div className="text-[10.5px] text-slate-500">WhatsApp · en ligne</div>
         </div>
-        <span className="rounded-full bg-emerald-400/15 px-2 py-0.5 text-[10px] font-semibold text-emerald-300">
-          Score 96%
+        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 ring-1 ring-emerald-100">
+          <CheckIcon className="size-2.5" /> 96%
         </span>
       </div>
 
-      {/* Messages */}
+      {/* Messages — cream WhatsApp-style background */}
       <div
         className="flex-1 space-y-3 overflow-hidden p-4"
         style={{
-          backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)",
-          backgroundSize: "16px 16px",
+          backgroundColor: "#EFEAE2",
+          backgroundImage:
+            "radial-gradient(rgba(15,23,42,0.06) 1px, transparent 1px)",
+          backgroundSize: "18px 18px",
         }}
       >
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-accent px-3.5 py-2.5 text-[12px] leading-relaxed text-white shadow-[0_8px_24px_-8px_rgba(233,30,140,0.6)]"
+          className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-accent px-3.5 py-2.5 text-[12px] leading-relaxed text-white shadow-[0_4px_12px_-6px_rgba(233,30,140,0.45)]"
         >
           {typed}
           {typed.length < WHATSAPP_MSG.length && (
@@ -1103,7 +2121,7 @@ function WhatsAppOverlay({ runId, showResponse }: { runId: number; showResponse:
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="max-w-[75%] rounded-2xl rounded-bl-sm bg-white/[0.08] px-3.5 py-2.5 text-[12px] leading-relaxed text-white"
+            className="max-w-[75%] rounded-2xl rounded-bl-sm bg-white px-3.5 py-2.5 text-[12px] leading-relaxed text-slate-900 shadow-[0_2px_6px_-2px_rgba(15,23,42,0.12)]"
           >
             Bonjour, oui avec plaisir. Jeudi 14h ça vous convient&nbsp;?
           </motion.div>
@@ -1111,16 +2129,16 @@ function WhatsAppOverlay({ runId, showResponse }: { runId: number; showResponse:
       </div>
 
       {/* Composer */}
-      <div className="flex items-center gap-2 border-t border-white/[0.06] bg-[#0F2240] px-3 py-2.5">
-        <div className="flex-1 rounded-full bg-white/[0.06] px-3 py-1.5 text-[11px] text-white/55">
+      <div className="flex items-center gap-2 border-t border-slate-200 bg-white px-3 py-2.5">
+        <div className="flex-1 rounded-full bg-slate-100 px-3 py-1.5 text-[11px] text-slate-400">
           Tapez un message…
         </div>
-        <div className="flex size-7 items-center justify-center rounded-full bg-accent">
+        <button className="flex size-7 items-center justify-center rounded-full bg-accent shadow-sm">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <line x1="22" y1="2" x2="11" y2="13" />
             <polygon points="22 2 15 22 11 13 2 9 22 2" />
           </svg>
-        </div>
+        </button>
       </div>
     </motion.div>
   );
@@ -1297,8 +2315,9 @@ function Pricing() {
   const [annual, setAnnual] = useState(false);
 
   return (
-    <section id="pricing" className="relative py-28 sm:py-36 border-t border-white/[0.06]">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+    <section id="pricing" className="relative overflow-hidden py-28 sm:py-36">
+      <SectionAmbience top intensity={0.35} />
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <Reveal className="text-center">
           <motion.span variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-accent">
             Tarifs
@@ -1367,7 +2386,7 @@ function Pricing() {
                 ))}
               </ul>
 
-              <CTAButton href="#" variant={t.ctaVariant} size="md" className="w-full">
+              <CTAButton href="/reserver-une-demo" variant={t.ctaVariant} size="md" className="w-full">
                 {t.cta}
               </CTAButton>
             </motion.div>
@@ -1452,10 +2471,10 @@ function FinalCTA() {
             Prêt à recruter autrement&nbsp;?
           </motion.h2>
           <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-white/80">
-            Voyez en 20 minutes ce que True Calling peut faire pour vos prochains recrutements.
+            Voyez en 20 minutes ce que TrueCalling peut faire pour vos prochains recrutements.
           </motion.p>
           <motion.div variants={fadeUp} className="mt-10">
-            <CTAButton href="#" variant="white" size="lg">
+            <CTAButton href="/reserver-une-demo" variant="white" size="lg">
               Réserver une démo
             </CTAButton>
           </motion.div>
@@ -1476,23 +2495,24 @@ function Footer() {
         { label: "Fonctionnalités", href: "#features" },
         { label: "Tarifs", href: "#pricing" },
         { label: "Démo", href: "#demo" },
+        { label: "FAQ", href: "/faq" },
       ],
     },
     {
       title: "Entreprise",
       links: [
         { label: "À propos", href: "#" },
-        { label: "Blog", href: "#" },
-        { label: "Contact", href: "#" },
+        { label: "Blog", href: "/blog" },
+        { label: "Contact", href: "/contact" },
       ],
     },
     {
       title: "Légal",
       links: [
-        { label: "CGU", href: "#" },
-        { label: "Mentions légales", href: "#" },
-        { label: "RGPD", href: "#" },
-        { label: "Politique de confidentialité", href: "#" },
+        { label: "CGU", href: "/cgu" },
+        { label: "Mentions légales", href: "/cgu" },
+        { label: "RGPD", href: "/cgu#rgpd" },
+        { label: "Politique de confidentialité", href: "/cgu#rgpd" },
       ],
     },
   ];
@@ -1507,10 +2527,13 @@ function Footer() {
               Sourcing IA, matching et outreach multi-canal pour les équipes recrutement modernes.
             </p>
             <div className="mt-5 flex items-center gap-2">
-              <SocialLink href="#" label="LinkedIn">
+              <SocialLink href="https://www.instagram.com/truecalling.ai/" label="Instagram">
+                <InstagramIcon />
+              </SocialLink>
+              <SocialLink href="https://www.linkedin.com/company/truecalling-ai/" label="LinkedIn">
                 <LinkedInIcon />
               </SocialLink>
-              <SocialLink href="#" label="X / Twitter">
+              <SocialLink href="https://x.com/TruecallinAI" label="X / Twitter">
                 <XIcon />
               </SocialLink>
             </div>
@@ -1538,7 +2561,7 @@ function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/[0.06] pt-6 text-xs text-ink-muted sm:flex-row sm:items-center">
-          <span>© 2026 True Calling. Tous droits réservés.</span>
+          <span>© 2026 TrueCalling. Tous droits réservés.</span>
           <span>Fait avec attention pour les recruteurs.</span>
         </div>
       </div>
@@ -1570,6 +2593,16 @@ function LinkedInIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v15H.22zM8 8h4.37v2.05h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v8.31h-4.56v-7.37c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V23H8z" />
+    </svg>
+  );
+}
+
+function InstagramIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
     </svg>
   );
 }

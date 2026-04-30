@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { LocaleProvider } from "./_i18n/locale-context";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -9,14 +10,15 @@ const inter = Inter({
 });
 
 const siteUrl = "https://truecalling.app";
-const titleDefault = "True Calling — Sourcing IA, matching et outreach pour les recruteurs";
+const titleDefault = "Logiciel de sourcing IA pour recruteurs · TrueCalling";
 const description =
-  "True Calling combine sourcing IA, matching intelligent et outreach multi-canal pour transformer le recrutement en conversations qui aboutissent.";
+  "Logiciel de sourcing IA qui transforme un brief en candidats qualifiés. Copilote EMILY, matching TrueFit 360 et outreach WhatsApp, email, téléphone. Démo en 20 min.";
 const ogImage = "/brand/truecalling-vertical.png";
+const ogImageAlt = "TrueCalling — Logiciel de sourcing IA et copilote de recrutement avec outreach WhatsApp";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: titleDefault, template: "%s · True Calling" },
+  title: { default: titleDefault, template: "%s · TrueCalling" },
   description,
   alternates: {
     canonical: "/",
@@ -25,11 +27,11 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: siteUrl,
-    siteName: "True Calling",
+    siteName: "TrueCalling",
     title: titleDefault,
     description,
     locale: "fr_FR",
-    images: [{ url: ogImage, width: 1080, height: 1080, alt: "True Calling — Hire with precision" }],
+    images: [{ url: ogImage, width: 1080, height: 1080, alt: ogImageAlt }],
   },
   twitter: {
     card: "summary_large_image",
@@ -50,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const ldJson = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "True Calling",
+    name: "TrueCalling",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     description,
@@ -74,7 +76,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
         />
       </head>
-      <body className="font-sans antialiased bg-bg text-ink">{children}</body>
+      <body className="font-sans antialiased bg-bg text-ink">
+        <LocaleProvider>{children}</LocaleProvider>
+      </body>
     </html>
   );
 }
