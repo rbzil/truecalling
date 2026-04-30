@@ -470,19 +470,54 @@ function Features() {
 }
 
 /* ----------------------------------------------------------
-   PRODUCT DEMO — 4-step animated mockup
+   PRODUCT DEMO — animated 4-step mockup styled after the real app
 ---------------------------------------------------------- */
-type Candidate = { initials: string; name: string; role: string; score: number; color: string };
+type Candidate = {
+  rank: number;
+  initials: string;
+  name: string;
+  role: string;
+  company: string;
+  city: string;
+  years: number;
+  score: number;
+  matched: string[];
+  missing: string[];
+  avatar: string;
+};
 
 const CANDIDATES: Candidate[] = [
-  { initials: "MD", name: "M. D.", role: "Senior Product Designer · Paris", score: 96, color: "from-pink-500 to-fuchsia-600" },
-  { initials: "SK", name: "S. K.", role: "Lead Product Designer · Remote FR", score: 92, color: "from-violet-500 to-indigo-600" },
-  { initials: "LP", name: "L. P.", role: "Senior UX Designer · Lyon", score: 88, color: "from-cyan-500 to-blue-600" },
-  { initials: "AB", name: "A. B.", role: "Product Designer · Bordeaux", score: 85, color: "from-amber-500 to-orange-600" },
+  {
+    rank: 1, initials: "MD", name: "M. Dubois", role: "Senior Product Designer",
+    company: "Doctolib", city: "Paris", years: 7.2, score: 96,
+    matched: ["Figma", "Design Systems", "User Research", "Prototyping"],
+    missing: [],
+    avatar: "from-pink-500 to-fuchsia-600",
+  },
+  {
+    rank: 2, initials: "SK", name: "S. Klein", role: "Lead Product Designer",
+    company: "Alan", city: "Remote FR", years: 5.8, score: 92,
+    matched: ["Figma", "Design Systems", "User Research", "Prototyping"],
+    missing: ["Motion"],
+    avatar: "from-violet-500 to-indigo-600",
+  },
+  {
+    rank: 3, initials: "LP", name: "L. Petit", role: "Senior UX Designer",
+    company: "Qonto", city: "Lyon", years: 6.4, score: 88,
+    matched: ["Figma", "User Research", "Prototyping"],
+    missing: ["Design Systems"],
+    avatar: "from-cyan-500 to-blue-600",
+  },
+  {
+    rank: 4, initials: "AB", name: "A. Bernard", role: "Product Designer",
+    company: "Spendesk", city: "Bordeaux", years: 4.1, score: 85,
+    matched: ["Figma", "Design Systems", "Prototyping"],
+    missing: ["Accessibility"],
+    avatar: "from-amber-500 to-orange-600",
+  },
 ];
 
-const BRIEF =
-  "Cherche Senior Product Designer, 5+ ans d'expérience SaaS B2B, basé Paris ou remote France, à l'aise avec systèmes de design et user research.";
+const BRIEF_TITLE = "Senior Product Designer";
 
 const WHATSAPP_MSG =
   "Bonjour M., je vous contacte au sujet d'un poste de Senior Product Designer chez [Client]. Votre profil correspond très précisément à ce qu'ils cherchent — auriez-vous 15 min cette semaine pour en discuter ?";
@@ -590,10 +625,10 @@ function BrowserChrome({ children }: { children: React.ReactNode }) {
         <span className="size-2.5 rounded-full bg-[#FEBC2E]" />
         <span className="size-2.5 rounded-full bg-[#28C840]" />
         <div className="ml-4 flex h-6 flex-1 items-center justify-center rounded-md bg-white/[0.04] px-3 text-[11px] text-ink-muted">
-          app.truecalling.app/poste/senior-product-designer
+          app.truecalling.app/advanced-search
         </div>
       </div>
-      <div className="relative aspect-[16/10] w-full bg-[radial-gradient(ellipse_at_top,_rgba(233,30,140,0.07),_transparent_60%)]">
+      <div className="relative aspect-[16/10] w-full bg-[#F7F8FA]">
         {children}
       </div>
     </div>
@@ -602,160 +637,371 @@ function BrowserChrome({ children }: { children: React.ReactNode }) {
 
 function DemoStage({ step, runId }: { step: number; runId: number }) {
   return (
-    <div className="absolute inset-0 grid grid-cols-1 gap-4 p-5 sm:p-8 lg:grid-cols-[1.05fr_1fr]">
-      {/* Left column — brief + candidates */}
-      <div className="flex min-h-0 flex-col gap-4">
-        <BriefBox key={`brief-${runId}`} active={step >= 0} />
-        <ResultsList step={step} runId={runId} />
+    <div className="absolute inset-0 overflow-hidden bg-[#F7F8FA] text-slate-900">
+      <DemoSidebar step={step} />
+
+      <div className="absolute inset-y-0 left-[58px] right-0 flex flex-col">
+        <DemoTopBar />
+        <div className="relative flex-1 overflow-hidden">
+          <AnimatePresence mode="wait">
+            {step === 0 ? (
+              <BriefModal key={`brief-${runId}`} />
+            ) : (
+              <ResultsView key={`results-${runId}`} step={step} runId={runId} />
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {step >= 2 && (
+              <WhatsAppOverlay key={`wa-${runId}`} runId={runId} showResponse={step >= 3} />
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {step >= 3 && <ResponseToast key={`toast-${runId}`} />}
+          </AnimatePresence>
+        </div>
       </div>
 
-      {/* Right column — WhatsApp panel + response toast */}
-      <div className="relative">
-        <AnimatePresence mode="wait">
-          {step >= 2 && (
-            <WhatsAppPanel key={`wa-${runId}`} runId={runId} showResponse={step >= 3} />
-          )}
-        </AnimatePresence>
-        <AnimatePresence>
-          {step >= 3 && <ResponseToast key={`toast-${runId}`} />}
-        </AnimatePresence>
+      <EmilyFAB />
+    </div>
+  );
+}
+
+/* ----- Sidebar (mini) ----- */
+function DemoSidebar({ step }: { step: number }) {
+  const items: { id: string; icon: React.ReactNode; active: boolean }[] = [
+    { id: "workspace", icon: <NavDashIcon />, active: false },
+    { id: "jobs", icon: <NavDocIcon />, active: step === 0 },
+    { id: "candidates", icon: <NavUsersIcon />, active: false },
+    { id: "search", icon: <NavSearchIcon />, active: step >= 1 },
+    { id: "follow", icon: <NavBellIcon />, active: false },
+    { id: "settings", icon: <NavGearIcon />, active: false },
+  ];
+  return (
+    <aside className="absolute inset-y-0 left-0 flex w-[58px] flex-col items-center gap-1 border-r border-slate-200 bg-white py-3">
+      <div className="mb-2">
+        <FingerprintMark size={22} color="#E91E8C" />
+      </div>
+      {items.map((it) => (
+        <div
+          key={it.id}
+          className={`flex size-9 items-center justify-center rounded-lg transition-colors ${
+            it.active
+              ? "bg-pink-50 text-accent ring-1 ring-pink-100"
+              : "text-slate-400"
+          }`}
+        >
+          {it.icon}
+        </div>
+      ))}
+    </aside>
+  );
+}
+
+/* ----- Top bar ----- */
+function DemoTopBar() {
+  return (
+    <div className="flex items-center justify-between border-b border-slate-200 bg-white px-5 py-2.5">
+      <div className="flex items-center gap-2 text-[12px]">
+        <span className="font-semibold text-slate-900">TrueCalling</span>
+        <span className="text-slate-300">·</span>
+        <span className="text-slate-500">{BRIEF_TITLE}</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <span className="rounded-full border border-slate-200 bg-white px-2.5 py-0.5 text-[10.5px] text-slate-600">
+          English
+        </span>
+        <div className="flex size-7 items-center justify-center rounded-full bg-accent text-[10.5px] font-semibold text-white">
+          R
+        </div>
       </div>
     </div>
   );
 }
 
-/* --- Step 1: brief typewriter --- */
-function BriefBox({ active }: { active: boolean }) {
+/* ----- Step 0: New position modal ----- */
+function BriefModal() {
   const [typed, setTyped] = useState("");
   useEffect(() => {
-    if (!active) return;
     setTyped("");
     let i = 0;
     const id = setInterval(() => {
-      i += 2;
-      setTyped(BRIEF.slice(0, i));
-      if (i >= BRIEF.length) clearInterval(id);
-    }, 28);
+      i += 1;
+      setTyped(BRIEF_TITLE.slice(0, i));
+      if (i >= BRIEF_TITLE.length) clearInterval(id);
+    }, 60);
     return () => clearInterval(id);
-  }, [active]);
+  }, []);
 
   return (
-    <div className="rounded-xl border border-white/[0.08] bg-bg/60 p-4">
-      <div className="mb-2 flex items-center justify-between">
-        <span className="text-[11px] uppercase tracking-[0.18em] text-ink-muted">
-          Décrivez votre poste
-        </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent">
-          <span className="size-1.5 rounded-full bg-accent" /> EMILY™
-        </span>
-      </div>
-      <p className="text-[13.5px] leading-relaxed text-ink">
-        {typed}
-        <span className="ml-0.5 inline-block h-4 w-[2px] translate-y-0.5 bg-accent align-middle animate-pulse" />
-      </p>
-    </div>
-  );
-}
-
-/* --- Step 2: candidates cascade with score counter --- */
-function ResultsList({ step, runId }: { step: number; runId: number }) {
-  const showAnalyzing = step === 1;
-  const showCards = step >= 1; // cards start appearing after brief
-
-  return (
-    <div className="flex-1 rounded-xl border border-white/[0.08] bg-bg/40 p-4">
-      <div className="mb-3 flex items-center justify-between">
-        <span className="text-[11px] uppercase tracking-[0.18em] text-ink-muted">
-          Candidats remontés
-        </span>
-        <AnimatePresence>
-          {showAnalyzing && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="inline-flex items-center gap-2 text-[11px] text-ink-muted"
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.3 } }}
+      className="absolute inset-0 flex items-center justify-center bg-slate-900/15 px-4 backdrop-blur-[1px]"
+    >
+      <motion.div
+        initial={{ scale: 0.96, y: 8 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.96, y: 8 }}
+        transition={{ type: "spring", stiffness: 240, damping: 24 }}
+        className="w-full max-w-[560px] overflow-hidden rounded-xl bg-white shadow-[0_30px_80px_-20px_rgba(15,23,42,0.3),0_8px_24px_-8px_rgba(15,23,42,0.15)] ring-1 ring-slate-200"
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 pt-4 pb-2">
+          <h3 className="text-[15px] font-semibold tracking-tight text-slate-900">New position</h3>
+          <span className="text-[16px] leading-none text-slate-400">×</span>
+        </div>
+        {/* Tabs */}
+        <div className="flex items-center gap-5 border-b border-slate-100 px-5">
+          {["Information", "Description", "Training", "Advanced"].map((t, i) => (
+            <span
+              key={t}
+              className={`relative py-2.5 text-[12px] ${
+                i === 0 ? "font-semibold text-accent" : "text-slate-500"
+              }`}
             >
-              EMILY analyse votre brief
-              <span className="inline-flex gap-0.5">
-                {[0, 1, 2].map((i) => (
-                  <span
-                    key={i}
-                    className="size-1 rounded-full bg-accent animate-pulse-soft"
-                    style={{ animationDelay: `${i * 0.15}s` }}
-                  />
-                ))}
+              {t}
+              {i === 0 && (
+                <motion.span
+                  layoutId="brief-tab"
+                  className="absolute inset-x-0 -bottom-px h-[2px] rounded-full bg-accent"
+                />
+              )}
+            </span>
+          ))}
+        </div>
+        {/* Body */}
+        <div className="space-y-3 px-5 py-4">
+          <div>
+            <label className="text-[10px] font-medium uppercase tracking-[0.06em] text-slate-500">
+              Job title <span className="text-accent">*</span>
+            </label>
+            <div className="mt-1 flex h-9 items-center rounded-md border border-slate-200 bg-white px-3 text-[12.5px] text-slate-900">
+              {typed}
+              <span className="ml-0.5 inline-block h-3.5 w-[1.5px] bg-accent animate-pulse" />
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <div className="flex-1">
+              <label className="text-[10px] font-medium uppercase tracking-[0.06em] text-slate-500">
+                Location
+              </label>
+              <div className="mt-1 flex h-9 items-center rounded-md border border-slate-200 bg-white px-3 text-[12.5px] text-slate-700">
+                Paris · Remote FR
+              </div>
+            </div>
+            <div className="flex items-center gap-2 self-end pb-1.5">
+              <span className="flex size-3.5 items-center justify-center rounded-[3px] border border-pink-300 bg-pink-50">
+                <CheckIcon className="size-2.5 text-accent" />
               </span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <AnimatePresence mode="popLayout">
-          {showCards &&
-            CANDIDATES.map((c, i) => (
-              <CandidateCard
-                key={`${runId}-${c.initials}`}
-                c={c}
-                index={i}
-                highlighted={step >= 2 && i === 0}
-                showButton={step >= 2 && i === 0}
-                pressed={step >= 3 && i === 0}
-              />
-            ))}
-        </AnimatePresence>
-      </div>
-    </div>
+              <span className="text-[11px] text-slate-700">Remote</span>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <div className="flex-1">
+              <label className="text-[10px] font-medium uppercase tracking-[0.06em] text-slate-500">
+                Recruiter
+              </label>
+              <div className="mt-1 flex h-9 items-center justify-between rounded-md border border-slate-200 bg-white px-3 text-[12.5px] text-slate-700">
+                <span>Raphaël · raphael@truecalling.ai</span>
+                <ChevronIcon />
+              </div>
+            </div>
+            <div className="flex-1">
+              <label className="text-[10px] font-medium uppercase tracking-[0.06em] text-slate-500">
+                Contact email
+              </label>
+              <div className="mt-1 flex h-9 items-center rounded-md border border-slate-200 bg-white px-3 text-[12.5px] text-slate-400">
+                recruteur@entreprise.com
+              </div>
+            </div>
+          </div>
+          <div className="flex items-end justify-between gap-3">
+            <div>
+              <label className="text-[10px] font-medium uppercase tracking-[0.06em] text-slate-500">
+                Min score
+              </label>
+              <div className="mt-1 flex h-9 w-24 items-center rounded-md border border-slate-200 bg-white px-3 text-[12.5px] text-slate-700">
+                0
+              </div>
+            </div>
+            <div className="flex items-center gap-2 pb-1.5">
+              <span className="flex h-5 w-9 items-center rounded-full bg-accent p-0.5">
+                <span className="ml-auto block size-4 rounded-full bg-white shadow-sm" />
+              </span>
+              <span className="text-[11.5px] text-slate-700">Active position</span>
+            </div>
+          </div>
+        </div>
+        {/* Footer */}
+        <div className="flex items-center justify-end gap-2 border-t border-slate-100 bg-slate-50 px-5 py-3">
+          <button className="rounded-md px-3 py-1.5 text-[11.5px] text-slate-600">Cancel</button>
+          <button className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-3 py-1.5 text-[11.5px] text-slate-700 shadow-sm">
+            Next <ChevronIcon />
+          </button>
+          <button className="rounded-md bg-accent px-3 py-1.5 text-[11.5px] font-semibold text-white shadow-sm">
+            Create position
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
-function CandidateCard({
+/* ----- Step 1+ : Advanced Search results ----- */
+function ResultsView({ step, runId }: { step: number; runId: number }) {
+  const analyzing = step === 1;
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      className="absolute inset-0 overflow-hidden p-4 sm:p-5"
+    >
+      {/* Filter strip */}
+      <div className="mb-3 flex items-center gap-2 text-[10.5px]">
+        <span className="rounded-full bg-pink-50 px-2.5 py-1 font-semibold text-accent ring-1 ring-pink-100">
+          {BRIEF_TITLE}
+        </span>
+        <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700">Paris</span>
+        <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700">Remote</span>
+        <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700">Figma · Design Systems · UX +2</span>
+      </div>
+
+      {/* Status line */}
+      <div className="mb-3 flex items-center gap-2 text-[11px]">
+        {analyzing ? (
+          <>
+            <span className="inline-flex gap-0.5">
+              {[0, 1, 2].map((i) => (
+                <span
+                  key={i}
+                  className="size-1 rounded-full bg-accent animate-pulse-soft"
+                  style={{ animationDelay: `${i * 0.15}s` }}
+                />
+              ))}
+            </span>
+            <span className="font-medium text-slate-700">
+              AI analysis in progress…{" "}
+              <span className="text-slate-400">(12/50)</span>
+            </span>
+          </>
+        ) : (
+          <>
+            <span className="size-1.5 rounded-full bg-emerald-500" />
+            <span className="font-medium text-slate-700">
+              50 candidats analysés ·{" "}
+              <span className="text-slate-500">top 4 affichés</span>
+            </span>
+          </>
+        )}
+      </div>
+
+      {/* Cards grid */}
+      <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+        <AnimatePresence mode="popLayout">
+          {CANDIDATES.map((c, i) => (
+            <ResultCard
+              key={`${runId}-${c.initials}`}
+              c={c}
+              index={i}
+              highlighted={step >= 2 && c.rank === 1}
+              showCursor={step === 2 && c.rank === 1}
+            />
+          ))}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  );
+}
+
+const RANK_COLORS: Record<number, string> = {
+  1: "bg-pink-100 text-pink-700",
+  2: "bg-blue-100 text-blue-700",
+  3: "bg-emerald-100 text-emerald-700",
+  4: "bg-amber-100 text-amber-700",
+};
+
+function ResultCard({
   c,
   index,
   highlighted,
-  showButton,
-  pressed,
+  showCursor,
 }: {
   c: Candidate;
   index: number;
   highlighted: boolean;
-  showButton: boolean;
-  pressed: boolean;
+  showCursor: boolean;
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      layout
+      initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.15, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-      className={`group flex items-center gap-3 rounded-lg border bg-surface/40 px-3 py-2.5 transition-all ${
+      exit={{ opacity: 0, y: -8 }}
+      transition={{ delay: index * 0.12, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className={`relative rounded-lg border bg-white p-3 transition-all ${
         highlighted
-          ? "border-accent/60 shadow-[0_0_0_1px_rgba(233,30,140,0.5),0_12px_30px_-12px_rgba(233,30,140,0.6)] -translate-y-[1px]"
-          : "border-white/[0.06]"
+          ? "border-accent shadow-[0_0_0_2px_rgba(233,30,140,0.18),0_12px_28px_-14px_rgba(233,30,140,0.45)]"
+          : "border-slate-200"
       }`}
     >
-      <div
-        className={`flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-[12px] font-semibold text-white ${c.color}`}
+      <span
+        className={`absolute -top-2 left-2.5 rounded-full px-1.5 py-0.5 text-[9.5px] font-bold tracking-tight ${RANK_COLORS[c.rank]}`}
       >
-        {c.initials}
-      </div>
-      <div className="min-w-0 flex-1">
-        <div className="truncate text-[13px] font-medium text-ink">{c.name}</div>
-        <div className="truncate text-[11.5px] text-ink-muted">{c.role}</div>
-      </div>
+        #{c.rank}
+      </span>
 
-      {showButton && (
-        <motion.button
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: pressed ? 0.94 : 1 }}
-          transition={{ duration: 0.25 }}
-          className="hidden rounded-full bg-accent px-3 py-1 text-[11px] font-medium text-white sm:inline-block cursor-pointer"
+      <div className="flex items-start gap-2.5">
+        <div
+          className={`flex size-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-[10.5px] font-bold text-white ${c.avatar}`}
         >
-          Contacter
-        </motion.button>
-      )}
+          {c.initials}
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <span className="truncate text-[12px] font-semibold text-slate-900">{c.name}</span>
+            <ScoreBadge value={c.score} />
+            {highlighted && (
+              <motion.button
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1, duration: 0.25 }}
+                className="ml-auto rounded-full bg-accent px-2.5 py-1 text-[9.5px] font-semibold text-white shadow-sm"
+              >
+                + Pipeline
+              </motion.button>
+            )}
+          </div>
+          <div className="mt-0.5 truncate text-[10.5px] text-slate-500">
+            {c.role} · {c.company} · {c.city} · {c.years.toFixed(1)}a exp.
+          </div>
+        </div>
+      </div>
 
-      <ScoreBadge value={c.score} />
+      <div className="mt-2.5 flex flex-wrap gap-1">
+        {c.matched.map((s) => (
+          <span
+            key={s}
+            className="inline-flex items-center gap-0.5 rounded-md bg-emerald-50 px-1.5 py-0.5 text-[9.5px] font-medium text-emerald-700"
+          >
+            <CheckIcon className="size-2.5" /> {s}
+          </span>
+        ))}
+        {c.missing.map((s) => (
+          <span
+            key={s}
+            className="inline-flex items-center gap-0.5 rounded-md bg-rose-50 px-1.5 py-0.5 text-[9.5px] font-medium text-rose-700"
+          >
+            <XSmallIcon /> {s}
+          </span>
+        ))}
+      </div>
+
+      {showCursor && <Cursor />}
     </motion.div>
   );
 }
@@ -770,22 +1016,35 @@ function ScoreBadge({ value }: { value: number }) {
   }, [value, mv]);
 
   return (
-    <div className="ml-1 flex size-11 shrink-0 items-center justify-center rounded-full bg-accent/15 ring-1 ring-accent/40">
-      <motion.span className="text-[12px] font-semibold tabular-nums text-accent">
+    <div className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-1.5 py-0.5 ring-1 ring-emerald-100">
+      <span className="size-1 rounded-full bg-emerald-500" />
+      <motion.span className="text-[10px] font-bold tabular-nums text-emerald-700">
         {rounded}
       </motion.span>
     </div>
   );
 }
 
-/* --- Step 3: WhatsApp panel slide-in + typewriter ---
-   Mounts/unmounts per loop (keyed by runId at parent), so the typewriter
-   reliably restarts each cycle.
-*/
-function WhatsAppPanel({ runId, showResponse }: { runId: number; showResponse: boolean }) {
-  void runId; // key forces remount; effect runs once on mount
-  const [typed, setTyped] = useState("");
+/* ----- Cursor (animated pointer for the "click + Pipeline" gesture) ----- */
+function Cursor() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -50, y: 30 }}
+      animate={{ opacity: [0, 1, 1, 1, 0], x: [-50, -10, -10], y: [30, -2, -2] }}
+      transition={{ duration: 1.6, ease: "easeOut", times: [0, 0.4, 0.7, 0.9, 1] }}
+      className="pointer-events-none absolute right-2 top-2"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="#0F172A" strokeWidth="1.4" aria-hidden="true">
+        <path d="M5 3l14 8-6 1.5L9 19 5 3z" />
+      </svg>
+    </motion.div>
+  );
+}
 
+/* ----- Step 2-3: WhatsApp panel slides from right (covers ~55%) ----- */
+function WhatsAppOverlay({ runId, showResponse }: { runId: number; showResponse: boolean }) {
+  void runId;
+  const [typed, setTyped] = useState("");
   useEffect(() => {
     setTyped("");
     let i = 0;
@@ -793,17 +1052,17 @@ function WhatsAppPanel({ runId, showResponse }: { runId: number; showResponse: b
       i += 2;
       setTyped(WHATSAPP_MSG.slice(0, i));
       if (i >= WHATSAPP_MSG.length) clearInterval(id);
-    }, 24);
+    }, 22);
     return () => clearInterval(id);
   }, []);
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 30 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 30 }}
-      transition={{ type: "spring", stiffness: 220, damping: 26 }}
-      className="absolute inset-0 flex flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-[#0B1A2E]"
+      initial={{ x: "105%" }}
+      animate={{ x: 0 }}
+      exit={{ x: "105%" }}
+      transition={{ type: "spring", stiffness: 220, damping: 28 }}
+      className="absolute inset-y-0 right-0 flex w-[58%] flex-col border-l border-slate-200 bg-[#0B1A2E] shadow-[-20px_0_60px_-20px_rgba(15,23,42,0.35)]"
     >
       {/* Header */}
       <div className="flex items-center gap-3 border-b border-white/[0.06] bg-[#142A48] px-4 py-3">
@@ -811,10 +1070,10 @@ function WhatsAppPanel({ runId, showResponse }: { runId: number; showResponse: b
           <WhatsAppGlyph />
         </div>
         <div className="flex-1">
-          <div className="text-[13px] font-medium text-ink">M. D.</div>
-          <div className="text-[10.5px] text-ink-muted">WhatsApp · en ligne</div>
+          <div className="text-[12.5px] font-medium text-white">M. Dubois</div>
+          <div className="text-[10.5px] text-white/60">WhatsApp · en ligne</div>
         </div>
-        <span className="rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent">
+        <span className="rounded-full bg-emerald-400/15 px-2 py-0.5 text-[10px] font-semibold text-emerald-300">
           Score 96%
         </span>
       </div>
@@ -823,8 +1082,7 @@ function WhatsAppPanel({ runId, showResponse }: { runId: number; showResponse: b
       <div
         className="flex-1 space-y-3 overflow-hidden p-4"
         style={{
-          backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)",
           backgroundSize: "16px 16px",
         }}
       >
@@ -832,11 +1090,11 @@ function WhatsAppPanel({ runId, showResponse }: { runId: number; showResponse: b
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-accent px-3.5 py-2.5 text-[12.5px] leading-relaxed text-white shadow-[0_8px_24px_-8px_rgba(233,30,140,0.6)]"
+          className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-accent px-3.5 py-2.5 text-[12px] leading-relaxed text-white shadow-[0_8px_24px_-8px_rgba(233,30,140,0.6)]"
         >
           {typed}
           {typed.length < WHATSAPP_MSG.length && (
-            <span className="ml-0.5 inline-block h-3 w-[2px] translate-y-0.5 bg-white/80 align-middle animate-pulse" />
+            <span className="ml-0.5 inline-block h-3 w-[1.5px] translate-y-0.5 bg-white/80 align-middle animate-pulse" />
           )}
         </motion.div>
 
@@ -845,7 +1103,7 @@ function WhatsAppPanel({ runId, showResponse }: { runId: number; showResponse: b
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="max-w-[75%] rounded-2xl rounded-bl-sm bg-white/[0.06] px-3.5 py-2.5 text-[12.5px] leading-relaxed text-ink"
+            className="max-w-[75%] rounded-2xl rounded-bl-sm bg-white/[0.08] px-3.5 py-2.5 text-[12px] leading-relaxed text-white"
           >
             Bonjour, oui avec plaisir. Jeudi 14h ça vous convient&nbsp;?
           </motion.div>
@@ -854,7 +1112,7 @@ function WhatsAppPanel({ runId, showResponse }: { runId: number; showResponse: b
 
       {/* Composer */}
       <div className="flex items-center gap-2 border-t border-white/[0.06] bg-[#0F2240] px-3 py-2.5">
-        <div className="flex-1 rounded-full bg-white/[0.04] px-3 py-1.5 text-[11.5px] text-ink-muted">
+        <div className="flex-1 rounded-full bg-white/[0.06] px-3 py-1.5 text-[11px] text-white/55">
           Tapez un message…
         </div>
         <div className="flex size-7 items-center justify-center rounded-full bg-accent">
@@ -876,25 +1134,111 @@ function WhatsAppGlyph() {
   );
 }
 
-/* --- Step 4: response toast --- */
+/* ----- Step 3: response toast (light theme) ----- */
 function ResponseToast() {
   return (
     <motion.div
-      initial={{ opacity: 0, x: 30, y: -10 }}
-      animate={{ opacity: 1, x: 0, y: 0 }}
-      exit={{ opacity: 0, x: 30 }}
-      transition={{ type: "spring", stiffness: 260, damping: 22 }}
-      className="absolute right-3 top-3 flex items-center gap-2.5 rounded-xl border border-white/10 bg-bg/90 px-3.5 py-2.5 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-md"
+      initial={{ opacity: 0, y: -10, x: 20 }}
+      animate={{ opacity: 1, y: 0, x: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ type: "spring", stiffness: 280, damping: 22 }}
+      className="absolute right-4 top-3 z-10 flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.3),0_4px_12px_-4px_rgba(15,23,42,0.15)]"
     >
       <span className="relative flex size-2.5">
         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
         <span className="relative inline-flex size-2.5 rounded-full bg-emerald-500" />
       </span>
-      <div className="text-[12px]">
-        <div className="font-medium text-ink">M. D. a répondu</div>
-        <div className="text-[10.5px] text-ink-muted">il y a 2 minutes</div>
+      <div className="text-[11.5px]">
+        <div className="font-semibold text-slate-900">M. Dubois a répondu</div>
+        <div className="text-[10px] text-slate-500">il y a 2 minutes</div>
       </div>
     </motion.div>
+  );
+}
+
+/* ----- Emily floating button ----- */
+function EmilyFAB() {
+  return (
+    <motion.button
+      type="button"
+      aria-label="Emily — assistante IA"
+      animate={{ y: [0, -3, 0] }}
+      transition={{ duration: 3, ease: "easeInOut", repeat: Infinity }}
+      className="absolute bottom-3 right-3 flex size-10 items-center justify-center rounded-full bg-violet-600 text-[13px] font-bold text-white shadow-[0_10px_30px_-8px_rgba(124,58,237,0.55)] ring-2 ring-white"
+    >
+      E
+    </motion.button>
+  );
+}
+
+/* ----- Mini icons (sidebar) + Chevron + XSmall ----- */
+function NavDashIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="7" height="7" rx="1" />
+      <rect x="14" y="3" width="7" height="7" rx="1" />
+      <rect x="3" y="14" width="7" height="7" rx="1" />
+      <rect x="14" y="14" width="7" height="7" rx="1" />
+    </svg>
+  );
+}
+function NavDocIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="8" y1="13" x2="16" y2="13" />
+      <line x1="8" y1="17" x2="13" y2="17" />
+    </svg>
+  );
+}
+function NavUsersIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  );
+}
+function NavSearchIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </svg>
+  );
+}
+function NavBellIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+      <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+    </svg>
+  );
+}
+function NavGearIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="3" />
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+    </svg>
+  );
+}
+function ChevronIcon() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
+  );
+}
+function XSmallIcon() {
+  return (
+    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
   );
 }
 
