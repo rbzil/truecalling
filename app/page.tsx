@@ -5,10 +5,8 @@ import {
   motion,
   useInView,
   useMotionValue,
-  useSpring,
   useTransform,
   animate as framerAnimate,
-  type MotionValue,
   type Variants,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -336,113 +334,40 @@ function Hero() {
 }
 
 function AuroraBackground() {
-  // Mouse-following spotlight via motion values + spring smoothing
-  const containerRef = useRef<HTMLDivElement>(null);
-  const mx = useMotionValue(50);
-  const my = useMotionValue(20);
-  const smoothX = useSpring(mx, { stiffness: 60, damping: 18, mass: 0.6 });
-  const smoothY = useSpring(my, { stiffness: 60, damping: 18, mass: 0.6 });
-  const spotlight = useTransform(
-    [smoothX, smoothY] as unknown as MotionValue<number>[],
-    ([x, y]) =>
-      `radial-gradient(600px circle at ${x}% ${y}%, rgba(233,30,140,0.22), transparent 55%)`,
-  );
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const onMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      mx.set(((e.clientX - rect.left) / rect.width) * 100);
-      my.set(((e.clientY - rect.top) / rect.height) * 100);
-    };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, [mx, my]);
-
   // Static-but-randomized particles (deterministic seed → SSR-safe)
   const particles = [
     { left: 12, top: 22, delay: 0, size: 4 },
-    { left: 28, top: 78, delay: 1.2, size: 3 },
     { left: 41, top: 34, delay: 2.4, size: 5 },
-    { left: 58, top: 68, delay: 0.8, size: 3 },
     { left: 71, top: 18, delay: 3.1, size: 4 },
     { left: 84, top: 55, delay: 1.7, size: 5 },
     { left: 19, top: 60, delay: 2.9, size: 3 },
-    { left: 92, top: 30, delay: 0.4, size: 4 },
-    { left: 36, top: 88, delay: 4.2, size: 3 },
     { left: 65, top: 8, delay: 2.0, size: 5 },
   ];
 
   return (
-    <div ref={containerRef} className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+    <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
       <div className="absolute inset-0 bg-bg" />
 
-      {/* Slow rotating conic halo behind everything */}
+      {/* Blob 1 — magenta, drift only (translate is GPU-cheap) */}
       <motion.div
         aria-hidden
-        className="absolute left-1/2 top-1/2 size-[140vw] max-w-[1800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.22] blur-3xl"
-        style={{
-          background:
-            "conic-gradient(from 0deg at 50% 50%, transparent, #E91E8C 25%, transparent 50%, #1B3A5C 75%, transparent)",
-        }}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-      />
-
-      {/* Blob 1 — magenta, scale + drift */}
-      <motion.div
-        aria-hidden
-        className="absolute left-[8%] top-[8%] size-[55vw] max-w-[780px] rounded-full bg-accent/45 blur-[60px] sm:blur-[110px]"
-        animate={{
-          x: [0, 60, -30, 0],
-          y: [0, -40, 30, 0],
-          scale: [1, 1.15, 0.95, 1],
-        }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute left-[8%] top-[8%] size-[55vw] max-w-[780px] rounded-full bg-accent/40 blur-[80px] will-change-transform"
+        animate={{ x: [0, 40, -20, 0], y: [0, -30, 20, 0] }}
+        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* Blob 2 — navy surface, counter motion */}
       <motion.div
         aria-hidden
-        className="absolute right-[5%] top-[28%] size-[55vw] max-w-[740px] rounded-full bg-surface/80 blur-[60px] sm:blur-[120px]"
-        animate={{
-          x: [0, -50, 40, 0],
-          y: [0, 50, -20, 0],
-          scale: [1, 1.2, 0.9, 1],
-        }}
-        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute right-[5%] top-[28%] size-[55vw] max-w-[740px] rounded-full bg-surface/70 blur-[80px] will-change-transform"
+        animate={{ x: [0, -35, 25, 0], y: [0, 35, -15, 0] }}
+        transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Blob 3 — soft accent low */}
-      <motion.div
+      {/* Blob 3 — fuchsia top-right accent (static, decorative) */}
+      <div
         aria-hidden
-        className="absolute bottom-[-12%] left-[28%] size-[55vw] max-w-[720px] rounded-full bg-accent/30 blur-[70px] sm:blur-[140px]"
-        animate={{
-          x: [0, 40, -40, 0],
-          y: [0, -30, 20, 0],
-          scale: [1, 1.18, 0.92, 1],
-        }}
-        transition={{ duration: 24, repeat: Infinity, ease: "easeInOut", delay: -4 }}
-      />
-
-      {/* Blob 4 — fuchsia top-right, new */}
-      <motion.div
-        aria-hidden
-        className="absolute right-[20%] top-[-10%] size-[40vw] max-w-[520px] rounded-full bg-fuchsia-500/30 blur-[60px] sm:blur-[110px]"
-        animate={{
-          x: [0, -60, 30, 0],
-          y: [0, 50, -20, 0],
-          scale: [1, 0.85, 1.15, 1],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: -7 }}
-      />
-
-      {/* Mouse-following spotlight */}
-      <motion.div
-        aria-hidden
-        className="absolute inset-0 mix-blend-screen"
-        style={{ backgroundImage: spotlight }}
+        className="absolute right-[20%] top-[-10%] size-[40vw] max-w-[520px] rounded-full bg-fuchsia-500/25 blur-[90px]"
       />
 
       {/* Floating particles drifting upward */}
@@ -450,7 +375,7 @@ function AuroraBackground() {
         <motion.span
           key={i}
           aria-hidden
-          className="absolute rounded-full bg-accent shadow-[0_0_12px_rgba(233,30,140,0.7)]"
+          className="absolute rounded-full bg-accent shadow-[0_0_12px_rgba(233,30,140,0.7)] will-change-transform"
           style={{
             left: `${p.left}%`,
             top: `${p.top}%`,
@@ -460,7 +385,6 @@ function AuroraBackground() {
           animate={{
             y: [0, -60, 0],
             opacity: [0, 0.85, 0],
-            scale: [0.6, 1.1, 0.6],
           }}
           transition={{
             duration: 8 + (i % 3),
@@ -471,27 +395,15 @@ function AuroraBackground() {
         />
       ))}
 
-      {/* Comet streak — diagonally across once every ~12s */}
+      {/* Comet streak — single, less frequent */}
       <motion.div
         aria-hidden
-        className="absolute -left-[15%] top-[22%] h-[2px] w-[260px] rotate-[18deg] bg-gradient-to-r from-transparent via-pink-300 to-transparent"
+        className="absolute -left-[15%] top-[22%] h-[2px] w-[260px] rotate-[18deg] bg-gradient-to-r from-transparent via-pink-300 to-transparent will-change-transform"
         animate={{ x: ["0vw", "130vw"], opacity: [0, 1, 0] }}
         transition={{
           duration: 2.4,
           repeat: Infinity,
-          repeatDelay: 9,
-          ease: [0.22, 1, 0.36, 1],
-        }}
-      />
-      <motion.div
-        aria-hidden
-        className="absolute -left-[15%] top-[64%] h-[1px] w-[180px] -rotate-[12deg] bg-gradient-to-r from-transparent via-pink-200 to-transparent"
-        animate={{ x: ["0vw", "130vw"], opacity: [0, 0.85, 0] }}
-        transition={{
-          duration: 2.8,
-          repeat: Infinity,
-          repeatDelay: 13,
-          delay: 5,
+          repeatDelay: 12,
           ease: [0.22, 1, 0.36, 1],
         }}
       />
@@ -540,41 +452,26 @@ function SectionAmbience({
   bottom?: boolean;
   intensity?: number;
 }) {
+  // Static blurred orbs — same premium glow without per-section animation cost.
+  // (Animating blur-[110px] elements in 5 sections at once was the main lag source.)
   return (
     <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden>
       {top && (
         <>
-          <motion.div
-            className="absolute -top-[30%] left-[10%] size-[55vw] max-w-[700px] rounded-full bg-accent blur-[110px]"
-            style={{ opacity: intensity * 0.4 }}
-            animate={{
-              x: [0, 50, -30, 0],
-              y: [0, 30, -20, 0],
-              scale: [1, 1.1, 0.95, 1],
-            }}
-            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+          <div
+            className="absolute -top-[30%] left-[10%] size-[55vw] max-w-[700px] rounded-full bg-accent blur-[80px]"
+            style={{ opacity: intensity * 0.35 }}
           />
-          <motion.div
-            className="absolute -top-[40%] right-[5%] size-[50vw] max-w-[640px] rounded-full bg-fuchsia-500 blur-[120px]"
-            style={{ opacity: intensity * 0.25 }}
-            animate={{
-              x: [0, -40, 30, 0],
-              y: [0, 40, -20, 0],
-              scale: [1, 0.95, 1.1, 1],
-            }}
-            transition={{ duration: 26, repeat: Infinity, ease: "easeInOut", delay: -6 }}
+          <div
+            className="absolute -top-[40%] right-[5%] size-[50vw] max-w-[640px] rounded-full bg-fuchsia-500 blur-[80px]"
+            style={{ opacity: intensity * 0.22 }}
           />
         </>
       )}
       {bottom && (
-        <motion.div
-          className="absolute -bottom-[30%] left-1/2 size-[60vw] max-w-[760px] -translate-x-1/2 rounded-full bg-accent blur-[110px]"
-          style={{ opacity: intensity * 0.35 }}
-          animate={{
-            x: [-30, 30, -30],
-            scale: [1, 1.12, 1],
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="absolute -bottom-[30%] left-1/2 size-[60vw] max-w-[760px] -translate-x-1/2 rounded-full bg-accent blur-[80px]"
+          style={{ opacity: intensity * 0.3 }}
         />
       )}
     </div>
@@ -791,36 +688,37 @@ function CogIcon() {
    FEATURES — 6 cards (Core Capabilities) + Meet EMILY subsection
 ---------------------------------------------------------- */
 function Features() {
+  const t = useT();
   const features = [
-    { icon: <BrainIcon />, title: "Intelligence des talents explicable", desc: "Nos modèles IA analysent l'expérience, les compétences et les signaux contextuels des candidats pour identifier la meilleure adéquation — et expliquent pourquoi." },
-    { icon: <SparkleIcon />, title: "EMILY™ — copilote IA de sourcing", desc: "EMILY engage et qualifie les candidats sur WhatsApp avant même que les recruteurs n'entrent dans la conversation." },
-    { icon: <TargetIcon />, title: "Matching candidat multi-couches", desc: "Les candidats sont classés par analyse sémantique et signaux contextuels — pas seulement par mots-clés." },
-    { icon: <DatabaseIcon />, title: "1,2 Md+ profils candidats", desc: "Accédez à plus de 1,2 milliard de profils sourcés à l'échelle mondiale, mis à jour en continu." },
-    { icon: <WhatsAppCircleIcon />, title: "Engagez les candidats sur WhatsApp", desc: "Touchez les candidats où ils sont vraiment actifs, avec des relances et des suivis automatisés." },
-    { icon: <BoltIcon />, title: "Découverte sémantique de talents", desc: "Trouvez les candidats pertinents en quelques minutes grâce à la recherche domain-aware et l'intelligence sémantique." },
+    { icon: <BrainIcon />, title: t("f1_title"), desc: t("f1_desc") },
+    { icon: <SparkleIcon />, title: t("f2_title"), desc: t("f2_desc") },
+    { icon: <TargetIcon />, title: t("f3_title"), desc: t("f3_desc") },
+    { icon: <DatabaseIcon />, title: t("f4_title"), desc: t("f4_desc") },
+    { icon: <WhatsAppCircleIcon />, title: t("f5_title"), desc: t("f5_desc") },
+    { icon: <BoltIcon />, title: t("f6_title"), desc: t("f6_desc") },
   ];
 
   return (
-    <section id="features" className="relative overflow-hidden py-28 sm:py-36">
+    <section id="features" className="relative overflow-hidden py-20 sm:py-24">
       {/* Ambient bleed from hero — a soft top glow that continues the aurora */}
       <SectionAmbience top intensity={0.5} />
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <Reveal className="mb-16 text-center">
           <motion.span variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-accent">
-            Fonctionnalités
+            {t("features_eyebrow")}
           </motion.span>
           <motion.h2
             variants={fadeUp}
             className="mx-auto mt-3 max-w-3xl text-balance font-semibold leading-[1.05] tracking-tighter2"
             style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
           >
-            Capacités cœur de{" "}
+            {t("features_h2_a")}{" "}
             <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
               TrueCalling
             </span>
           </motion.h2>
           <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-2xl text-lg text-ink-muted">
-            Sourcing IA, matching et engagement candidat — sur une seule plateforme.
+            {t("features_subtitle")}
           </motion.p>
         </Reveal>
 
@@ -859,26 +757,15 @@ function Features() {
 
 /* ----- Meet EMILY subsection ----- */
 function MeetEmily() {
+  const t = useT();
   const cards = [
-    {
-      icon: <WhatsAppCircleIcon />,
-      title: "90 %+ de taux d'ouverture",
-      desc: "Quand LinkedIn InMail plafonne à 18-25 %, EMILY atteint les candidats là où ils répondent vraiment.",
-    },
-    {
-      icon: <RobotIcon />,
-      title: "Qualification automatisée",
-      desc: "EMILY pose les bonnes questions, filtre les profils et ne transmet que les candidats qualifiés.",
-    },
-    {
-      icon: <CalendarIcon />,
-      title: "Planification intégrée",
-      desc: "Relances intelligentes et planification automatique sans intervention humaine.",
-    },
+    { icon: <WhatsAppCircleIcon />, title: t("emily_c1_title"), desc: t("emily_c1_desc") },
+    { icon: <RobotIcon />, title: t("emily_c2_title"), desc: t("emily_c2_desc") },
+    { icon: <CalendarIcon />, title: t("emily_c3_title"), desc: t("emily_c3_desc") },
   ];
 
   return (
-    <div className="relative mt-32 overflow-hidden rounded-3xl border border-white/[0.06] bg-bg/40 px-5 py-20 sm:px-10 sm:py-24">
+    <div className="relative mt-20 overflow-hidden rounded-3xl border border-white/[0.06] bg-bg/40 px-5 py-14 sm:px-10 sm:py-16">
       {/* Soft animated glow background */}
       <motion.span
         aria-hidden
@@ -898,7 +785,7 @@ function MeetEmily() {
           variants={fadeUp}
           className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-ink-muted backdrop-blur-md"
         >
-          <SparkleIconSmall /> IA conversationnelle pour WhatsApp
+          <SparkleIconSmall /> {t("emily_eyebrow")}
         </motion.span>
 
         <motion.h3
@@ -906,15 +793,14 @@ function MeetEmily() {
           className="mt-5 font-semibold leading-[1.05] tracking-tighter2"
           style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
         >
-          Découvrez{" "}
+          {t("emily_h3_lead")}{" "}
           <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
             EMILY™
           </span>
         </motion.h3>
 
         <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-2xl text-lg text-ink-muted">
-          Le premier copilote IA qui engage les candidats directement sur WhatsApp, avec plus de
-          90 % de taux d'ouverture.
+          {t("emily_subtitle")}
         </motion.p>
 
         <Reveal className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -947,54 +833,35 @@ function MeetEmily() {
    HOW IT WORKS — vertical timeline
 ---------------------------------------------------------- */
 function HowItWorks() {
+  const t = useT();
   const steps = [
-    {
-      icon: <UploadIcon />,
-      title: "Définissez vos critères",
-      desc: "Décrivez votre candidat idéal en langage naturel. Notre IA comprend vos exigences instantanément.",
-    },
-    {
-      icon: <BrainIcon />,
-      title: "Lancez la recherche",
-      desc: "Notre IA scanne 1,2 Md+ profils et identifie les meilleurs candidats en quelques minutes.",
-    },
-    {
-      icon: <UsersGroupIcon />,
-      title: "Construisez votre présélection",
-      desc: "Évaluez les candidats avec le score IA (matching, résilience et réputation digitale) et bâtissez votre présélection.",
-    },
-    {
-      icon: <ChatBubbleIcon />,
-      title: "EMILY™ engage les candidats sur WhatsApp",
-      desc: "En un clic, EMILY contacte les candidats sélectionnés sur WhatsApp avec des messages personnalisés.",
-    },
-    {
-      icon: <TransferIcon />,
-      title: "Transfert vers votre ATS",
-      desc: "Les candidats qualifiés sont transférés automatiquement vers votre ATS (Workday, Greenhouse, SAP SuccessFactors, etc.).",
-    },
+    { icon: <UploadIcon />, title: t("s1_title"), desc: t("s1_desc") },
+    { icon: <BrainIcon />, title: t("s2_title"), desc: t("s2_desc") },
+    { icon: <UsersGroupIcon />, title: t("s3_title"), desc: t("s3_desc") },
+    { icon: <ChatBubbleIcon />, title: t("s4_title"), desc: t("s4_desc") },
+    { icon: <TransferIcon />, title: t("s5_title"), desc: t("s5_desc") },
   ];
 
   return (
-    <section id="how-it-works" className="relative overflow-hidden py-28 sm:py-36">
+    <section id="how-it-works" className="relative overflow-hidden py-20 sm:py-24">
       <SectionAmbience top intensity={0.35} />
       <div className="relative mx-auto max-w-5xl px-5 sm:px-8">
-        <Reveal className="mb-20 text-center">
+        <Reveal className="mb-14 text-center">
           <motion.span variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-accent">
-            Comment ça marche
+            {t("how_eyebrow")}
           </motion.span>
           <motion.h2
             variants={fadeUp}
             className="mx-auto mt-3 max-w-3xl text-balance font-semibold leading-[1.05] tracking-tighter2"
             style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
           >
-            Comment fonctionne{" "}
+            {t("how_h2_a")}{" "}
             <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
               TrueCalling
             </span>
           </motion.h2>
           <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-ink-muted">
-            Du brief au candidat qualifié, en cinq étapes — sans changer d'outil.
+            {t("how_subtitle")}
           </motion.p>
         </Reveal>
 
@@ -1120,27 +987,27 @@ function TimelineItem({
    BENEFITS — Stats + ATS integrations + Case study
 ---------------------------------------------------------- */
 function Benefits() {
+  const t = useT();
   return (
-    <section id="benefits" className="relative overflow-hidden py-28 sm:py-36">
+    <section id="benefits" className="relative overflow-hidden py-20 sm:py-24">
       <SectionAmbience top intensity={0.4} />
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <Reveal className="mb-16 text-center">
           <motion.span variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-accent">
-            Bénéfices
+            {t("benefits_eyebrow")}
           </motion.span>
           <motion.h2
             variants={fadeUp}
             className="mx-auto mt-3 max-w-3xl text-balance font-semibold leading-[1.05] tracking-tighter2"
             style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
           >
-            L'impact de{" "}
+            {t("benefits_h2_a")}{" "}
             <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
               TrueCalling
             </span>
           </motion.h2>
           <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-ink-muted">
-            Des résultats mesurables sur l'ensemble de votre workflow de sourcing et de
-            recrutement.
+            {t("benefits_subtitle")}
           </motion.p>
         </Reveal>
 
@@ -1152,16 +1019,16 @@ function Benefits() {
   );
 }
 
-const STATS = [
-  { value: 80, suffix: "%", icon: <ClockIcon />, title: "Sourcing plus rapide", desc: "Trouvez des candidats qualifiés en minutes plutôt qu'en jours." },
-  { value: 90, suffix: "%", icon: <DollarIcon />, title: "Taux d'ouverture WhatsApp", desc: "Engagez les candidats là où ils lisent vraiment leurs messages." },
-  { value: 95, suffix: "%", icon: <TargetIcon />, title: "Précision de matching", desc: "Le score IA identifie le meilleur candidat." },
-  { value: 60, suffix: "%", icon: <TrendingUpIcon />, title: "Coûts de recrutement réduits", desc: "Réduisez le sourcing manuel, l'outreach et le screening." },
-  { value: 70, suffix: "%", icon: <ShieldIcon />, title: "Rétention plus élevée", desc: "Recrutez des candidats alignés avec le poste et la culture." },
-  { value: null, suffix: "∞", icon: <RocketIcon />, title: "Scalabilité illimitée", desc: "Scalez votre recrutement sans agrandir l'équipe." },
-];
-
 function StatsGrid() {
+  const t = useT();
+  const STATS = [
+    { value: 80, suffix: "%", icon: <ClockIcon />, title: t("st1_title"), desc: t("st1_desc") },
+    { value: 90, suffix: "%", icon: <DollarIcon />, title: t("st2_title"), desc: t("st2_desc") },
+    { value: 95, suffix: "%", icon: <TargetIcon />, title: t("st3_title"), desc: t("st3_desc") },
+    { value: 60, suffix: "%", icon: <TrendingUpIcon />, title: t("st4_title"), desc: t("st4_desc") },
+    { value: 70, suffix: "%", icon: <ShieldIcon />, title: t("st5_title"), desc: t("st5_desc") },
+    { value: null as number | null, suffix: "∞", icon: <RocketIcon />, title: t("st6_title"), desc: t("st6_desc") },
+  ];
   return (
     <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {STATS.map((s, i) => (
@@ -1217,11 +1084,12 @@ function StatNumber({ value, suffix }: { value: number | null; suffix: string })
 
 /* ----- ATS Integrations block ----- */
 function ATSBlock() {
+  const t = useT();
   const items = [
-    { icon: <TwoWayIcon />, title: "Synchronisation bidirectionnelle", desc: "Candidats et offres se synchronisent automatiquement entre TrueCalling et votre ATS." },
-    { icon: <BoltIcon />, title: "Mises à jour en temps réel", desc: "Recevez des updates instantanées dès qu'un statut candidat change." },
-    { icon: <SyncIcon />, title: "Statuts mis à jour automatiquement", desc: "Les statuts candidats et offres restent synchronisés sans travail manuel." },
-    { icon: <CogIcon />, title: "Paramètres flexibles", desc: "Personnalisez le mapping et les règles de sync pour matcher votre process." },
+    { icon: <TwoWayIcon />, title: t("ats1_title"), desc: t("ats1_desc") },
+    { icon: <BoltIcon />, title: t("ats2_title"), desc: t("ats2_desc") },
+    { icon: <SyncIcon />, title: t("ats3_title"), desc: t("ats3_desc") },
+    { icon: <CogIcon />, title: t("ats4_title"), desc: t("ats4_desc") },
   ];
 
   return (
@@ -1232,13 +1100,13 @@ function ATSBlock() {
           className="font-semibold leading-tight tracking-tighter2"
           style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)" }}
         >
-          Intégrations ATS{" "}
+          {t("ats_h3_a")}{" "}
           <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
-            sans friction
+            {t("ats_h3_b")}
           </span>
         </motion.h3>
         <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-xl text-lg text-ink-muted">
-          Connectez TrueCalling à votre ATS et conservez votre workflow de recrutement intact.
+          {t("ats_subtitle")}
         </motion.p>
       </Reveal>
 
@@ -1268,7 +1136,7 @@ function ATSBlock() {
 
       <Reveal className="mt-8 rounded-2xl border border-white/[0.06] bg-bg/40 p-6 backdrop-blur-md sm:p-8">
         <motion.div variants={fadeUp} className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-[11.5px] font-medium text-emerald-300">
-          <CheckIcon className="size-3" /> Compatible avec votre stack actuel
+          <CheckIcon className="size-3" /> {t("ats_compatible")}
         </motion.div>
 
         <motion.div variants={fadeUp} className="mt-2 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-12">
@@ -1279,7 +1147,7 @@ function ATSBlock() {
             </span>
             <div className="text-center">
               <div className="text-[14px] font-semibold">TrueCalling</div>
-              <div className="text-[11.5px] text-ink-muted">Sourcing IA</div>
+              <div className="text-[11.5px] text-ink-muted">{t("ats_node_tc_label")}</div>
             </div>
           </div>
 
@@ -1302,16 +1170,16 @@ function ATSBlock() {
             </span>
             <div className="text-center">
               <div className="text-[14px] font-semibold">ATS</div>
-              <div className="text-[11.5px] text-ink-muted">Gestion candidats</div>
+              <div className="text-[11.5px] text-ink-muted">{t("ats_node_ats_label")}</div>
             </div>
           </div>
         </motion.div>
 
         <motion.div variants={fadeUp} className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
           {[
-            { label: "Candidats", value: "Auto sync" },
-            { label: "Offres", value: "Import / Export" },
-            { label: "Statuts", value: "Temps réel" },
+            { label: t("ats_kpi1_label"), value: t("ats_kpi1_value") },
+            { label: t("ats_kpi2_label"), value: t("ats_kpi2_value") },
+            { label: t("ats_kpi3_label"), value: t("ats_kpi3_value") },
           ].map((it) => (
             <div
               key={it.label}
@@ -1329,12 +1197,13 @@ function ATSBlock() {
 
 /* ----- Case study block ----- */
 function CaseStudyBlock() {
+  const t = useT();
   const stages = [
-    { label: "Rôle", value: "Senior Data Engineer — Paris" },
-    { label: "Candidats identifiés", value: "26" },
-    { label: "Candidats présélectionnés", value: "11" },
-    { label: "Candidats contactés via WhatsApp", value: "7" },
-    { label: "Réponses sous 24 heures", value: "7" },
+    { label: t("case_stage1_label"), value: t("case_stage1_value") },
+    { label: t("case_stage2_label"), value: t("case_stage2_value") },
+    { label: t("case_stage3_label"), value: t("case_stage3_value") },
+    { label: t("case_stage4_label"), value: t("case_stage4_value") },
+    { label: t("case_stage5_label"), value: t("case_stage5_value") },
   ];
 
   return (
@@ -1345,13 +1214,13 @@ function CaseStudyBlock() {
           className="font-semibold leading-tight tracking-tighter2"
           style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)" }}
         >
-          Du sourcing aux candidats qualifiés{" "}
+          {t("case_h3_a")}{" "}
           <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
-            en quelques heures
+            {t("case_h3_b")}
           </span>
         </motion.h3>
         <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-xl text-lg text-ink-muted">
-          Voilà à quoi ressemble un vrai workflow de sourcing avec TrueCalling.
+          {t("case_subtitle")}
         </motion.p>
       </Reveal>
 
@@ -1360,13 +1229,13 @@ function CaseStudyBlock() {
           variants={fadeUp}
           className="text-[11px] uppercase tracking-[0.2em] text-accent"
         >
-          Exemple
+          {t("case_eyebrow")}
         </motion.span>
         <motion.h4
           variants={fadeUp}
           className="mt-2 text-2xl font-semibold tracking-tight"
         >
-          Du sourcing à la conversation en moins de 24 h
+          {t("case_h4")}
         </motion.h4>
 
         <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-10">
@@ -1401,12 +1270,12 @@ function CaseStudyBlock() {
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             />
             <div className="relative">
-              <div className="text-[11px] uppercase tracking-[0.22em] text-accent">Résultat</div>
+              <div className="text-[11px] uppercase tracking-[0.22em] text-accent">{t("case_result")}</div>
               <div className="mt-3 bg-gradient-to-r from-white via-pink-200 to-white bg-clip-text text-7xl font-bold leading-none text-transparent sm:text-8xl">
                 7
               </div>
               <p className="mx-auto mt-4 max-w-[18ch] text-[14px] leading-relaxed text-ink-muted">
-                candidats joints en moins de 24 heures
+                {t("case_result_caption")}
               </p>
             </div>
           </motion.div>
@@ -1416,13 +1285,9 @@ function CaseStudyBlock() {
           variants={fadeUp}
           className="mt-10 rounded-2xl border-l-2 border-accent bg-bg/40 p-6 text-[14.5px] leading-relaxed text-ink/90"
         >
-          <span className="text-accent">«</span> LinkedIn est une base de données ; TrueCalling
-          lance la conversation. Trouver les bonnes personnes est facile, les faire répondre est le
-          vrai défi. En moins de 24 heures, nous avions 7 candidats top dans notre boîte de
-          réception, prêts à parler. C'est un niveau d'engagement que je n'avais jamais vu
-          ailleurs. <span className="text-accent">»</span>
+          <span className="text-accent">«</span> {t("case_quote")} <span className="text-accent">»</span>
           <footer className="mt-3 text-[12.5px] not-italic text-ink-muted">
-            — Talent Management Director, Leading IT Services Group, Espagne
+            {t("case_quote_author")}
           </footer>
         </motion.blockquote>
       </Reveal>
@@ -1485,6 +1350,7 @@ const WHATSAPP_MSG =
   "Bonjour M., je vous contacte au sujet d'un poste de Senior Product Designer chez [Client]. Votre profil correspond très précisément à ce qu'ils cherchent — auriez-vous 15 min cette semaine pour en discuter ?";
 
 function ProductDemo() {
+  const t = useT();
   const sectionRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { once: false, margin: "-100px" });
   const [step, setStep] = useState(0); // 0..3
@@ -1509,23 +1375,23 @@ function ProductDemo() {
     <section
       id="demo"
       ref={sectionRef}
-      className="relative overflow-hidden py-28 sm:py-36"
+      className="relative overflow-hidden py-20 sm:py-24"
     >
       <SectionAmbience top intensity={0.3} />
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <Reveal className="mb-14 text-center">
           <motion.span variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-accent">
-            Démo produit
+            {t("demo_eyebrow")}
           </motion.span>
           <motion.h2
             variants={fadeUp}
             className="mt-3 text-balance font-semibold leading-[1.05] tracking-tighter2"
             style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)" }}
           >
-            Du brief au candidat qualifié en quelques minutes.
+            {t("demo_h2")}
           </motion.h2>
           <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-ink-muted">
-            Du brief au candidat qui répond, en moins d'une minute.
+            {t("demo_subtitle")}
           </motion.p>
         </Reveal>
 
@@ -1539,9 +1405,9 @@ function ProductDemo() {
             <button
               onClick={() => setRunId((r) => r + 1)}
               className="ml-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs text-ink-muted transition-colors hover:bg-white/[0.06] hover:text-ink cursor-pointer"
-              aria-label="Rejouer la démo"
+              aria-label={t("demo_replay_aria")}
             >
-              <ReplayIcon /> Rejouer
+              <ReplayIcon /> {t("demo_replay")}
             </button>
           </div>
         </div>
@@ -2263,74 +2129,60 @@ function XSmallIcon() {
 /* ----------------------------------------------------------
    PRICING — toggle + 3 tiers
 ---------------------------------------------------------- */
-const TIERS = [
-  {
-    name: "Starter",
-    priceMonthly: 595,
-    tagline: "Pour les équipes qui structurent leur sourcing.",
-    features: [
-      "Jusqu'à 10 fiches de poste",
-      "Outreach multi-canal (WhatsApp, email, téléphone)",
-      "Collaboration d'équipe",
-      "Top Ranking",
-      "EMILY™ AI Copilot",
-      "Employer Branding",
-      "TrueFit 360 Assessment ($5/test)",
-    ],
-    cta: "Commencer",
-    ctaVariant: "outline" as const,
-    highlight: false,
-  },
-  {
-    name: "Core",
-    priceMonthly: 895,
-    tagline: "Pour les équipes qui scalent leurs recrutements.",
-    features: [
-      "Fiches de poste illimitées",
-      "Tout ce qui est dans Starter",
-      "1 intégration ATS",
-      "Workflows IA personnalisés",
-    ],
-    cta: "Réserver une démo",
-    ctaVariant: "primary" as const,
-    highlight: true,
-  },
-  {
-    name: "Enterprise",
-    priceMonthly: null,
-    tagline: "Pour les grandes organisations.",
-    features: [
-      "Tout ce qui est dans Core",
-      "Intégrations ATS illimitées",
-      "Recherche avancée",
-      "Accompagnement dédié",
-    ],
-    cta: "Nous contacter",
-    ctaVariant: "outline" as const,
-    highlight: false,
-  },
-];
-
 function Pricing() {
+  const t = useT();
   const [annual, setAnnual] = useState(false);
 
+  const TIERS = [
+    {
+      name: "Starter",
+      priceMonthly: 595 as number | null,
+      tagline: t("starter_tagline"),
+      features: [
+        t("starter_f1"), t("starter_f2"), t("starter_f3"), t("starter_f4"),
+        t("starter_f5"), t("starter_f6"), t("starter_f7"),
+      ],
+      cta: t("cta_start"),
+      ctaVariant: "outline" as const,
+      highlight: false,
+    },
+    {
+      name: "Core",
+      priceMonthly: 895 as number | null,
+      tagline: t("core_tagline"),
+      features: [t("core_f1"), t("core_f2"), t("core_f3"), t("core_f4")],
+      cta: t("cta_book_demo"),
+      ctaVariant: "primary" as const,
+      highlight: true,
+    },
+    {
+      name: "Enterprise",
+      priceMonthly: null as number | null,
+      tagline: t("enterprise_tagline"),
+      features: [t("ent_f1"), t("ent_f2"), t("ent_f3"), t("ent_f4")],
+      cta: t("cta_contact"),
+      ctaVariant: "outline" as const,
+      highlight: false,
+    },
+  ];
+
   return (
-    <section id="pricing" className="relative overflow-hidden py-28 sm:py-36">
+    <section id="pricing" className="relative overflow-hidden py-20 sm:py-24">
       <SectionAmbience top intensity={0.35} />
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <Reveal className="text-center">
           <motion.span variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-accent">
-            Tarifs
+            {t("pricing_eyebrow")}
           </motion.span>
           <motion.h2
             variants={fadeUp}
             className="mt-3 text-balance font-semibold leading-[1.05] tracking-tighter2"
             style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)" }}
           >
-            Une offre par étape de croissance.
+            {t("pricing_h2")}
           </motion.h2>
           <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-ink-muted">
-            Sans engagement, sans frais cachés. Annulez à tout moment.
+            {t("pricing_subtitle")}
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-8 inline-flex items-center gap-3">
@@ -2339,44 +2191,44 @@ function Pricing() {
         </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-3 lg:items-stretch">
-          {TIERS.map((t, i) => (
+          {TIERS.map((tier, i) => (
             <motion.div
-              key={t.name}
+              key={tier.name}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
               className={`relative flex flex-col rounded-2xl border p-7 ${
-                t.highlight
+                tier.highlight
                   ? "border-accent/50 bg-surface/60 shadow-[0_0_0_1px_rgba(233,30,140,0.55),0_30px_80px_-30px_rgba(233,30,140,0.55)] lg:-translate-y-3 lg:py-9"
                   : "border-white/[0.08] bg-surface/30"
               }`}
             >
-              {t.highlight && (
+              {tier.highlight && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">
-                  Most popular
+                  {t("pricing_most_popular")}
                 </span>
               )}
 
-              <div className="mb-1 text-sm font-medium text-ink-muted">{t.name}</div>
+              <div className="mb-1 text-sm font-medium text-ink-muted">{tier.name}</div>
 
               <div className="mb-2 flex items-baseline gap-1">
-                {t.priceMonthly === null ? (
-                  <span className="text-3xl font-semibold tracking-tighter2">Sur devis</span>
+                {tier.priceMonthly === null ? (
+                  <span className="text-3xl font-semibold tracking-tighter2">{t("pricing_quote")}</span>
                 ) : (
                   <>
                     <span className="text-4xl font-semibold tracking-tighter2 sm:text-5xl">
-                      ${annual ? Math.round(t.priceMonthly * 0.8) : t.priceMonthly}
+                      ${annual ? Math.round(tier.priceMonthly * 0.8) : tier.priceMonthly}
                     </span>
-                    <span className="text-sm text-ink-muted">/utilisateur/mois</span>
+                    <span className="text-sm text-ink-muted">{t("pricing_per_user")}</span>
                   </>
                 )}
               </div>
 
-              <p className="mb-6 text-[13.5px] leading-relaxed text-ink-muted">{t.tagline}</p>
+              <p className="mb-6 text-[13.5px] leading-relaxed text-ink-muted">{tier.tagline}</p>
 
               <ul className="mb-8 flex-1 space-y-3">
-                {t.features.map((f) => (
+                {tier.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-[14px] text-ink/90">
                     <span className="mt-0.5 inline-flex size-4 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
                       <CheckIcon className="size-3" />
@@ -2386,8 +2238,8 @@ function Pricing() {
                 ))}
               </ul>
 
-              <CTAButton href="/reserver-une-demo" variant={t.ctaVariant} size="md" className="w-full">
-                {t.cta}
+              <CTAButton href="/reserver-une-demo" variant={tier.ctaVariant} size="md" className="w-full">
+                {tier.cta}
               </CTAButton>
             </motion.div>
           ))}
@@ -2398,10 +2250,11 @@ function Pricing() {
 }
 
 function BillingToggle({ annual, onChange }: { annual: boolean; onChange: (v: boolean) => void }) {
+  const t = useT();
   return (
     <div
       role="radiogroup"
-      aria-label="Période de facturation"
+      aria-label={t("pricing_billing_aria")}
       className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] p-1 backdrop-blur-md"
     >
       <button
@@ -2420,7 +2273,7 @@ function BillingToggle({ annual, onChange }: { annual: boolean; onChange: (v: bo
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
           />
         )}
-        <span className="relative">Mensuel</span>
+        <span className="relative">{t("pricing_monthly")}</span>
       </button>
       <button
         type="button"
@@ -2439,7 +2292,7 @@ function BillingToggle({ annual, onChange }: { annual: boolean; onChange: (v: bo
           />
         )}
         <span className="relative inline-flex items-center gap-1.5">
-          Annuel
+          {t("pricing_annual")}
           <span className="rounded-full bg-accent/15 px-1.5 py-0.5 text-[10px] font-semibold text-accent">
             -20%
           </span>
@@ -2453,8 +2306,9 @@ function BillingToggle({ annual, onChange }: { annual: boolean; onChange: (v: bo
    FINAL CTA
 ---------------------------------------------------------- */
 function FinalCTA() {
+  const t = useT();
   return (
-    <section className="relative overflow-hidden py-28 sm:py-36">
+    <section className="relative overflow-hidden py-20 sm:py-24">
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-bg via-surface to-accent/40" />
         <div className="absolute -left-20 top-10 size-[60vw] max-w-[700px] rounded-full bg-accent/40 blur-[60px] sm:blur-[110px] animate-blob-1" />
@@ -2468,14 +2322,14 @@ function FinalCTA() {
             className="text-balance font-semibold leading-[1.05] tracking-tighter2"
             style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)" }}
           >
-            Prêt à recruter autrement&nbsp;?
+            {t("final_h2")}
           </motion.h2>
           <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-white/80">
-            Voyez en 20 minutes ce que TrueCalling peut faire pour vos prochains recrutements.
+            {t("final_subtitle")}
           </motion.p>
           <motion.div variants={fadeUp} className="mt-10">
             <CTAButton href="/reserver-une-demo" variant="white" size="lg">
-              Réserver une démo
+              {t("cta_book_demo")}
             </CTAButton>
           </motion.div>
         </Reveal>
@@ -2488,31 +2342,32 @@ function FinalCTA() {
    FOOTER
 ---------------------------------------------------------- */
 function Footer() {
+  const t = useT();
   const cols = [
     {
-      title: "Produit",
+      title: t("footer_col_product"),
       links: [
-        { label: "Fonctionnalités", href: "#features" },
-        { label: "Tarifs", href: "#pricing" },
-        { label: "Démo", href: "#demo" },
-        { label: "FAQ", href: "/faq" },
+        { label: t("nav_features"), href: "#features" },
+        { label: t("nav_pricing"), href: "#pricing" },
+        { label: t("nav_demo"), href: "#demo" },
+        { label: t("nav_faq"), href: "/faq" },
       ],
     },
     {
-      title: "Entreprise",
+      title: t("footer_col_company"),
       links: [
-        { label: "À propos", href: "#" },
-        { label: "Blog", href: "/blog" },
-        { label: "Contact", href: "/contact" },
+        { label: t("footer_about_link"), href: "#" },
+        { label: t("nav_blog"), href: "/blog" },
+        { label: t("nav_contact"), href: "/contact" },
       ],
     },
     {
-      title: "Légal",
+      title: t("footer_col_legal"),
       links: [
         { label: "CGU", href: "/cgu" },
-        { label: "Mentions légales", href: "/cgu" },
-        { label: "RGPD", href: "/cgu#rgpd" },
-        { label: "Politique de confidentialité", href: "/cgu#rgpd" },
+        { label: t("footer_legal_mentions"), href: "/cgu" },
+        { label: t("footer_gdpr"), href: "/cgu#rgpd" },
+        { label: t("footer_privacy"), href: "/cgu#rgpd" },
       ],
     },
   ];
@@ -2524,7 +2379,7 @@ function Footer() {
           <div>
             <Logo size={28} showTagline />
             <p className="mt-5 max-w-xs text-sm text-ink-muted">
-              Sourcing IA, matching et outreach multi-canal pour les équipes recrutement modernes.
+              {t("footer_about")}
             </p>
             <div className="mt-5 flex items-center gap-2">
               <SocialLink href="https://www.instagram.com/truecalling.ai/" label="Instagram">
@@ -2561,8 +2416,8 @@ function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/[0.06] pt-6 text-xs text-ink-muted sm:flex-row sm:items-center">
-          <span>© 2026 TrueCalling. Tous droits réservés.</span>
-          <span>Fait avec attention pour les recruteurs.</span>
+          <span>{t("footer_copyright")}</span>
+          <span>{t("footer_made")}</span>
         </div>
       </div>
     </footer>
