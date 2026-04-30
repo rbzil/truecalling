@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
+import { useT } from "../_i18n/locale-context";
 
 /* ============================================================
    Réservation de démo — /reserver-une-demo
@@ -21,10 +22,6 @@ type FormState = {
   slot: string;
   message: string;
 };
-
-const TEAM_SIZES = ["Moi seul", "2 – 5", "5 – 15", "15 +"];
-const HIRES = ["Moins de 10", "10 – 50", "50 – 200", "200 +"];
-const SLOTS = ["Cette semaine", "La semaine prochaine", "Plus tard"];
 
 export default function Page() {
   return (
@@ -51,16 +48,17 @@ function BackgroundDecor() {
 
 /* ----- Top nav (simplified) ----- */
 function SiteNav() {
+  const t = useT();
   return (
     <header className="relative z-10 flex h-16 items-center justify-between px-5 sm:px-8">
-      <Link href="/" aria-label="Retour à l'accueil" className="cursor-pointer">
+      <Link href="/" aria-label={t("rd_back_home_aria")} className="cursor-pointer">
         <Logo />
       </Link>
       <Link
         href="/"
         className="inline-flex items-center gap-1.5 text-sm text-ink-muted transition-colors hover:text-ink cursor-pointer"
       >
-        <ArrowLeft /> Retour
+        <ArrowLeft /> {t("rd_back")}
       </Link>
     </header>
   );
@@ -121,6 +119,11 @@ function Hero() {
 
 /* ----- Form card ----- */
 function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }) => void }) {
+  const t = useT();
+  const TEAM_SIZES = [t("rd_team_solo"), t("rd_team_2_5"), t("rd_team_5_15"), t("rd_team_15p")];
+  const HIRES = [t("rd_hires_lt_10"), t("rd_hires_10_50"), t("rd_hires_50_200"), t("rd_hires_200p")];
+  const SLOTS = [t("rd_slot_this_week"), t("rd_slot_next_week"), t("rd_slot_later")];
+
   const [form, setForm] = useState<FormState>({
     firstName: "",
     lastName: "",
@@ -141,13 +144,13 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
 
   const validate = (): boolean => {
     const e: Partial<Record<keyof FormState, string>> = {};
-    if (!form.firstName.trim()) e.firstName = "Requis";
-    if (!form.lastName.trim()) e.lastName = "Requis";
-    if (!form.email.trim()) e.email = "Requis";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Email invalide";
-    if (!form.company.trim()) e.company = "Requis";
-    if (!form.teamSize) e.teamSize = "Choisir";
-    if (!form.hiresPerYear) e.hiresPerYear = "Choisir";
+    if (!form.firstName.trim()) e.firstName = t("rd_required_short");
+    if (!form.lastName.trim()) e.lastName = t("rd_required_short");
+    if (!form.email.trim()) e.email = t("rd_required_short");
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = t("rd_email_invalid");
+    if (!form.company.trim()) e.company = t("rd_required_short");
+    if (!form.teamSize) e.teamSize = t("rd_select_short");
+    if (!form.hiresPerYear) e.hiresPerYear = t("rd_select_short");
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -171,17 +174,16 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
     >
       <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ink-muted backdrop-blur-md">
         <span className="size-1.5 rounded-full bg-accent shadow-[0_0_10px_rgba(233,30,140,0.7)]" />
-        Démo guidée
+        {t("rd_eyebrow")}
       </span>
       <h1
         className="mt-5 text-balance font-semibold leading-[1.05] tracking-tighter2"
         style={{ fontSize: "clamp(2.25rem, 5vw, 3.75rem)" }}
       >
-        Réservez votre démo.
+        {t("rd_h1")}
       </h1>
       <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">
-        20 minutes pour voir comment TrueCalling transforme votre sourcing — sur votre cas réel,
-        avec vos prochains recrutements.
+        {t("rd_subtitle")}
       </p>
 
       <form
@@ -191,7 +193,7 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
       >
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field
-            label="Prénom"
+            label={t("rd_first_name")}
             name="firstName"
             value={form.firstName}
             error={errors.firstName}
@@ -200,7 +202,7 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
             required
           />
           <Field
-            label="Nom"
+            label={t("rd_last_name")}
             name="lastName"
             value={form.lastName}
             error={errors.lastName}
@@ -211,40 +213,40 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
         </div>
 
         <Field
-          label="Email professionnel"
+          label={t("rd_email")}
           name="email"
           type="email"
           value={form.email}
           error={errors.email}
           onChange={(v) => set("email", v)}
           autoComplete="email"
-          placeholder="vous@entreprise.com"
+          placeholder={t("rd_email_placeholder")}
           required
         />
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field
-            label="Téléphone"
+            label={t("rd_phone")}
             name="phone"
             type="tel"
             value={form.phone}
             onChange={(v) => set("phone", v)}
             autoComplete="tel"
-            placeholder="+33 6 12 34 56 78"
+            placeholder={t("rd_phone_placeholder")}
             optional
           />
           <Field
-            label="Poste"
+            label={t("rd_role")}
             name="role"
             value={form.role}
             onChange={(v) => set("role", v)}
-            placeholder="Head of Talent, Recruteur…"
+            placeholder={t("rd_role_placeholder")}
             optional
           />
         </div>
 
         <Field
-          label="Entreprise"
+          label={t("rd_company")}
           name="company"
           value={form.company}
           error={errors.company}
@@ -255,7 +257,7 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <SelectField
-            label="Taille équipe recrutement"
+            label={t("rd_team_size")}
             options={TEAM_SIZES}
             value={form.teamSize}
             error={errors.teamSize}
@@ -263,7 +265,7 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
             required
           />
           <SelectField
-            label="Recrutements par an"
+            label={t("rd_hires_per_year")}
             options={HIRES}
             value={form.hiresPerYear}
             error={errors.hiresPerYear}
@@ -273,7 +275,7 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
         </div>
 
         <div>
-          <Label>Quand souhaitez-vous la démo&nbsp;?</Label>
+          <Label>{t("rd_when_label")}</Label>
           <div className="mt-2 grid grid-cols-3 gap-2">
             {SLOTS.map((s) => (
               <button
@@ -301,21 +303,20 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
 
         <div>
           <Label>
-            Quelque chose à nous partager <span className="text-ink-muted/70">(facultatif)</span>
+            {t("rd_share_label")} <span className="text-ink-muted/70">{t("rd_optional")}</span>
           </Label>
           <textarea
             value={form.message}
             onChange={(e) => set("message", e.target.value)}
             rows={3}
-            placeholder="Vos contraintes, vos postes ouverts, votre stack ATS…"
+            placeholder={t("rd_message_placeholder")}
             className="mt-2 w-full resize-none rounded-lg border border-white/10 bg-white/[0.02] px-3.5 py-2.5 text-[14px] text-ink placeholder:text-ink-muted/60 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
           />
         </div>
 
         <div className="flex flex-col items-stretch gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[11.5px] text-ink-muted/80">
-            En soumettant, vous acceptez d'être recontacté par TrueCalling. Vos données ne sont
-            jamais revendues.
+            {t("rd_consent")}
           </p>
           <SubmitButton submitting={submitting} />
         </div>
@@ -355,13 +356,14 @@ function Field({
   required?: boolean;
   optional?: boolean;
 }) {
+  const t = useT();
   const id = `f-${name}`;
   return (
     <div>
       <label htmlFor={id} className="block text-[11px] font-medium uppercase tracking-[0.12em] text-ink-muted">
         {label}
         {required && <span className="ml-1 text-accent">*</span>}
-        {optional && <span className="ml-1 text-ink-muted/70">(facultatif)</span>}
+        {optional && <span className="ml-1 text-ink-muted/70">{t("rd_optional")}</span>}
       </label>
       <input
         id={id}
@@ -398,6 +400,7 @@ function SelectField({
   error?: string;
   required?: boolean;
 }) {
+  const t = useT();
   const id = `f-${label.replace(/\s+/g, "-").toLowerCase()}`;
   return (
     <div>
@@ -418,7 +421,7 @@ function SelectField({
           } ${value ? "" : "text-ink-muted/60"}`}
         >
           <option value="" disabled>
-            Choisir…
+            {t("rd_choose")}
           </option>
           {options.map((o) => (
             <option key={o} value={o} className="bg-bg text-ink">
@@ -438,6 +441,7 @@ function SelectField({
 }
 
 function SubmitButton({ submitting }: { submitting: boolean }) {
+  const t = useT();
   return (
     <motion.button
       type="submit"
@@ -448,11 +452,11 @@ function SubmitButton({ submitting }: { submitting: boolean }) {
     >
       {submitting ? (
         <>
-          <Spinner /> Envoi en cours…
+          <Spinner /> {t("rd_submitting")}
         </>
       ) : (
         <>
-          Réserver ma démo <ArrowRight />
+          {t("rd_submit")} <ArrowRight />
         </>
       )}
     </motion.button>
@@ -479,6 +483,7 @@ function Spinner() {
 
 /* ----- Success card ----- */
 function SuccessCard({ firstName, email }: { firstName: string; email: string }) {
+  const t = useT();
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -508,13 +513,13 @@ function SuccessCard({ firstName, email }: { firstName: string; email: string })
         className="mt-6 font-semibold leading-tight tracking-tighter2"
         style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)" }}
       >
-        Merci {firstName}, c'est noté.
+        {t("rd_success_thanks").replace("{name}", firstName)}
       </h2>
       <p className="mt-3 max-w-md text-base leading-relaxed text-ink-muted">
-        Notre équipe vous recontacte sous{" "}
-        <span className="text-ink">24 heures ouvrées</span> pour caler la démo. Un email de
-        confirmation a été envoyé à{" "}
-        <span className="text-ink">{email}</span>.
+        {t("rd_success_msg_a")}{" "}
+        <span className="text-ink">{t("rd_success_business_hours")}</span>{" "}
+        {t("rd_success_msg_b")}{" "}
+        <span className="text-ink">{email}</span>{t("rd_success_msg_c")}
       </p>
 
       <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -522,13 +527,13 @@ function SuccessCard({ firstName, email }: { firstName: string; email: string })
           href="/"
           className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 text-[14px] font-medium text-ink transition-colors hover:bg-white/[0.08] cursor-pointer"
         >
-          <ArrowLeft /> Retour à l'accueil
+          <ArrowLeft /> {t("rd_back_home")}
         </Link>
         <Link
           href="/#demo"
           className="inline-flex h-11 items-center gap-2 rounded-full bg-accent px-5 text-[14px] font-semibold text-white shadow-[0_8px_30px_rgba(233,30,140,0.35)] transition-colors hover:bg-accent/90 cursor-pointer"
         >
-          Revoir la démo produit
+          {t("rd_replay_demo")}
         </Link>
       </div>
     </motion.div>
@@ -537,29 +542,18 @@ function SuccessCard({ firstName, email }: { firstName: string; email: string })
 
 /* ----- Right column ----- */
 function SidePanel() {
+  const t = useT();
   const points = [
-    {
-      title: "Votre brief, en live",
-      desc: "On part d'un de vos postes ouverts et EMILY remonte les profils en moins d'une minute.",
-    },
-    {
-      title: "Outreach multi-canal",
-      desc: "WhatsApp, email, téléphone — on configure les séquences et on suit les réponses.",
-    },
-    {
-      title: "TrueFit 360 et workflows",
-      desc: "Score de matching et workflows IA personnalisés à votre stack ATS.",
-    },
-    {
-      title: "Q&A et roadmap",
-      desc: "On répond à toutes vos questions et on cale les étapes pour intégrer TrueCalling.",
-    },
+    { title: t("rd_p1_title"), desc: t("rd_p1_desc") },
+    { title: t("rd_p2_title"), desc: t("rd_p2_desc") },
+    { title: t("rd_p3_title"), desc: t("rd_p3_desc") },
+    { title: t("rd_p4_title"), desc: t("rd_p4_desc") },
   ];
   return (
     <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 backdrop-blur-md">
-      <span className="text-[11px] uppercase tracking-[0.22em] text-accent">Au programme</span>
+      <span className="text-[11px] uppercase tracking-[0.22em] text-accent">{t("rd_program")}</span>
       <h2 className="mt-3 text-2xl font-semibold leading-tight tracking-tighter2 sm:text-[28px]">
-        20 minutes pour repartir avec un plan d'action.
+        {t("rd_program_h2")}
       </h2>
 
       <ul className="mt-6 space-y-5">
@@ -583,12 +577,11 @@ function SidePanel() {
           </div>
           <div className="min-w-0">
             <div className="truncate text-[13px] font-medium text-ink">Camille Dupont</div>
-            <div className="truncate text-[11px] text-ink-muted">Head of Talent · Series B SaaS</div>
+            <div className="truncate text-[11px] text-ink-muted">{t("rd_quote_role")}</div>
           </div>
         </div>
         <p className="mt-3 text-[13px] leading-relaxed text-ink/85">
-          « En 20 minutes j'avais compris exactement comment scaler le sourcing sans grossir
-          l'équipe. On a signé deux semaines plus tard. »
+          {t("rd_quote")}
         </p>
       </div>
     </div>
@@ -597,16 +590,17 @@ function SidePanel() {
 
 /* ----- Footer ----- */
 function Footer() {
+  const t = useT();
   return (
     <footer className="relative border-t border-white/[0.06] py-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-xs text-ink-muted sm:flex-row sm:px-8">
-        <span>© 2026 TrueCalling. Tous droits réservés.</span>
+        <span>{t("footer_copyright")}</span>
         <div className="flex items-center gap-5">
           <Link href="/" className="transition-colors hover:text-ink cursor-pointer">
-            Accueil
+            {t("rd_footer_home")}
           </Link>
           <Link href="/#pricing" className="transition-colors hover:text-ink cursor-pointer">
-            Tarifs
+            {t("nav_pricing")}
           </Link>
         </div>
       </div>

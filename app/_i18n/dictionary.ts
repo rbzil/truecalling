@@ -151,6 +151,62 @@ type Dict = {
   footer_privacy: string;
   footer_copyright: string;
   footer_made: string;
+
+  // Reserve-a-demo page
+  rd_back_home_aria: string;
+  rd_back: string;
+  rd_eyebrow: string;
+  rd_h1: string;
+  rd_subtitle: string;
+  rd_first_name: string;
+  rd_last_name: string;
+  rd_email: string;
+  rd_email_placeholder: string;
+  rd_phone: string;
+  rd_phone_placeholder: string;
+  rd_role: string;
+  rd_role_placeholder: string;
+  rd_company: string;
+  rd_team_size: string;
+  rd_hires_per_year: string;
+  rd_when_label: string;
+  rd_share_label: string;
+  rd_optional: string;
+  rd_message_placeholder: string;
+  rd_consent: string;
+  rd_choose: string;
+  rd_required_short: string;
+  rd_email_invalid: string;
+  rd_select_short: string;
+  rd_submit: string;
+  rd_submitting: string;
+  rd_team_solo: string;
+  rd_team_2_5: string;
+  rd_team_5_15: string;
+  rd_team_15p: string;
+  rd_hires_lt_10: string;
+  rd_hires_10_50: string;
+  rd_hires_50_200: string;
+  rd_hires_200p: string;
+  rd_slot_this_week: string;
+  rd_slot_next_week: string;
+  rd_slot_later: string;
+  rd_success_thanks: string;
+  rd_success_msg_a: string;
+  rd_success_msg_b: string;
+  rd_success_msg_c: string;
+  rd_success_business_hours: string;
+  rd_back_home: string;
+  rd_replay_demo: string;
+  rd_program: string;
+  rd_program_h2: string;
+  rd_p1_title: string; rd_p1_desc: string;
+  rd_p2_title: string; rd_p2_desc: string;
+  rd_p3_title: string; rd_p3_desc: string;
+  rd_p4_title: string; rd_p4_desc: string;
+  rd_quote: string;
+  rd_quote_role: string;
+  rd_footer_home: string;
 };
 
 export const DICT: Record<Locale, Dict> = {
@@ -274,6 +330,38 @@ export const DICT: Record<Locale, Dict> = {
     footer_gdpr: "RGPD", footer_privacy: "Politique de confidentialité",
     footer_copyright: "© 2026 TrueCalling. Tous droits réservés.",
     footer_made: "Fait avec attention pour les recruteurs.",
+
+    rd_back_home_aria: "Retour à l'accueil", rd_back: "Retour",
+    rd_eyebrow: "Démo guidée", rd_h1: "Réservez votre démo.",
+    rd_subtitle: "20 minutes pour voir comment TrueCalling transforme votre sourcing — sur votre cas réel, avec vos prochains recrutements.",
+    rd_first_name: "Prénom", rd_last_name: "Nom",
+    rd_email: "Email professionnel", rd_email_placeholder: "vous@entreprise.com",
+    rd_phone: "Téléphone", rd_phone_placeholder: "+33 6 12 34 56 78",
+    rd_role: "Poste", rd_role_placeholder: "Head of Talent, Recruteur…",
+    rd_company: "Entreprise",
+    rd_team_size: "Taille équipe recrutement", rd_hires_per_year: "Recrutements par an",
+    rd_when_label: "Quand souhaitez-vous la démo ?",
+    rd_share_label: "Quelque chose à nous partager", rd_optional: "(facultatif)",
+    rd_message_placeholder: "Vos contraintes, vos postes ouverts, votre stack ATS…",
+    rd_consent: "En soumettant, vous acceptez d'être recontacté par TrueCalling. Vos données ne sont jamais revendues.",
+    rd_choose: "Choisir…", rd_required_short: "Requis", rd_email_invalid: "Email invalide", rd_select_short: "Choisir",
+    rd_submit: "Réserver ma démo", rd_submitting: "Envoi en cours…",
+    rd_team_solo: "Moi seul", rd_team_2_5: "2 – 5", rd_team_5_15: "5 – 15", rd_team_15p: "15 +",
+    rd_hires_lt_10: "Moins de 10", rd_hires_10_50: "10 – 50", rd_hires_50_200: "50 – 200", rd_hires_200p: "200 +",
+    rd_slot_this_week: "Cette semaine", rd_slot_next_week: "La semaine prochaine", rd_slot_later: "Plus tard",
+    rd_success_thanks: "Merci {name}, c'est noté.",
+    rd_success_msg_a: "Notre équipe vous recontacte sous",
+    rd_success_business_hours: "24 heures ouvrées",
+    rd_success_msg_b: "pour caler la démo. Un email de confirmation a été envoyé à",
+    rd_success_msg_c: ".",
+    rd_back_home: "Retour à l'accueil", rd_replay_demo: "Revoir la démo produit",
+    rd_program: "Au programme", rd_program_h2: "20 minutes pour repartir avec un plan d'action.",
+    rd_p1_title: "Votre brief, en live", rd_p1_desc: "On part d'un de vos postes ouverts et EMILY remonte les profils en moins d'une minute.",
+    rd_p2_title: "Outreach multi-canal", rd_p2_desc: "WhatsApp, email, téléphone — on configure les séquences et on suit les réponses.",
+    rd_p3_title: "TrueFit 360 et workflows", rd_p3_desc: "Score de matching et workflows IA personnalisés à votre stack ATS.",
+    rd_p4_title: "Q&A et roadmap", rd_p4_desc: "On répond à toutes vos questions et on cale les étapes pour intégrer TrueCalling.",
+    rd_quote: "« En 20 minutes j'avais compris exactement comment scaler le sourcing sans grossir l'équipe. On a signé deux semaines plus tard. »",
+    rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Accueil",
   },
 
   en: {
@@ -382,6 +470,38 @@ export const DICT: Record<Locale, Dict> = {
     footer_gdpr: "GDPR", footer_privacy: "Privacy policy",
     footer_copyright: "© 2026 TrueCalling. All rights reserved.",
     footer_made: "Made with care for recruiters.",
+
+    rd_back_home_aria: "Back to home", rd_back: "Back",
+    rd_eyebrow: "Guided demo", rd_h1: "Book your demo.",
+    rd_subtitle: "20 minutes to see how TrueCalling transforms your sourcing — on your real case, with your next hires.",
+    rd_first_name: "First name", rd_last_name: "Last name",
+    rd_email: "Work email", rd_email_placeholder: "you@company.com",
+    rd_phone: "Phone", rd_phone_placeholder: "+1 555 123 4567",
+    rd_role: "Role", rd_role_placeholder: "Head of Talent, Recruiter…",
+    rd_company: "Company",
+    rd_team_size: "Recruiting team size", rd_hires_per_year: "Hires per year",
+    rd_when_label: "When would you like the demo?",
+    rd_share_label: "Anything to share", rd_optional: "(optional)",
+    rd_message_placeholder: "Your constraints, open roles, ATS stack…",
+    rd_consent: "By submitting, you agree to be contacted by TrueCalling. Your data is never sold.",
+    rd_choose: "Choose…", rd_required_short: "Required", rd_email_invalid: "Invalid email", rd_select_short: "Pick one",
+    rd_submit: "Book my demo", rd_submitting: "Sending…",
+    rd_team_solo: "Just me", rd_team_2_5: "2 – 5", rd_team_5_15: "5 – 15", rd_team_15p: "15 +",
+    rd_hires_lt_10: "Less than 10", rd_hires_10_50: "10 – 50", rd_hires_50_200: "50 – 200", rd_hires_200p: "200 +",
+    rd_slot_this_week: "This week", rd_slot_next_week: "Next week", rd_slot_later: "Later",
+    rd_success_thanks: "Thanks {name}, we got it.",
+    rd_success_msg_a: "Our team will get back to you within",
+    rd_success_business_hours: "24 business hours",
+    rd_success_msg_b: "to schedule the demo. A confirmation email has been sent to",
+    rd_success_msg_c: ".",
+    rd_back_home: "Back to home", rd_replay_demo: "Replay product demo",
+    rd_program: "On the agenda", rd_program_h2: "20 minutes to leave with an action plan.",
+    rd_p1_title: "Your brief, live", rd_p1_desc: "We start from one of your open roles and EMILY surfaces profiles in under a minute.",
+    rd_p2_title: "Multichannel outreach", rd_p2_desc: "WhatsApp, email, phone — we configure sequences and track replies together.",
+    rd_p3_title: "TrueFit 360 and workflows", rd_p3_desc: "Matching score and AI workflows tailored to your ATS stack.",
+    rd_p4_title: "Q&A and roadmap", rd_p4_desc: "We answer all your questions and align on the steps to roll out TrueCalling.",
+    rd_quote: "“In 20 minutes I understood exactly how to scale sourcing without growing the team. We signed two weeks later.”",
+    rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Home",
   },
 
   he: {
@@ -493,6 +613,38 @@ export const DICT: Record<Locale, Dict> = {
     footer_gdpr: "GDPR", footer_privacy: "מדיניות פרטיות",
     footer_copyright: "© 2026 TrueCalling. כל הזכויות שמורות.",
     footer_made: "נעשה במחשבה למגייסים.",
+
+    rd_back_home_aria: "חזרה לדף הבית", rd_back: "חזרה",
+    rd_eyebrow: "הדגמה מודרכת", rd_h1: "הזמינו את ההדגמה שלכם.",
+    rd_subtitle: "20 דקות לראות איך TrueCalling משנה את הסורסינג שלכם — על מקרה אמיתי שלכם, עם הגיוסים הבאים שלכם.",
+    rd_first_name: "שם פרטי", rd_last_name: "שם משפחה",
+    rd_email: "אימייל עסקי", rd_email_placeholder: "you@company.com",
+    rd_phone: "טלפון", rd_phone_placeholder: "050-123-4567",
+    rd_role: "תפקיד", rd_role_placeholder: "Head of Talent, מגייס/ת…",
+    rd_company: "חברה",
+    rd_team_size: "גודל צוות הגיוס", rd_hires_per_year: "גיוסים בשנה",
+    rd_when_label: "מתי תרצו את ההדגמה?",
+    rd_share_label: "משהו שתרצו לשתף", rd_optional: "(לא חובה)",
+    rd_message_placeholder: "האילוצים שלכם, משרות פתוחות, סטאק ה-ATS…",
+    rd_consent: "בשליחה, אתם מסכימים לקבל יצירת קשר מ-TrueCalling. הנתונים שלכם לא נמכרים אף פעם.",
+    rd_choose: "בחרו…", rd_required_short: "חובה", rd_email_invalid: "אימייל לא תקין", rd_select_short: "בחרו",
+    rd_submit: "הזמינו את ההדגמה", rd_submitting: "שולח…",
+    rd_team_solo: "רק אני", rd_team_2_5: "2 – 5", rd_team_5_15: "5 – 15", rd_team_15p: "15 +",
+    rd_hires_lt_10: "פחות מ-10", rd_hires_10_50: "10 – 50", rd_hires_50_200: "50 – 200", rd_hires_200p: "200 +",
+    rd_slot_this_week: "השבוע", rd_slot_next_week: "שבוע הבא", rd_slot_later: "מאוחר יותר",
+    rd_success_thanks: "תודה {name}, קיבלנו.",
+    rd_success_msg_a: "הצוות שלנו יחזור אליכם תוך",
+    rd_success_business_hours: "24 שעות עבודה",
+    rd_success_msg_b: "כדי לתאם את ההדגמה. מייל אישור נשלח אל",
+    rd_success_msg_c: ".",
+    rd_back_home: "חזרה לדף הבית", rd_replay_demo: "צפו שוב בהדגמה",
+    rd_program: "על סדר היום", rd_program_h2: "20 דקות כדי לצאת עם תוכנית פעולה.",
+    rd_p1_title: "הבריף שלכם, בשידור חי", rd_p1_desc: "אנחנו מתחילים ממשרה פתוחה שלכם ו-EMILY מעלה פרופילים בפחות מדקה.",
+    rd_p2_title: "פנייה רב-ערוצית", rd_p2_desc: "WhatsApp, מייל, טלפון — אנחנו מגדירים יחד רצפים ועוקבים אחר תגובות.",
+    rd_p3_title: "TrueFit 360 וזרימות עבודה", rd_p3_desc: "ציון התאמה וזרימות AI מותאמות לסטאק ה-ATS שלכם.",
+    rd_p4_title: "שאלות ותשובות ומפת דרכים", rd_p4_desc: "אנחנו עונים על כל השאלות ומסכמים את השלבים לאימוץ TrueCalling.",
+    rd_quote: "« ב-20 דקות הבנתי בדיוק איך להרחיב את הסורסינג בלי להגדיל את הצוות. חתמנו שבועיים אחר כך. »",
+    rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "דף הבית",
   },
 
   "pt-BR": {
@@ -604,6 +756,38 @@ export const DICT: Record<Locale, Dict> = {
     footer_gdpr: "LGPD", footer_privacy: "Política de privacidade",
     footer_copyright: "© 2026 TrueCalling. Todos os direitos reservados.",
     footer_made: "Feito com cuidado para recrutadores.",
+
+    rd_back_home_aria: "Voltar para a página inicial", rd_back: "Voltar",
+    rd_eyebrow: "Demo guiada", rd_h1: "Agende sua demo.",
+    rd_subtitle: "20 minutos para ver como a TrueCalling transforma seu sourcing — no seu caso real, com suas próximas contratações.",
+    rd_first_name: "Nome", rd_last_name: "Sobrenome",
+    rd_email: "E-mail profissional", rd_email_placeholder: "voce@empresa.com",
+    rd_phone: "Telefone", rd_phone_placeholder: "+55 11 91234-5678",
+    rd_role: "Cargo", rd_role_placeholder: "Head of Talent, Recrutador(a)…",
+    rd_company: "Empresa",
+    rd_team_size: "Tamanho do time de recrutamento", rd_hires_per_year: "Contratações por ano",
+    rd_when_label: "Quando você gostaria de fazer a demo?",
+    rd_share_label: "Algo que queira compartilhar", rd_optional: "(opcional)",
+    rd_message_placeholder: "Suas restrições, vagas abertas, stack do ATS…",
+    rd_consent: "Ao enviar, você concorda em ser contatado pela TrueCalling. Seus dados nunca são vendidos.",
+    rd_choose: "Escolha…", rd_required_short: "Obrigatório", rd_email_invalid: "E-mail inválido", rd_select_short: "Escolha",
+    rd_submit: "Agendar minha demo", rd_submitting: "Enviando…",
+    rd_team_solo: "Só eu", rd_team_2_5: "2 – 5", rd_team_5_15: "5 – 15", rd_team_15p: "15 +",
+    rd_hires_lt_10: "Menos de 10", rd_hires_10_50: "10 – 50", rd_hires_50_200: "50 – 200", rd_hires_200p: "200 +",
+    rd_slot_this_week: "Esta semana", rd_slot_next_week: "Semana que vem", rd_slot_later: "Mais tarde",
+    rd_success_thanks: "Obrigado {name}, recebemos.",
+    rd_success_msg_a: "Nosso time entra em contato em até",
+    rd_success_business_hours: "24 horas úteis",
+    rd_success_msg_b: "para agendar a demo. Um e-mail de confirmação foi enviado para",
+    rd_success_msg_c: ".",
+    rd_back_home: "Voltar para a página inicial", rd_replay_demo: "Rever a demo do produto",
+    rd_program: "Na agenda", rd_program_h2: "20 minutos para sair com um plano de ação.",
+    rd_p1_title: "Seu briefing, ao vivo", rd_p1_desc: "Partimos de uma das suas vagas abertas e EMILY traz os perfis em menos de um minuto.",
+    rd_p2_title: "Outreach multicanal", rd_p2_desc: "WhatsApp, e-mail, telefone — configuramos as sequências e acompanhamos as respostas.",
+    rd_p3_title: "TrueFit 360 e workflows", rd_p3_desc: "Score de matching e workflows de IA personalizados para sua stack de ATS.",
+    rd_p4_title: "Q&A e roadmap", rd_p4_desc: "Respondemos todas as suas perguntas e alinhamos os passos para integrar a TrueCalling.",
+    rd_quote: "« Em 20 minutos eu entendi exatamente como escalar o sourcing sem aumentar o time. Fechamos duas semanas depois. »",
+    rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Início",
   },
 
   es: {
@@ -715,6 +899,38 @@ export const DICT: Record<Locale, Dict> = {
     footer_gdpr: "RGPD", footer_privacy: "Política de privacidad",
     footer_copyright: "© 2026 TrueCalling. Todos los derechos reservados.",
     footer_made: "Hecho con cuidado para reclutadores.",
+
+    rd_back_home_aria: "Volver al inicio", rd_back: "Volver",
+    rd_eyebrow: "Demo guiada", rd_h1: "Reserva tu demo.",
+    rd_subtitle: "20 minutos para ver cómo TrueCalling transforma tu sourcing — sobre tu caso real, con tus próximas contrataciones.",
+    rd_first_name: "Nombre", rd_last_name: "Apellido",
+    rd_email: "Email profesional", rd_email_placeholder: "tu@empresa.com",
+    rd_phone: "Teléfono", rd_phone_placeholder: "+34 600 123 456",
+    rd_role: "Puesto", rd_role_placeholder: "Head of Talent, Reclutador/a…",
+    rd_company: "Empresa",
+    rd_team_size: "Tamaño del equipo de selección", rd_hires_per_year: "Contrataciones al año",
+    rd_when_label: "¿Cuándo te gustaría hacer la demo?",
+    rd_share_label: "Algo que quieras compartir", rd_optional: "(opcional)",
+    rd_message_placeholder: "Tus restricciones, vacantes abiertas, stack ATS…",
+    rd_consent: "Al enviar, aceptas que TrueCalling se ponga en contacto contigo. Tus datos nunca se venden.",
+    rd_choose: "Elegir…", rd_required_short: "Requerido", rd_email_invalid: "Email no válido", rd_select_short: "Elegir",
+    rd_submit: "Reservar mi demo", rd_submitting: "Enviando…",
+    rd_team_solo: "Solo yo", rd_team_2_5: "2 – 5", rd_team_5_15: "5 – 15", rd_team_15p: "15 +",
+    rd_hires_lt_10: "Menos de 10", rd_hires_10_50: "10 – 50", rd_hires_50_200: "50 – 200", rd_hires_200p: "200 +",
+    rd_slot_this_week: "Esta semana", rd_slot_next_week: "La semana que viene", rd_slot_later: "Más tarde",
+    rd_success_thanks: "Gracias {name}, lo tenemos.",
+    rd_success_msg_a: "Nuestro equipo te contactará en menos de",
+    rd_success_business_hours: "24 horas laborables",
+    rd_success_msg_b: "para agendar la demo. Se ha enviado un email de confirmación a",
+    rd_success_msg_c: ".",
+    rd_back_home: "Volver al inicio", rd_replay_demo: "Volver a ver la demo",
+    rd_program: "En la agenda", rd_program_h2: "20 minutos para salir con un plan de acción.",
+    rd_p1_title: "Tu brief, en vivo", rd_p1_desc: "Partimos de una de tus vacantes abiertas y EMILY trae perfiles en menos de un minuto.",
+    rd_p2_title: "Outreach multicanal", rd_p2_desc: "WhatsApp, email, teléfono — configuramos las secuencias y seguimos las respuestas.",
+    rd_p3_title: "TrueFit 360 y workflows", rd_p3_desc: "Score de matching y workflows de IA personalizados a tu stack ATS.",
+    rd_p4_title: "Q&A y roadmap", rd_p4_desc: "Respondemos a todas tus preguntas y planificamos los pasos para integrar TrueCalling.",
+    rd_quote: "« En 20 minutos entendí exactamente cómo escalar el sourcing sin agrandar el equipo. Firmamos dos semanas después. »",
+    rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Inicio",
   },
 
   de: {
@@ -826,6 +1042,38 @@ export const DICT: Record<Locale, Dict> = {
     footer_gdpr: "DSGVO", footer_privacy: "Datenschutz",
     footer_copyright: "© 2026 TrueCalling. Alle Rechte vorbehalten.",
     footer_made: "Mit Sorgfalt für Recruiter gemacht.",
+
+    rd_back_home_aria: "Zurück zur Startseite", rd_back: "Zurück",
+    rd_eyebrow: "Geführte Demo", rd_h1: "Buchen Sie Ihre Demo.",
+    rd_subtitle: "20 Minuten, um zu sehen, wie TrueCalling Ihr Sourcing verändert — anhand Ihres realen Falls und Ihrer nächsten Einstellungen.",
+    rd_first_name: "Vorname", rd_last_name: "Nachname",
+    rd_email: "Geschäftliche E-Mail", rd_email_placeholder: "sie@unternehmen.de",
+    rd_phone: "Telefon", rd_phone_placeholder: "+49 30 12345678",
+    rd_role: "Position", rd_role_placeholder: "Head of Talent, Recruiter…",
+    rd_company: "Unternehmen",
+    rd_team_size: "Größe des Recruiting-Teams", rd_hires_per_year: "Einstellungen pro Jahr",
+    rd_when_label: "Wann möchten Sie die Demo?",
+    rd_share_label: "Etwas, das Sie teilen möchten", rd_optional: "(optional)",
+    rd_message_placeholder: "Ihre Constraints, offene Stellen, ATS-Stack…",
+    rd_consent: "Mit dem Absenden stimmen Sie zu, dass TrueCalling Sie kontaktiert. Ihre Daten werden nie verkauft.",
+    rd_choose: "Auswählen…", rd_required_short: "Pflichtfeld", rd_email_invalid: "Ungültige E-Mail", rd_select_short: "Auswählen",
+    rd_submit: "Demo buchen", rd_submitting: "Wird gesendet…",
+    rd_team_solo: "Nur ich", rd_team_2_5: "2 – 5", rd_team_5_15: "5 – 15", rd_team_15p: "15 +",
+    rd_hires_lt_10: "Weniger als 10", rd_hires_10_50: "10 – 50", rd_hires_50_200: "50 – 200", rd_hires_200p: "200 +",
+    rd_slot_this_week: "Diese Woche", rd_slot_next_week: "Nächste Woche", rd_slot_later: "Später",
+    rd_success_thanks: "Danke {name}, wir haben Ihre Anfrage erhalten.",
+    rd_success_msg_a: "Unser Team meldet sich innerhalb von",
+    rd_success_business_hours: "24 Geschäftsstunden",
+    rd_success_msg_b: "zur Terminabstimmung. Eine Bestätigungs-E-Mail wurde gesendet an",
+    rd_success_msg_c: ".",
+    rd_back_home: "Zurück zur Startseite", rd_replay_demo: "Produkt-Demo erneut ansehen",
+    rd_program: "Auf der Agenda", rd_program_h2: "20 Minuten, um mit einem Aktionsplan herauszugehen.",
+    rd_p1_title: "Ihr Briefing, live", rd_p1_desc: "Wir starten mit einer Ihrer offenen Stellen und EMILY liefert in weniger als einer Minute Profile.",
+    rd_p2_title: "Multi-Channel-Outreach", rd_p2_desc: "WhatsApp, E-Mail, Telefon — wir konfigurieren Sequenzen und verfolgen Antworten gemeinsam.",
+    rd_p3_title: "TrueFit 360 und Workflows", rd_p3_desc: "Matching-Score und KI-Workflows, individuell auf Ihren ATS-Stack zugeschnitten.",
+    rd_p4_title: "Q&A und Roadmap", rd_p4_desc: "Wir beantworten alle Fragen und stimmen die Schritte für den Rollout von TrueCalling ab.",
+    rd_quote: "„In 20 Minuten hatte ich genau verstanden, wie ich Sourcing skaliere, ohne das Team zu vergrößern. Zwei Wochen später haben wir unterschrieben.“",
+    rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Startseite",
   },
 
   it: {
@@ -937,6 +1185,38 @@ export const DICT: Record<Locale, Dict> = {
     footer_gdpr: "GDPR", footer_privacy: "Informativa privacy",
     footer_copyright: "© 2026 TrueCalling. Tutti i diritti riservati.",
     footer_made: "Fatto con cura per i recruiter.",
+
+    rd_back_home_aria: "Torna alla home", rd_back: "Indietro",
+    rd_eyebrow: "Demo guidata", rd_h1: "Prenota la tua demo.",
+    rd_subtitle: "20 minuti per vedere come TrueCalling trasforma il tuo sourcing — sul tuo caso reale, con le tue prossime assunzioni.",
+    rd_first_name: "Nome", rd_last_name: "Cognome",
+    rd_email: "Email aziendale", rd_email_placeholder: "tu@azienda.com",
+    rd_phone: "Telefono", rd_phone_placeholder: "+39 333 123 4567",
+    rd_role: "Ruolo", rd_role_placeholder: "Head of Talent, Recruiter…",
+    rd_company: "Azienda",
+    rd_team_size: "Dimensione del team di recruiting", rd_hires_per_year: "Assunzioni all'anno",
+    rd_when_label: "Quando vorresti fare la demo?",
+    rd_share_label: "Qualcosa da condividere", rd_optional: "(facoltativo)",
+    rd_message_placeholder: "I tuoi vincoli, posizioni aperte, stack ATS…",
+    rd_consent: "Inviando, accetti di essere contattato da TrueCalling. I tuoi dati non vengono mai venduti.",
+    rd_choose: "Scegli…", rd_required_short: "Richiesto", rd_email_invalid: "Email non valida", rd_select_short: "Scegli",
+    rd_submit: "Prenota la mia demo", rd_submitting: "Invio in corso…",
+    rd_team_solo: "Solo io", rd_team_2_5: "2 – 5", rd_team_5_15: "5 – 15", rd_team_15p: "15 +",
+    rd_hires_lt_10: "Meno di 10", rd_hires_10_50: "10 – 50", rd_hires_50_200: "50 – 200", rd_hires_200p: "200 +",
+    rd_slot_this_week: "Questa settimana", rd_slot_next_week: "Settimana prossima", rd_slot_later: "Più avanti",
+    rd_success_thanks: "Grazie {name}, ricevuto.",
+    rd_success_msg_a: "Il nostro team ti ricontatterà entro",
+    rd_success_business_hours: "24 ore lavorative",
+    rd_success_msg_b: "per fissare la demo. Un'email di conferma è stata inviata a",
+    rd_success_msg_c: ".",
+    rd_back_home: "Torna alla home", rd_replay_demo: "Rivedi la demo del prodotto",
+    rd_program: "In programma", rd_program_h2: "20 minuti per uscire con un piano d'azione.",
+    rd_p1_title: "Il tuo brief, in diretta", rd_p1_desc: "Partiamo da una delle tue posizioni aperte ed EMILY tira fuori i profili in meno di un minuto.",
+    rd_p2_title: "Outreach multicanale", rd_p2_desc: "WhatsApp, email, telefono — configuriamo le sequenze e seguiamo le risposte insieme.",
+    rd_p3_title: "TrueFit 360 e workflow", rd_p3_desc: "Score di matching e workflow IA personalizzati per il tuo stack ATS.",
+    rd_p4_title: "Q&A e roadmap", rd_p4_desc: "Rispondiamo a tutte le tue domande e definiamo i passi per integrare TrueCalling.",
+    rd_quote: "« In 20 minuti avevo capito esattamente come scalare il sourcing senza ingrandire il team. Abbiamo firmato due settimane dopo. »",
+    rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Home",
   },
 
   nl: {
@@ -1048,5 +1328,37 @@ export const DICT: Record<Locale, Dict> = {
     footer_gdpr: "AVG", footer_privacy: "Privacybeleid",
     footer_copyright: "© 2026 TrueCalling. Alle rechten voorbehouden.",
     footer_made: "Met zorg gemaakt voor recruiters.",
+
+    rd_back_home_aria: "Terug naar home", rd_back: "Terug",
+    rd_eyebrow: "Begeleide demo", rd_h1: "Boek je demo.",
+    rd_subtitle: "20 minuten om te zien hoe TrueCalling je sourcing transformeert — op je echte case, met je volgende aanwervingen.",
+    rd_first_name: "Voornaam", rd_last_name: "Achternaam",
+    rd_email: "Werk-e-mail", rd_email_placeholder: "jij@bedrijf.com",
+    rd_phone: "Telefoon", rd_phone_placeholder: "+31 6 12345678",
+    rd_role: "Functie", rd_role_placeholder: "Head of Talent, Recruiter…",
+    rd_company: "Bedrijf",
+    rd_team_size: "Grootte recruitmentteam", rd_hires_per_year: "Aanwervingen per jaar",
+    rd_when_label: "Wanneer wil je de demo?",
+    rd_share_label: "Iets te delen", rd_optional: "(optioneel)",
+    rd_message_placeholder: "Je beperkingen, open vacatures, ATS-stack…",
+    rd_consent: "Door te verzenden ga je akkoord dat TrueCalling contact opneemt. Je gegevens worden nooit verkocht.",
+    rd_choose: "Kies…", rd_required_short: "Verplicht", rd_email_invalid: "Ongeldig e-mailadres", rd_select_short: "Kies",
+    rd_submit: "Demo boeken", rd_submitting: "Verzenden…",
+    rd_team_solo: "Alleen ik", rd_team_2_5: "2 – 5", rd_team_5_15: "5 – 15", rd_team_15p: "15 +",
+    rd_hires_lt_10: "Minder dan 10", rd_hires_10_50: "10 – 50", rd_hires_50_200: "50 – 200", rd_hires_200p: "200 +",
+    rd_slot_this_week: "Deze week", rd_slot_next_week: "Volgende week", rd_slot_later: "Later",
+    rd_success_thanks: "Dank je {name}, we hebben het ontvangen.",
+    rd_success_msg_a: "Ons team neemt binnen",
+    rd_success_business_hours: "24 werkuren",
+    rd_success_msg_b: "contact op om de demo in te plannen. Een bevestigingsmail is verstuurd naar",
+    rd_success_msg_c: ".",
+    rd_back_home: "Terug naar home", rd_replay_demo: "Productdemo opnieuw bekijken",
+    rd_program: "Op de agenda", rd_program_h2: "20 minuten om met een actieplan weg te lopen.",
+    rd_p1_title: "Jouw briefing, live", rd_p1_desc: "We starten met een van je openstaande vacatures en EMILY brengt profielen naar boven in minder dan een minuut.",
+    rd_p2_title: "Multichannel outreach", rd_p2_desc: "WhatsApp, e-mail, telefoon — we stellen sequenties in en volgen reacties samen.",
+    rd_p3_title: "TrueFit 360 en workflows", rd_p3_desc: "Match-score en AI-workflows op maat van je ATS-stack.",
+    rd_p4_title: "Q&A en roadmap", rd_p4_desc: "We beantwoorden al je vragen en plannen de stappen om TrueCalling uit te rollen.",
+    rd_quote: "„In 20 minuten begreep ik precies hoe ik sourcing kan opschalen zonder het team uit te breiden. Twee weken later tekenden we.\"",
+    rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Home",
   },
 };
