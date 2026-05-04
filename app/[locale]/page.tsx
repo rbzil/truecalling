@@ -950,9 +950,13 @@ function ATSBlock() {
           <CheckIcon className="size-3" /> {t("ats_compatible")}
         </motion.div>
 
-        <motion.div variants={fadeUp} className="mt-2 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-12">
-          {/* TrueCalling node */}
-          <div className="flex flex-col items-center gap-2">
+        <motion.div
+          variants={fadeUp}
+          className="mx-auto mt-2 flex max-w-2xl flex-col items-center justify-center gap-6 sm:flex-row sm:gap-8"
+        >
+          {/* TrueCalling node — shrink-0 so the logo column never
+              compresses when the line stretches. */}
+          <div className="flex shrink-0 flex-col items-center gap-2">
             <span className="flex size-14 items-center justify-center rounded-xl bg-accent text-white shadow-[0_10px_30px_-8px_rgba(233,30,140,0.55)]">
               <BoltIcon />
             </span>
@@ -964,8 +968,11 @@ function ATSBlock() {
 
           {/* Animated sync line — 3 glowing pink dots flowing left to
               right to evoke a continuous data stream between the
-              TrueCalling and ATS nodes. */}
-          <div className="relative h-1.5 w-32 sm:w-auto sm:flex-1 sm:max-w-md">
+              TrueCalling and ATS nodes. Width capped at 300px on sm+
+              so the line stays proportioned to the logos on wide
+              screens (was previously stretching to max-w-md = 448px,
+              which dwarfed the logos). */}
+          <div className="relative h-1.5 w-32 sm:w-auto sm:min-w-[80px] sm:max-w-[300px] sm:flex-1">
             <span
               aria-hidden
               className="absolute inset-x-0 top-1/2 h-[2px] -translate-y-1/2 rounded-full"
@@ -1002,8 +1009,8 @@ function ATSBlock() {
             ))}
           </div>
 
-          {/* ATS node */}
-          <div className="flex flex-col items-center gap-2">
+          {/* ATS node — shrink-0 so the logo column never compresses */}
+          <div className="flex shrink-0 flex-col items-center gap-2">
             <span className="flex size-14 items-center justify-center rounded-xl bg-accent text-[12px] font-bold text-white shadow-[0_10px_30px_-8px_rgba(233,30,140,0.55)]">
               ATS
             </span>
