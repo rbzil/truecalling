@@ -12,7 +12,7 @@
   "hero_badge": "Sourcing IA pour équipes recrutement",
   "hero_h1_a": "Le logiciel de sourcing IA",
   "hero_h1_b": "qui recrute avec précision.",
-  "hero_subtitle": "TrueCalling transforme un brief en candidats qualifiés en quelques minutes. Copilote IA EMILY, matching TrueFit 360 et outreach multicanal — WhatsApp, email, téléphone.",
+  "hero_subtitle": "Conçu pour les équipes recrutement, TrueCalling transforme une fiche de poste en candidats qualifiés en quelques minutes. EMILY™, notre copilote IA, gère le matching et l'outreach multicanal sur WhatsApp, email et téléphone.",
   "hero_cta_demo": "Réserver une démo",
   "hero_cta_video": "Voir la démo produit",
   "hero_social": "Utilisé par des équipes recrutement de",
@@ -286,5 +286,6 @@
   "blog_footer_contact": "Contact",
   "blog_footer_faq": "FAQ",
   "blog_footer_demo": "Réserver une démo",
-  "demo_transition_label": "Voici les résultats concrets chez l'un de nos clients :"
+  "demo_transition_label": "Voici les résultats concrets chez l'un de nos clients :",
+  "meta_description": "TrueCalling, le logiciel de sourcing IA pour équipes recrutement. D'une fiche de poste à des candidats qualifiés en minutes, via WhatsApp, email, téléphone."
 }

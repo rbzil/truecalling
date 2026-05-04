@@ -12,7 +12,7 @@
   "hero_badge": "AI sourcing for recruiting teams",
   "hero_h1_a": "The AI sourcing software",
   "hero_h1_b": "that hires with precision.",
-  "hero_subtitle": "TrueCalling turns a brief into qualified candidates in minutes. AI copilot EMILY, TrueFit 360 matching and multichannel outreach — WhatsApp, email, phone.",
+  "hero_subtitle": "Built for recruiting teams, TrueCalling turns a job description into qualified candidates in minutes. EMILY™, our AI copilot, handles matching and multichannel outreach on WhatsApp, email, and phone.",
   "hero_cta_demo": "Book a demo",
   "hero_cta_video": "Watch the product demo",
   "hero_social": "Trusted by recruiting teams at",
@@ -286,5 +286,6 @@
   "blog_footer_contact": "Contact",
   "blog_footer_faq": "FAQ",
   "blog_footer_demo": "Book a demo",
-  "demo_transition_label": "Here's what real results look like at one of our clients:"
+  "demo_transition_label": "Here's what real results look like at one of our clients:",
+  "meta_description": "TrueCalling, the AI sourcing software for recruiting teams. From a job description to qualified candidates in minutes — via WhatsApp, email, phone."
 }

@@ -12,7 +12,7 @@
   "hero_badge": "סורסינג מבוסס AI לצוותי גיוס",
   "hero_h1_a": "תוכנת הסורסינג מבוססת ה-AI",
   "hero_h1_b": "שמגייסת בדיוק.",
-  "hero_subtitle": "TrueCalling הופכת בריף למועמדים מוסמכים בתוך דקות. קופיילוט AI בשם EMILY, התאמה TrueFit 360 וסורסינג רב-ערוצי — WhatsApp, מייל, טלפון.",
+  "hero_subtitle": "‫נבנה עבור צוותי גיוס, TrueCalling הופך תיאור משרה למועמדים מתאימים בתוך דקות. EMILY™, עוזרת ה-AI שלנו, מנהלת את ההתאמה והפנייה הרב-ערוצית ב-WhatsApp, אימייל וטלפון.‬",
   "hero_cta_demo": "הזמינו הדגמה",
   "hero_cta_video": "צפו בהדגמה",
   "hero_social": "בשימוש צוותי גיוס מובילים",
@@ -286,5 +286,6 @@
   "blog_footer_contact": "Contact",
   "blog_footer_faq": "FAQ",
   "blog_footer_demo": "Book a demo",
-  "demo_transition_label": "הנה התוצאות הקונקרטיות אצל אחד מלקוחותינו:"
+  "demo_transition_label": "הנה התוצאות הקונקרטיות אצל אחד מלקוחותינו:",
+  "meta_description": "TrueCalling, תוכנת ה-Sourcing מבוססת AI לצוותי גיוס. מתיאור משרה למועמדים מתאימים בתוך דקות — ב-WhatsApp, אימייל וטלפון."
 }

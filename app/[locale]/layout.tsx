@@ -33,7 +33,7 @@ export async function generateMetadata({
 
   return {
     title: dict.hero_h1_a + " " + dict.hero_h1_b,
-    description: dict.hero_subtitle,
+    description: dict.meta_description,
     alternates: {
       canonical: `${SITE_URL}${getLocalizedPath("home", locale)}`,
       languages,
