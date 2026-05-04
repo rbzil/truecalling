@@ -20,11 +20,12 @@ export function SiteFooter() {
   const { locale } = useLocale();
   const showBlog = (blogEnabledLocales as readonly string[]).includes(locale);
 
+  // Order matches the home-page scroll order (same as the navbar).
   const productLinks = [
+    { label: t("nav_demo"), href: href("home", { hash: "#demo" }) },
     { label: t("nav_features"), href: href("home", { hash: "#features" }) },
     { label: t("nav_how"), href: href("home", { hash: "#how-it-works" }) },
     { label: t("nav_benefits"), href: href("home", { hash: "#benefits" }) },
-    { label: t("nav_demo"), href: href("home", { hash: "#demo" }) },
     { label: t("nav_pricing"), href: href("home", { hash: "#pricing" }) },
   ];
   const resourceLinks = [

@@ -158,11 +158,13 @@ export function Navbar() {
   const href = useLocalizedHref();
   // Blog and FAQ live in the footer; the navbar stays focused on the
   // core conversion flow.
+  // Order matches the home-page scroll order:
+  // Hero → Demo → Features → How it works → Benefits → Pricing → Contact
   const links = [
+    { label: t("nav_demo"), href: href("home", { hash: "#demo" }) },
     { label: t("nav_features"), href: href("home", { hash: "#features" }) },
     { label: t("nav_how"), href: href("home", { hash: "#how-it-works" }) },
     { label: t("nav_benefits"), href: href("home", { hash: "#benefits" }) },
-    { label: t("nav_demo"), href: href("home", { hash: "#demo" }) },
     { label: t("nav_pricing"), href: href("home", { hash: "#pricing" }) },
     { label: t("nav_contact"), href: href("contact") },
   ];
