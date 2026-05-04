@@ -28,7 +28,7 @@ export default function Page() {
       <Features />
       <HowItWorks />
       <Benefits />
-      <ProductDemo />
+      <DemoAndCaseStudy />
       <Pricing />
       <FinalCTA />
       <Footer />
@@ -822,7 +822,6 @@ function Benefits() {
 
         <StatsGrid />
         <ATSBlock />
-        <CaseStudyBlock />
       </div>
     </section>
   );
@@ -1004,108 +1003,9 @@ function ATSBlock() {
   );
 }
 
-/* ----- Case study block ----- */
-function CaseStudyBlock() {
-  const t = useT();
-  const stages = [
-    { label: t("case_stage1_label"), value: t("case_stage1_value") },
-    { label: t("case_stage2_label"), value: t("case_stage2_value") },
-    { label: t("case_stage3_label"), value: t("case_stage3_value") },
-    { label: t("case_stage4_label"), value: t("case_stage4_value") },
-    { label: t("case_stage5_label"), value: t("case_stage5_value") },
-  ];
-
-  return (
-    <div className="mt-24">
-      <Reveal className="mb-12 text-center">
-        <motion.h3
-          variants={fadeUp}
-          className="font-semibold leading-tight tracking-tighter2"
-          style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)" }}
-        >
-          {t("case_h3_a")}{" "}
-          <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
-            {t("case_h3_b")}
-          </span>
-        </motion.h3>
-        <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-xl text-lg text-ink-muted">
-          {t("case_subtitle")}
-        </motion.p>
-      </Reveal>
-
-      <Reveal className="overflow-hidden rounded-3xl border border-ink/[0.08] bg-surface/30 p-7 backdrop-blur-md sm:p-10">
-        <motion.span
-          variants={fadeUp}
-          className="text-[11px] uppercase tracking-[0.2em] text-accent"
-        >
-          {t("case_eyebrow")}
-        </motion.span>
-        <motion.h4
-          variants={fadeUp}
-          className="mt-2 text-2xl font-semibold tracking-tight"
-        >
-          {t("case_h4")}
-        </motion.h4>
-
-        <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-10">
-          <motion.ol variants={stagger} className="space-y-4">
-            {stages.map((s, i) => (
-              <motion.li
-                key={s.label}
-                variants={fadeUp}
-                className="flex items-start gap-4"
-              >
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent text-[13px] font-bold text-white">
-                  {i + 1}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="text-[12px] uppercase tracking-[0.14em] text-ink-muted">
-                    {s.label}
-                  </div>
-                  <div className="mt-0.5 text-[15px] font-semibold tracking-tight">{s.value}</div>
-                </div>
-              </motion.li>
-            ))}
-          </motion.ol>
-
-          <motion.div
-            variants={fadeUp}
-            className="relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/15 via-bg/60 to-fuchsia-500/10 p-8 text-center"
-          >
-            <motion.span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(233,30,140,0.25),transparent_60%)]"
-              animate={{ scale: [1, 1.15, 1], opacity: [0.6, 1, 0.6] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <div className="relative">
-              <div className="text-[11px] uppercase tracking-[0.22em] text-accent">{t("case_result")}</div>
-              <div className="mt-3 bg-gradient-to-r from-ink via-pink-300 to-ink bg-clip-text text-7xl font-bold leading-none text-transparent sm:text-8xl">
-                7
-              </div>
-              <p className="mx-auto mt-4 max-w-[18ch] text-[14px] leading-relaxed text-ink-muted">
-                {t("case_result_caption")}
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-        <motion.blockquote
-          variants={fadeUp}
-          className="mt-10 rounded-2xl border-l-2 border-accent bg-bg/40 p-6 text-[14.5px] leading-relaxed text-ink/90"
-        >
-          <span className="text-accent">«</span> {t("case_quote")} <span className="text-accent">»</span>
-          <footer className="mt-3 text-[12.5px] not-italic text-ink-muted">
-            {t("case_quote_author")}
-          </footer>
-        </motion.blockquote>
-      </Reveal>
-    </div>
-  );
-}
-
 /* ----------------------------------------------------------
-   PRODUCT DEMO — animated 4-step mockup styled after the real app
+   DEMO + CASE STUDY — unified section: animated mockup followed
+   by Le Chiller case study (timeline + count-up + verbatim)
 ---------------------------------------------------------- */
 type Candidate = {
   rank: number;
@@ -1158,7 +1058,7 @@ const BRIEF_TITLE = "Senior Product Designer";
 const WHATSAPP_MSG =
   "Bonjour M., je vous contacte au sujet d'un poste de Senior Product Designer chez [Client]. Votre profil correspond très précisément à ce qu'ils cherchent — auriez-vous 15 min cette semaine pour en discuter ?";
 
-function ProductDemo() {
+function DemoAndCaseStudy() {
   const t = useT();
   const sectionRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { once: false, margin: "-100px" });
@@ -1189,6 +1089,7 @@ function ProductDemo() {
     >
       <SectionAmbience top intensity={0.3} />
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
+        {/* Unified section header */}
         <Reveal className="mb-10 sm:mb-14 text-center">
           <motion.span variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-accent">
             {t("demo_eyebrow")}
@@ -1205,6 +1106,7 @@ function ProductDemo() {
           </motion.p>
         </Reveal>
 
+        {/* BLOCK 1 — animated demo */}
         <div className="relative mx-auto max-w-5xl">
           {isMobile ? (
             <MobileDemoMockup step={step} runId={runId} />
@@ -1225,8 +1127,216 @@ function ProductDemo() {
             </button>
           </div>
         </div>
+
+        {/* TRANSITION — fading line + micro-text. Bridges demo and case study */}
+        <Reveal className="mx-auto mt-12 flex max-w-2xl flex-col items-center gap-3 sm:mt-20">
+          <motion.span
+            variants={fadeUp}
+            className="text-[11.5px] uppercase tracking-[0.22em] text-ink-muted"
+          >
+            {t("demo_transition_label")}
+          </motion.span>
+          <motion.span
+            variants={fadeUp}
+            aria-hidden
+            className="block h-px w-full max-w-[420px] bg-[linear-gradient(to_right,transparent,rgba(233,30,140,0.32),transparent)]"
+          />
+        </Reveal>
+
+        {/* BLOCK 2 — case study (no second H2; continues the narrative) */}
+        <div className="mt-10 sm:mt-12">
+          <CaseStudyCard />
+        </div>
       </div>
     </section>
+  );
+}
+
+/* ----------------------------------------------------------
+   Case study card — Le Chiller. Renders inside DemoAndCaseStudy,
+   no top-level H2 (continues the demo narrative).
+---------------------------------------------------------- */
+function CaseStudyCard() {
+  const t = useT();
+  const stages = [
+    { label: t("case_stage1_label"), value: t("case_stage1_value") },
+    { label: t("case_stage2_label"), value: t("case_stage2_value") },
+    { label: t("case_stage3_label"), value: t("case_stage3_value") },
+    { label: t("case_stage4_label"), value: t("case_stage4_value") },
+    { label: t("case_stage5_label"), value: t("case_stage5_value") },
+  ];
+
+  return (
+    <Reveal className="overflow-hidden rounded-3xl border border-ink/[0.08] bg-surface/30 p-7 backdrop-blur-md sm:p-10">
+      <motion.span
+        variants={fadeUp}
+        className="text-[11px] uppercase tracking-[0.2em] text-accent"
+      >
+        {t("case_eyebrow")}
+      </motion.span>
+      <motion.h3
+        variants={fadeUp}
+        className="mt-2 text-2xl font-semibold tracking-tight"
+      >
+        {t("case_h4")}
+      </motion.h3>
+
+      <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-10">
+        {/* Timeline — 5 staggered steps */}
+        <motion.ol
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
+          }}
+          className="space-y-4"
+        >
+          {stages.map((s, i) => (
+            <motion.li
+              key={s.label}
+              variants={fadeUp}
+              whileHover={{ x: 4 }}
+              transition={{ type: "spring", stiffness: 320, damping: 22 }}
+              className="group flex items-start gap-4"
+            >
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent text-[13px] font-bold text-white shadow-[0_0_0_0_rgba(233,30,140,0)] transition-shadow duration-300 group-hover:shadow-[0_0_22px_rgba(233,30,140,0.55)]">
+                {i + 1}
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="text-[12px] uppercase tracking-[0.14em] text-ink-muted">
+                  {s.label}
+                </div>
+                <div className="mt-0.5 text-[15px] font-semibold tracking-tight">{s.value}</div>
+              </div>
+            </motion.li>
+          ))}
+        </motion.ol>
+
+        <CaseResultCard />
+      </div>
+
+      <motion.blockquote
+        variants={fadeUp}
+        className="mt-10 rounded-2xl border-l-2 border-accent bg-bg/40 p-6 text-[14.5px] leading-relaxed text-ink/90"
+      >
+        <span className="text-accent">«</span> {t("case_quote")} <span className="text-accent">»</span>
+        <footer className="mt-4 flex flex-wrap items-center gap-3 text-[12.5px] not-italic text-ink-muted">
+          <LeChillerLogo />
+          <span>{t("case_quote_author")}</span>
+        </footer>
+      </motion.blockquote>
+    </Reveal>
+  );
+}
+
+/* ----- Result card with count-up + pulse + shine sweep ----- */
+function CaseResultCard() {
+  const t = useT();
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+      transition={{
+        duration: 0.55,
+        delay: 0.85, // after the 5 timeline steps (5 * 0.15 + 0.1 ≈ 0.85)
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="relative flex min-h-[200px] flex-col items-center justify-center overflow-hidden rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/15 via-bg/60 to-fuchsia-500/10 p-8 text-center"
+    >
+      {/* radial pulse */}
+      <motion.span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(233,30,140,0.25),transparent_60%)]"
+        animate={{ scale: [1, 1.15, 1], opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      />
+      {/* subtle scale pulse on the whole card */}
+      <motion.span
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        animate={{ scale: [1, 1.02, 1] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+      {/* shine sweep — diagonal stripe of brightness every 6s */}
+      <motion.span
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 left-0 w-[40%] bg-[linear-gradient(115deg,transparent_0%,transparent_30%,rgba(255,255,255,0.18)_50%,transparent_70%,transparent_100%)]"
+        initial={{ x: "-100%" }}
+        animate={{ x: ["−100%", "260%"] }}
+        transition={{
+          duration: 1.4,
+          repeat: Infinity,
+          repeatDelay: 4.6,
+          ease: "easeInOut",
+        }}
+      />
+      <div className="relative">
+        <div className="text-[11px] uppercase tracking-[0.22em] text-accent">{t("case_result")}</div>
+        <AnimatedCount target={5} active={inView} />
+        <p className="mx-auto mt-4 max-w-[20ch] text-[14px] leading-relaxed text-ink-muted">
+          {t("case_result_caption")}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+function AnimatedCount({ target, active }: { target: number; active: boolean }) {
+  const mv = useMotionValue(0);
+  const rounded = useTransform(mv, (v) => Math.round(v));
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!active) return;
+    const controls = framerAnimate(mv, target, {
+      duration: 1.5,
+      ease: [0.22, 1, 0.36, 1],
+    });
+    const unsub = rounded.on("change", (v) => setDisplay(v));
+    return () => {
+      controls.stop();
+      unsub();
+    };
+  }, [active, target, mv, rounded]);
+
+  return (
+    <div className="mt-3 bg-gradient-to-r from-ink via-pink-300 to-ink bg-clip-text text-7xl font-bold leading-none tabular-nums text-transparent sm:text-8xl">
+      {display}
+    </div>
+  );
+}
+
+/* ----- Le Chiller logo with graceful text fallback ----- */
+function LeChillerLogo() {
+  const [errored, setErrored] = useState(false);
+  if (errored) {
+    return (
+      <span className="inline-flex h-8 items-center rounded-md bg-slate-900 px-2.5 font-mono text-[11px] font-bold tracking-[0.2em] text-white">
+        LECHILLER
+      </span>
+    );
+  }
+  return (
+    <span className="inline-flex h-8 items-center justify-center rounded-md bg-slate-900 px-2 dark:bg-transparent dark:px-0">
+      <img
+        src="/logos/lechiller.png"
+        alt="Le Chiller"
+        className="h-6 w-auto object-contain"
+        onError={() => setErrored(true)}
+      />
+    </span>
+  );
+}
+
+/* ----- Blurred logo placeholder for anonymized companies ----- */
+function BlurredLogoChip() {
+  return (
+    <span
+      aria-label="Anonymized employer"
+      className="inline-block h-[14px] w-10 shrink-0 rounded-md bg-gradient-to-r from-slate-400/70 via-slate-500/60 to-slate-400/70 opacity-50 [filter:blur(0.6px)]"
+    />
   );
 }
 
@@ -1883,8 +1993,14 @@ function ResultCard({
               </motion.button>
             )}
           </div>
-          <div className="mt-0.5 truncate text-[10.5px] text-slate-500">
-            {c.role} · {c.company} · {c.city} · {c.years.toFixed(1)}a exp.
+          <div className="mt-0.5 flex items-center gap-1 truncate text-[10.5px] text-slate-500">
+            <span className="truncate">{c.role}</span>
+            <span aria-hidden>·</span>
+            <BlurredLogoChip />
+            <span aria-hidden>·</span>
+            <span className="truncate">
+              {c.city} · {c.years.toFixed(1)}a exp.
+            </span>
           </div>
         </div>
       </div>

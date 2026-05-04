@@ -1,25 +1,46 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { articles, getArticle, getRelatedArticles } from "../_lib/articles";
+import {
+  getArticles,
+  getArticle,
+  getRelatedArticles,
+  type Article,
+} from "../_lib/articles";
+import { getDictionary, type Dictionary } from "@/lib/get-dictionary";
+import {
+  getLocalizedPath,
+  type Locale,
+  blogEnabledLocales,
+} from "@/lib/i18n-config";
+import { Navbar } from "@/components/SiteNavbar";
+
+const SITE_URL = "https://truecalling.app";
 
 export function generateStaticParams() {
-  return articles.map((a) => ({ slug: a.slug }));
+  return blogEnabledLocales.flatMap((locale) =>
+    getArticles(locale as Locale).map((a) => ({ locale, slug: a.slug })),
+  );
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const a = getArticle(params.slug);
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: Locale; slug: string };
+}): Promise<Metadata> {
+  const a = getArticle(params.slug, params.locale);
   if (!a) return {};
+  const url = `${SITE_URL}${getLocalizedPath("blog", params.locale)}/${a.slug}`;
   return {
     title: `${a.title} · TrueCalling`,
     description: a.description,
-    alternates: { canonical: `/blog/${a.slug}` },
+    alternates: { canonical: url },
     openGraph: {
       type: "article",
       title: a.title,
       description: a.description,
-      url: `https://truecalling.app/blog/${a.slug}`,
-      locale: "fr_FR",
+      url,
+      locale: params.locale,
       publishedTime: a.publishedAt,
     },
     twitter: {
@@ -30,10 +51,18 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
-  const article = getArticle(params.slug);
+export default async function Page({
+  params,
+}: {
+  params: { locale: Locale; slug: string };
+}) {
+  if (!(blogEnabledLocales as readonly string[]).includes(params.locale)) {
+    notFound();
+  }
+  const article = getArticle(params.slug, params.locale);
   if (!article) notFound();
-  const related = getRelatedArticles(article.slug, 3);
+  const related = getRelatedArticles(article.slug, params.locale, 3);
+  const dict = await getDictionary(params.locale);
 
   const ldJson = {
     "@context": "https://schema.org",
@@ -42,34 +71,51 @@ export default function Page({ params }: { params: { slug: string } }) {
     description: article.description,
     datePublished: article.publishedAt,
     author: { "@type": "Organization", name: "TrueCalling" },
-    publisher: { "@type": "Organization", name: "TrueCalling", url: "https://truecalling.app" },
+    publisher: {
+      "@type": "Organization",
+      name: "TrueCalling",
+      url: "https://truecalling.app",
+    },
     keywords: article.keyword,
-    inLanguage: "fr-FR",
-    mainEntityOfPage: { "@type": "WebPage", "@id": `https://truecalling.app/blog/${article.slug}` },
+    inLanguage: params.locale,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}${getLocalizedPath("blog", params.locale)}/${article.slug}`,
+    },
   };
 
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-bg text-ink">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
+      />
       <BackgroundDecor />
-      <SiteNav />
+      <Navbar />
 
-      <article className="relative px-5 pt-10 pb-20 sm:px-8 sm:pt-14">
+      <article className="relative px-5 pb-20 pt-28 sm:px-8 sm:pt-32">
         <div className="mx-auto max-w-3xl">
           <Link
-            href="/blog"
+            href={getLocalizedPath("blog", params.locale)}
             className="inline-flex items-center gap-1.5 text-[13px] text-ink-muted transition-colors hover:text-ink cursor-pointer"
           >
-            <ArrowLeft /> Tous les articles
+            <ArrowLeft /> {dict.blog_back_articles}
           </Link>
 
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <span className="rounded-full bg-accent/15 px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-[0.15em] text-accent">
               {article.category}
             </span>
-            <time className="text-[12px] text-ink-muted">{formatDate(article.publishedAt)}</time>
+            <time className="text-[12px] text-ink-muted">
+              {formatDate(article.publishedAt, params.locale)}
+            </time>
             <span className="text-ink-muted/40">·</span>
-            <span className="text-[12px] text-ink-muted">{article.readingMinutes} min de lecture</span>
+            <span className="text-[12px] text-ink-muted">
+              {dict.blog_min_read.replace(
+                "{n}",
+                String(article.readingMinutes),
+              )}
+            </span>
           </div>
 
           <h1
@@ -87,12 +133,21 @@ export default function Page({ params }: { params: { slug: string } }) {
             <ProseContent>{article.content}</ProseContent>
           </div>
 
-          <ShareBar slug={article.slug} title={article.title} />
+          <ShareBar
+            slug={article.slug}
+            title={article.title}
+            locale={params.locale}
+            dict={dict}
+          />
         </div>
       </article>
 
-      <RelatedArticles articles={related} />
-      <Footer />
+      <RelatedArticles
+        articles={related}
+        locale={params.locale}
+        dict={dict}
+      />
+      <Footer locale={params.locale} dict={dict} />
     </main>
   );
 }
@@ -104,39 +159,6 @@ function BackgroundDecor() {
       <div className="absolute -left-20 top-[5%] size-[55vw] max-w-[700px] rounded-full bg-accent/30 blur-[60px] sm:blur-[120px] animate-blob-1" />
       <div className="absolute right-[-5%] top-[35%] size-[50vw] max-w-[640px] rounded-full bg-surface/80 blur-[60px] sm:blur-[130px] animate-blob-2" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,rgb(var(--bg))_85%)]" />
-    </div>
-  );
-}
-
-function SiteNav() {
-  return (
-    <header className="relative z-10 flex h-16 items-center justify-between px-5 sm:px-8">
-      <Link href="/" aria-label="Retour à l'accueil" className="cursor-pointer">
-        <Logo />
-      </Link>
-      <Link
-        href="/"
-        className="inline-flex items-center gap-1.5 text-sm text-ink-muted transition-colors hover:text-ink cursor-pointer"
-      >
-        <ArrowLeft /> Accueil
-      </Link>
-    </header>
-  );
-}
-
-function Logo() {
-  return (
-    <div className="flex items-center gap-2.5">
-      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="#E91E8C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M3.5 22 C 3.5 11, 8 4, 16 4 C 24 4, 28.5 11, 28.5 22" />
-        <path d="M6.5 24 C 6.5 13, 10 7, 16 7 C 22 7, 25.5 13, 25.5 24" />
-        <path d="M9.5 26 C 9.5 15, 12 10, 16 10 C 20 10, 22.5 15, 22.5 26" />
-        <path d="M12.5 27 C 12.5 17, 14 13, 16 13 C 18 13, 19.5 17, 19.5 27" />
-        <path d="M16.5 27 L 16.5 19 C 16.5 17, 14.8 16, 13.7 17 C 12.6 18, 13 20, 14.5 20 L 16 20" />
-      </svg>
-      <span className="text-[16px] font-bold uppercase tracking-[0.04em] text-ink">
-        TrueCalling
-      </span>
     </div>
   );
 }
@@ -158,8 +180,18 @@ function ProseContent({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ShareBar({ slug, title }: { slug: string; title: string }) {
-  const url = `https://truecalling.app/blog/${slug}`;
+function ShareBar({
+  slug,
+  title,
+  locale,
+  dict,
+}: {
+  slug: string;
+  title: string;
+  locale: Locale;
+  dict: Dictionary;
+}) {
+  const url = `${SITE_URL}${getLocalizedPath("blog", locale)}/${slug}`;
   const shareLinks = [
     {
       label: "LinkedIn",
@@ -176,7 +208,9 @@ function ShareBar({ slug, title }: { slug: string; title: string }) {
   ];
   return (
     <div className="mt-12 flex items-center gap-3 border-t border-ink/[0.06] pt-6">
-      <span className="text-[12px] uppercase tracking-[0.14em] text-ink-muted">Partager</span>
+      <span className="text-[12px] uppercase tracking-[0.14em] text-ink-muted">
+        {dict.blog_share}
+      </span>
       {shareLinks.map((s) => (
         <a
           key={s.label}
@@ -192,17 +226,27 @@ function ShareBar({ slug, title }: { slug: string; title: string }) {
   );
 }
 
-function RelatedArticles({ articles }: { articles: typeof import("../_lib/articles").articles }) {
+function RelatedArticles({
+  articles,
+  locale,
+  dict,
+}: {
+  articles: Article[];
+  locale: Locale;
+  dict: Dictionary;
+}) {
   if (!articles.length) return null;
   return (
     <section className="relative border-t border-ink/[0.06] px-5 py-16 sm:px-8 sm:py-20">
       <div className="mx-auto max-w-6xl">
-        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">À lire aussi</h2>
+        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+          {dict.blog_related}
+        </h2>
         <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {articles.map((a) => (
             <Link
               key={a.slug}
-              href={`/blog/${a.slug}`}
+              href={`${getLocalizedPath("blog", locale)}/${a.slug}`}
               className="group flex h-full flex-col rounded-2xl border border-ink/[0.08] bg-surface/30 p-6 backdrop-blur-md transition-all hover:-translate-y-1 hover:border-accent/40 cursor-pointer"
             >
               <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.14em] text-ink-muted">
@@ -210,7 +254,12 @@ function RelatedArticles({ articles }: { articles: typeof import("../_lib/articl
                   {a.category}
                 </span>
                 <span>·</span>
-                <span>{a.readingMinutes} min</span>
+                <span>
+                  {dict.blog_min_read_short.replace(
+                    "{n}",
+                    String(a.readingMinutes),
+                  )}
+                </span>
               </div>
               <h3 className="mt-4 text-[16px] font-semibold leading-snug tracking-tight transition-colors group-hover:text-accent">
                 {a.title}
@@ -226,23 +275,48 @@ function RelatedArticles({ articles }: { articles: typeof import("../_lib/articl
   );
 }
 
-function Footer() {
+function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   return (
     <footer className="relative border-t border-ink/[0.06] py-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-xs text-ink-muted sm:flex-row sm:px-8">
-        <span>© 2026 TrueCalling. Tous droits réservés.</span>
+        <span>{dict.blog_footer_rights}</span>
         <div className="flex items-center gap-5">
-          <Link href="/" className="transition-colors hover:text-ink cursor-pointer">Accueil</Link>
-          <Link href="/blog" className="transition-colors hover:text-ink cursor-pointer">Blog</Link>
-          <Link href="/contact" className="transition-colors hover:text-ink cursor-pointer">Contact</Link>
-          <Link href="/reserver-une-demo" className="transition-colors hover:text-ink cursor-pointer">Réserver une démo</Link>
+          <Link
+            href={getLocalizedPath("home", locale)}
+            className="transition-colors hover:text-ink cursor-pointer"
+          >
+            {dict.blog_footer_home}
+          </Link>
+          <Link
+            href={getLocalizedPath("blog", locale)}
+            className="transition-colors hover:text-ink cursor-pointer"
+          >
+            {dict.blog_footer_blog}
+          </Link>
+          <Link
+            href={getLocalizedPath("contact", locale)}
+            className="transition-colors hover:text-ink cursor-pointer"
+          >
+            {dict.blog_footer_contact}
+          </Link>
+          <Link
+            href={getLocalizedPath("book-a-demo", locale)}
+            className="transition-colors hover:text-ink cursor-pointer"
+          >
+            {dict.blog_footer_demo}
+          </Link>
         </div>
       </div>
     </footer>
   );
 }
 
-function formatDate(iso: string): string {
+function formatDate(iso: string, locale: Locale): string {
   const d = new Date(iso);
-  return d.toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" });
+  const intlLocale = locale === "pt-BR" ? "pt-BR" : locale;
+  return d.toLocaleDateString(intlLocale, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 }

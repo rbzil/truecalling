@@ -37,11 +37,8 @@ export const localeFlags: Record<Locale, string> = {
  * Locales where the /blog section is published.
  * For other locales, the blog link is hidden from nav and any direct visit
  * to /<locale>/blog redirects to the home of that locale.
- *
- * NOTE: only "fr" for now. EN articles to be translated in a dedicated session
- * (~20 000 words across 10 articles).
  */
-export const blogEnabledLocales: readonly Locale[] = ["fr"] as const;
+export const blogEnabledLocales: readonly Locale[] = ["fr", "en"] as const;
 
 /* ----------------------------------------------------------
    Route keys → file-system paths (canonical, what Next.js routes to)
