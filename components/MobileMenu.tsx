@@ -4,10 +4,9 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Menu, X } from "lucide-react";
-import { useT, useLocale, useLocalizedHref } from "../app/_i18n/locale-context";
+import { useT, useLocalizedHref } from "../app/_i18n/locale-context";
 import { LanguageSwitcher } from "../app/_i18n/language-switcher";
 import { ThemeToggle } from "./ThemeToggle";
-import { blogEnabledLocales } from "../lib/i18n-config";
 
 /* ============================================================
    MobileMenu — hamburger button + slide-from-right drawer.
@@ -21,10 +20,8 @@ export function MobileMenu() {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const t = useT();
-  const { locale } = useLocale();
   const href = useLocalizedHref();
   const reduce = useReducedMotion();
-  const showBlog = (blogEnabledLocales as readonly string[]).includes(locale);
 
   // createPortal needs document — only mount on the client.
   useEffect(() => {
@@ -51,14 +48,14 @@ export function MobileMenu() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // Blog and FAQ live in the footer; the mobile menu mirrors the
+  // navbar's focused conversion flow.
   const links: { label: string; href: string }[] = [
     { label: t("nav_features"), href: href("home", { hash: "#features" }) },
     { label: t("nav_how"), href: href("home", { hash: "#how-it-works" }) },
     { label: t("nav_benefits"), href: href("home", { hash: "#benefits" }) },
     { label: t("nav_demo"), href: href("home", { hash: "#demo" }) },
     { label: t("nav_pricing"), href: href("home", { hash: "#pricing" }) },
-    ...(showBlog ? [{ label: t("nav_blog"), href: href("blog") }] : []),
-    { label: t("nav_faq"), href: href("faq") },
     { label: t("nav_contact"), href: href("contact") },
   ];
 

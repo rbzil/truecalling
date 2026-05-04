@@ -154,7 +154,7 @@
   "footer_gdpr": "GDPR",
   "footer_privacy": "מדיניות פרטיות",
   "footer_copyright": "© 2026 TrueCalling. כל הזכויות שמורות.",
-  "footer_made": "נעשה במחשבה למגייסים.",
+  "footer_made": "נוצר עם ❤️ בצרפת",
   "rd_back_home_aria": "חזרה לדף הבית",
   "rd_back": "חזרה",
   "rd_eyebrow": "הדגמה מודרכת",
@@ -290,5 +290,17 @@
   "demo_transition_label": "הנה התוצאות הקונקרטיות אצל אחד מלקוחותינו:",
   "meta_description": "TrueCalling, תוכנת ה-Sourcing מבוססת AI לצוותי גיוס. מתיאור משרה למועמדים מתאימים בתוך דקות — ב-WhatsApp, אימייל וטלפון.",
   "demo_form_error_validation": "אנא בדקו את השדות המסומנים.",
-  "demo_form_error_generic": "אירעה שגיאה. נסו שוב או צרו איתנו קשר ישירות."
+  "demo_form_error_generic": "אירעה שגיאה. נסו שוב או צרו איתנו קשר ישירות.",
+  "footer_tagline": "תוכנת ה-Sourcing מבוססת AI שמגייסת בדיוק.",
+  "footer_col_resources": "משאבים",
+  "footer_terms": "תנאי שימוש",
+  "legal_back_home": "חזרה לעמוד הבית",
+  "legal_notice_title": "הודעה משפטית",
+  "legal_notice_intro": "התוכן בעבודה. הגרסה הסופית תפורסם לפני השקת האתר.",
+  "legal_notice_todo": "לבעלי האתר: יש לערוך תוכן זה על ידי עורך דין לפני ההשקה.",
+  "privacy_title": "מדיניות פרטיות",
+  "privacy_intro": "התוכן בעבודה. הגרסה הסופית תפורסם לפני השקת האתר.",
+  "privacy_todo": "לבעלי האתר: יש לערוך תוכן זה על ידי עורך דין (או באמצעות סקירת GDPR ייעודית) לפני ההשקה.",
+  "privacy_gdpr_anchor_title": "זכויותיך לפי GDPR",
+  "privacy_gdpr_anchor_body": "סעיף GDPR להשלמה: זכות לעיון, תיקון, מחיקה, העברה ואופן מימוש זכויות אלה."
 }

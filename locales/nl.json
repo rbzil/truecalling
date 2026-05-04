@@ -154,7 +154,7 @@
   "footer_gdpr": "AVG",
   "footer_privacy": "Privacybeleid",
   "footer_copyright": "© 2026 TrueCalling. Alle rechten voorbehouden.",
-  "footer_made": "Met zorg gemaakt voor recruiters.",
+  "footer_made": "Gemaakt met ❤️ in Frankrijk",
   "rd_back_home_aria": "Terug naar home",
   "rd_back": "Terug",
   "rd_eyebrow": "Begeleide demo",
@@ -290,5 +290,17 @@
   "demo_transition_label": "Zo zien concrete resultaten eruit bij een van onze klanten:",
   "meta_description": "TrueCalling, de AI-sourcing software voor recruitmentteams. Van een vacature naar gekwalificeerde kandidaten in minuten — WhatsApp, e-mail, telefoon.",
   "demo_form_error_validation": "Controleer de gemarkeerde velden.",
-  "demo_form_error_generic": "Er ging iets mis. Probeer opnieuw of neem rechtstreeks contact op."
+  "demo_form_error_generic": "Er ging iets mis. Probeer opnieuw of neem rechtstreeks contact op.",
+  "footer_tagline": "De AI-sourcing software die met precisie aanwerft.",
+  "footer_col_resources": "Bronnen",
+  "footer_terms": "Voorwaarden",
+  "legal_back_home": "Terug naar home",
+  "legal_notice_title": "Juridische mededeling",
+  "legal_notice_intro": "Inhoud in voorbereiding. De definitieve versie wordt vóór de lancering gepubliceerd.",
+  "legal_notice_todo": "Voor de eigenaar: deze inhoud moet vóór de lancering door een advocaat worden opgesteld.",
+  "privacy_title": "Privacybeleid",
+  "privacy_intro": "Inhoud in voorbereiding. De definitieve versie wordt vóór de lancering gepubliceerd.",
+  "privacy_todo": "Voor de eigenaar: deze inhoud moet vóór de lancering door een advocaat (of via een toegewijde AVG-analyse) worden opgesteld.",
+  "privacy_gdpr_anchor_title": "Uw AVG-rechten",
+  "privacy_gdpr_anchor_body": "AVG-sectie om aan te vullen: recht op inzage, rectificatie, wissing, overdraagbaarheid, en procedure om deze rechten uit te oefenen."
 }

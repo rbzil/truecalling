@@ -8,6 +8,7 @@ import {
 } from "@/lib/i18n-config";
 import { getDictionary } from "@/lib/get-dictionary";
 import { Providers } from "../providers";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -88,6 +89,7 @@ export default async function LocaleLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
         />
         {children}
+        <SiteFooter />
       </div>
     </Providers>
   );

@@ -154,7 +154,7 @@
   "footer_gdpr": "DSGVO",
   "footer_privacy": "Datenschutz",
   "footer_copyright": "© 2026 TrueCalling. Alle Rechte vorbehalten.",
-  "footer_made": "Mit Sorgfalt für Recruiter gemacht.",
+  "footer_made": "Mit ❤️ in Frankreich gemacht",
   "rd_back_home_aria": "Zurück zur Startseite",
   "rd_back": "Zurück",
   "rd_eyebrow": "Geführte Demo",
@@ -290,5 +290,17 @@
   "demo_transition_label": "So sehen die konkreten Ergebnisse bei einem unserer Kunden aus:",
   "meta_description": "TrueCalling, die KI-Sourcing-Software für Recruiting-Teams. Von einer Stellenbeschreibung zu qualifizierten Kandidaten in Minuten — WhatsApp, E-Mail, Telefon.",
   "demo_form_error_validation": "Bitte prüfen Sie die markierten Felder.",
-  "demo_form_error_generic": "Etwas ist schiefgelaufen. Bitte erneut versuchen oder uns direkt kontaktieren."
+  "demo_form_error_generic": "Etwas ist schiefgelaufen. Bitte erneut versuchen oder uns direkt kontaktieren.",
+  "footer_tagline": "Die KI-Sourcing-Software, die mit Präzision rekrutiert.",
+  "footer_col_resources": "Ressourcen",
+  "footer_terms": "AGB",
+  "legal_back_home": "Zurück zur Startseite",
+  "legal_notice_title": "Impressum",
+  "legal_notice_intro": "Inhalt in Bearbeitung. Die endgültige Fassung wird vor dem Launch veröffentlicht.",
+  "legal_notice_todo": "Hinweis an den Betreiber: Dieser Inhalt muss vor dem Launch von einem Anwalt verfasst werden.",
+  "privacy_title": "Datenschutzerklärung",
+  "privacy_intro": "Inhalt in Bearbeitung. Die endgültige Fassung wird vor dem Launch veröffentlicht.",
+  "privacy_todo": "Hinweis an den Betreiber: Dieser Inhalt muss vor dem Launch von einem Anwalt (oder über eine dedizierte DSGVO-Prüfung) verfasst werden.",
+  "privacy_gdpr_anchor_title": "Ihre DSGVO-Rechte",
+  "privacy_gdpr_anchor_body": "DSGVO-Abschnitt zum Vervollständigen: Auskunfts-, Berichtigungs-, Löschungs- und Datenübertragbarkeitsrecht sowie Verfahren zur Ausübung dieser Rechte."
 }

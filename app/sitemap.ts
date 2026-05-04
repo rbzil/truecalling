@@ -14,7 +14,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
   // Routes published on every locale
-  const universalRoutes: RouteKey[] = ["home", "book-a-demo", "contact", "faq", "terms"];
+  const universalRoutes: RouteKey[] = [
+    "home",
+    "book-a-demo",
+    "contact",
+    "faq",
+    "terms",
+    "legal-notice",
+    "privacy",
+  ];
 
   for (const locale of locales) {
     for (const route of universalRoutes) {

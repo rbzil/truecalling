@@ -29,7 +29,6 @@ export default function Page() {
       <BackgroundDecor />
       <Navbar />
       <FAQSection />
-      <Footer />
     </main>
   );
 }
@@ -226,19 +225,4 @@ function PlusIcon() {
   );
 }
 
-/* ----- Footer ----- */
-function Footer() {
-  const t = useT();
-  return (
-    <footer className="relative border-t border-ink/[0.06] py-8">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-xs text-ink-muted sm:flex-row sm:px-8">
-        <span>{t("footer_copyright")}</span>
-        <div className="flex items-center gap-5">
-          <Link href="/" className="transition-colors hover:text-ink cursor-pointer">{t("rd_footer_home")}</Link>
-          <Link href="/#pricing" className="transition-colors hover:text-ink cursor-pointer">{t("nav_pricing")}</Link>
-          <Link href="/contact" className="transition-colors hover:text-ink cursor-pointer">{t("nav_contact")}</Link>
-        </div>
-      </div>
-    </footer>
-  );
-}
+/* Footer is mounted globally in app/[locale]/layout.tsx */

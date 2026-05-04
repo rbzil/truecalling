@@ -2,11 +2,10 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useT, useLocale, useLocalizedHref } from "../app/_i18n/locale-context";
+import { useT, useLocalizedHref } from "../app/_i18n/locale-context";
 import { LanguageSwitcher } from "../app/_i18n/language-switcher";
 import { ThemeToggle } from "./ThemeToggle";
 import { MobileMenu } from "./MobileMenu";
-import { blogEnabledLocales } from "../lib/i18n-config";
 
 /* ----------------------------------------------------------
    FingerprintMark — magenta brand mark
@@ -156,17 +155,15 @@ export function Navbar() {
   }, []);
 
   const t = useT();
-  const { locale } = useLocale();
   const href = useLocalizedHref();
-  const showBlog = (blogEnabledLocales as readonly string[]).includes(locale);
+  // Blog and FAQ live in the footer; the navbar stays focused on the
+  // core conversion flow.
   const links = [
     { label: t("nav_features"), href: href("home", { hash: "#features" }) },
     { label: t("nav_how"), href: href("home", { hash: "#how-it-works" }) },
     { label: t("nav_benefits"), href: href("home", { hash: "#benefits" }) },
     { label: t("nav_demo"), href: href("home", { hash: "#demo" }) },
     { label: t("nav_pricing"), href: href("home", { hash: "#pricing" }) },
-    ...(showBlog ? [{ label: t("nav_blog"), href: href("blog") }] : []),
-    { label: t("nav_faq"), href: href("faq") },
     { label: t("nav_contact"), href: href("contact") },
   ];
 

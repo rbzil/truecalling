@@ -154,7 +154,7 @@
   "footer_gdpr": "RGPD",
   "footer_privacy": "Politique de confidentialité",
   "footer_copyright": "© 2026 TrueCalling. Tous droits réservés.",
-  "footer_made": "Fait avec attention pour les recruteurs.",
+  "footer_made": "Conçu avec ❤️ en France",
   "rd_back_home_aria": "Retour à l'accueil",
   "rd_back": "Retour",
   "rd_eyebrow": "Démo guidée",
@@ -290,5 +290,17 @@
   "demo_transition_label": "Voici les résultats concrets chez l'un de nos clients :",
   "meta_description": "TrueCalling, le logiciel de sourcing IA pour équipes recrutement. D'une fiche de poste à des candidats qualifiés en minutes, via WhatsApp, email, téléphone.",
   "demo_form_error_validation": "Veuillez vérifier les champs surlignés.",
-  "demo_form_error_generic": "Une erreur est survenue. Veuillez réessayer ou nous contacter directement."
+  "demo_form_error_generic": "Une erreur est survenue. Veuillez réessayer ou nous contacter directement.",
+  "footer_tagline": "Le logiciel de sourcing IA qui recrute avec précision.",
+  "footer_col_resources": "Ressources",
+  "footer_terms": "CGU",
+  "legal_back_home": "Retour à l'accueil",
+  "legal_notice_title": "Mentions légales",
+  "legal_notice_intro": "Page en cours de rédaction. Le contenu définitif sera publié avant la mise en production.",
+  "legal_notice_todo": "Pour l'utilisateur : faire rédiger ce contenu par un avocat avant le launch.",
+  "privacy_title": "Politique de confidentialité",
+  "privacy_intro": "Page en cours de rédaction. Le contenu définitif sera publié avant la mise en production.",
+  "privacy_todo": "Pour l'utilisateur : faire rédiger ce contenu par un avocat (ou via une analyse RGPD dédiée) avant le launch.",
+  "privacy_gdpr_anchor_title": "Vos droits RGPD",
+  "privacy_gdpr_anchor_body": "Section RGPD à compléter : droit d'accès, de rectification, à l'effacement, à la portabilité, et procédure pour exercer ces droits."
 }

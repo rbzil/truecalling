@@ -154,7 +154,7 @@
   "footer_gdpr": "GDPR",
   "footer_privacy": "Privacy policy",
   "footer_copyright": "© 2026 TrueCalling. All rights reserved.",
-  "footer_made": "Made with care for recruiters.",
+  "footer_made": "Made with ❤️ in France",
   "rd_back_home_aria": "Back to home",
   "rd_back": "Back",
   "rd_eyebrow": "Guided demo",
@@ -290,5 +290,17 @@
   "demo_transition_label": "Here's what real results look like at one of our clients:",
   "meta_description": "TrueCalling, the AI sourcing software for recruiting teams. From a job description to qualified candidates in minutes — via WhatsApp, email, phone.",
   "demo_form_error_validation": "Please check the highlighted fields.",
-  "demo_form_error_generic": "Something went wrong. Please try again or contact us directly."
+  "demo_form_error_generic": "Something went wrong. Please try again or contact us directly.",
+  "footer_tagline": "AI sourcing software that hires with precision.",
+  "footer_col_resources": "Resources",
+  "footer_terms": "Terms",
+  "legal_back_home": "Back to home",
+  "legal_notice_title": "Legal notice",
+  "legal_notice_intro": "Content in progress. The final version will be published before launch.",
+  "legal_notice_todo": "For the owner: have this drafted by a lawyer before launch.",
+  "privacy_title": "Privacy policy",
+  "privacy_intro": "Content in progress. The final version will be published before launch.",
+  "privacy_todo": "For the owner: have this drafted by a lawyer (or via a dedicated GDPR review) before launch.",
+  "privacy_gdpr_anchor_title": "Your GDPR rights",
+  "privacy_gdpr_anchor_body": "GDPR section to complete: right of access, rectification, erasure, portability, and how to exercise these rights."
 }

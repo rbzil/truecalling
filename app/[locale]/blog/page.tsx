@@ -75,7 +75,6 @@ export default async function Page({
         locale={params.locale}
         dict={dict}
       />
-      <Footer locale={params.locale} dict={dict} />
     </main>
   );
 }
@@ -247,41 +246,7 @@ function ArticleCard({
   );
 }
 
-function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
-  return (
-    <footer className="relative border-t border-ink/[0.06] py-8">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-xs text-ink-muted sm:flex-row sm:px-8">
-        <span>{dict.blog_footer_rights}</span>
-        <div className="flex items-center gap-5">
-          <Link
-            href={getLocalizedPath("home", locale)}
-            className="transition-colors hover:text-ink cursor-pointer"
-          >
-            {dict.blog_footer_home}
-          </Link>
-          <Link
-            href={`${getLocalizedPath("home", locale)}#pricing`}
-            className="transition-colors hover:text-ink cursor-pointer"
-          >
-            {dict.blog_footer_pricing}
-          </Link>
-          <Link
-            href={getLocalizedPath("contact", locale)}
-            className="transition-colors hover:text-ink cursor-pointer"
-          >
-            {dict.blog_footer_contact}
-          </Link>
-          <Link
-            href={getLocalizedPath("faq", locale)}
-            className="transition-colors hover:text-ink cursor-pointer"
-          >
-            {dict.blog_footer_faq}
-          </Link>
-        </div>
-      </div>
-    </footer>
-  );
-}
+/* Footer is mounted globally in app/[locale]/layout.tsx */
 
 function formatDate(iso: string, locale: Locale): string {
   const d = new Date(iso);

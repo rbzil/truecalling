@@ -44,7 +44,15 @@ export const blogEnabledLocales: readonly Locale[] = ["fr", "en"] as const;
    Route keys → file-system paths (canonical, what Next.js routes to)
    These match the folders under app/[locale]/ (e.g. "book-a-demo")
 ---------------------------------------------------------- */
-export type RouteKey = "home" | "book-a-demo" | "contact" | "faq" | "terms" | "blog";
+export type RouteKey =
+  | "home"
+  | "book-a-demo"
+  | "contact"
+  | "faq"
+  | "terms"
+  | "blog"
+  | "legal-notice"
+  | "privacy";
 
 /**
  * Canonical (file-system) slug per route key. The folder under
@@ -56,6 +64,8 @@ export const canonicalSlug: Record<Exclude<RouteKey, "home">, string> = {
   faq: "faq",
   terms: "terms",
   blog: "blog",
+  "legal-notice": "legal-notice",
+  privacy: "privacy",
 };
 
 /**
@@ -107,6 +117,26 @@ export const localizedSlug: Record<RouteKey, Record<Locale, string>> = {
   blog: {
     fr: "blog", en: "blog", he: "blog", "pt-BR": "blog",
     es: "blog", de: "blog", it: "blog", nl: "blog",
+  },
+  "legal-notice": {
+    fr: "mentions-legales",
+    en: "legal-notice",
+    he: "legal-notice",
+    "pt-BR": "aviso-legal",
+    es: "aviso-legal",
+    de: "impressum",
+    it: "note-legali",
+    nl: "juridische-mededeling",
+  },
+  privacy: {
+    fr: "politique-de-confidentialite",
+    en: "privacy",
+    he: "privacy",
+    "pt-BR": "privacidade",
+    es: "privacidad",
+    de: "datenschutz",
+    it: "privacy",
+    nl: "privacy",
   },
 };
 

@@ -154,7 +154,7 @@
   "footer_gdpr": "RGPD",
   "footer_privacy": "Política de privacidad",
   "footer_copyright": "© 2026 TrueCalling. Todos los derechos reservados.",
-  "footer_made": "Hecho con cuidado para reclutadores.",
+  "footer_made": "Hecho con ❤️ en Francia",
   "rd_back_home_aria": "Volver al inicio",
   "rd_back": "Volver",
   "rd_eyebrow": "Demo guiada",
@@ -290,5 +290,17 @@
   "demo_transition_label": "Estos son los resultados concretos en uno de nuestros clientes:",
   "meta_description": "TrueCalling, el software de sourcing con IA para reclutamiento. De una descripción de puesto a candidatos cualificados en minutos — WhatsApp, email, teléfono.",
   "demo_form_error_validation": "Revisa los campos destacados.",
-  "demo_form_error_generic": "Algo salió mal. Inténtalo de nuevo o escríbenos directamente."
+  "demo_form_error_generic": "Algo salió mal. Inténtalo de nuevo o escríbenos directamente.",
+  "footer_tagline": "El software de sourcing con IA que contrata con precisión.",
+  "footer_col_resources": "Recursos",
+  "footer_terms": "Términos",
+  "legal_back_home": "Volver al inicio",
+  "legal_notice_title": "Aviso legal",
+  "legal_notice_intro": "Contenido en preparación. La versión definitiva se publicará antes del lanzamiento.",
+  "legal_notice_todo": "Para el propietario: este contenido debe ser redactado por un abogado antes del lanzamiento.",
+  "privacy_title": "Política de privacidad",
+  "privacy_intro": "Contenido en preparación. La versión definitiva se publicará antes del lanzamiento.",
+  "privacy_todo": "Para el propietario: este contenido debe ser redactado por un abogado (o mediante un análisis RGPD específico) antes del lanzamiento.",
+  "privacy_gdpr_anchor_title": "Tus derechos RGPD",
+  "privacy_gdpr_anchor_body": "Sección RGPD por completar: derecho de acceso, rectificación, supresión, portabilidad y cómo ejercer estos derechos."
 }
