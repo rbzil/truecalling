@@ -41,7 +41,7 @@ function BackgroundDecor() {
       <div className="absolute inset-0 bg-bg" />
       <div className="absolute -left-20 top-[5%] size-[55vw] max-w-[700px] rounded-full bg-accent/30 blur-[60px] sm:blur-[120px] animate-blob-1" />
       <div className="absolute right-[-5%] top-[35%] size-[50vw] max-w-[640px] rounded-full bg-surface/80 blur-[60px] sm:blur-[130px] animate-blob-2" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,#0A1628_85%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,rgb(var(--bg))_85%)]" />
     </div>
   );
 }
@@ -172,7 +172,7 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
-      <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ink-muted backdrop-blur-md">
+      <span className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-ink/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ink-muted backdrop-blur-md">
         <span className="size-1.5 rounded-full bg-accent shadow-[0_0_10px_rgba(233,30,140,0.7)]" />
         {t("rd_eyebrow")}
       </span>
@@ -189,7 +189,7 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
       <form
         onSubmit={onSubmit}
         noValidate
-        className="mt-8 space-y-5 rounded-2xl border border-white/[0.08] bg-surface/30 p-6 backdrop-blur-md sm:p-7"
+        className="mt-8 space-y-5 rounded-2xl border border-ink/[0.08] bg-surface/30 p-6 backdrop-blur-md sm:p-7"
       >
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field
@@ -285,7 +285,7 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
                 className={`relative rounded-lg border px-3 py-2.5 text-[13px] font-medium transition-colors cursor-pointer ${
                   form.slot === s
                     ? "border-accent/60 bg-accent/10 text-ink"
-                    : "border-white/10 bg-white/[0.02] text-ink-muted hover:text-ink"
+                    : "border-ink/10 bg-ink/[0.02] text-ink-muted hover:text-ink"
                 }`}
               >
                 {form.slot === s && (
@@ -310,7 +310,7 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
             onChange={(e) => set("message", e.target.value)}
             rows={3}
             placeholder={t("rd_message_placeholder")}
-            className="mt-2 w-full resize-none rounded-lg border border-white/10 bg-white/[0.02] px-3.5 py-2.5 text-[14px] text-ink placeholder:text-ink-muted/60 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
+            className="mt-2 w-full resize-none rounded-lg border border-ink/10 bg-ink/[0.02] px-3.5 py-2.5 text-[14px] text-ink placeholder:text-ink-muted/60 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
           />
         </div>
 
@@ -374,10 +374,10 @@ function Field({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         aria-invalid={!!error}
-        className={`mt-2 h-11 w-full rounded-lg border bg-white/[0.02] px-3.5 text-[14px] text-ink placeholder:text-ink-muted/60 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/30 ${
+        className={`mt-2 h-11 w-full rounded-lg border bg-ink/[0.02] px-3.5 text-[14px] text-ink placeholder:text-ink-muted/60 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/30 ${
           error
             ? "border-rose-500/60 focus:border-rose-400"
-            : "border-white/10 focus:border-accent/60"
+            : "border-ink/10 focus:border-accent/60"
         }`}
       />
       {error && <p className="mt-1.5 text-[11px] text-rose-400">{error}</p>}
@@ -414,10 +414,10 @@ function SelectField({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           aria-invalid={!!error}
-          className={`h-11 w-full appearance-none rounded-lg border bg-white/[0.02] pl-3.5 pr-9 text-[14px] text-ink transition-colors focus:outline-none focus:ring-2 focus:ring-accent/30 ${
+          className={`h-11 w-full appearance-none rounded-lg border bg-ink/[0.02] pl-3.5 pr-9 text-[14px] text-ink transition-colors focus:outline-none focus:ring-2 focus:ring-accent/30 ${
             error
               ? "border-rose-500/60 focus:border-rose-400"
-              : "border-white/10 focus:border-accent/60"
+              : "border-ink/10 focus:border-accent/60"
           } ${value ? "" : "text-ink-muted/60"}`}
         >
           <option value="" disabled>
@@ -525,7 +525,7 @@ function SuccessCard({ firstName, email }: { firstName: string; email: string })
       <div className="mt-7 flex flex-wrap items-center gap-3">
         <Link
           href="/"
-          className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 text-[14px] font-medium text-ink transition-colors hover:bg-white/[0.08] cursor-pointer"
+          className="inline-flex h-11 items-center gap-2 rounded-full border border-ink/15 bg-ink/[0.04] px-5 text-[14px] font-medium text-ink transition-colors hover:bg-ink/[0.08] cursor-pointer"
         >
           <ArrowLeft /> {t("rd_back_home")}
         </Link>
@@ -550,7 +550,7 @@ function SidePanel() {
     { title: t("rd_p4_title"), desc: t("rd_p4_desc") },
   ];
   return (
-    <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 backdrop-blur-md">
+    <div className="rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-7 backdrop-blur-md">
       <span className="text-[11px] uppercase tracking-[0.22em] text-accent">{t("rd_program")}</span>
       <h2 className="mt-3 text-2xl font-semibold leading-tight tracking-tighter2 sm:text-[28px]">
         {t("rd_program_h2")}
@@ -570,7 +570,7 @@ function SidePanel() {
         ))}
       </ul>
 
-      <div className="mt-7 rounded-xl border border-white/[0.06] bg-bg/40 p-5">
+      <div className="mt-7 rounded-xl border border-ink/[0.06] bg-bg/40 p-5">
         <div className="flex items-center gap-3">
           <div className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-pink-500 to-fuchsia-600 text-[12px] font-bold text-white">
             CD
@@ -592,7 +592,7 @@ function SidePanel() {
 function Footer() {
   const t = useT();
   return (
-    <footer className="relative border-t border-white/[0.06] py-8">
+    <footer className="relative border-t border-ink/[0.06] py-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-xs text-ink-muted sm:flex-row sm:px-8">
         <span>{t("footer_copyright")}</span>
         <div className="flex items-center gap-5">

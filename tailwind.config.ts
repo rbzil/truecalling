@@ -2,18 +2,21 @@ import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
 
 const config: Config = {
+  darkMode: "class",
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        bg: "#0A1628",
-        surface: "#1B3A5C",
-        accent: "#E91E8C",
+        // Channel-based RGB tokens so `bg-ink/40`, `text-bg/60` etc. work in both themes.
+        // The variables hold "R G B" triplets (no commas, no rgb() wrapper) — see globals.css.
+        bg: "rgb(var(--bg) / <alpha-value>)",
+        surface: "rgb(var(--surface) / <alpha-value>)",
+        deep: "rgb(var(--deep) / <alpha-value>)",
+        accent: "rgb(var(--accent) / <alpha-value>)",
         ink: {
-          DEFAULT: "#FFFFFF",
-          muted: "#94A3B8",
+          DEFAULT: "rgb(var(--ink) / <alpha-value>)",
+          muted: "rgb(var(--ink-muted) / <alpha-value>)",
         },
-        deep: "#050B14",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],

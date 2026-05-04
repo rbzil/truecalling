@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { LocaleProvider } from "./_i18n/locale-context";
+import { Providers } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="fr" className={inter.variable}>
+    <html lang="fr" className={inter.variable} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -77,7 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-sans antialiased bg-bg text-ink">
-        <LocaleProvider>{children}</LocaleProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

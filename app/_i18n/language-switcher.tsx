@@ -36,7 +36,7 @@ export function LanguageSwitcher() {
         aria-expanded={open}
         aria-haspopup="listbox"
         onClick={() => setOpen((o) => !o)}
-        className="inline-flex h-9 items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3 text-[12.5px] font-medium text-ink-muted transition-colors hover:border-white/20 hover:bg-white/[0.06] hover:text-ink cursor-pointer"
+        className="inline-flex h-9 items-center gap-1.5 rounded-full border border-ink/10 bg-ink/[0.03] px-3 text-[12.5px] font-medium text-ink-muted transition-colors hover:border-ink/20 hover:bg-ink/[0.06] hover:text-ink cursor-pointer"
       >
         <span className="text-[14px] leading-none">{current.flag}</span>
         <span className="hidden sm:inline">{locale.toUpperCase()}</span>
@@ -53,7 +53,7 @@ export function LanguageSwitcher() {
             exit={{ opacity: 0, y: -6, scale: 0.97 }}
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
             role="listbox"
-            className="absolute right-0 top-full z-50 mt-2 w-52 overflow-hidden rounded-xl border border-white/10 bg-[#0E1F37]/95 p-1.5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+            className="absolute right-0 top-full z-50 mt-2 w-52 overflow-hidden rounded-xl border border-ink/10 bg-surface/95 p-1.5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-xl"
           >
             {LOCALES.map((l) => {
               const m = LOCALE_META[l];
@@ -69,7 +69,7 @@ export function LanguageSwitcher() {
                     className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-[13px] transition-colors cursor-pointer ${
                       active
                         ? "bg-accent/15 text-accent"
-                        : "text-ink-muted hover:bg-white/[0.06] hover:text-ink"
+                        : "text-ink-muted hover:bg-ink/[0.06] hover:text-ink"
                     }`}
                   >
                     <span className="text-[16px] leading-none">{m.flag}</span>

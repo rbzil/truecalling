@@ -44,7 +44,7 @@ function BackgroundDecor() {
       <div className="absolute inset-0 bg-bg" />
       <div className="absolute -left-20 top-[5%] size-[55vw] max-w-[700px] rounded-full bg-accent/30 blur-[60px] sm:blur-[120px] animate-blob-1" />
       <div className="absolute right-[-5%] top-[35%] size-[50vw] max-w-[640px] rounded-full bg-surface/80 blur-[60px] sm:blur-[130px] animate-blob-2" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,#0A1628_85%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,rgb(var(--bg))_85%)]" />
     </div>
   );
 }
@@ -95,7 +95,7 @@ function Hero() {
   return (
     <section className="relative px-5 pt-10 sm:px-8 sm:pt-16">
       <div className="mx-auto max-w-6xl text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ink-muted backdrop-blur-md">
+        <span className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-ink/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ink-muted backdrop-blur-md">
           <span className="size-1.5 rounded-full bg-accent shadow-[0_0_10px_rgba(233,30,140,0.7)]" />
           Blog TrueCalling
         </span>
@@ -124,7 +124,7 @@ function FeaturedArticle({ article }: { article: typeof articles[number] }) {
       <div className="mx-auto max-w-6xl">
         <Link
           href={`/blog/${article.slug}`}
-          className="group block overflow-hidden rounded-3xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md transition-all hover:border-accent/40 hover:shadow-[0_0_0_1px_rgba(233,30,140,0.35),0_30px_80px_-30px_rgba(233,30,140,0.4)] sm:p-10 cursor-pointer"
+          className="group block overflow-hidden rounded-3xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md transition-all hover:border-accent/40 hover:shadow-[0_0_0_1px_rgba(233,30,140,0.35),0_30px_80px_-30px_rgba(233,30,140,0.4)] sm:p-10 cursor-pointer"
         >
           <div className="flex items-center gap-3">
             <span className="rounded-full bg-accent/15 px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-[0.15em] text-accent">
@@ -182,7 +182,7 @@ function ArticleCard({ article }: { article: typeof articles[number] }) {
   return (
     <Link
       href={`/blog/${article.slug}`}
-      className="group flex h-full flex-col rounded-2xl border border-white/[0.08] bg-surface/30 p-6 backdrop-blur-md transition-all hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_0_0_1px_rgba(233,30,140,0.25),0_20px_50px_-20px_rgba(233,30,140,0.3)] cursor-pointer"
+      className="group flex h-full flex-col rounded-2xl border border-ink/[0.08] bg-surface/30 p-6 backdrop-blur-md transition-all hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_0_0_1px_rgba(233,30,140,0.25),0_20px_50px_-20px_rgba(233,30,140,0.3)] cursor-pointer"
     >
       <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.14em] text-ink-muted">
         <span className="rounded-full bg-accent/10 px-2 py-0.5 font-semibold text-accent">
@@ -197,7 +197,7 @@ function ArticleCard({ article }: { article: typeof articles[number] }) {
       <p className="mt-3 line-clamp-3 text-[13.5px] leading-relaxed text-ink-muted">
         {article.excerpt}
       </p>
-      <div className="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4 text-[12px] text-ink-muted">
+      <div className="mt-6 flex items-center justify-between border-t border-ink/[0.06] pt-4 text-[12px] text-ink-muted">
         <span>{article.readingMinutes} min de lecture</span>
         <span className="inline-flex items-center gap-1 text-accent">
           Lire
@@ -212,7 +212,7 @@ function ArticleCard({ article }: { article: typeof articles[number] }) {
 
 function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.06] py-8">
+    <footer className="relative border-t border-ink/[0.06] py-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-xs text-ink-muted sm:flex-row sm:px-8">
         <span>© 2026 TrueCalling. Tous droits réservés.</span>
         <div className="flex items-center gap-5">

@@ -42,7 +42,7 @@ export default function Page() {
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[260px_1fr] lg:gap-14">
           <aside className="hidden lg:block">
             <div className="sticky top-24">
-              <div className="rounded-2xl border border-white/[0.08] bg-surface/30 p-5 backdrop-blur-md">
+              <div className="rounded-2xl border border-ink/[0.08] bg-surface/30 p-5 backdrop-blur-md">
                 <div className="mb-3 text-[11px] uppercase tracking-[0.18em] text-accent">
                   Sommaire
                 </div>
@@ -72,7 +72,7 @@ export default function Page() {
             </Link>
 
             <header className="mt-7">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ink-muted backdrop-blur-md">
+              <span className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-ink/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ink-muted backdrop-blur-md">
                 <span className="size-1.5 rounded-full bg-accent shadow-[0_0_10px_rgba(233,30,140,0.7)]" />
                 Mentions légales
               </span>
@@ -334,7 +334,7 @@ export default function Page() {
               </Section>
             </div>
 
-            <div className="mt-14 flex flex-wrap items-center gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 backdrop-blur-md">
+            <div className="mt-14 flex flex-wrap items-center gap-3 rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-6 backdrop-blur-md">
               <div className="flex-1">
                 <div className="text-[14px] font-semibold text-ink">Une question juridique ?</div>
                 <p className="mt-1 text-[13px] text-ink-muted">
@@ -351,7 +351,7 @@ export default function Page() {
               </div>
               <Link
                 href="/contact"
-                className="inline-flex h-10 items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 text-[13px] font-medium text-ink transition-colors hover:bg-white/[0.08] cursor-pointer"
+                className="inline-flex h-10 items-center gap-2 rounded-full border border-ink/15 bg-ink/[0.04] px-4 text-[13px] font-medium text-ink transition-colors hover:bg-ink/[0.08] cursor-pointer"
               >
                 Nous contacter
               </Link>
@@ -406,7 +406,7 @@ function BackgroundDecor() {
       <div className="absolute inset-0 bg-bg" />
       <div className="absolute -left-20 top-[5%] size-[55vw] max-w-[700px] rounded-full bg-accent/30 blur-[60px] sm:blur-[120px] animate-blob-1" />
       <div className="absolute right-[-5%] top-[35%] size-[50vw] max-w-[640px] rounded-full bg-surface/80 blur-[60px] sm:blur-[130px] animate-blob-2" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,#0A1628_85%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,rgb(var(--bg))_85%)]" />
     </div>
   );
 }
@@ -455,7 +455,7 @@ function ArrowLeft() {
 
 function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.06] py-8">
+    <footer className="relative border-t border-ink/[0.06] py-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-xs text-ink-muted sm:flex-row sm:px-8">
         <span>© 2026 TrueCalling. Tous droits réservés.</span>
         <div className="flex items-center gap-5">

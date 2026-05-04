@@ -83,7 +83,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             {article.description}
           </p>
 
-          <div className="mt-10 border-t border-white/[0.06] pt-10">
+          <div className="mt-10 border-t border-ink/[0.06] pt-10">
             <ProseContent>{article.content}</ProseContent>
           </div>
 
@@ -103,7 +103,7 @@ function BackgroundDecor() {
       <div className="absolute inset-0 bg-bg" />
       <div className="absolute -left-20 top-[5%] size-[55vw] max-w-[700px] rounded-full bg-accent/30 blur-[60px] sm:blur-[120px] animate-blob-1" />
       <div className="absolute right-[-5%] top-[35%] size-[50vw] max-w-[640px] rounded-full bg-surface/80 blur-[60px] sm:blur-[130px] animate-blob-2" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,#0A1628_85%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,rgb(var(--bg))_85%)]" />
     </div>
   );
 }
@@ -152,7 +152,7 @@ function ArrowLeft() {
 
 function ProseContent({ children }: { children: React.ReactNode }) {
   return (
-    <div className="prose prose-invert prose-pink max-w-none prose-p:text-ink-muted prose-p:leading-relaxed prose-headings:text-ink prose-headings:tracking-tight prose-headings:font-semibold prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-strong:text-ink prose-strong:font-semibold prose-li:text-ink-muted prose-li:my-1 prose-ul:my-5 prose-ol:my-5 prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-accent prose-blockquote:text-ink/85 prose-blockquote:not-italic prose-blockquote:bg-surface/40 prose-blockquote:rounded-r-lg prose-blockquote:py-1 prose-blockquote:px-5 prose-table:text-sm prose-table:my-7 prose-th:bg-surface/60 prose-th:text-ink prose-th:font-semibold prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:border-white/[0.08] prose-td:px-4 prose-td:py-3 prose-td:border-white/[0.06] prose-td:text-ink-muted prose-tr:border-white/[0.06]">
+    <div className="prose prose-invert prose-pink max-w-none prose-p:text-ink-muted prose-p:leading-relaxed prose-headings:text-ink prose-headings:tracking-tight prose-headings:font-semibold prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-strong:text-ink prose-strong:font-semibold prose-li:text-ink-muted prose-li:my-1 prose-ul:my-5 prose-ol:my-5 prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-accent prose-blockquote:text-ink/85 prose-blockquote:not-italic prose-blockquote:bg-surface/40 prose-blockquote:rounded-r-lg prose-blockquote:py-1 prose-blockquote:px-5 prose-table:text-sm prose-table:my-7 prose-th:bg-surface/60 prose-th:text-ink prose-th:font-semibold prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:border-ink/[0.08] prose-td:px-4 prose-td:py-3 prose-td:border-ink/[0.06] prose-td:text-ink-muted prose-tr:border-ink/[0.06]">
       {children}
     </div>
   );
@@ -175,7 +175,7 @@ function ShareBar({ slug, title }: { slug: string; title: string }) {
     },
   ];
   return (
-    <div className="mt-12 flex items-center gap-3 border-t border-white/[0.06] pt-6">
+    <div className="mt-12 flex items-center gap-3 border-t border-ink/[0.06] pt-6">
       <span className="text-[12px] uppercase tracking-[0.14em] text-ink-muted">Partager</span>
       {shareLinks.map((s) => (
         <a
@@ -183,7 +183,7 @@ function ShareBar({ slug, title }: { slug: string; title: string }) {
           href={s.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[12px] text-ink-muted transition-colors hover:border-accent/40 hover:text-accent cursor-pointer"
+          className="rounded-full border border-ink/10 bg-ink/[0.03] px-3 py-1 text-[12px] text-ink-muted transition-colors hover:border-accent/40 hover:text-accent cursor-pointer"
         >
           {s.label}
         </a>
@@ -195,7 +195,7 @@ function ShareBar({ slug, title }: { slug: string; title: string }) {
 function RelatedArticles({ articles }: { articles: typeof import("../_lib/articles").articles }) {
   if (!articles.length) return null;
   return (
-    <section className="relative border-t border-white/[0.06] px-5 py-16 sm:px-8 sm:py-20">
+    <section className="relative border-t border-ink/[0.06] px-5 py-16 sm:px-8 sm:py-20">
       <div className="mx-auto max-w-6xl">
         <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">À lire aussi</h2>
         <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -203,7 +203,7 @@ function RelatedArticles({ articles }: { articles: typeof import("../_lib/articl
             <Link
               key={a.slug}
               href={`/blog/${a.slug}`}
-              className="group flex h-full flex-col rounded-2xl border border-white/[0.08] bg-surface/30 p-6 backdrop-blur-md transition-all hover:-translate-y-1 hover:border-accent/40 cursor-pointer"
+              className="group flex h-full flex-col rounded-2xl border border-ink/[0.08] bg-surface/30 p-6 backdrop-blur-md transition-all hover:-translate-y-1 hover:border-accent/40 cursor-pointer"
             >
               <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.14em] text-ink-muted">
                 <span className="rounded-full bg-accent/10 px-2 py-0.5 font-semibold text-accent">
@@ -228,7 +228,7 @@ function RelatedArticles({ articles }: { articles: typeof import("../_lib/articl
 
 function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.06] py-8">
+    <footer className="relative border-t border-ink/[0.06] py-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-xs text-ink-muted sm:flex-row sm:px-8">
         <span>© 2026 TrueCalling. Tous droits réservés.</span>
         <div className="flex items-center gap-5">

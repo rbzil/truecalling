@@ -55,7 +55,7 @@ function BackgroundDecor() {
       <div className="absolute inset-0 bg-bg" />
       <div className="absolute -left-20 top-[5%] size-[55vw] max-w-[700px] rounded-full bg-accent/30 blur-[60px] sm:blur-[120px] animate-blob-1" />
       <div className="absolute right-[-5%] top-[35%] size-[50vw] max-w-[640px] rounded-full bg-surface/80 blur-[60px] sm:blur-[130px] animate-blob-2" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,#0A1628_85%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,rgb(var(--bg))_85%)]" />
     </div>
   );
 }
@@ -167,7 +167,7 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
     >
       <motion.span
         variants={fadeUp}
-        className="relative inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ink-muted backdrop-blur-md"
+        className="relative inline-flex items-center gap-2 rounded-full border border-ink/10 bg-ink/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ink-muted backdrop-blur-md"
       >
         <span className="relative flex size-1.5">
           <motion.span
@@ -205,7 +205,7 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
         variants={fadeUp}
         onSubmit={onSubmit}
         noValidate
-        className="mt-8 space-y-5 rounded-2xl border border-white/[0.08] bg-surface/30 p-6 backdrop-blur-md sm:p-7"
+        className="mt-8 space-y-5 rounded-2xl border border-ink/[0.08] bg-surface/30 p-6 backdrop-blur-md sm:p-7"
       >
         <motion.div variants={stagger} initial="hidden" animate="show" className="space-y-5">
           <motion.div variants={fadeUp} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -246,7 +246,7 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
                   className={`relative rounded-full border px-3.5 py-1.5 text-[12.5px] font-medium transition-colors cursor-pointer ${
                     form.subject === s
                       ? "border-accent/60 bg-accent/10 text-ink"
-                      : "border-white/10 bg-white/[0.02] text-ink-muted hover:text-ink"
+                      : "border-ink/10 bg-ink/[0.02] text-ink-muted hover:text-ink"
                   }`}
                 >
                   {form.subject === s && (
@@ -272,10 +272,10 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
               rows={5}
               placeholder="Votre besoin, votre contexte, votre stack…"
               aria-invalid={!!errors.message}
-              className={`mt-2 w-full resize-none rounded-lg border bg-white/[0.02] px-3.5 py-2.5 text-[14px] text-ink placeholder:text-ink-muted/60 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/30 ${
+              className={`mt-2 w-full resize-none rounded-lg border bg-ink/[0.02] px-3.5 py-2.5 text-[14px] text-ink placeholder:text-ink-muted/60 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/30 ${
                 errors.message
                   ? "border-rose-500/60 focus:border-rose-400"
-                  : "border-white/10 focus:border-accent/60"
+                  : "border-ink/10 focus:border-accent/60"
               }`}
             />
             {errors.message && <p className="mt-1.5 text-[11px] text-rose-400">{errors.message}</p>}
@@ -353,10 +353,10 @@ function Field({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         aria-invalid={!!error}
-        className={`mt-2 h-11 w-full rounded-lg border bg-white/[0.02] px-3.5 text-[14px] text-ink placeholder:text-ink-muted/60 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/30 ${
+        className={`mt-2 h-11 w-full rounded-lg border bg-ink/[0.02] px-3.5 text-[14px] text-ink placeholder:text-ink-muted/60 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/30 ${
           error
             ? "border-rose-500/60 focus:border-rose-400"
-            : "border-white/10 focus:border-accent/60"
+            : "border-ink/10 focus:border-accent/60"
         }`}
       />
       {error && <p className="mt-1.5 text-[11px] text-rose-400">{error}</p>}
@@ -376,7 +376,7 @@ function SubmitButton({ submitting }: { submitting: boolean }) {
       {/* Shimmer sweep */}
       <motion.span
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+        className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-ink/30 to-transparent"
         animate={{ x: ["0%", "300%"] }}
         transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 1.6, ease: "easeInOut" }}
       />
@@ -454,7 +454,7 @@ function SuccessCard({ name, email }: { name: string; email: string }) {
       <div className="mt-7 flex flex-wrap items-center gap-3">
         <Link
           href="/"
-          className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 text-[14px] font-medium text-ink transition-colors hover:bg-white/[0.08] cursor-pointer"
+          className="inline-flex h-11 items-center gap-2 rounded-full border border-ink/15 bg-ink/[0.04] px-5 text-[14px] font-medium text-ink transition-colors hover:bg-ink/[0.08] cursor-pointer"
         >
           <ArrowLeft /> Retour à l'accueil
         </Link>
@@ -495,7 +495,7 @@ function SidePanel() {
       variants={stagger}
       initial="hidden"
       animate="show"
-      className="relative rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 backdrop-blur-md"
+      className="relative rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-7 backdrop-blur-md"
     >
       {/* Soft ambient blob behind the panel */}
       <motion.span
@@ -525,7 +525,7 @@ function SidePanel() {
               href={c.href}
               whileHover={{ x: 3 }}
               transition={{ type: "spring", stiffness: 320, damping: 22 }}
-              className="group flex items-center gap-3.5 rounded-xl border border-white/[0.06] bg-bg/40 p-4 transition-colors hover:border-accent/40 hover:bg-bg/60 cursor-pointer"
+              className="group flex items-center gap-3.5 rounded-xl border border-ink/[0.06] bg-bg/40 p-4 transition-colors hover:border-accent/40 hover:bg-bg/60 cursor-pointer"
             >
               <motion.span
                 whileHover={{ rotate: -6, scale: 1.06 }}
@@ -558,7 +558,7 @@ function SidePanel() {
         <motion.div
           whileHover={{ y: -2 }}
           transition={{ type: "spring", stiffness: 320, damping: 22 }}
-          className="rounded-xl border border-white/[0.06] bg-bg/40 p-4"
+          className="rounded-xl border border-ink/[0.06] bg-bg/40 p-4"
         >
           <div className="text-[10.5px] uppercase tracking-[0.14em] text-ink-muted">Réponse</div>
           <div className="mt-1 text-[14px] font-semibold text-ink">&lt; 24 h ouvrées</div>
@@ -566,7 +566,7 @@ function SidePanel() {
         <motion.div
           whileHover={{ y: -2 }}
           transition={{ type: "spring", stiffness: 320, damping: 22 }}
-          className="rounded-xl border border-white/[0.06] bg-bg/40 p-4"
+          className="rounded-xl border border-ink/[0.06] bg-bg/40 p-4"
         >
           <div className="text-[10.5px] uppercase tracking-[0.14em] text-ink-muted">Bureau</div>
           <div className="mt-1 text-[14px] font-semibold text-ink">Paris · Tel Aviv</div>
@@ -586,7 +586,7 @@ function SidePanel() {
             whileHover={{ y: -2, scale: 1.08 }}
             whileTap={{ scale: 0.94 }}
             transition={{ type: "spring", stiffness: 320, damping: 18 }}
-            className="inline-flex size-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-ink-muted transition-colors hover:border-accent/40 hover:text-accent cursor-pointer"
+            className="inline-flex size-9 items-center justify-center rounded-full border border-ink/10 bg-ink/[0.03] text-ink-muted transition-colors hover:border-accent/40 hover:text-accent cursor-pointer"
           >
             {s.icon}
           </motion.a>
@@ -598,7 +598,7 @@ function SidePanel() {
 
 function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.06] py-8">
+    <footer className="relative border-t border-ink/[0.06] py-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-xs text-ink-muted sm:flex-row sm:px-8">
         <span>© 2026 TrueCalling. Tous droits réservés.</span>
         <div className="flex items-center gap-5">

@@ -182,7 +182,7 @@ const Article1Content: ReactNode = (
       et comment le déployer en moins de 30 jours ?&quot;
     </p>
 
-    <div className="not-prose mt-12 rounded-2xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
       <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
       <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
         Voyez le sourcing IA en action
@@ -377,7 +377,7 @@ const Article2Content: ReactNode = (
       des opt-out, vous capturez les 98 % d&apos;ouverture sans risquer un contrôle.
     </p>
 
-    <div className="not-prose mt-12 rounded-2xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
       <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
       <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
         Lancez votre première campagne WhatsApp conforme
@@ -557,7 +557,7 @@ const Article3Content: ReactNode = (
       mais &quot;quel copilote choisir et comment le déployer en moins de 30 jours ?&quot;
     </p>
 
-    <div className="not-prose mt-12 rounded-2xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
       <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
       <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
         Voyez EMILY au travail sur un de vos postes
@@ -762,7 +762,7 @@ const Article4Content: ReactNode = (
       HireSweet reste valable. Au-delà, le calcul penche en faveur de TrueCalling.
     </p>
 
-    <div className="not-prose mt-12 rounded-2xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
       <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
       <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
         Comparez sur un de vos postes en cours
@@ -973,7 +973,7 @@ const Article5Content: ReactNode = (
       ROI mesurable, vous recrutez plus vite et avec moins de friction.
     </p>
 
-    <div className="not-prose mt-12 rounded-2xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
       <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
       <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
         Mesurez le delta sur votre prochain poste tendu
@@ -1157,7 +1157,7 @@ const Article6Content: ReactNode = (
       .
     </p>
 
-    <div className="not-prose mt-12 rounded-2xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
       <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
       <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
         Testez TrueFit 360 sur vos derniers recrutements
@@ -1368,7 +1368,7 @@ const Article7Content: ReactNode = (
       benchmarks parlent, c&apos;est à vous de raccourcir la boucle.
     </p>
 
-    <div className="not-prose mt-12 rounded-2xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
       <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
       <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
         Réduisez votre time-to-hire de moitié en 90 jours
@@ -1576,7 +1576,7 @@ const Article8Content: ReactNode = (
       .
     </p>
 
-    <div className="not-prose mt-12 rounded-2xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
       <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
       <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
         Lancez votre première séquence multicanal
@@ -1776,7 +1776,7 @@ const Article9Content: ReactNode = (
       recruteur ne disparaît pas — il se concentre sur les tâches à plus forte valeur ajoutée.
     </p>
 
-    <div className="not-prose mt-12 rounded-2xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
       <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
       <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
         Voyez l&apos;agent IA TrueCalling sur un poste réel
@@ -2012,7 +2012,7 @@ const Article10Content: ReactNode = (
       .
     </p>
 
-    <div className="not-prose mt-12 rounded-2xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
       <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
       <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
         Automatisez sans perdre le ton humain

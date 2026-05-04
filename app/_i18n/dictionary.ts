@@ -207,6 +207,10 @@ type Dict = {
   rd_quote: string;
   rd_quote_role: string;
   rd_footer_home: string;
+
+  // Theme toggle
+  theme_to_light: string;
+  theme_to_dark: string;
 };
 
 export const DICT: Record<Locale, Dict> = {
@@ -362,6 +366,7 @@ export const DICT: Record<Locale, Dict> = {
     rd_p4_title: "Q&A et roadmap", rd_p4_desc: "On répond à toutes vos questions et on cale les étapes pour intégrer TrueCalling.",
     rd_quote: "« En 20 minutes j'avais compris exactement comment scaler le sourcing sans grossir l'équipe. On a signé deux semaines plus tard. »",
     rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Accueil",
+    theme_to_light: "Passer en mode clair", theme_to_dark: "Passer en mode sombre",
   },
 
   en: {
@@ -502,6 +507,7 @@ export const DICT: Record<Locale, Dict> = {
     rd_p4_title: "Q&A and roadmap", rd_p4_desc: "We answer all your questions and align on the steps to roll out TrueCalling.",
     rd_quote: "“In 20 minutes I understood exactly how to scale sourcing without growing the team. We signed two weeks later.”",
     rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Home",
+    theme_to_light: "Switch to light mode", theme_to_dark: "Switch to dark mode",
   },
 
   he: {
@@ -645,6 +651,7 @@ export const DICT: Record<Locale, Dict> = {
     rd_p4_title: "שאלות ותשובות ומפת דרכים", rd_p4_desc: "אנחנו עונים על כל השאלות ומסכמים את השלבים לאימוץ TrueCalling.",
     rd_quote: "« ב-20 דקות הבנתי בדיוק איך להרחיב את הסורסינג בלי להגדיל את הצוות. חתמנו שבועיים אחר כך. »",
     rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "דף הבית",
+    theme_to_light: "עבור למצב בהיר", theme_to_dark: "עבור למצב כהה",
   },
 
   "pt-BR": {
@@ -788,6 +795,7 @@ export const DICT: Record<Locale, Dict> = {
     rd_p4_title: "Q&A e roadmap", rd_p4_desc: "Respondemos todas as suas perguntas e alinhamos os passos para integrar a TrueCalling.",
     rd_quote: "« Em 20 minutos eu entendi exatamente como escalar o sourcing sem aumentar o time. Fechamos duas semanas depois. »",
     rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Início",
+    theme_to_light: "Mudar para o modo claro", theme_to_dark: "Mudar para o modo escuro",
   },
 
   es: {
@@ -931,6 +939,7 @@ export const DICT: Record<Locale, Dict> = {
     rd_p4_title: "Q&A y roadmap", rd_p4_desc: "Respondemos a todas tus preguntas y planificamos los pasos para integrar TrueCalling.",
     rd_quote: "« En 20 minutos entendí exactamente cómo escalar el sourcing sin agrandar el equipo. Firmamos dos semanas después. »",
     rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Inicio",
+    theme_to_light: "Cambiar a modo claro", theme_to_dark: "Cambiar a modo oscuro",
   },
 
   de: {
@@ -1074,6 +1083,7 @@ export const DICT: Record<Locale, Dict> = {
     rd_p4_title: "Q&A und Roadmap", rd_p4_desc: "Wir beantworten alle Fragen und stimmen die Schritte für den Rollout von TrueCalling ab.",
     rd_quote: "„In 20 Minuten hatte ich genau verstanden, wie ich Sourcing skaliere, ohne das Team zu vergrößern. Zwei Wochen später haben wir unterschrieben.“",
     rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Startseite",
+    theme_to_light: "Zum Hellmodus wechseln", theme_to_dark: "Zum Dunkelmodus wechseln",
   },
 
   it: {
@@ -1217,6 +1227,7 @@ export const DICT: Record<Locale, Dict> = {
     rd_p4_title: "Q&A e roadmap", rd_p4_desc: "Rispondiamo a tutte le tue domande e definiamo i passi per integrare TrueCalling.",
     rd_quote: "« In 20 minuti avevo capito esattamente come scalare il sourcing senza ingrandire il team. Abbiamo firmato due settimane dopo. »",
     rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Home",
+    theme_to_light: "Passa alla modalità chiara", theme_to_dark: "Passa alla modalità scura",
   },
 
   nl: {
@@ -1360,5 +1371,6 @@ export const DICT: Record<Locale, Dict> = {
     rd_p4_title: "Q&A en roadmap", rd_p4_desc: "We beantwoorden al je vragen en plannen de stappen om TrueCalling uit te rollen.",
     rd_quote: "„In 20 minuten begreep ik precies hoe ik sourcing kan opschalen zonder het team uit te breiden. Twee weken later tekenden we.\"",
     rd_quote_role: "Head of Talent · Series B SaaS", rd_footer_home: "Home",
+    theme_to_light: "Schakel naar lichte modus", theme_to_dark: "Schakel naar donkere modus",
   },
 };

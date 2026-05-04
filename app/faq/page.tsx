@@ -79,7 +79,7 @@ function BackgroundDecor() {
       <div className="absolute inset-0 bg-bg" />
       <div className="absolute -left-20 top-[5%] size-[55vw] max-w-[700px] rounded-full bg-accent/30 blur-[60px] sm:blur-[120px] animate-blob-1" />
       <div className="absolute right-[-5%] top-[35%] size-[50vw] max-w-[640px] rounded-full bg-surface/80 blur-[60px] sm:blur-[130px] animate-blob-2" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,#0A1628_85%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,rgb(var(--bg))_85%)]" />
     </div>
   );
 }
@@ -138,7 +138,7 @@ function FAQSection() {
         <motion.div variants={stagger} initial="hidden" animate="show">
           <motion.span
             variants={fadeUp}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ink-muted backdrop-blur-md"
+            className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-ink/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-ink-muted backdrop-blur-md"
           >
             <span className="size-1.5 rounded-full bg-accent shadow-[0_0_10px_rgba(233,30,140,0.7)]" />
             FAQ
@@ -170,7 +170,7 @@ function FAQSection() {
           <motion.ul
             variants={stagger}
             role="list"
-            className="mt-10 divide-y divide-white/[0.06] rounded-2xl border border-white/[0.08] bg-surface/30 backdrop-blur-md"
+            className="mt-10 divide-y divide-ink/[0.06] rounded-2xl border border-ink/[0.08] bg-surface/30 backdrop-blur-md"
           >
             {FAQ.map((f, i) => (
               <FAQItem key={f.q} q={f.q} a={f.a} index={i} />
@@ -179,7 +179,7 @@ function FAQSection() {
 
           <motion.div
             variants={fadeUp}
-            className="mt-12 flex flex-col items-start gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between"
+            className="mt-12 flex flex-col items-start gap-3 rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-6 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between"
           >
             <div>
               <div className="text-[14px] font-semibold text-ink">Encore une hésitation&nbsp;?</div>
@@ -219,7 +219,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
           aria-expanded={open}
           aria-controls={panelId}
           onClick={() => setOpen((o) => !o)}
-          className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-white/[0.02] focus:outline-none focus-visible:bg-white/[0.03] cursor-pointer"
+          className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-ink/[0.02] focus:outline-none focus-visible:bg-ink/[0.03] cursor-pointer"
         >
           <span className="text-[15px] font-medium leading-snug text-ink sm:text-base">
             {q}
@@ -230,7 +230,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
             className={`flex size-7 shrink-0 items-center justify-center rounded-full border transition-colors ${
               open
                 ? "border-accent/60 bg-accent/15 text-accent"
-                : "border-white/15 bg-white/[0.03] text-ink-muted group-hover:text-ink"
+                : "border-ink/15 bg-ink/[0.03] text-ink-muted group-hover:text-ink"
             }`}
           >
             <PlusIcon />
@@ -272,7 +272,7 @@ function PlusIcon() {
 /* ----- Footer ----- */
 function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.06] py-8">
+    <footer className="relative border-t border-ink/[0.06] py-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-xs text-ink-muted sm:flex-row sm:px-8">
         <span>© 2026 TrueCalling. Tous droits réservés.</span>
         <div className="flex items-center gap-5">

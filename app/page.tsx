@@ -12,6 +12,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useT } from "./_i18n/locale-context";
 import { LanguageSwitcher } from "./_i18n/language-switcher";
+import { ThemeToggle } from "../components/ThemeToggle";
 
 /* ============================================================
    TrueCalling — Landing Page
@@ -113,8 +114,10 @@ function Logo({
   className?: string;
   size?: number;
 }) {
-  const wordColor = variant === "light" ? "#FFFFFF" : "#0A1628";
-  const taglineColor = variant === "light" ? "rgba(255,255,255,0.55)" : "rgba(10,22,40,0.7)";
+  // Theme-aware via the --ink CSS variable.
+  const wordColor = "rgb(var(--ink))";
+  const taglineColor = "rgb(var(--ink) / 0.6)";
+  void variant;
   return (
     <div className={`flex items-center gap-2.5 ${className ?? ""}`}>
       <FingerprintMark size={size} color="#E91E8C" />
@@ -166,7 +169,7 @@ function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         scrolled
-          ? "bg-bg/70 backdrop-blur-xl border-b border-white/[0.08]"
+          ? "bg-bg/70 backdrop-blur-xl border-b border-ink/[0.08]"
           : "bg-transparent"
       }`}
     >
@@ -177,26 +180,27 @@ function Navbar() {
         </a>
 
         {/* Center: nav links pill */}
-        <nav className="hidden items-center gap-0.5 rounded-full border border-white/[0.06] bg-white/[0.02] p-1 backdrop-blur-md xl:flex">
+        <nav className="hidden items-center gap-0.5 rounded-full border border-ink/[0.06] bg-ink/[0.02] p-1 backdrop-blur-md xl:flex">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="whitespace-nowrap rounded-full px-2.5 py-1.5 text-[12px] font-medium text-ink-muted transition-colors hover:bg-white/[0.06] hover:text-ink cursor-pointer 2xl:px-3.5 2xl:text-[13px]"
+              className="whitespace-nowrap rounded-full px-2.5 py-1.5 text-[12px] font-medium text-ink-muted transition-colors hover:bg-ink/[0.06] hover:text-ink cursor-pointer 2xl:px-3.5 2xl:text-[13px]"
             >
               {l.label}
             </a>
           ))}
         </nav>
 
-        {/* Far right: language switcher + login + primary CTA */}
+        {/* Far right: theme + language + login + primary CTA */}
         <div className="flex shrink-0 items-center gap-2.5">
+          <ThemeToggle />
           <LanguageSwitcher />
           <a
             href="https://truecalling.vercel.app/login"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden h-9 items-center rounded-full border border-white/15 bg-white/[0.03] px-4 text-[13px] font-medium text-ink transition-colors hover:border-white/30 hover:bg-white/[0.06] sm:inline-flex cursor-pointer"
+            className="hidden h-9 items-center rounded-full border border-ink/15 bg-ink/[0.03] px-4 text-[13px] font-medium text-ink transition-colors hover:border-ink/30 hover:bg-ink/[0.06] sm:inline-flex cursor-pointer"
           >
             {t("nav_login")}
           </a>
@@ -238,8 +242,8 @@ function CTAButton({
     variant === "primary"
       ? "bg-accent text-white hover:bg-accent/90 shadow-[0_8px_30px_rgba(233,30,140,0.35)]"
       : variant === "outline"
-      ? "bg-transparent border border-white/15 text-ink hover:bg-white/[0.04]"
-      : "bg-white text-bg hover:bg-white/90";
+      ? "bg-transparent border border-ink/15 text-ink hover:bg-ink/[0.04]"
+      : "bg-ink text-bg hover:bg-ink/90";
 
   const Inner = (
     <motion.span
@@ -280,7 +284,7 @@ function Hero() {
         <Reveal className="flex flex-col items-center text-center">
           <motion.div
             variants={fadeUp}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-xs text-ink-muted backdrop-blur-md"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-ink/10 bg-ink/[0.03] px-3.5 py-1.5 text-xs text-ink-muted backdrop-blur-md"
           >
             <span className="size-1.5 rounded-full bg-accent shadow-[0_0_12px_rgba(233,30,140,0.8)]" />
             {t("hero_badge")}
@@ -321,7 +325,7 @@ function Hero() {
             <span>{t("hero_social")}</span>
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 opacity-60">
               {["Lattice", "Notion", "Alan", "Doctolib", "Qonto", "Spendesk"].map((c) => (
-                <span key={c} className="text-sm font-semibold tracking-normal text-white/55">
+                <span key={c} className="text-sm font-semibold tracking-normal text-ink/55">
                   {c}
                 </span>
               ))}
@@ -356,10 +360,10 @@ function AuroraBackground() {
         transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Blob 2 — navy surface, counter motion */}
+      {/* Blob 2 — navy in dark / violet pastel in light, counter motion */}
       <motion.div
         aria-hidden
-        className="absolute right-[5%] top-[28%] size-[55vw] max-w-[740px] rounded-full bg-surface/70 blur-[80px] will-change-transform"
+        className="absolute right-[5%] top-[28%] size-[55vw] max-w-[740px] rounded-full bg-violet-300/40 dark:bg-surface/70 blur-[80px] will-change-transform"
         animate={{ x: [0, -35, 25, 0], y: [0, 35, -15, 0] }}
         transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -408,13 +412,13 @@ function AuroraBackground() {
         }}
       />
 
-      {/* Soft radial vignette — much wider falloff than before */}
+      {/* Soft radial vignette — much wider falloff than before. Uses --bg so it adapts to theme. */}
       <div
         aria-hidden
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 90% 70% at 50% 35%, transparent 35%, rgba(10,22,40,0.55) 75%, rgba(10,22,40,0.95) 100%)",
+            "radial-gradient(ellipse 90% 70% at 50% 35%, transparent 35%, rgb(var(--bg) / 0.55) 75%, rgb(var(--bg) / 0.95) 100%)",
         }}
       />
       {/* Smooth bottom blend into next section — eliminates the hard cut */}
@@ -423,7 +427,7 @@ function AuroraBackground() {
         className="absolute inset-x-0 bottom-0 h-[45%]"
         style={{
           background:
-            "linear-gradient(to bottom, transparent 0%, rgba(10,22,40,0.4) 35%, rgba(10,22,40,0.85) 75%, #0A1628 100%)",
+            "linear-gradient(to bottom, transparent 0%, rgb(var(--bg) / 0.4) 35%, rgb(var(--bg) / 0.85) 75%, rgb(var(--bg)) 100%)",
         }}
       />
       <div
@@ -729,7 +733,7 @@ function Features() {
               variants={fadeUp}
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 260, damping: 22 }}
-              className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-surface/40 p-7 backdrop-blur-md transition-shadow hover:shadow-[0_0_0_1px_rgba(233,30,140,0.35),0_20px_60px_-20px_rgba(233,30,140,0.35)]"
+              className="group relative overflow-hidden rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md transition-shadow hover:shadow-[0_0_0_1px_rgba(233,30,140,0.35),0_20px_60px_-20px_rgba(233,30,140,0.35)]"
             >
               <motion.div
                 className="mb-6 inline-flex size-11 items-center justify-center rounded-xl bg-accent text-white shadow-[0_8px_20px_-6px_rgba(233,30,140,0.45)]"
@@ -765,7 +769,7 @@ function MeetEmily() {
   ];
 
   return (
-    <div className="relative mt-20 overflow-hidden rounded-3xl border border-white/[0.06] bg-bg/40 px-5 py-14 sm:px-10 sm:py-16">
+    <div className="relative mt-20 overflow-hidden rounded-3xl border border-ink/[0.06] bg-bg/40 px-5 py-14 sm:px-10 sm:py-16">
       {/* Soft animated glow background */}
       <motion.span
         aria-hidden
@@ -783,7 +787,7 @@ function MeetEmily() {
       <Reveal className="relative text-center">
         <motion.span
           variants={fadeUp}
-          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-ink-muted backdrop-blur-md"
+          className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-ink/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-ink-muted backdrop-blur-md"
         >
           <SparkleIconSmall /> {t("emily_eyebrow")}
         </motion.span>
@@ -810,7 +814,7 @@ function MeetEmily() {
               variants={fadeUp}
               whileHover={{ y: -3 }}
               transition={{ type: "spring", stiffness: 260, damping: 22 }}
-              className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-surface/40 p-7 text-left backdrop-blur-md hover:border-accent/40"
+              className="group relative overflow-hidden rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 text-left backdrop-blur-md hover:border-accent/40"
             >
               <motion.div
                 className="mb-5 inline-flex size-11 items-center justify-center rounded-xl bg-accent text-white shadow-[0_8px_20px_-6px_rgba(233,30,140,0.45)]"
@@ -919,7 +923,7 @@ function TimelineItem({
       initial={{ opacity: 0, x: isLeft ? -20 : 20, y: 8 }}
       animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
       transition={{ duration: 0.55, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className={`rounded-2xl border border-white/[0.08] bg-surface/40 p-6 backdrop-blur-md transition-colors hover:border-accent/40 ${
+      className={`rounded-2xl border border-ink/[0.08] bg-surface/40 p-6 backdrop-blur-md transition-colors hover:border-accent/40 ${
         isLeft ? "md:text-right" : ""
       }`}
     >
@@ -940,7 +944,13 @@ function TimelineItem({
       transition={{ duration: 0.45, delay: index * 0.1 + 0.15, type: "spring", stiffness: 240, damping: 18 }}
       className="relative z-10 hidden md:flex md:items-center md:justify-center"
     >
-      <div className="relative flex size-12 items-center justify-center rounded-full bg-accent text-[13px] font-bold text-white shadow-[0_0_0_4px_rgba(10,22,40,1),0_0_30px_rgba(233,30,140,0.6)]">
+      <div
+        className="relative flex size-12 items-center justify-center rounded-full bg-accent text-[13px] font-bold text-white"
+        style={{
+          boxShadow:
+            "0 0 0 4px rgb(var(--bg)), 0 0 30px rgba(233,30,140,0.6)",
+        }}
+      >
         <motion.span
           aria-hidden
           className="absolute inset-0 rounded-full bg-accent"
@@ -962,7 +972,7 @@ function TimelineItem({
         <span className="flex size-8 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-white">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <span className="h-px flex-1 bg-white/10" />
+        <span className="h-px flex-1 bg-ink/10" />
       </div>
 
       {/* Desktop layout — DOM order matches column order so the grid keeps everything on row 1 */}
@@ -1038,11 +1048,11 @@ function StatsGrid() {
           whileHover={{ y: -3 }}
           transition={{ type: "spring", stiffness: 260, damping: 22 }}
           className={`group relative overflow-hidden rounded-2xl border bg-surface/40 p-6 backdrop-blur-md transition-colors ${
-            i === 0 ? "border-accent/50 shadow-[0_0_0_1px_rgba(233,30,140,0.35),0_20px_60px_-20px_rgba(233,30,140,0.4)]" : "border-white/[0.08] hover:border-accent/30"
+            i === 0 ? "border-accent/50 shadow-[0_0_0_1px_rgba(233,30,140,0.35),0_20px_60px_-20px_rgba(233,30,140,0.4)]" : "border-ink/[0.08] hover:border-accent/30"
           }`}
         >
           <div className="flex items-start justify-between gap-3">
-            <span className="inline-flex size-10 items-center justify-center rounded-lg bg-white/[0.04] text-accent/80 ring-1 ring-white/[0.06]">
+            <span className="inline-flex size-10 items-center justify-center rounded-lg bg-ink/[0.04] text-accent/80 ring-1 ring-ink/[0.06]">
               {s.icon}
             </span>
             <StatNumber value={s.value} suffix={s.suffix} />
@@ -1117,7 +1127,7 @@ function ATSBlock() {
             variants={fadeUp}
             whileHover={{ y: -3 }}
             transition={{ type: "spring", stiffness: 260, damping: 22 }}
-            className="rounded-2xl border border-white/[0.08] bg-surface/40 p-6 backdrop-blur-md transition-colors hover:border-accent/30"
+            className="rounded-2xl border border-ink/[0.08] bg-surface/40 p-6 backdrop-blur-md transition-colors hover:border-accent/30"
           >
             <div className="flex items-center gap-3">
               <motion.span
@@ -1134,7 +1144,7 @@ function ATSBlock() {
         ))}
       </Reveal>
 
-      <Reveal className="mt-8 rounded-2xl border border-white/[0.06] bg-bg/40 p-6 backdrop-blur-md sm:p-8">
+      <Reveal className="mt-8 rounded-2xl border border-ink/[0.06] bg-bg/40 p-6 backdrop-blur-md sm:p-8">
         <motion.div variants={fadeUp} className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-[11.5px] font-medium text-emerald-300">
           <CheckIcon className="size-3" /> {t("ats_compatible")}
         </motion.div>
@@ -1183,7 +1193,7 @@ function ATSBlock() {
           ].map((it) => (
             <div
               key={it.label}
-              className="rounded-xl border border-white/[0.06] bg-surface/30 px-4 py-3 text-center"
+              className="rounded-xl border border-ink/[0.06] bg-surface/30 px-4 py-3 text-center"
             >
               <div className="text-[12.5px] font-semibold text-accent">{it.label}</div>
               <div className="mt-0.5 text-[12px] text-ink-muted">{it.value}</div>
@@ -1224,7 +1234,7 @@ function CaseStudyBlock() {
         </motion.p>
       </Reveal>
 
-      <Reveal className="overflow-hidden rounded-3xl border border-white/[0.08] bg-surface/30 p-7 backdrop-blur-md sm:p-10">
+      <Reveal className="overflow-hidden rounded-3xl border border-ink/[0.08] bg-surface/30 p-7 backdrop-blur-md sm:p-10">
         <motion.span
           variants={fadeUp}
           className="text-[11px] uppercase tracking-[0.2em] text-accent"
@@ -1271,7 +1281,7 @@ function CaseStudyBlock() {
             />
             <div className="relative">
               <div className="text-[11px] uppercase tracking-[0.22em] text-accent">{t("case_result")}</div>
-              <div className="mt-3 bg-gradient-to-r from-white via-pink-200 to-white bg-clip-text text-7xl font-bold leading-none text-transparent sm:text-8xl">
+              <div className="mt-3 bg-gradient-to-r from-ink via-pink-300 to-ink bg-clip-text text-7xl font-bold leading-none text-transparent sm:text-8xl">
                 7
               </div>
               <p className="mx-auto mt-4 max-w-[18ch] text-[14px] leading-relaxed text-ink-muted">
@@ -1404,7 +1414,7 @@ function ProductDemo() {
             <StepDots step={step} />
             <button
               onClick={() => setRunId((r) => r + 1)}
-              className="ml-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs text-ink-muted transition-colors hover:bg-white/[0.06] hover:text-ink cursor-pointer"
+              className="ml-3 inline-flex items-center gap-2 rounded-full border border-ink/10 bg-ink/[0.03] px-4 py-1.5 text-xs text-ink-muted transition-colors hover:bg-ink/[0.06] hover:text-ink cursor-pointer"
               aria-label={t("demo_replay_aria")}
             >
               <ReplayIcon /> {t("demo_replay")}
@@ -1432,7 +1442,7 @@ function StepDots({ step }: { step: number }) {
         <span
           key={i}
           className={`h-1.5 rounded-full transition-all duration-500 ${
-            i === step ? "w-8 bg-accent" : "w-1.5 bg-white/15"
+            i === step ? "w-8 bg-accent" : "w-1.5 bg-ink/15"
           }`}
         />
       ))}
@@ -1442,12 +1452,12 @@ function StepDots({ step }: { step: number }) {
 
 function BrowserChrome({ children }: { children: React.ReactNode }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0E1F37] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.7)]">
-      <div className="flex items-center gap-2 border-b border-white/[0.06] bg-bg/60 px-4 py-3">
+    <div className="overflow-hidden rounded-2xl border border-ink/[0.08] bg-[#0E1F37] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.7)]">
+      <div className="flex items-center gap-2 border-b border-ink/[0.06] bg-bg/60 px-4 py-3">
         <span className="size-2.5 rounded-full bg-[#FF5F57]" />
         <span className="size-2.5 rounded-full bg-[#FEBC2E]" />
         <span className="size-2.5 rounded-full bg-[#28C840]" />
-        <div className="ml-4 flex h-6 flex-1 items-center justify-center rounded-md bg-white/[0.04] px-3 text-[11px] text-ink-muted">
+        <div className="ml-4 flex h-6 flex-1 items-center justify-center rounded-md bg-ink/[0.04] px-3 text-[11px] text-ink-muted">
           app.truecalling.app/advanced-search
         </div>
       </div>
@@ -1978,7 +1988,7 @@ function WhatsAppOverlay({ runId, showResponse }: { runId: number; showResponse:
         >
           {typed}
           {typed.length < WHATSAPP_MSG.length && (
-            <span className="ml-0.5 inline-block h-3 w-[1.5px] translate-y-0.5 bg-white/80 align-middle animate-pulse" />
+            <span className="ml-0.5 inline-block h-3 w-[1.5px] translate-y-0.5 bg-ink/80 align-middle animate-pulse" />
           )}
         </motion.div>
 
@@ -2201,7 +2211,7 @@ function Pricing() {
               className={`relative flex flex-col rounded-2xl border p-7 ${
                 tier.highlight
                   ? "border-accent/50 bg-surface/60 shadow-[0_0_0_1px_rgba(233,30,140,0.55),0_30px_80px_-30px_rgba(233,30,140,0.55)] lg:-translate-y-3 lg:py-9"
-                  : "border-white/[0.08] bg-surface/30"
+                  : "border-ink/[0.08] bg-surface/30"
               }`}
             >
               {tier.highlight && (
@@ -2255,7 +2265,7 @@ function BillingToggle({ annual, onChange }: { annual: boolean; onChange: (v: bo
     <div
       role="radiogroup"
       aria-label={t("pricing_billing_aria")}
-      className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] p-1 backdrop-blur-md"
+      className="inline-flex items-center gap-2 rounded-full border border-ink/[0.08] bg-ink/[0.03] p-1 backdrop-blur-md"
     >
       <button
         type="button"
@@ -2269,7 +2279,7 @@ function BillingToggle({ annual, onChange }: { annual: boolean; onChange: (v: bo
         {!annual && (
           <motion.span
             layoutId="bill-pill"
-            className="absolute inset-0 rounded-full bg-white"
+            className="absolute inset-0 rounded-full bg-ink"
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
           />
         )}
@@ -2287,7 +2297,7 @@ function BillingToggle({ annual, onChange }: { annual: boolean; onChange: (v: bo
         {annual && (
           <motion.span
             layoutId="bill-pill"
-            className="absolute inset-0 rounded-full bg-white"
+            className="absolute inset-0 rounded-full bg-ink"
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
           />
         )}
@@ -2324,7 +2334,7 @@ function FinalCTA() {
           >
             {t("final_h2")}
           </motion.h2>
-          <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-white/80">
+          <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-ink/80">
             {t("final_subtitle")}
           </motion.p>
           <motion.div variants={fadeUp} className="mt-10">
@@ -2373,7 +2383,7 @@ function Footer() {
   ];
 
   return (
-    <footer className="relative border-t border-white/[0.06] bg-deep py-16">
+    <footer className="relative border-t border-ink/[0.06] bg-deep py-16">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
@@ -2415,7 +2425,7 @@ function Footer() {
           ))}
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/[0.06] pt-6 text-xs text-ink-muted sm:flex-row sm:items-center">
+        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-ink/[0.06] pt-6 text-xs text-ink-muted sm:flex-row sm:items-center">
           <span>{t("footer_copyright")}</span>
           <span>{t("footer_made")}</span>
         </div>
@@ -2437,7 +2447,7 @@ function SocialLink({
     <a
       href={href}
       aria-label={label}
-      className="inline-flex size-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-ink-muted transition-colors hover:border-accent/40 hover:text-accent cursor-pointer"
+      className="inline-flex size-9 items-center justify-center rounded-full border border-ink/10 bg-ink/[0.03] text-ink-muted transition-colors hover:border-accent/40 hover:text-accent cursor-pointer"
     >
       {children}
     </a>
