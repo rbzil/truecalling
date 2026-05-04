@@ -76,14 +76,14 @@ function Hero() {
   const t = useT();
   const href = useLocalizedHref();
   return (
-    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-24">
+    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-20 sm:pt-24">
       <AuroraBackground />
 
-      <div className="relative mx-auto w-full max-w-6xl px-5 sm:px-8 py-16">
+      <div className="relative mx-auto w-full max-w-6xl px-5 sm:px-8 py-10 sm:py-16">
         <Reveal className="flex flex-col items-center text-center">
           <motion.div
             variants={fadeUp}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-ink/10 bg-ink/[0.03] px-3.5 py-1.5 text-xs text-ink-muted backdrop-blur-md"
+            className="mb-5 sm:mb-6 inline-flex items-center gap-2 rounded-full border border-ink/10 bg-ink/[0.03] px-3 sm:px-3.5 py-1.5 text-[11px] sm:text-xs text-ink-muted backdrop-blur-md"
           >
             <span className="size-1.5 rounded-full bg-accent shadow-[0_0_12px_rgba(233,30,140,0.8)]" />
             {t("hero_badge")}
@@ -91,8 +91,8 @@ function Hero() {
 
           <motion.h1
             variants={fadeUp}
-            className="max-w-5xl text-balance font-semibold leading-[1.02] tracking-tighter2"
-            style={{ fontSize: "clamp(3rem, 6.5vw, 5.5rem)" }}
+            className="max-w-5xl text-balance font-semibold leading-[1.05] sm:leading-[1.02] tracking-tighter2"
+            style={{ fontSize: "clamp(2.25rem, 7vw, 5.5rem)" }}
           >
             {t("hero_h1_a")}{" "}
             <br className="hidden sm:block" />
@@ -103,12 +103,12 @@ function Hero() {
 
           <motion.p
             variants={fadeUp}
-            className="mt-7 max-w-2xl text-balance text-base leading-relaxed text-ink-muted sm:text-lg"
+            className="mt-5 sm:mt-7 max-w-2xl text-balance text-[15px] sm:text-lg leading-relaxed text-ink-muted"
           >
             {t("hero_subtitle")}
           </motion.p>
 
-          <motion.div variants={fadeUp} className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+          <motion.div variants={fadeUp} className="mt-7 sm:mt-10 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
             <CTAButton href={href("book-a-demo")} size="lg">
               {t("hero_cta_demo")}
             </CTAButton>
@@ -151,10 +151,10 @@ function AuroraBackground() {
     <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
       <div className="absolute inset-0 bg-bg" />
 
-      {/* Blob 1 — magenta, drift only (translate is GPU-cheap) */}
+      {/* Blob 1 — magenta. Lower opacity + smaller blur on mobile to save GPU. */}
       <motion.div
         aria-hidden
-        className="absolute left-[8%] top-[8%] size-[55vw] max-w-[780px] rounded-full bg-accent/40 blur-[80px] will-change-transform"
+        className="absolute left-[8%] top-[8%] size-[55vw] max-w-[780px] rounded-full bg-accent/30 sm:bg-accent/40 blur-[60px] sm:blur-[80px] will-change-transform"
         animate={{ x: [0, 40, -20, 0], y: [0, -30, 20, 0] }}
         transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -162,7 +162,7 @@ function AuroraBackground() {
       {/* Blob 2 — navy in dark / violet pastel in light, counter motion */}
       <motion.div
         aria-hidden
-        className="absolute right-[5%] top-[28%] size-[55vw] max-w-[740px] rounded-full bg-violet-300/40 dark:bg-surface/70 blur-[80px] will-change-transform"
+        className="absolute right-[5%] top-[28%] size-[55vw] max-w-[740px] rounded-full bg-violet-300/30 dark:bg-surface/60 sm:bg-violet-300/40 sm:dark:bg-surface/70 blur-[60px] sm:blur-[80px] will-change-transform"
         animate={{ x: [0, -35, 25, 0], y: [0, 35, -15, 0] }}
         transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -170,7 +170,7 @@ function AuroraBackground() {
       {/* Blob 3 — fuchsia top-right accent (static, decorative) */}
       <div
         aria-hidden
-        className="absolute right-[20%] top-[-10%] size-[40vw] max-w-[520px] rounded-full bg-fuchsia-500/25 blur-[90px]"
+        className="absolute right-[20%] top-[-10%] size-[40vw] max-w-[520px] rounded-full bg-fuchsia-500/20 sm:bg-fuchsia-500/25 blur-[70px] sm:blur-[90px]"
       />
 
       {/* Floating particles drifting upward */}
@@ -1164,6 +1164,7 @@ function ProductDemo() {
   const inView = useInView(sectionRef, { once: false, margin: "-100px" });
   const [step, setStep] = useState(0); // 0..3
   const [runId, setRunId] = useState(0); // bumps to restart
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!inView) return;
@@ -1184,30 +1185,34 @@ function ProductDemo() {
     <section
       id="demo"
       ref={sectionRef}
-      className="relative overflow-hidden py-20 sm:py-24"
+      className="relative overflow-hidden py-16 sm:py-24"
     >
       <SectionAmbience top intensity={0.3} />
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
-        <Reveal className="mb-14 text-center">
+        <Reveal className="mb-10 sm:mb-14 text-center">
           <motion.span variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-accent">
             {t("demo_eyebrow")}
           </motion.span>
           <motion.h2
             variants={fadeUp}
             className="mt-3 text-balance font-semibold leading-[1.05] tracking-tighter2"
-            style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)" }}
+            style={{ fontSize: "clamp(1.75rem, 4vw, 3.25rem)" }}
           >
             {t("demo_h2")}
           </motion.h2>
-          <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-ink-muted">
+          <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-xl text-base sm:text-lg text-ink-muted">
             {t("demo_subtitle")}
           </motion.p>
         </Reveal>
 
         <div className="relative mx-auto max-w-5xl">
-          <BrowserChrome>
-            <DemoStage step={step} runId={runId} />
-          </BrowserChrome>
+          {isMobile ? (
+            <MobileDemoMockup step={step} runId={runId} />
+          ) : (
+            <BrowserChrome>
+              <DemoStage step={step} runId={runId} />
+            </BrowserChrome>
+          )}
 
           <div className="mt-6 flex items-center justify-center gap-3">
             <StepDots step={step} />
@@ -1223,6 +1228,262 @@ function ProductDemo() {
       </div>
     </section>
   );
+}
+
+/* ----------------------------------------------------------
+   useIsMobile — single matchMedia listener
+---------------------------------------------------------- */
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
+  return isMobile;
+}
+
+/* ----------------------------------------------------------
+   MobileDemoMockup — iPhone-shaped frame with the 4-step demo
+   adapted for narrow screens. Mirrors the desktop sequence:
+   1. brief typed → 2. EMILY analyses + cards appear → 3. WhatsApp
+   bottom sheet → 4. iOS-style reply notification.
+---------------------------------------------------------- */
+function MobileDemoMockup({ step, runId }: { step: number; runId: number }) {
+  return (
+    <div className="relative mx-auto" style={{ maxWidth: 320 }}>
+      {/* iPhone frame */}
+      <div
+        className="relative mx-auto overflow-hidden rounded-[44px] border border-ink/15 bg-[#0E1F37] p-[6px] shadow-[0_40px_100px_-30px_rgba(0,0,0,0.6)]"
+        style={{ aspectRatio: "9/19" }}
+      >
+        {/* Inner screen */}
+        <div className="relative h-full w-full overflow-hidden rounded-[38px] bg-[#F7F8FA]">
+          {/* Notch */}
+          <div className="absolute left-1/2 top-2 z-30 h-6 w-28 -translate-x-1/2 rounded-full bg-[#0E1F37]" />
+
+          {/* Status bar */}
+          <div className="absolute inset-x-0 top-0 z-20 flex h-9 items-center justify-between px-7 pt-2.5 text-[10px] font-semibold text-slate-900">
+            <span>9:41</span>
+            <span className="opacity-70">●●● ▮</span>
+          </div>
+
+          {/* App content */}
+          <div className="absolute inset-0 pt-12 pb-6">
+            <MobileDemoContent step={step} runId={runId} />
+          </div>
+
+          {/* Reply notification — step 3 */}
+          <AnimatePresence>
+            {step >= 3 && (
+              <motion.div
+                key={`notif-${runId}`}
+                initial={{ y: -80, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -80, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 260, damping: 24 }}
+                className="absolute inset-x-3 top-12 z-40 flex items-center gap-2.5 rounded-2xl bg-white/95 px-3 py-2.5 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.3)] ring-1 ring-slate-200"
+              >
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[#25D366] text-white">
+                  <WhatsAppCircleIcon />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-2 text-[10px] text-slate-500">
+                    <span className="font-semibold text-slate-700">M. Dubois</span>
+                    <span>now</span>
+                  </div>
+                  <div className="truncate text-[12px] font-medium text-slate-900">
+                    Sounds great — when do we chat?
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileDemoContent({ step, runId }: { step: number; runId: number }) {
+  return (
+    <div className="relative flex h-full flex-col gap-3 px-4">
+      {/* App header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="flex size-7 items-center justify-center rounded-lg bg-accent text-white">
+            <FingerprintMark size={14} color="#fff" />
+          </span>
+          <span className="text-[12px] font-bold uppercase tracking-wider text-slate-900">
+            TrueCalling
+          </span>
+        </div>
+        <span className="size-7 rounded-full bg-slate-200" />
+      </div>
+
+      {/* Step 0 — brief input */}
+      {step === 0 && (
+        <motion.div
+          key={`brief-${runId}`}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-2 rounded-xl border border-slate-200 bg-white p-3 shadow-sm"
+        >
+          <div className="text-[9.5px] uppercase tracking-[0.18em] text-slate-500">Brief</div>
+          <div className="mt-1.5 min-h-[44px] text-[12.5px] leading-relaxed text-slate-900">
+            <BriefTypewriter runId={runId} />
+          </div>
+          <button className="mt-3 w-full rounded-md bg-accent py-2 text-[11.5px] font-semibold text-white">
+            Search
+          </button>
+        </motion.div>
+      )}
+
+      {/* Step 1 — EMILY analysing then candidate cards */}
+      {(step === 1 || step === 2 || step === 3) && (
+        <div className="mt-2 flex flex-col gap-2">
+          <div className="flex items-center gap-2 rounded-lg bg-accent/10 px-2.5 py-1.5">
+            <span className="flex size-5 items-center justify-center rounded-full bg-accent text-white text-[9px] font-bold">
+              E
+            </span>
+            <span className="text-[10.5px] font-medium text-accent">
+              EMILY analysed 1.2B profiles
+            </span>
+          </div>
+          <MobileCandidateCard
+            initials="MD"
+            name="M. Dubois"
+            role="Senior Product Designer"
+            score={96}
+            highlight={step >= 2}
+            delay={0}
+          />
+          <MobileCandidateCard
+            initials="SK"
+            name="S. Klein"
+            role="Lead Product Designer"
+            score={92}
+            delay={0.15}
+          />
+          <MobileCandidateCard
+            initials="LP"
+            name="L. Petit"
+            role="Senior UX Designer"
+            score={88}
+            delay={0.3}
+          />
+        </div>
+      )}
+
+      {/* Step 2 — WhatsApp bottom sheet */}
+      <AnimatePresence>
+        {step === 2 && (
+          <motion.div
+            key={`wa-${runId}`}
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="absolute inset-x-0 bottom-0 z-30 flex flex-col rounded-t-3xl bg-[#EFEAE2] shadow-[0_-20px_40px_-20px_rgba(0,0,0,0.2)]"
+            style={{ height: "62%" }}
+          >
+            <div className="flex items-center gap-2.5 border-b border-black/5 bg-white px-4 py-3">
+              <span className="flex size-8 items-center justify-center rounded-full bg-[#25D366] text-white">
+                <WhatsAppCircleIcon />
+              </span>
+              <div className="flex-1">
+                <div className="text-[12px] font-semibold text-slate-900">M. Dubois</div>
+                <div className="text-[10px] text-slate-500">via WhatsApp</div>
+              </div>
+            </div>
+            <div className="flex-1 overflow-hidden p-4">
+              <div className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-[#D9FDD3] px-3 py-2 text-[11.5px] leading-relaxed text-slate-900 shadow-sm">
+                <WaTypewriter runId={runId} />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function MobileCandidateCard({
+  initials,
+  name,
+  role,
+  score,
+  highlight = false,
+  delay = 0,
+}: {
+  initials: string;
+  name: string;
+  role: string;
+  score: number;
+  highlight?: boolean;
+  delay?: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={`flex items-center gap-2.5 rounded-xl border bg-white p-2.5 transition-all ${
+        highlight ? "border-accent/60 shadow-[0_8px_20px_-8px_rgba(233,30,140,0.4)]" : "border-slate-200"
+      }`}
+    >
+      <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-pink-500 to-fuchsia-600 text-[11px] font-bold text-white">
+        {initials}
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="truncate text-[12px] font-semibold text-slate-900">{name}</div>
+        <div className="truncate text-[10.5px] text-slate-500">{role}</div>
+      </div>
+      <span className="rounded-md bg-accent/10 px-1.5 py-0.5 text-[10.5px] font-bold text-accent">
+        {score}%
+      </span>
+    </motion.div>
+  );
+}
+
+function BriefTypewriter({ runId }: { runId: number }) {
+  const text = "Senior Product Designer, Paris, 5+ years, SaaS B2B";
+  const [shown, setShown] = useState("");
+  useEffect(() => {
+    setShown("");
+    let i = 0;
+    const id = setInterval(() => {
+      i++;
+      setShown(text.slice(0, i));
+      if (i >= text.length) clearInterval(id);
+    }, 45);
+    return () => clearInterval(id);
+  }, [runId]);
+  return (
+    <span>
+      {shown}
+      <span className="ml-0.5 inline-block h-3 w-px bg-slate-700 align-middle animate-pulse" />
+    </span>
+  );
+}
+
+function WaTypewriter({ runId }: { runId: number }) {
+  const text =
+    "Hi M., I have a Senior Product Designer role that fits your profile. 15 min this week to chat?";
+  const [shown, setShown] = useState("");
+  useEffect(() => {
+    setShown("");
+    let i = 0;
+    const id = setInterval(() => {
+      i++;
+      setShown(text.slice(0, i));
+      if (i >= text.length) clearInterval(id);
+    }, 22);
+    return () => clearInterval(id);
+  }, [runId]);
+  return <>{shown}</>;
 }
 
 function ReplayIcon() {
@@ -2010,7 +2271,7 @@ function Pricing() {
               transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
               className={`relative flex flex-col rounded-2xl border p-7 ${
                 tier.highlight
-                  ? "border-accent/50 bg-surface/60 shadow-[0_0_0_1px_rgba(233,30,140,0.55),0_30px_80px_-30px_rgba(233,30,140,0.55)] lg:-translate-y-3 lg:py-9"
+                  ? "border-accent/50 bg-surface/60 shadow-[0_0_0_1px_rgba(233,30,140,0.4),0_15px_40px_-20px_rgba(233,30,140,0.35)] sm:shadow-[0_0_0_1px_rgba(233,30,140,0.55),0_30px_80px_-30px_rgba(233,30,140,0.55)] lg:-translate-y-3 lg:py-9"
                   : "border-ink/[0.08] bg-surface/30"
               }`}
             >
@@ -2119,26 +2380,26 @@ function FinalCTA() {
   const t = useT();
   const href = useLocalizedHref();
   return (
-    <section className="relative overflow-hidden py-20 sm:py-24">
+    <section className="relative overflow-hidden py-16 sm:py-24">
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-bg via-surface to-accent/40" />
         <div className="absolute -left-20 top-10 size-[60vw] max-w-[700px] rounded-full bg-accent/40 blur-[60px] sm:blur-[110px] animate-blob-1" />
         <div className="absolute -right-10 bottom-0 size-[55vw] max-w-[640px] rounded-full bg-fuchsia-500/35 blur-[70px] sm:blur-[120px] animate-blob-2" />
       </div>
 
-      <div className="mx-auto max-w-4xl px-5 sm:px-8 text-center">
+      <div className="mx-auto max-w-4xl px-6 sm:px-8 text-center">
         <Reveal>
           <motion.h2
             variants={fadeUp}
             className="text-balance font-semibold leading-[1.05] tracking-tighter2"
-            style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)" }}
+            style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
           >
             {t("final_h2")}
           </motion.h2>
-          <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-ink/80">
+          <motion.p variants={fadeUp} className="mx-auto mt-4 sm:mt-5 max-w-xl text-base sm:text-lg text-ink/80">
             {t("final_subtitle")}
           </motion.p>
-          <motion.div variants={fadeUp} className="mt-10">
+          <motion.div variants={fadeUp} className="mt-8 sm:mt-10">
             <CTAButton href={href("book-a-demo")} variant="white" size="lg">
               {t("cta_book_demo")}
             </CTAButton>
@@ -2187,7 +2448,7 @@ function Footer() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Logo size={28} showTagline />
+            <Logo size={28} showTagline alwaysShowWordmark />
             <p className="mt-5 max-w-xs text-sm text-ink-muted">
               {t("footer_about")}
             </p>

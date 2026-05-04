@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useT, useLocale, useLocalizedHref } from "../app/_i18n/locale-context";
 import { LanguageSwitcher } from "../app/_i18n/language-switcher";
 import { ThemeToggle } from "./ThemeToggle";
+import { MobileMenu } from "./MobileMenu";
 import { blogEnabledLocales } from "../lib/i18n-config";
 
 /* ----------------------------------------------------------
@@ -49,11 +50,14 @@ export function Logo({
   showTagline = false,
   className,
   size = 26,
+  alwaysShowWordmark = false,
 }: {
   variant?: "light" | "dark";
   showTagline?: boolean;
   className?: string;
   size?: number;
+  /** If false (default) the wordmark hides on mobile. Footer/full headers can override. */
+  alwaysShowWordmark?: boolean;
 }) {
   const wordColor = "rgb(var(--ink))";
   const taglineColor = "rgb(var(--ink) / 0.6)";
@@ -61,7 +65,7 @@ export function Logo({
   return (
     <div className={`flex items-center gap-2.5 ${className ?? ""}`}>
       <FingerprintMark size={size} color="#E91E8C" />
-      <div className="flex flex-col leading-none">
+      <div className={`flex-col leading-none ${alwaysShowWordmark ? "flex" : "hidden sm:flex"}`}>
         <span
           className="font-bold uppercase tracking-[0.06em]"
           style={{ color: wordColor, fontSize: size * 0.62, letterSpacing: "0.04em" }}
@@ -191,20 +195,29 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2.5">
-          <ThemeToggle />
-          <LanguageSwitcher />
-          <a
-            href="https://truecalling.vercel.app/login"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden h-9 items-center rounded-full border border-ink/15 bg-ink/[0.03] px-4 text-[13px] font-medium text-ink transition-colors hover:border-ink/30 hover:bg-ink/[0.06] sm:inline-flex cursor-pointer"
-          >
-            {t("nav_login")}
-          </a>
+        <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+          {/* Desktop-only: theme toggle, lang switcher, login button */}
+          <div className="hidden md:flex items-center gap-2.5">
+            <ThemeToggle />
+            <LanguageSwitcher />
+            <a
+              href="https://truecalling.vercel.app/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden h-9 items-center rounded-full border border-ink/15 bg-ink/[0.03] px-4 text-[13px] font-medium text-ink transition-colors hover:border-ink/30 hover:bg-ink/[0.06] lg:inline-flex cursor-pointer"
+            >
+              {t("nav_login")}
+            </a>
+          </div>
+
+          {/* Always visible CTA — text shortens on mobile */}
           <CTAButton href={href("book-a-demo")} size="sm">
-            {t("nav_book")}
+            <span className="md:hidden">{t("nav_demo")}</span>
+            <span className="hidden md:inline">{t("nav_book")}</span>
           </CTAButton>
+
+          {/* Mobile-only hamburger */}
+          <MobileMenu />
         </div>
       </div>
     </header>
