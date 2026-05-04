@@ -3,7 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
-import { useT } from "../_i18n/locale-context";
+import { useT } from "../../_i18n/locale-context";
+import { Navbar } from "../../../components/SiteNavbar";
 
 /* ============================================================
    Réservation de démo — /reserver-une-demo
@@ -27,7 +28,7 @@ export default function Page() {
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-bg text-ink">
       <BackgroundDecor />
-      <SiteNav />
+      <Navbar />
       <Hero />
       <Footer />
     </main>
@@ -46,41 +47,6 @@ function BackgroundDecor() {
   );
 }
 
-/* ----- Top nav (simplified) ----- */
-function SiteNav() {
-  const t = useT();
-  return (
-    <header className="relative z-10 flex h-16 items-center justify-between px-5 sm:px-8">
-      <Link href="/" aria-label={t("rd_back_home_aria")} className="cursor-pointer">
-        <Logo />
-      </Link>
-      <Link
-        href="/"
-        className="inline-flex items-center gap-1.5 text-sm text-ink-muted transition-colors hover:text-ink cursor-pointer"
-      >
-        <ArrowLeft /> {t("rd_back")}
-      </Link>
-    </header>
-  );
-}
-
-function Logo() {
-  return (
-    <div className="flex items-center gap-2.5">
-      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="#E91E8C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M3.5 22 C 3.5 11, 8 4, 16 4 C 24 4, 28.5 11, 28.5 22" />
-        <path d="M6.5 24 C 6.5 13, 10 7, 16 7 C 22 7, 25.5 13, 25.5 24" />
-        <path d="M9.5 26 C 9.5 15, 12 10, 16 10 C 20 10, 22.5 15, 22.5 26" />
-        <path d="M12.5 27 C 12.5 17, 14 13, 16 13 C 18 13, 19.5 17, 19.5 27" />
-        <path d="M16.5 27 L 16.5 19 C 16.5 17, 14.8 16, 13.7 17 C 12.6 18, 13 20, 14.5 20 L 16 20" />
-      </svg>
-      <span className="text-[16px] font-bold uppercase tracking-[0.04em] text-ink">
-        TrueCalling
-      </span>
-    </div>
-  );
-}
-
 function ArrowLeft() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -95,7 +61,7 @@ function Hero() {
   const [submitted, setSubmitted] = useState<{ firstName: string; email: string } | null>(null);
 
   return (
-    <section className="relative px-5 pb-24 pt-10 sm:px-8 sm:pt-16">
+    <section className="relative px-5 pb-24 pt-28 sm:px-8 sm:pt-32">
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
         {/* Left — form or success */}
         <div className="order-2 lg:order-1">

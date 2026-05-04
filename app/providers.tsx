@@ -2,8 +2,18 @@
 
 import { ThemeProvider } from "next-themes";
 import { LocaleProvider } from "./_i18n/locale-context";
+import type { Locale } from "@/lib/i18n-config";
+import type { Dictionary } from "@/lib/get-dictionary";
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({
+  locale,
+  dictionary,
+  children,
+}: {
+  locale: Locale;
+  dictionary: Dictionary;
+  children: React.ReactNode;
+}) {
   return (
     <ThemeProvider
       attribute="class"
@@ -11,7 +21,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
       enableSystem={false}
       disableTransitionOnChange
     >
-      <LocaleProvider>{children}</LocaleProvider>
+      <LocaleProvider locale={locale} dictionary={dictionary}>
+        {children}
+      </LocaleProvider>
     </ThemeProvider>
   );
 }

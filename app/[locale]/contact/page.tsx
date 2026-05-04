@@ -3,6 +3,8 @@
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
+import { useT } from "../../_i18n/locale-context";
+import { Navbar } from "../../../components/SiteNavbar";
 
 /* ----- Animation primitives ----- */
 const fadeUp: Variants = {
@@ -30,19 +32,11 @@ type FormState = {
   message: string;
 };
 
-const SUBJECTS = [
-  "Question produit",
-  "Tarification",
-  "Partenariat",
-  "Presse",
-  "Autre",
-];
-
 export default function Page() {
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-bg text-ink">
       <BackgroundDecor />
-      <SiteNav />
+      <Navbar />
       <Section />
       <Footer />
     </main>
@@ -54,51 +48,9 @@ function BackgroundDecor() {
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       <div className="absolute inset-0 bg-bg" />
       <div className="absolute -left-20 top-[5%] size-[55vw] max-w-[700px] rounded-full bg-accent/30 blur-[60px] sm:blur-[120px] animate-blob-1" />
-      <div className="absolute right-[-5%] top-[35%] size-[50vw] max-w-[640px] rounded-full bg-surface/80 blur-[60px] sm:blur-[130px] animate-blob-2" />
+      <div className="absolute right-[-5%] top-[35%] size-[50vw] max-w-[640px] rounded-full bg-violet-300/40 dark:bg-surface/80 blur-[60px] sm:blur-[130px] animate-blob-2" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_50%,rgb(var(--bg))_85%)]" />
     </div>
-  );
-}
-
-function SiteNav() {
-  return (
-    <header className="relative z-10 flex h-16 items-center justify-between px-5 sm:px-8">
-      <Link href="/" aria-label="Retour à l'accueil" className="cursor-pointer">
-        <Logo />
-      </Link>
-      <Link
-        href="/"
-        className="inline-flex items-center gap-1.5 text-sm text-ink-muted transition-colors hover:text-ink cursor-pointer"
-      >
-        <ArrowLeft /> Retour
-      </Link>
-    </header>
-  );
-}
-
-function Logo() {
-  return (
-    <div className="flex items-center gap-2.5">
-      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="#E91E8C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M3.5 22 C 3.5 11, 8 4, 16 4 C 24 4, 28.5 11, 28.5 22" />
-        <path d="M6.5 24 C 6.5 13, 10 7, 16 7 C 22 7, 25.5 13, 25.5 24" />
-        <path d="M9.5 26 C 9.5 15, 12 10, 16 10 C 20 10, 22.5 15, 22.5 26" />
-        <path d="M12.5 27 C 12.5 17, 14 13, 16 13 C 18 13, 19.5 17, 19.5 27" />
-        <path d="M16.5 27 L 16.5 19 C 16.5 17, 14.8 16, 13.7 17 C 12.6 18, 13 20, 14.5 20 L 16 20" />
-      </svg>
-      <span className="text-[16px] font-bold uppercase tracking-[0.04em] text-ink">
-        TrueCalling
-      </span>
-    </div>
-  );
-}
-
-function ArrowLeft() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <line x1="19" y1="12" x2="5" y2="12" />
-      <polyline points="12 19 5 12 12 5" />
-    </svg>
   );
 }
 
@@ -106,7 +58,7 @@ function Section() {
   const [submitted, setSubmitted] = useState<{ name: string; email: string } | null>(null);
 
   return (
-    <section className="relative px-5 pb-24 pt-10 sm:px-8 sm:pt-16">
+    <section className="relative px-5 pb-24 pt-28 sm:px-8 sm:pt-32">
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <div className="order-2 lg:order-1">
           <AnimatePresence mode="wait">
@@ -126,6 +78,15 @@ function Section() {
 }
 
 function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => void }) {
+  const t = useT();
+  const SUBJECTS = [
+    t("contact_subj_product"),
+    t("contact_subj_pricing"),
+    t("contact_subj_partnership"),
+    t("contact_subj_press"),
+    t("contact_subj_other"),
+  ];
+
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
@@ -140,11 +101,11 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
 
   const validate = (): boolean => {
     const e: Partial<Record<keyof FormState, string>> = {};
-    if (!form.name.trim()) e.name = "Requis";
-    if (!form.email.trim()) e.email = "Requis";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Email invalide";
-    if (!form.message.trim()) e.message = "Requis";
-    else if (form.message.trim().length < 10) e.message = "Au moins 10 caractères";
+    if (!form.name.trim()) e.name = t("rd_required_short");
+    if (!form.email.trim()) e.email = t("rd_required_short");
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = t("rd_email_invalid");
+    if (!form.message.trim()) e.message = t("rd_required_short");
+    else if (form.message.trim().length < 10) e.message = t("contact_min_chars");
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -177,7 +138,7 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
           />
           <span className="relative inline-flex size-1.5 rounded-full bg-accent shadow-[0_0_10px_rgba(233,30,140,0.7)]" />
         </span>
-        Contact
+        {t("nav_contact")}
         <FloatingSparkle delay={0.2} className="-right-3 -top-2" />
         <FloatingSparkle delay={0.9} className="-right-1 top-3 size-[3px]" />
       </motion.span>
@@ -187,16 +148,16 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
         className="mt-5 text-balance font-semibold leading-[1.05] tracking-tighter2"
         style={{ fontSize: "clamp(2.25rem, 5vw, 3.75rem)" }}
       >
-        Une question&nbsp;? Parlons-en.
+        {t("contact_h1")}
       </motion.h1>
 
       <motion.p
         variants={fadeUp}
         className="mt-4 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg"
       >
-        Notre équipe répond sous 24 heures ouvrées. Pour une démo guidée,{" "}
+        {t("contact_subtitle_a")}{" "}
         <Link href="/reserver-une-demo" className="text-accent underline-offset-4 hover:underline">
-          réservez plutôt un créneau
+          {t("contact_subtitle_link")}
         </Link>
         .
       </motion.p>
@@ -210,7 +171,7 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
         <motion.div variants={stagger} initial="hidden" animate="show" className="space-y-5">
           <motion.div variants={fadeUp} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Field
-              label="Nom complet"
+              label={t("contact_name_label")}
               name="name"
               value={form.name}
               error={errors.name}
@@ -219,20 +180,20 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
               required
             />
             <Field
-              label="Email"
+              label={t("contact_email_label")}
               name="email"
               type="email"
               value={form.email}
               error={errors.email}
               onChange={(v) => set("email", v)}
               autoComplete="email"
-              placeholder="vous@entreprise.com"
+              placeholder={t("contact_email_placeholder")}
               required
             />
           </motion.div>
 
           <motion.div variants={fadeUp}>
-            <Label>Sujet</Label>
+            <Label>{t("contact_subject_label")}</Label>
             <div className="mt-2 flex flex-wrap gap-2">
               {SUBJECTS.map((s, i) => (
                 <motion.button
@@ -264,13 +225,13 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
 
           <motion.div variants={fadeUp}>
             <Label>
-              Message <span className="text-accent">*</span>
+              {t("contact_message_label")} <span className="text-accent">*</span>
             </Label>
             <textarea
               value={form.message}
               onChange={(e) => set("message", e.target.value)}
               rows={5}
-              placeholder="Votre besoin, votre contexte, votre stack…"
+              placeholder={t("contact_message_placeholder")}
               aria-invalid={!!errors.message}
               className={`mt-2 w-full resize-none rounded-lg border bg-ink/[0.02] px-3.5 py-2.5 text-[14px] text-ink placeholder:text-ink-muted/60 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/30 ${
                 errors.message
@@ -286,7 +247,7 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
             className="flex flex-col items-stretch gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between"
           >
             <p className="text-[11.5px] text-ink-muted/80">
-              Vos données ne sont jamais revendues.
+              {t("contact_no_resale")}
             </p>
             <SubmitButton submitting={submitting} />
           </motion.div>
@@ -365,6 +326,7 @@ function Field({
 }
 
 function SubmitButton({ submitting }: { submitting: boolean }) {
+  const t = useT();
   return (
     <motion.button
       type="submit"
@@ -383,11 +345,11 @@ function SubmitButton({ submitting }: { submitting: boolean }) {
       <span className="relative inline-flex items-center gap-2">
         {submitting ? (
           <>
-            <Spinner /> Envoi…
+            <Spinner /> {t("contact_submitting")}
           </>
         ) : (
           <>
-            Envoyer le message
+            {t("contact_submit")}
             <motion.span
               className="inline-flex"
               animate={{ x: [0, 3, 0] }}
@@ -411,6 +373,15 @@ function ArrowRight() {
   );
 }
 
+function ArrowLeft() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="19" y1="12" x2="5" y2="12" />
+      <polyline points="12 19 5 12 12 5" />
+    </svg>
+  );
+}
+
 function Spinner() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="animate-spin">
@@ -421,6 +392,7 @@ function Spinner() {
 }
 
 function SuccessCard({ name, email }: { name: string; email: string }) {
+  const t = useT();
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -444,11 +416,12 @@ function SuccessCard({ name, email }: { name: string; email: string }) {
         className="mt-6 font-semibold leading-tight tracking-tighter2"
         style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)" }}
       >
-        Message envoyé, {name}.
+        {t("contact_success_title").replace("{name}", name)}
       </h2>
       <p className="mt-3 max-w-md text-base leading-relaxed text-ink-muted">
-        Nous vous répondons sous{" "}
-        <span className="text-ink">24 heures ouvrées</span> à{" "}
+        {t("contact_success_msg_a")}{" "}
+        <span className="text-ink">{t("rd_success_business_hours")}</span>{" "}
+        {t("contact_success_msg_b")}{" "}
         <span className="text-ink">{email}</span>.
       </p>
       <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -456,13 +429,13 @@ function SuccessCard({ name, email }: { name: string; email: string }) {
           href="/"
           className="inline-flex h-11 items-center gap-2 rounded-full border border-ink/15 bg-ink/[0.04] px-5 text-[14px] font-medium text-ink transition-colors hover:bg-ink/[0.08] cursor-pointer"
         >
-          <ArrowLeft /> Retour à l'accueil
+          <ArrowLeft /> {t("rd_back_home")}
         </Link>
         <Link
           href="/reserver-une-demo"
           className="inline-flex h-11 items-center gap-2 rounded-full bg-accent px-5 text-[14px] font-semibold text-white shadow-[0_8px_30px_rgba(233,30,140,0.35)] transition-colors hover:bg-accent/90 cursor-pointer"
         >
-          Réserver une démo <ArrowRight />
+          {t("cta_book_demo")} <ArrowRight />
         </Link>
       </div>
     </motion.div>
@@ -470,22 +443,23 @@ function SuccessCard({ name, email }: { name: string; email: string }) {
 }
 
 function SidePanel() {
+  const t = useT();
   const channels = [
     {
       icon: <MailIcon />,
-      label: "Email direct",
+      label: t("contact_channel_email"),
       value: "hello@truecalling.ai",
       href: "mailto:hello@truecalling.ai",
     },
     {
       icon: <SalesIcon />,
-      label: "Ventes",
+      label: t("contact_channel_sales"),
       value: "sales@truecalling.ai",
       href: "mailto:sales@truecalling.ai",
     },
     {
       icon: <SupportIcon />,
-      label: "Support clients",
+      label: t("contact_channel_support"),
       value: "support@truecalling.ai",
       href: "mailto:support@truecalling.ai",
     },
@@ -509,13 +483,13 @@ function SidePanel() {
         variants={slideRight}
         className="relative text-[11px] uppercase tracking-[0.22em] text-accent"
       >
-        Autres canaux
+        {t("contact_panel_eyebrow")}
       </motion.span>
       <motion.h2
         variants={slideRight}
         className="relative mt-3 text-2xl font-semibold leading-tight tracking-tighter2 sm:text-[28px]"
       >
-        Plusieurs façons de nous joindre.
+        {t("contact_panel_h2")}
       </motion.h2>
 
       <motion.ul variants={stagger} className="relative mt-6 space-y-3">
@@ -560,16 +534,16 @@ function SidePanel() {
           transition={{ type: "spring", stiffness: 320, damping: 22 }}
           className="rounded-xl border border-ink/[0.06] bg-bg/40 p-4"
         >
-          <div className="text-[10.5px] uppercase tracking-[0.14em] text-ink-muted">Réponse</div>
-          <div className="mt-1 text-[14px] font-semibold text-ink">&lt; 24 h ouvrées</div>
+          <div className="text-[10.5px] uppercase tracking-[0.14em] text-ink-muted">{t("contact_kpi_response")}</div>
+          <div className="mt-1 text-[14px] font-semibold text-ink">{t("contact_kpi_response_value")}</div>
         </motion.div>
         <motion.div
           whileHover={{ y: -2 }}
           transition={{ type: "spring", stiffness: 320, damping: 22 }}
           className="rounded-xl border border-ink/[0.06] bg-bg/40 p-4"
         >
-          <div className="text-[10.5px] uppercase tracking-[0.14em] text-ink-muted">Bureau</div>
-          <div className="mt-1 text-[14px] font-semibold text-ink">Paris · Tel Aviv</div>
+          <div className="text-[10.5px] uppercase tracking-[0.14em] text-ink-muted">{t("contact_kpi_office")}</div>
+          <div className="mt-1 text-[14px] font-semibold text-ink">{t("contact_kpi_office_value")}</div>
         </motion.div>
       </motion.div>
 
@@ -597,14 +571,15 @@ function SidePanel() {
 }
 
 function Footer() {
+  const t = useT();
   return (
     <footer className="relative border-t border-ink/[0.06] py-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-xs text-ink-muted sm:flex-row sm:px-8">
-        <span>© 2026 TrueCalling. Tous droits réservés.</span>
+        <span>{t("footer_copyright")}</span>
         <div className="flex items-center gap-5">
-          <Link href="/" className="transition-colors hover:text-ink cursor-pointer">Accueil</Link>
-          <Link href="/#pricing" className="transition-colors hover:text-ink cursor-pointer">Tarifs</Link>
-          <Link href="/reserver-une-demo" className="transition-colors hover:text-ink cursor-pointer">Démo</Link>
+          <Link href="/" className="transition-colors hover:text-ink cursor-pointer">{t("rd_footer_home")}</Link>
+          <Link href="/#pricing" className="transition-colors hover:text-ink cursor-pointer">{t("nav_pricing")}</Link>
+          <Link href="/reserver-une-demo" className="transition-colors hover:text-ink cursor-pointer">{t("nav_demo")}</Link>
         </div>
       </div>
     </footer>

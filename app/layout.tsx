@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -10,27 +9,23 @@ const inter = Inter({
 });
 
 const siteUrl = "https://truecalling.app";
-const titleDefault = "Logiciel de sourcing IA pour recruteurs · TrueCalling";
+const titleDefault = "TrueCalling — AI sourcing software for recruiters";
 const description =
-  "Logiciel de sourcing IA qui transforme un brief en candidats qualifiés. Copilote EMILY, matching TrueFit 360 et outreach WhatsApp, email, téléphone. Démo en 20 min.";
+  "TrueCalling turns a brief into qualified candidates in minutes. AI copilot EMILY, TrueFit 360 matching, multichannel outreach (WhatsApp, email, phone).";
 const ogImage = "/brand/truecalling-vertical.png";
-const ogImageAlt = "TrueCalling — Logiciel de sourcing IA et copilote de recrutement avec outreach WhatsApp";
+const ogImageAlt =
+  "TrueCalling — AI sourcing software with WhatsApp outreach";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: titleDefault, template: "%s · TrueCalling" },
   description,
-  alternates: {
-    canonical: "/",
-    languages: { "fr-FR": "/" },
-  },
   openGraph: {
     type: "website",
     url: siteUrl,
     siteName: "TrueCalling",
     title: titleDefault,
     description,
-    locale: "fr_FR",
     images: [{ url: ogImage, width: 1080, height: 1080, alt: ogImageAlt }],
   },
   twitter: {
@@ -49,36 +44,9 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const ldJson = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "TrueCalling",
-    applicationCategory: "BusinessApplication",
-    operatingSystem: "Web",
-    description,
-    url: siteUrl,
-    image: `${siteUrl}${ogImage}`,
-    inLanguage: "fr-FR",
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: "USD",
-      lowPrice: "595",
-      highPrice: "895",
-      offerCount: "3",
-    },
-  };
-
   return (
-    <html lang="fr" className={inter.variable} suppressHydrationWarning>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
-        />
-      </head>
-      <body className="font-sans antialiased bg-bg text-ink">
-        <Providers>{children}</Providers>
-      </body>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <body className="font-sans antialiased bg-bg text-ink">{children}</body>
     </html>
   );
 }

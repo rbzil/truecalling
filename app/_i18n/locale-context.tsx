@@ -1,64 +1,53 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { DICT, LOCALES, RTL_LOCALES, type Locale } from "./dictionary";
+import { createContext, useContext, useEffect, useMemo } from "react";
+import {
+  locales,
+  rtlLocales,
+  getLocalizedPath,
+  type Locale,
+  type RouteKey,
+} from "@/lib/i18n-config";
+import type { Dictionary, DictKey } from "@/lib/get-dictionary";
 
-const STORAGE_KEY = "tc-locale";
+/* ============================================================
+   Locale context — fed from the server-rendered `app/[locale]/layout.tsx`.
+   Source of truth is the URL locale segment (no localStorage anymore).
+   This file's API (`useT`, `useLocale`) stays the same so existing
+   `useT()` callers continue to work without changes.
+   ============================================================ */
 
 type Ctx = {
   locale: Locale;
-  setLocale: (l: Locale) => void;
-  t: (key: keyof (typeof DICT)["fr"]) => string;
+  t: (key: DictKey) => string;
   isRTL: boolean;
 };
 
 const LocaleCtx = createContext<Ctx | null>(null);
 
-export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("fr");
-
-  // Hydrate from localStorage / browser language on mount
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY) as Locale | null;
-      if (stored && LOCALES.includes(stored)) {
-        setLocaleState(stored);
-        return;
-      }
-      const nav = navigator.language;
-      const match = LOCALES.find(
-        (l) => l === nav || l.split("-")[0] === nav.split("-")[0],
-      );
-      if (match) setLocaleState(match);
-    } catch {
-      // localStorage unavailable — fall through
-    }
-  }, []);
-
-  // Sync html dir + lang attributes for RTL and a11y
+export function LocaleProvider({
+  locale,
+  dictionary,
+  children,
+}: {
+  locale: Locale;
+  dictionary: Dictionary;
+  children: React.ReactNode;
+}) {
+  // Reflect locale onto <html> for accessibility + RTL.
   useEffect(() => {
     if (typeof document === "undefined") return;
     document.documentElement.lang = locale;
-    document.documentElement.dir = RTL_LOCALES.includes(locale) ? "rtl" : "ltr";
+    document.documentElement.dir = rtlLocales.includes(locale) ? "rtl" : "ltr";
   }, [locale]);
 
-  const setLocale = useCallback((l: Locale) => {
-    setLocaleState(l);
-    try {
-      localStorage.setItem(STORAGE_KEY, l);
-    } catch {
-      // ignore
-    }
-  }, []);
-
-  const t = useCallback(
-    (key: keyof (typeof DICT)["fr"]) => DICT[locale][key] ?? DICT.fr[key],
-    [locale],
-  );
-
   const value = useMemo<Ctx>(
-    () => ({ locale, setLocale, t, isRTL: RTL_LOCALES.includes(locale) }),
-    [locale, setLocale, t],
+    () => ({
+      locale,
+      t: (key) => dictionary[key] ?? key,
+      isRTL: rtlLocales.includes(locale),
+    }),
+    [locale, dictionary],
   );
 
   return <LocaleCtx.Provider value={value}>{children}</LocaleCtx.Provider>;
@@ -73,3 +62,18 @@ export function useLocale() {
 export function useT() {
   return useLocale().t;
 }
+
+/** Build a locale-correct href for a known route + optional hash/sub-path. */
+export function useLocalizedHref() {
+  const { locale } = useLocale();
+  return (route: RouteKey, opts?: { hash?: string; subPath?: string }) => {
+    const base = getLocalizedPath(route, locale);
+    const sub = opts?.subPath ? `/${opts.subPath}` : "";
+    const hash = opts?.hash ?? "";
+    return `${base}${sub}${hash}`;
+  };
+}
+
+/* Re-export locale list for convenience (some components iterate over it). */
+export { locales };
+export type { Locale };
