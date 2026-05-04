@@ -962,16 +962,44 @@ function ATSBlock() {
             </div>
           </div>
 
-          {/* Animated sync line */}
-          <div className="relative h-px w-32 sm:w-44">
-            <span className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/60 to-accent/0" />
-            <motion.span
-              className="absolute -top-2 left-0 flex size-5 items-center justify-center rounded-full bg-accent/15 text-accent ring-1 ring-accent/40"
-              animate={{ x: ["0%", "100%", "0%"], rotate: [0, 180, 360] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <SyncIcon />
-            </motion.span>
+          {/* Animated sync line — 3 glowing pink dots flowing left to
+              right to evoke a continuous data stream between the
+              TrueCalling and ATS nodes. */}
+          <div className="relative h-1.5 w-32 sm:w-auto sm:flex-1 sm:max-w-md">
+            <span
+              aria-hidden
+              className="absolute inset-x-0 top-1/2 h-[2px] -translate-y-1/2 rounded-full"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(236,72,153,0.5) 50%, transparent 100%)",
+              }}
+            />
+            {[0, 0.83, 1.66].map((delay, i) => (
+              <motion.span
+                key={i}
+                aria-hidden
+                className="absolute size-1.5 rounded-full"
+                style={{
+                  top: "50%",
+                  background: "#ec4899",
+                  boxShadow:
+                    "0 0 8px #ec4899, 0 0 16px rgba(236,72,153,0.6)",
+                }}
+                initial={{ left: "0%", opacity: 0 }}
+                animate={{
+                  left: ["0%", "100%"],
+                  opacity: [0, 1, 1, 0],
+                  y: "-50%",
+                }}
+                transition={{
+                  duration: 2.5,
+                  ease: "linear",
+                  repeat: Infinity,
+                  delay,
+                  times: [0, 0.1, 0.9, 1],
+                }}
+              />
+            ))}
           </div>
 
           {/* ATS node */}
