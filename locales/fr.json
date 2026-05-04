@@ -288,5 +288,7 @@
   "blog_footer_faq": "FAQ",
   "blog_footer_demo": "Réserver une démo",
   "demo_transition_label": "Voici les résultats concrets chez l'un de nos clients :",
-  "meta_description": "TrueCalling, le logiciel de sourcing IA pour équipes recrutement. D'une fiche de poste à des candidats qualifiés en minutes, via WhatsApp, email, téléphone."
+  "meta_description": "TrueCalling, le logiciel de sourcing IA pour équipes recrutement. D'une fiche de poste à des candidats qualifiés en minutes, via WhatsApp, email, téléphone.",
+  "demo_form_error_validation": "Veuillez vérifier les champs surlignés.",
+  "demo_form_error_generic": "Une erreur est survenue. Veuillez réessayer ou nous contacter directement."
 }

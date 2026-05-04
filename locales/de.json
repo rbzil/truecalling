@@ -288,5 +288,7 @@
   "blog_footer_faq": "FAQ",
   "blog_footer_demo": "Book a demo",
   "demo_transition_label": "So sehen die konkreten Ergebnisse bei einem unserer Kunden aus:",
-  "meta_description": "TrueCalling, die KI-Sourcing-Software für Recruiting-Teams. Von einer Stellenbeschreibung zu qualifizierten Kandidaten in Minuten — WhatsApp, E-Mail, Telefon."
+  "meta_description": "TrueCalling, die KI-Sourcing-Software für Recruiting-Teams. Von einer Stellenbeschreibung zu qualifizierten Kandidaten in Minuten — WhatsApp, E-Mail, Telefon.",
+  "demo_form_error_validation": "Bitte prüfen Sie die markierten Felder.",
+  "demo_form_error_generic": "Etwas ist schiefgelaufen. Bitte erneut versuchen oder uns direkt kontaktieren."
 }

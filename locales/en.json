@@ -288,5 +288,7 @@
   "blog_footer_faq": "FAQ",
   "blog_footer_demo": "Book a demo",
   "demo_transition_label": "Here's what real results look like at one of our clients:",
-  "meta_description": "TrueCalling, the AI sourcing software for recruiting teams. From a job description to qualified candidates in minutes — via WhatsApp, email, phone."
+  "meta_description": "TrueCalling, the AI sourcing software for recruiting teams. From a job description to qualified candidates in minutes — via WhatsApp, email, phone.",
+  "demo_form_error_validation": "Please check the highlighted fields.",
+  "demo_form_error_generic": "Something went wrong. Please try again or contact us directly."
 }

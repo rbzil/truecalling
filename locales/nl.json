@@ -288,5 +288,7 @@
   "blog_footer_faq": "FAQ",
   "blog_footer_demo": "Book a demo",
   "demo_transition_label": "Zo zien concrete resultaten eruit bij een van onze klanten:",
-  "meta_description": "TrueCalling, de AI-sourcing software voor recruitmentteams. Van een vacature naar gekwalificeerde kandidaten in minuten — WhatsApp, e-mail, telefoon."
+  "meta_description": "TrueCalling, de AI-sourcing software voor recruitmentteams. Van een vacature naar gekwalificeerde kandidaten in minuten — WhatsApp, e-mail, telefoon.",
+  "demo_form_error_validation": "Controleer de gemarkeerde velden.",
+  "demo_form_error_generic": "Er ging iets mis. Probeer opnieuw of neem rechtstreeks contact op."
 }

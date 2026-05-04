@@ -288,5 +288,7 @@
   "blog_footer_faq": "FAQ",
   "blog_footer_demo": "Book a demo",
   "demo_transition_label": "הנה התוצאות הקונקרטיות אצל אחד מלקוחותינו:",
-  "meta_description": "TrueCalling, תוכנת ה-Sourcing מבוססת AI לצוותי גיוס. מתיאור משרה למועמדים מתאימים בתוך דקות — ב-WhatsApp, אימייל וטלפון."
+  "meta_description": "TrueCalling, תוכנת ה-Sourcing מבוססת AI לצוותי גיוס. מתיאור משרה למועמדים מתאימים בתוך דקות — ב-WhatsApp, אימייל וטלפון.",
+  "demo_form_error_validation": "אנא בדקו את השדות המסומנים.",
+  "demo_form_error_generic": "אירעה שגיאה. נסו שוב או צרו איתנו קשר ישירות."
 }

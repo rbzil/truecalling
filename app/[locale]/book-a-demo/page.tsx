@@ -2,14 +2,17 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
-import { useT } from "../../_i18n/locale-context";
+import { useState, useTransition } from "react";
+import { useT, useLocale } from "../../_i18n/locale-context";
 import { Navbar } from "../../../components/SiteNavbar";
+import { submitDemoRequest } from "./actions";
 
 /* ============================================================
    Réservation de démo — /reserver-une-demo
-   Form + success state, no backend (simulated submit).
+   Form posts to a Server Action that emails team + prospect via Resend.
    ============================================================ */
+
+type Timing = "this-week" | "next-week" | "later";
 
 type FormState = {
   firstName: string;
@@ -20,8 +23,9 @@ type FormState = {
   role: string;
   teamSize: string;
   hiresPerYear: string;
-  slot: string;
+  timing: Timing;
   message: string;
+  honeypot: string;
 };
 
 export default function Page() {
@@ -86,9 +90,14 @@ function Hero() {
 /* ----- Form card ----- */
 function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }) => void }) {
   const t = useT();
+  const { locale } = useLocale();
   const TEAM_SIZES = [t("rd_team_solo"), t("rd_team_2_5"), t("rd_team_5_15"), t("rd_team_15p")];
   const HIRES = [t("rd_hires_lt_10"), t("rd_hires_10_50"), t("rd_hires_50_200"), t("rd_hires_200p")];
-  const SLOTS = [t("rd_slot_this_week"), t("rd_slot_next_week"), t("rd_slot_later")];
+  const SLOTS: { key: Timing; label: string }[] = [
+    { key: "this-week", label: t("rd_slot_this_week") },
+    { key: "next-week", label: t("rd_slot_next_week") },
+    { key: "later", label: t("rd_slot_later") },
+  ];
 
   const [form, setForm] = useState<FormState>({
     firstName: "",
@@ -99,11 +108,13 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
     role: "",
     teamSize: "",
     hiresPerYear: "",
-    slot: SLOTS[0],
+    timing: "this-week",
     message: "",
+    honeypot: "",
   });
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
-  const [submitting, setSubmitting] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setForm((s) => ({ ...s, [k]: v }));
@@ -121,14 +132,38 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
     return Object.keys(e).length === 0;
   };
 
-  const onSubmit = async (ev: React.FormEvent) => {
+  const onSubmit = (ev: React.FormEvent) => {
     ev.preventDefault();
-    if (!validate()) return;
-    setSubmitting(true);
-    // simulated submit delay
-    await new Promise((r) => setTimeout(r, 800));
-    setSubmitting(false);
-    onDone({ firstName: form.firstName, email: form.email });
+    setServerError(null);
+    if (!validate()) {
+      setServerError(t("demo_form_error_validation"));
+      return;
+    }
+
+    const fd = new FormData();
+    fd.set("firstName", form.firstName.trim());
+    fd.set("lastName", form.lastName.trim());
+    fd.set("email", form.email.trim());
+    fd.set("phone", form.phone.trim());
+    fd.set("jobTitle", form.role.trim());
+    fd.set("company", form.company.trim());
+    fd.set("teamSize", form.teamSize);
+    fd.set("recruitmentsPerYear", form.hiresPerYear);
+    fd.set("timing", form.timing);
+    fd.set("message", form.message.trim());
+    fd.set("honeypot", form.honeypot);
+    fd.set("locale", locale);
+
+    startTransition(async () => {
+      const res = await submitDemoRequest(fd);
+      if (res.success) {
+        onDone({ firstName: form.firstName, email: form.email });
+      } else if (res.error === "validation") {
+        setServerError(t("demo_form_error_validation"));
+      } else {
+        setServerError(t("demo_form_error_generic"));
+      }
+    });
   };
 
   return (
@@ -245,23 +280,23 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
           <div className="mt-2 grid grid-cols-3 gap-2">
             {SLOTS.map((s) => (
               <button
-                key={s}
+                key={s.key}
                 type="button"
-                onClick={() => set("slot", s)}
+                onClick={() => set("timing", s.key)}
                 className={`relative rounded-lg border px-3 py-2.5 text-[13px] font-medium transition-colors cursor-pointer ${
-                  form.slot === s
+                  form.timing === s.key
                     ? "border-accent/60 bg-accent/10 text-ink"
                     : "border-ink/10 bg-ink/[0.02] text-ink-muted hover:text-ink"
                 }`}
               >
-                {form.slot === s && (
+                {form.timing === s.key && (
                   <motion.span
                     layoutId="slot-pill"
                     className="absolute inset-0 rounded-lg ring-1 ring-accent/60"
                     transition={{ type: "spring", stiffness: 320, damping: 26 }}
                   />
                 )}
-                <span className="relative">{s}</span>
+                <span className="relative">{s.label}</span>
               </button>
             ))}
           </div>
@@ -280,11 +315,32 @@ function FormCard({ onDone }: { onDone: (d: { firstName: string; email: string }
           />
         </div>
 
+        {/* Honeypot — must stay empty. Hidden from users + assistive tech. */}
+        <input
+          type="text"
+          name="honeypot"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          value={form.honeypot}
+          onChange={(e) => set("honeypot", e.target.value)}
+          className="absolute left-[-9999px] top-[-9999px] h-0 w-0 opacity-0"
+        />
+
+        {serverError && (
+          <div
+            role="alert"
+            className="rounded-lg border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-[13px] text-rose-300"
+          >
+            {serverError}
+          </div>
+        )}
+
         <div className="flex flex-col items-stretch gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[11.5px] text-ink-muted/80">
             {t("rd_consent")}
           </p>
-          <SubmitButton submitting={submitting} />
+          <SubmitButton submitting={isPending} />
         </div>
       </form>
     </motion.div>
