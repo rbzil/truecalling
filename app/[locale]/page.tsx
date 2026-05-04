@@ -101,12 +101,17 @@ function Hero() {
             </span>
           </motion.h1>
 
-          <motion.p
+          <motion.div
             variants={fadeUp}
-            className="mt-5 sm:mt-7 max-w-2xl text-balance text-[15px] sm:text-lg leading-relaxed text-ink-muted"
+            className="mt-5 sm:mt-7 max-w-2xl space-y-2 sm:space-y-3"
           >
-            {t("hero_subtitle")}
-          </motion.p>
+            <p className="text-balance text-[15px] sm:text-lg leading-relaxed text-ink-muted">
+              {t("hero_subtitle_line1")}
+            </p>
+            <p className="text-balance text-[15px] sm:text-lg leading-relaxed text-ink-muted">
+              {t("hero_subtitle_line2")}
+            </p>
+          </motion.div>
 
           <motion.div variants={fadeUp} className="mt-7 sm:mt-10 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
             <CTAButton href={href("book-a-demo")} size="lg">

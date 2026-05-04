@@ -65,7 +65,7 @@ export default async function LocaleLayout({
     name: "TrueCalling",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
-    description: dictionary.hero_subtitle,
+    description: `${dictionary.hero_subtitle_line1} ${dictionary.hero_subtitle_line2}`,
     url: `${SITE_URL}${getLocalizedPath("home", locale)}`,
     image: `${SITE_URL}/brand/truecalling-vertical.png`,
     inLanguage: locale,
