@@ -24,10 +24,10 @@ export default function Page() {
     <main className="relative min-h-screen overflow-x-hidden bg-bg text-ink">
       <Navbar />
       <Hero />
+      <DemoAndCaseStudy />
       <Features />
       <HowItWorks />
       <Benefits />
-      <DemoAndCaseStudy />
       <Pricing />
       <FinalCTA />
     </main>
