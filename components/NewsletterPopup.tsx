@@ -163,16 +163,21 @@ export function NewsletterPopup() {
             aria-hidden="true"
           />
 
-          {/* Modal */}
-          <motion.div
-            key="np-modal"
-            {...motionProps}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="newsletter-popup-title"
-            className="fixed left-1/2 top-1/2 z-[9999] w-[90vw] max-w-md max-h-[90vh] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl border border-ink/[0.08] p-6 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)] sm:p-8"
-            style={{ backgroundColor: "rgb(var(--bg))" }}
-          >
+          {/* Centering wrapper — flex handles the X/Y centering so
+              Framer Motion's animated transform on the modal below
+              never fights with a Tailwind translate-1/2 transform.
+              pointer-events-none lets clicks pass through to the
+              backdrop except where the modal is. */}
+          <div className="pointer-events-none fixed inset-0 z-[9999] flex items-center justify-center p-4">
+            <motion.div
+              key="np-modal"
+              {...motionProps}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="newsletter-popup-title"
+              className="pointer-events-auto relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl border border-ink/[0.08] p-6 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)] sm:p-8"
+              style={{ backgroundColor: "rgb(var(--bg))" }}
+            >
             <button
               type="button"
               onClick={handleClose}
@@ -296,7 +301,8 @@ export function NewsletterPopup() {
                 </p>
               </>
             )}
-          </motion.div>
+            </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>
