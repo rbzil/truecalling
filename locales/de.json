@@ -304,7 +304,6 @@
   "privacy_gdpr_anchor_title": "Ihre DSGVO-Rechte",
   "privacy_gdpr_anchor_body": "DSGVO-Abschnitt zum Vervollständigen: Auskunfts-, Berichtigungs-, Löschungs- und Datenübertragbarkeitsrecht sowie Verfahren zur Ausübung dieser Rechte.",
   "newsletter_popup_badge": "Recruiting-Newsletter",
-  "newsletter_popup_hook_context": "Und jede Fehlbesetzung kostet Ihr Unternehmen zwischen 30.000 € und 150.000 €.",
   "newsletter_popup_promise": "Erhalten Sie jede Woche die Methoden, die die besten Recruiting-Teams nutzen, um keine Einstellungen mehr zu verfehlen.",
   "newsletter_popup_placeholder": "sie@unternehmen.de",
   "newsletter_popup_button": "Abonnieren (kostenlos)",
@@ -316,7 +315,8 @@
   "newsletter_popup_privacy_note": "Ein Newsletter pro Woche. Abmeldung mit einem Klick.",
   "newsletter_popup_privacy_link_text": "Unsere Datenschutzerklärung",
   "newsletter_popup_close_label": "Schließen",
-  "newsletter_popup_hook_before": "Jede",
-  "newsletter_popup_hook_highlight": "dritte",
-  "newsletter_popup_hook_after": "Neueinstellung übersteht das erste Jahr nicht."
+  "newsletter_popup_hook": "Jede dritte Neueinstellung übersteht das erste Jahr nicht.",
+  "newsletter_popup_hook_context_before": "Und jede Fehlbesetzung kostet Ihr Unternehmen zwischen",
+  "newsletter_popup_hook_context_highlight": "30.000 € und 150.000 €",
+  "newsletter_popup_hook_context_after": "."
 }

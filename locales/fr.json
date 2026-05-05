@@ -304,7 +304,6 @@
   "privacy_gdpr_anchor_title": "Vos droits RGPD",
   "privacy_gdpr_anchor_body": "Section RGPD à compléter : droit d'accès, de rectification, à l'effacement, à la portabilité, et procédure pour exercer ces droits.",
   "newsletter_popup_badge": "Newsletter recrutement",
-  "newsletter_popup_hook_context": "Et chaque erreur de recrutement coûte entre 30 000 € et 150 000 € à votre entreprise.",
   "newsletter_popup_promise": "Recevez chaque semaine les méthodes que les meilleures équipes recrutement utilisent pour ne plus rater leurs embauches.",
   "newsletter_popup_placeholder": "vous@entreprise.com",
   "newsletter_popup_button": "Je m'abonne (gratuit)",
@@ -316,7 +315,8 @@
   "newsletter_popup_privacy_note": "Une newsletter par semaine. Désinscription en un clic.",
   "newsletter_popup_privacy_link_text": "Voir notre politique de confidentialité",
   "newsletter_popup_close_label": "Fermer",
-  "newsletter_popup_hook_before": "Un CDI sur",
-  "newsletter_popup_hook_highlight": "trois",
-  "newsletter_popup_hook_after": "ne survit pas à la première année."
+  "newsletter_popup_hook": "Un CDI sur trois ne survit pas à la première année.",
+  "newsletter_popup_hook_context_before": "Et chaque erreur de recrutement coûte entre",
+  "newsletter_popup_hook_context_highlight": "30 000 € et 150 000 €",
+  "newsletter_popup_hook_context_after": "à votre entreprise."
 }

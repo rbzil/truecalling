@@ -304,7 +304,6 @@
   "privacy_gdpr_anchor_title": "I tuoi diritti GDPR",
   "privacy_gdpr_anchor_body": "Sezione GDPR da completare: diritto di accesso, rettifica, cancellazione, portabilità e procedura per esercitare tali diritti.",
   "newsletter_popup_badge": "Newsletter recruiting",
-  "newsletter_popup_hook_context": "E ogni errore di assunzione costa alla tua azienda tra 30.000 € e 150.000 €.",
   "newsletter_popup_promise": "Ricevi ogni settimana i metodi che i migliori team di recruiting usano per non sbagliare più le assunzioni.",
   "newsletter_popup_placeholder": "tu@azienda.com",
   "newsletter_popup_button": "Iscriviti (gratis)",
@@ -316,7 +315,8 @@
   "newsletter_popup_privacy_note": "Una newsletter a settimana. Disiscrizione con un clic.",
   "newsletter_popup_privacy_link_text": "Vedi la nostra politica sulla privacy",
   "newsletter_popup_close_label": "Chiudi",
-  "newsletter_popup_hook_before": "Un contratto su",
-  "newsletter_popup_hook_highlight": "tre",
-  "newsletter_popup_hook_after": "non supera il primo anno."
+  "newsletter_popup_hook": "Un contratto su tre non supera il primo anno.",
+  "newsletter_popup_hook_context_before": "E ogni errore di assunzione costa alla tua azienda tra",
+  "newsletter_popup_hook_context_highlight": "30.000 € e 150.000 €",
+  "newsletter_popup_hook_context_after": "."
 }

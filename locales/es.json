@@ -304,7 +304,6 @@
   "privacy_gdpr_anchor_title": "Tus derechos RGPD",
   "privacy_gdpr_anchor_body": "Sección RGPD por completar: derecho de acceso, rectificación, supresión, portabilidad y cómo ejercer estos derechos.",
   "newsletter_popup_badge": "Newsletter de reclutamiento",
-  "newsletter_popup_hook_context": "Y cada error de contratación cuesta entre 30.000 € y 150.000 € a tu empresa.",
   "newsletter_popup_promise": "Recibe cada semana los métodos que los mejores equipos de reclutamiento usan para no fallar más en sus contrataciones.",
   "newsletter_popup_placeholder": "tu@empresa.com",
   "newsletter_popup_button": "Suscribirme (gratis)",
@@ -316,7 +315,8 @@
   "newsletter_popup_privacy_note": "Una newsletter por semana. Cancela cuando quieras.",
   "newsletter_popup_privacy_link_text": "Ver nuestra política de privacidad",
   "newsletter_popup_close_label": "Cerrar",
-  "newsletter_popup_hook_before": "Uno de cada",
-  "newsletter_popup_hook_highlight": "tres",
-  "newsletter_popup_hook_after": "contratos no supera el primer año."
+  "newsletter_popup_hook": "Uno de cada tres contratos no supera el primer año.",
+  "newsletter_popup_hook_context_before": "Y cada error de contratación cuesta a tu empresa entre",
+  "newsletter_popup_hook_context_highlight": "30.000 € y 150.000 €",
+  "newsletter_popup_hook_context_after": "."
 }

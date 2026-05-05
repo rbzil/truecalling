@@ -10,7 +10,6 @@ import { createPortal } from "react-dom";
 import { X, Mail, Check } from "lucide-react";
 import { useT, useLocale, useLocalizedHref } from "../app/_i18n/locale-context";
 import { subscribeToNewsletter } from "../app/actions/newsletter";
-import { AnimatedHook } from "./AnimatedHook";
 
 /* ============================================================
    NewsletterPopup — auto-triggered modal with statistical hook
@@ -204,16 +203,45 @@ export function NewsletterPopup() {
                   </span>
                 </div>
 
-                <AnimatedHook
-                  before={t("newsletter_popup_hook_before")}
-                  highlight={t("newsletter_popup_hook_highlight")}
-                  after={t("newsletter_popup_hook_after")}
-                  isRTL={isRTL}
-                />
+                {/* Hook — block fade-in, editorial serif. */}
+                <motion.h2
+                  id="newsletter-popup-title"
+                  initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12 }}
+                  animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.1,
+                  }}
+                  className={`mb-4 text-balance text-2xl font-normal tracking-tight text-ink sm:text-3xl ${
+                    isRTL ? "font-serif-he" : "font-serif"
+                  }`}
+                  style={{ lineHeight: isRTL ? 1.4 : 1.15 }}
+                >
+                  {t("newsletter_popup_hook")}
+                </motion.h2>
 
-                <p className="mb-5 leading-relaxed text-ink-muted">
-                  {t("newsletter_popup_hook_context")}
-                </p>
+                {/* Hook context — phrase fades in, then the cost figure
+                    enters with overshoot + animated underline. */}
+                <motion.p
+                  initial={reduce ? { opacity: 0 } : { opacity: 0, y: 8 }}
+                  animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.35,
+                  }}
+                  className="mb-5 text-[15px] leading-relaxed text-ink-muted sm:text-base"
+                >
+                  {t("newsletter_popup_hook_context_before")}{" "}
+                  <HighlightedAmount
+                    text={t("newsletter_popup_hook_context_highlight")}
+                    isRTL={isRTL}
+                    delay={reduce ? 0 : 0.85}
+                    reduce={!!reduce}
+                  />
+                  {t("newsletter_popup_hook_context_after")}
+                </motion.p>
 
                 <div className="mb-5 h-px bg-ink/[0.08]" />
 
@@ -277,3 +305,56 @@ export function NewsletterPopup() {
   if (!mounted) return null;
   return createPortal(overlay, document.body);
 }
+
+/* ----------------------------------------------------------
+   HighlightedAmount — italic accent serif rendering of the cost
+   figure inside the popup's hook context. Lands with a subtle
+   overshoot, then a gradient underline draws in beneath it.
+---------------------------------------------------------- */
+function HighlightedAmount({
+  text,
+  isRTL,
+  delay,
+  reduce,
+}: {
+  text: string;
+  isRTL: boolean;
+  delay: number;
+  reduce: boolean;
+}) {
+  return (
+    <motion.span
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.9 }}
+      animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+      transition={{
+        duration: 0.7,
+        ease: [0.34, 1.56, 0.64, 1],
+        delay,
+      }}
+      className={`relative mx-[0.05em] inline-block whitespace-nowrap text-[1.15em] italic text-accent ${
+        isRTL ? "font-serif-he" : "font-serif"
+      }`}
+      style={{ letterSpacing: "-0.01em" }}
+    >
+      {text}
+      <motion.span
+        aria-hidden="true"
+        initial={{ scaleX: 0, opacity: 0 }}
+        animate={{ scaleX: 1, opacity: 1 }}
+        transition={{
+          duration: 0.6,
+          ease: [0.22, 1, 0.36, 1],
+          delay: delay + 0.4,
+        }}
+        className={`absolute -bottom-0.5 left-0 right-0 h-[2.5px] rounded-full ${
+          isRTL ? "origin-right" : "origin-left"
+        }`}
+        style={{
+          background:
+            "linear-gradient(90deg, rgb(var(--accent)) 0%, rgb(var(--accent) / 0.4) 100%)",
+        }}
+      />
+    </motion.span>
+  );
+}
+
