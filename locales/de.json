@@ -302,5 +302,19 @@
   "privacy_intro": "Inhalt in Bearbeitung. Die endgültige Fassung wird vor dem Launch veröffentlicht.",
   "privacy_todo": "Hinweis an den Betreiber: Dieser Inhalt muss vor dem Launch von einem Anwalt (oder über eine dedizierte DSGVO-Prüfung) verfasst werden.",
   "privacy_gdpr_anchor_title": "Ihre DSGVO-Rechte",
-  "privacy_gdpr_anchor_body": "DSGVO-Abschnitt zum Vervollständigen: Auskunfts-, Berichtigungs-, Löschungs- und Datenübertragbarkeitsrecht sowie Verfahren zur Ausübung dieser Rechte."
+  "privacy_gdpr_anchor_body": "DSGVO-Abschnitt zum Vervollständigen: Auskunfts-, Berichtigungs-, Löschungs- und Datenübertragbarkeitsrecht sowie Verfahren zur Ausübung dieser Rechte.",
+  "newsletter_popup_badge": "Recruiting-Newsletter",
+  "newsletter_popup_hook": "Jede dritte Neueinstellung übersteht das erste Jahr nicht.",
+  "newsletter_popup_hook_context": "Und jede Fehlbesetzung kostet Ihr Unternehmen zwischen 30.000 € und 150.000 €.",
+  "newsletter_popup_promise": "Erhalten Sie jede Woche die Methoden, die die besten Recruiting-Teams nutzen, um keine Einstellungen mehr zu verfehlen.",
+  "newsletter_popup_placeholder": "sie@unternehmen.de",
+  "newsletter_popup_button": "Abonnieren (kostenlos)",
+  "newsletter_popup_submitting": "Wird abonniert…",
+  "newsletter_popup_success_title": "Geschafft!",
+  "newsletter_popup_success_message": "Prüfen Sie Ihren Posteingang, um Ihr Abonnement zu bestätigen.",
+  "newsletter_popup_error_generic": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+  "newsletter_popup_error_invalid_email": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+  "newsletter_popup_privacy_note": "Ein Newsletter pro Woche. Abmeldung mit einem Klick.",
+  "newsletter_popup_privacy_link_text": "Unsere Datenschutzerklärung",
+  "newsletter_popup_close_label": "Schließen"
 }

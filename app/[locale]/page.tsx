@@ -12,6 +12,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useT, useLocalizedHref } from "../_i18n/locale-context";
 import { Navbar, FingerprintMark, CTAButton } from "../../components/SiteNavbar";
+import { NewsletterPopup } from "../../components/NewsletterPopup";
 
 /* ============================================================
    TrueCalling — Landing Page
@@ -30,6 +31,7 @@ export default function Page() {
       <Benefits />
       <Pricing />
       <FinalCTA />
+      <NewsletterPopup />
     </main>
   );
 }

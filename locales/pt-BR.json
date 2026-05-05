@@ -302,5 +302,19 @@
   "privacy_intro": "Conteúdo em construção. A versão final será publicada antes do lançamento.",
   "privacy_todo": "Para o proprietário: este conteúdo deve ser redigido por um advogado (ou através de uma análise dedicada à LGPD/GDPR) antes do lançamento.",
   "privacy_gdpr_anchor_title": "Seus direitos GDPR",
-  "privacy_gdpr_anchor_body": "Seção GDPR a completar: direito de acesso, retificação, eliminação, portabilidade, e procedimento para exercer esses direitos."
+  "privacy_gdpr_anchor_body": "Seção GDPR a completar: direito de acesso, retificação, eliminação, portabilidade, e procedimento para exercer esses direitos.",
+  "newsletter_popup_badge": "Newsletter de recrutamento",
+  "newsletter_popup_hook": "Um em cada três contratos não passa do primeiro ano.",
+  "newsletter_popup_hook_context": "E cada erro de contratação custa entre R$ 150.000 e R$ 750.000 à sua empresa.",
+  "newsletter_popup_promise": "Receba toda semana os métodos que as melhores equipes de recrutamento usam para não errar mais nas contratações.",
+  "newsletter_popup_placeholder": "voce@empresa.com",
+  "newsletter_popup_button": "Inscrever-se (grátis)",
+  "newsletter_popup_submitting": "Inscrevendo…",
+  "newsletter_popup_success_title": "Pronto!",
+  "newsletter_popup_success_message": "Verifique sua caixa de entrada para confirmar a inscrição.",
+  "newsletter_popup_error_generic": "Algo deu errado. Tente novamente.",
+  "newsletter_popup_error_invalid_email": "Por favor, insira um e-mail válido.",
+  "newsletter_popup_privacy_note": "Uma newsletter por semana. Cancele a qualquer momento.",
+  "newsletter_popup_privacy_link_text": "Ver nossa política de privacidade",
+  "newsletter_popup_close_label": "Fechar"
 }

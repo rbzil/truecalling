@@ -302,5 +302,19 @@
   "privacy_intro": "Inhoud in voorbereiding. De definitieve versie wordt vóór de lancering gepubliceerd.",
   "privacy_todo": "Voor de eigenaar: deze inhoud moet vóór de lancering door een advocaat (of via een toegewijde AVG-analyse) worden opgesteld.",
   "privacy_gdpr_anchor_title": "Uw AVG-rechten",
-  "privacy_gdpr_anchor_body": "AVG-sectie om aan te vullen: recht op inzage, rectificatie, wissing, overdraagbaarheid, en procedure om deze rechten uit te oefenen."
+  "privacy_gdpr_anchor_body": "AVG-sectie om aan te vullen: recht op inzage, rectificatie, wissing, overdraagbaarheid, en procedure om deze rechten uit te oefenen.",
+  "newsletter_popup_badge": "Recruiting nieuwsbrief",
+  "newsletter_popup_hook": "Eén op drie nieuwe medewerkers haalt het eerste jaar niet.",
+  "newsletter_popup_hook_context": "En elke verkeerde aanwerving kost uw bedrijf tussen € 30.000 en € 150.000.",
+  "newsletter_popup_promise": "Ontvang wekelijks de methodes die de beste recruitingteams gebruiken om geen aanwervingen meer te missen.",
+  "newsletter_popup_placeholder": "jij@bedrijf.com",
+  "newsletter_popup_button": "Abonneren (gratis)",
+  "newsletter_popup_submitting": "Bezig met abonneren…",
+  "newsletter_popup_success_title": "Gelukt!",
+  "newsletter_popup_success_message": "Controleer je inbox om je abonnement te bevestigen.",
+  "newsletter_popup_error_generic": "Er is iets misgegaan. Probeer opnieuw.",
+  "newsletter_popup_error_invalid_email": "Voer een geldig e-mailadres in.",
+  "newsletter_popup_privacy_note": "Eén nieuwsbrief per week. Uitschrijven met één klik.",
+  "newsletter_popup_privacy_link_text": "Zie ons privacybeleid",
+  "newsletter_popup_close_label": "Sluiten"
 }

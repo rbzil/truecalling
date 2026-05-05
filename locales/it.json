@@ -302,5 +302,19 @@
   "privacy_intro": "Contenuto in fase di redazione. La versione definitiva sarà pubblicata prima del lancio.",
   "privacy_todo": "Per il proprietario: questo contenuto deve essere redatto da un avvocato (o tramite un'analisi GDPR dedicata) prima del lancio.",
   "privacy_gdpr_anchor_title": "I tuoi diritti GDPR",
-  "privacy_gdpr_anchor_body": "Sezione GDPR da completare: diritto di accesso, rettifica, cancellazione, portabilità e procedura per esercitare tali diritti."
+  "privacy_gdpr_anchor_body": "Sezione GDPR da completare: diritto di accesso, rettifica, cancellazione, portabilità e procedura per esercitare tali diritti.",
+  "newsletter_popup_badge": "Newsletter recruiting",
+  "newsletter_popup_hook": "Un contratto su tre non supera il primo anno.",
+  "newsletter_popup_hook_context": "E ogni errore di assunzione costa alla tua azienda tra 30.000 € e 150.000 €.",
+  "newsletter_popup_promise": "Ricevi ogni settimana i metodi che i migliori team di recruiting usano per non sbagliare più le assunzioni.",
+  "newsletter_popup_placeholder": "tu@azienda.com",
+  "newsletter_popup_button": "Iscriviti (gratis)",
+  "newsletter_popup_submitting": "Iscrizione in corso…",
+  "newsletter_popup_success_title": "Fatto!",
+  "newsletter_popup_success_message": "Controlla la tua casella per confermare l'iscrizione.",
+  "newsletter_popup_error_generic": "Si è verificato un errore. Riprova.",
+  "newsletter_popup_error_invalid_email": "Inserisci un indirizzo email valido.",
+  "newsletter_popup_privacy_note": "Una newsletter a settimana. Disiscrizione con un clic.",
+  "newsletter_popup_privacy_link_text": "Vedi la nostra politica sulla privacy",
+  "newsletter_popup_close_label": "Chiudi"
 }

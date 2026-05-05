@@ -302,5 +302,19 @@
   "privacy_intro": "התוכן בעבודה. הגרסה הסופית תפורסם לפני השקת האתר.",
   "privacy_todo": "לבעלי האתר: יש לערוך תוכן זה על ידי עורך דין (או באמצעות סקירת GDPR ייעודית) לפני ההשקה.",
   "privacy_gdpr_anchor_title": "זכויותיך לפי GDPR",
-  "privacy_gdpr_anchor_body": "סעיף GDPR להשלמה: זכות לעיון, תיקון, מחיקה, העברה ואופן מימוש זכויות אלה."
+  "privacy_gdpr_anchor_body": "סעיף GDPR להשלמה: זכות לעיון, תיקון, מחיקה, העברה ואופן מימוש זכויות אלה.",
+  "newsletter_popup_badge": "ניוזלטר גיוס",
+  "newsletter_popup_hook": "אחד מכל שלושה גיוסים לא שורד את השנה הראשונה.",
+  "newsletter_popup_hook_context": "וכל טעות גיוס עולה לחברה שלכם בין 30,000 ל-150,000 €.",
+  "newsletter_popup_promise": "קבלו מדי שבוע את השיטות שצוותי הגיוס המובילים משתמשים בהן כדי לא לפספס יותר גיוסים.",
+  "newsletter_popup_placeholder": "you@company.com",
+  "newsletter_popup_button": "הרשמה (חינם)",
+  "newsletter_popup_submitting": "נרשם…",
+  "newsletter_popup_success_title": "נרשמתם בהצלחה!",
+  "newsletter_popup_success_message": "בדקו את תיבת הדואר שלכם כדי לאשר את ההרשמה.",
+  "newsletter_popup_error_generic": "אירעה שגיאה. אנא נסו שוב.",
+  "newsletter_popup_error_invalid_email": "אנא הזינו כתובת אימייל תקינה.",
+  "newsletter_popup_privacy_note": "ניוזלטר אחד בשבוע. ביטול הרשמה בלחיצה אחת.",
+  "newsletter_popup_privacy_link_text": "ראו את מדיניות הפרטיות שלנו",
+  "newsletter_popup_close_label": "סגור"
 }
