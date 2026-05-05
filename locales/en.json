@@ -304,7 +304,6 @@
   "privacy_gdpr_anchor_title": "Your GDPR rights",
   "privacy_gdpr_anchor_body": "GDPR section to complete: right of access, rectification, erasure, portability, and how to exercise these rights.",
   "newsletter_popup_badge": "Recruiting newsletter",
-  "newsletter_popup_hook": "One in three new hires doesn't make it past the first year.",
   "newsletter_popup_hook_context": "And every bad hire costs your company between $30,000 and $150,000.",
   "newsletter_popup_promise": "Get the methods top recruiting teams use to stop missing their hires — every week in your inbox.",
   "newsletter_popup_placeholder": "you@company.com",
@@ -316,5 +315,8 @@
   "newsletter_popup_error_invalid_email": "Please enter a valid email address.",
   "newsletter_popup_privacy_note": "One newsletter per week. Unsubscribe in one click.",
   "newsletter_popup_privacy_link_text": "See our privacy policy",
-  "newsletter_popup_close_label": "Close"
+  "newsletter_popup_close_label": "Close",
+  "newsletter_popup_hook_before": "One in",
+  "newsletter_popup_hook_highlight": "three",
+  "newsletter_popup_hook_after": "new hires doesn't make it past the first year."
 }

@@ -8,8 +8,9 @@ import {
 } from "framer-motion";
 import { createPortal } from "react-dom";
 import { X, Mail, Check } from "lucide-react";
-import { useT, useLocalizedHref } from "../app/_i18n/locale-context";
+import { useT, useLocale, useLocalizedHref } from "../app/_i18n/locale-context";
 import { subscribeToNewsletter } from "../app/actions/newsletter";
+import { AnimatedHook } from "./AnimatedHook";
 
 /* ============================================================
    NewsletterPopup — auto-triggered modal with statistical hook
@@ -35,6 +36,7 @@ const SCROLL_TRIGGER_PERCENT = 50;
 export function NewsletterPopup() {
   const t = useT();
   const href = useLocalizedHref();
+  const { isRTL } = useLocale();
   const reduce = useReducedMotion();
 
   const [mounted, setMounted] = useState(false);
@@ -202,12 +204,12 @@ export function NewsletterPopup() {
                   </span>
                 </div>
 
-                <h2
-                  id="newsletter-popup-title"
-                  className="mb-3 text-balance text-2xl font-bold leading-tight tracking-tight text-ink sm:text-[28px]"
-                >
-                  {t("newsletter_popup_hook")}
-                </h2>
+                <AnimatedHook
+                  before={t("newsletter_popup_hook_before")}
+                  highlight={t("newsletter_popup_hook_highlight")}
+                  after={t("newsletter_popup_hook_after")}
+                  isRTL={isRTL}
+                />
 
                 <p className="mb-5 leading-relaxed text-ink-muted">
                   {t("newsletter_popup_hook_context")}

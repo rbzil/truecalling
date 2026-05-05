@@ -20,6 +20,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
+        "serif-he": ["var(--font-serif-he)", "Georgia", "serif"],
       },
       letterSpacing: {
         tighter2: "-0.02em",
