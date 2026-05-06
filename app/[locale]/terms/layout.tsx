@@ -12,8 +12,8 @@ export async function generateMetadata({
   const locale = params.locale as Locale;
   if (!(locales as readonly string[]).includes(locale)) return {};
 
-  const { title, description } = getSeoMeta("legal-notice", locale);
-  const alternates = buildAlternates("legal-notice", locale);
+  const { title, description } = getSeoMeta("terms", locale);
+  const alternates = buildAlternates("terms", locale);
 
   return {
     title,
@@ -31,7 +31,7 @@ export async function generateMetadata({
   };
 }
 
-export default function LegalNoticeLayout({
+export default function TermsLayout({
   children,
   params,
 }: {
@@ -41,7 +41,7 @@ export default function LegalNoticeLayout({
   const locale = params.locale as Locale;
   if (!(locales as readonly string[]).includes(locale)) return children;
   return (
-    <SubRouteLayout route="legal-notice" locale={locale}>
+    <SubRouteLayout route="terms" locale={locale}>
       {children}
     </SubRouteLayout>
   );

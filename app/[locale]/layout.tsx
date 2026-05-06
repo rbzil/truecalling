@@ -1,13 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import {
-  locales,
-  rtlLocales,
-  getLocalizedPath,
-  type Locale,
-} from "@/lib/i18n-config";
+import { locales, rtlLocales, type Locale } from "@/lib/i18n-config";
 import { getDictionary } from "@/lib/get-dictionary";
-import { buildAlternates, SITE_URL } from "@/lib/seo-metadata";
+import { buildAlternates } from "@/lib/seo-metadata";
 import { Providers } from "../providers";
 import { SiteFooter } from "@/components/SiteFooter";
 
@@ -50,35 +45,11 @@ export default async function LocaleLayout({
   const dictionary = await getDictionary(locale);
   const dir = rtlLocales.includes(locale) ? "rtl" : "ltr";
 
-  // Locale-aware structured data (one per locale page)
-  const ldJson = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "TrueCalling",
-    applicationCategory: "BusinessApplication",
-    operatingSystem: "Web",
-    description: `${dictionary.hero_subtitle_line1} ${dictionary.hero_subtitle_line2}`,
-    url: `${SITE_URL}${getLocalizedPath("home", locale)}`,
-    image: `${SITE_URL}/brand/truecalling-vertical.png`,
-    inLanguage: locale,
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: "USD",
-      lowPrice: "595",
-      highPrice: "895",
-      offerCount: "3",
-    },
-  };
-
   return (
     <Providers locale={locale} dictionary={dictionary}>
-      {/* The locale provider syncs <html lang dir> via effect; we also set
-         dir here on a wrapper so SSR markup is correct for RTL flipping. */}
+      {/* Root <html> already carries lang + dir from headers(); the wrapper
+         here keeps deeply-nested CSS that targets [dir] working. */}
       <div dir={dir} lang={locale}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
-        />
         {children}
         <SiteFooter />
       </div>

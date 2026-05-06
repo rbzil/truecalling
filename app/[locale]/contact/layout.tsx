@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { type Locale, locales } from "@/lib/i18n-config";
 import { buildAlternates } from "@/lib/seo-metadata";
 import { getSeoMeta } from "@/lib/seo-translations";
+import { SubRouteLayout } from "@/components/SubRouteLayout";
 
 export async function generateMetadata({
   params,
@@ -30,6 +31,18 @@ export async function generateMetadata({
   };
 }
 
-export default function ContactLayout({ children }: { children: React.ReactNode }) {
-  return children;
+export default function ContactLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: { locale: string };
+}) {
+  const locale = params.locale as Locale;
+  if (!(locales as readonly string[]).includes(locale)) return children;
+  return (
+    <SubRouteLayout route="contact" locale={locale}>
+      {children}
+    </SubRouteLayout>
+  );
 }

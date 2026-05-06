@@ -8,11 +8,10 @@ import {
   locales,
   blogEnabledLocales,
 } from "@/lib/i18n-config";
-import { buildAlternates } from "@/lib/seo-metadata";
+import { buildAlternates, SITE_URL } from "@/lib/seo-metadata";
+import { breadcrumbSchema, jsonLd } from "@/lib/schema";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/SiteNavbar";
-
-const SITE_URL = "https://truecalling.app";
 
 export function generateStaticParams() {
   return blogEnabledLocales.map((locale) => ({ locale }));
@@ -58,8 +57,17 @@ export default async function Page({
   const featured = sorted[0];
   const rest = sorted.slice(1);
 
+  const breadcrumb = breadcrumbSchema([
+    { name: "TrueCalling", url: `${SITE_URL}${getLocalizedPath("home", params.locale)}` },
+    { name: dict.blog_meta_title ?? "Blog", url: `${SITE_URL}${getLocalizedPath("blog", params.locale)}` },
+  ]);
+
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-bg text-ink">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumb) }}
+      />
       <BackgroundDecor />
       <Navbar />
       <Hero dict={dict} />
