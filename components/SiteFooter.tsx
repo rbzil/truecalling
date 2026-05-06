@@ -38,6 +38,7 @@ export function SiteFooter() {
     { label: t("footer_terms"), href: href("terms") },
     { label: t("footer_legal_mentions"), href: href("legal-notice") },
     { label: t("footer_privacy"), href: href("privacy") },
+    { label: t("footer_cookies"), href: href("cookies") },
     { label: t("footer_gdpr"), href: href("privacy", { hash: "#rgpd" }) },
   ];
 

@@ -318,5 +318,6 @@
   "newsletter_popup_hook": "Un CDI sur trois ne survit pas à la première année.",
   "newsletter_popup_hook_context_before": "Et chaque erreur de recrutement coûte entre",
   "newsletter_popup_hook_context_highlight": "30 000 € et 150 000 €",
-  "newsletter_popup_hook_context_after": "à votre entreprise."
+  "newsletter_popup_hook_context_after": "à votre entreprise.",
+  "footer_cookies": "Politique de cookies"
 }

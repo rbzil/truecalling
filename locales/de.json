@@ -318,5 +318,6 @@
   "newsletter_popup_hook": "Jede dritte Neueinstellung übersteht das erste Jahr nicht.",
   "newsletter_popup_hook_context_before": "Und jede Fehlbesetzung kostet Ihr Unternehmen zwischen",
   "newsletter_popup_hook_context_highlight": "30.000 € und 150.000 €",
-  "newsletter_popup_hook_context_after": "."
+  "newsletter_popup_hook_context_after": ".",
+  "footer_cookies": "Cookie-Richtlinie"
 }

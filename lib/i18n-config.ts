@@ -52,7 +52,8 @@ export type RouteKey =
   | "terms"
   | "blog"
   | "legal-notice"
-  | "privacy";
+  | "privacy"
+  | "cookies";
 
 /**
  * Canonical (file-system) slug per route key. The folder under
@@ -66,6 +67,7 @@ export const canonicalSlug: Record<Exclude<RouteKey, "home">, string> = {
   blog: "blog",
   "legal-notice": "legal-notice",
   privacy: "privacy",
+  cookies: "cookies",
 };
 
 /**
@@ -137,6 +139,16 @@ export const localizedSlug: Record<RouteKey, Record<Locale, string>> = {
     de: "datenschutz",
     it: "privacy",
     nl: "privacy",
+  },
+  cookies: {
+    fr: "politique-de-cookies",
+    en: "cookies",
+    he: "cookies",
+    "pt-BR": "cookies",
+    es: "cookies",
+    de: "cookies",
+    it: "cookies",
+    nl: "cookies",
   },
 };
 

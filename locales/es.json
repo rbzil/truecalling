@@ -318,5 +318,6 @@
   "newsletter_popup_hook": "Uno de cada tres contratos no supera el primer año.",
   "newsletter_popup_hook_context_before": "Y cada error de contratación cuesta a tu empresa entre",
   "newsletter_popup_hook_context_highlight": "30.000 € y 150.000 €",
-  "newsletter_popup_hook_context_after": "."
+  "newsletter_popup_hook_context_after": ".",
+  "footer_cookies": "Política de cookies"
 }

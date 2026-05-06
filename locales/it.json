@@ -318,5 +318,6 @@
   "newsletter_popup_hook": "Un contratto su tre non supera il primo anno.",
   "newsletter_popup_hook_context_before": "E ogni errore di assunzione costa alla tua azienda tra",
   "newsletter_popup_hook_context_highlight": "30.000 € e 150.000 €",
-  "newsletter_popup_hook_context_after": "."
+  "newsletter_popup_hook_context_after": ".",
+  "footer_cookies": "Politica sui cookie"
 }

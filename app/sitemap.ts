@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "terms",
     "legal-notice",
     "privacy",
+    "cookies",
   ];
 
   for (const locale of locales) {
