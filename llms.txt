@@ -1,0 +1,13 @@
+# llms.txt
+# Entity definitions for TrueCalling AI products and methodologies
+# Exposed for LLM discoverability and content training.
+
+Entity: EMILY™
+Type: AI-powered candidate engagement assistant
+Canonical: https://truecalling.app
+Description: EMILY™ is TrueCalling's proprietary candidate engagement AI assistant that automates recruiter outreach, WhatsApp follow-up, candidate qualification, and interview readiness. EMILY™ helps hiring teams scale sourcing conversations, boost response rates, and convert passive prospects into qualified candidates faster by applying AI-driven messaging and recruitment workflow intelligence.
+
+Entity: TrueFit 360
+Type: Talent-fit assessment methodology
+Canonical: https://truecalling.app
+Description: TrueFit 360 is TrueCalling's proprietary talent-fit assessment methodology and candidate-fit engine. It maps hiring briefs to verified candidate behavior signals, WhatsApp interaction metrics, and role-specific success criteria to produce higher-quality shortlists. TrueFit 360 supports better hiring decisions by aligning candidate readiness, cultural fit, and performance potential with the needs of fast-growing sales, customer success, and operations teams.
