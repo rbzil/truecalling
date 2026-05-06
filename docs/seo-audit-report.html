@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TrueCalling — SEO Audit Report (May 6, 2026)</title>
+<style>
+  @page { size: A4; margin: 18mm 14mm; }
+  :root {
+    --accent: #E91E8C;
+    --ink: #0a1628;
+    --muted: #475569;
+    --bg: #ffffff;
+    --surface: #f8fafc;
+    --border: #e2e8f0;
+    --critical: #dc2626;
+    --high: #ea580c;
+    --medium: #ca8a04;
+    --low: #64748b;
+    --pass: #10b981;
+  }
+  * { box-sizing: border-box; }
+  html, body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--ink); line-height: 1.55; margin: 0; padding: 0; background: var(--bg); }
+  body { max-width: 900px; margin: 0 auto; padding: 32px 28px 80px; font-size: 14px; }
+  h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 6px; }
+  h2 { font-size: 22px; font-weight: 700; margin: 32px 0 10px; padding-bottom: 6px; border-bottom: 2px solid var(--border); page-break-after: avoid; }
+  h3 { font-size: 16px; font-weight: 600; margin: 20px 0 6px; page-break-after: avoid; }
+  h4 { font-size: 14px; font-weight: 600; margin: 12px 0 4px; }
+  p { margin: 0 0 8px; }
+  small { color: var(--muted); }
+  ul, ol { margin: 6px 0 12px; padding-left: 22px; }
+  li { margin: 3px 0; }
+  code { background: var(--surface); padding: 1px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, monospace; font-size: 12.5px; color: var(--accent); }
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; overflow-x: auto; font-size: 12px; line-height: 1.4; }
+  pre code { background: transparent; color: var(--ink); padding: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; font-size: 13px; page-break-inside: avoid; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { background: var(--surface); font-weight: 600; color: var(--ink); }
+  .header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding-bottom: 18px; border-bottom: 3px solid var(--accent); margin-bottom: 24px; }
+  .header .meta { text-align: right; color: var(--muted); font-size: 12.5px; }
+  .header .meta strong { color: var(--ink); }
+  .score-card { display: grid; grid-template-columns: 1fr 2fr; gap: 18px; padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin: 16px 0 28px; page-break-inside: avoid; }
+  .score-card .number { font-size: 64px; font-weight: 700; line-height: 1; color: var(--accent); text-align: center; }
+  .score-card .label { text-align: center; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-top: 4px; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .pill.critical { background: #fee2e2; color: var(--critical); }
+  .pill.high { background: #fed7aa; color: var(--high); }
+  .pill.medium { background: #fef3c7; color: var(--medium); }
+  .pill.low { background: #e2e8f0; color: var(--low); }
+  .pill.pass { background: #dcfce7; color: var(--pass); }
+  .callout { padding: 14px 16px; border-radius: 8px; margin: 14px 0; border-left: 4px solid var(--critical); background: #fef2f2; }
+  .callout.high { border-color: var(--high); background: #fff7ed; }
+  .callout.info { border-color: #0ea5e9; background: #f0f9ff; }
+  .footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--muted); text-align: center; }
+  .toc { background: var(--surface); padding: 14px 18px; border-radius: 8px; margin: 16px 0 32px; font-size: 13px; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .page-break { page-break-before: always; }
+  @media print {
+    body { padding: 0; }
+    h2 { page-break-after: avoid; }
+    table { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>SEO Audit Report</h1>
+    <p style="margin: 0; color: var(--muted); font-size: 14px;">TrueCalling — AI sourcing software for recruiting teams</p>
+  </div>
+  <div class="meta">
+    <div><strong>Audit date:</strong> May 6, 2026</div>
+    <div><strong>URL audited:</strong> truecalling-lyart.vercel.app/en</div>
+    <div><strong>Production:</strong> truecalling.app</div>
+    <div><strong>Type:</strong> SaaS B2B (recruiting AI)</div>
+    <div><strong>Locales:</strong> 8 (fr, en, he, pt-BR, es, de, it, nl)</div>
+  </div>
+</div>
+
+<section class="toc">
+  <strong>Contents</strong>
+  <ul style="margin: 6px 0 0;">
+    <li><a href="#summary">Executive summary</a></li>
+    <li><a href="#scores">Category scores</a></li>
+    <li><a href="#critical">Critical issues (5)</a></li>
+    <li><a href="#proximate">Visible bugs to users</a></li>
+    <li><a href="#actions">Prioritized action plan</a></li>
+    <li><a href="#technical">Technical SEO findings (51/100)</a></li>
+    <li><a href="#schema">Schema findings (45/100)</a></li>
+    <li><a href="#geo">GEO / AI search findings (38/100)</a></li>
+    <li><a href="#sxo">SXO findings (41/100)</a></li>
+    <li><a href="#hreflang">Hreflang findings</a></li>
+    <li><a href="#partial">Partial reports (content, sitemap, perf, visual)</a></li>
+  </ul>
+</section>
+
+<h2 id="summary">Executive summary</h2>
+<p>TrueCalling has a solid SSR foundation (Next.js 14 App Router on Vercel), correct per-locale title differentiation, and a working 8-locale URL structure with translated slugs. The site is not yet ready for production SEO because of five blocking technical issues that compound across locales: a global canonical collapse points every sub-page at the locale homepage; the staging Vercel environment is openly indexable in parallel with the canonical domain; <code>robots.txt</code> returns 404 because the locale catch-all route intercepts the path; the root <code>&lt;html lang&gt;</code> attribute is hardcoded to English on every locale page; and broken hreflang on sub-routes points at the wrong target URLs.</p>
+<p>Beyond technical correctness, the homepage is the wrong page type for the primary commercial keywords ("AI sourcing software", "recruiting AI tool") — Google rewards comparison guides and listicles for these queries (90 % of top 10 results). A separate comparison content asset is required to capture organic traffic for these terms; the homepage will only ever rank for branded and bottom-of-funnel queries.</p>
+<p>The blog is the strongest GEO asset on the site, but it is undermined by missing author attribution, unsourced statistics, and absent <code>image</code> on <code>BlogPosting</code> schema (which alone makes every article ineligible for Google rich results). The site has no <code>llms.txt</code>, no <code>Organization</code> schema, and no AI crawler directives — limiting LLM citation potential at a moment where Perplexity and ChatGPT Search are becoming meaningful traffic sources for B2B SaaS.</p>
+
+<div class="score-card">
+  <div>
+    <div class="number">50</div>
+    <div class="label">SEO Health Score / 100</div>
+  </div>
+  <div>
+    <p style="margin: 0;"><strong>Verdict:</strong> Below average for a launch-stage B2B SaaS site. The fundamentals are present but compromised by 5 critical technical issues that block independent indexing of sub-pages and split crawl signals between staging and production. Estimated lift to 75+ within 4-6 weeks of focused dev work, and 85+ within 8-12 weeks adding content (comparison page, blog author bylines, sourced stats, llms.txt).</p>
+  </div>
+</div>
+
+<h2 id="scores">Category scores</h2>
+<table>
+  <thead><tr><th>Category</th><th>Weight</th><th>Score</th><th>Weighted</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>Technical SEO</td><td>22 %</td><td>51 / 100</td><td>11.2</td><td><span class="pill high">Needs work</span></td></tr>
+    <tr><td>Content quality</td><td>23 %</td><td>55 / 100</td><td>12.7</td><td><span class="pill medium">Needs work</span></td></tr>
+    <tr><td>On-page SEO</td><td>20 %</td><td>50 / 100</td><td>10.0</td><td><span class="pill medium">Needs work</span></td></tr>
+    <tr><td>Schema / structured data</td><td>10 %</td><td>45 / 100</td><td>4.5</td><td><span class="pill high">Critical gaps</span></td></tr>
+    <tr><td>Performance (CWV)</td><td>10 %</td><td>50 / 100*</td><td>5.0</td><td><span class="pill medium">Partial measurement</span></td></tr>
+    <tr><td>AI search readiness (GEO)</td><td>10 %</td><td>38 / 100</td><td>3.8</td><td><span class="pill critical">Bottom quartile</span></td></tr>
+    <tr><td>Images</td><td>5 %</td><td>60 / 100</td><td>3.0</td><td><span class="pill medium">OK with one 404</span></td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>100 %</strong></td><td></td><td><strong>50.2 / 100</strong></td><td></td></tr>
+  </tbody>
+</table>
+<p><small>* Performance score partial — PageSpeed Insights API quota was exhausted during the audit. Re-run with Lighthouse CLI for accurate Core Web Vitals.</small></p>
+
+<h2 id="critical">Critical issues</h2>
+
+<div class="callout">
+<h4 style="margin-top:0;"><span class="pill critical">Critical 1</span> &nbsp; Canonical collapse on all sub-routes</h4>
+<p>Every sub-route (<code>/en/book-a-demo</code>, <code>/en/contact</code>, <code>/en/faq</code>, <code>/fr/reserver-une-demo</code>, <code>/fr/contact</code>, <code>/fr/politique-de-confidentialite</code>, etc.) issues a <code>&lt;link rel="canonical"&gt;</code> pointing back at the locale homepage instead of itself. Google will treat each as a duplicate of the home and refuse to index ~48 URLs across the 8 locales independently. Only <code>/en/blog</code> self-canonicalizes correctly because it has its own <code>generateMetadata</code>.</p>
+<p><strong>Root cause:</strong> the <code>generateMetadata</code> in <code>app/[locale]/layout.tsx</code> sets canonical to the locale home; all sub-routes inherit it because they don't override it.</p>
+<p><strong>Fix:</strong> add a <code>generateMetadata()</code> export to every sub-page module (book-a-demo, contact, faq, terms, legal-notice, privacy, cookies, blog/[slug]) that returns <code>alternates.canonical</code> = the page's own URL, computed via <code>getLocalizedPath(routeKey, locale)</code>.</p>
+</div>
+
+<div class="callout">
+<h4 style="margin-top:0;"><span class="pill critical">Critical 2</span> &nbsp; Hreflang sub-routes point at wrong URLs</h4>
+<p>On every sub-page, the <code>alternates.languages</code> dictionary inherited from the home layout maps each locale to that locale's <em>homepage</em>, not the equivalent localized slug. So <code>/fr/reserver-une-demo</code> declares <code>hreflang="de"</code> targeting <code>/de</code> instead of <code>/de/demo-buchen</code>. Google will either ignore these hreflang declarations or treat the cross-locale relationships as broken.</p>
+<p><strong>Same fix as Critical 1:</strong> when adding <code>generateMetadata</code> per sub-route, also rebuild <code>alternates.languages</code> for each locale using <code>getLocalizedPath(routeKey, locale)</code>, not <code>getLocalizedPath("home", locale)</code>.</p>
+</div>
+
+<div class="callout">
+<h4 style="margin-top:0;"><span class="pill critical">Critical 3</span> &nbsp; <code>&lt;html lang="en"&gt;</code> hardcoded across all locales</h4>
+<p>The root layout (<code>app/layout.tsx</code>) hardcodes <code>&lt;html lang="en"&gt;</code>. The locale-specific <code>&lt;div lang={locale}&gt;</code> child does not compensate for this in the eyes of Google or accessibility tooling. On <code>/fr</code>, <code>/he</code>, <code>/de</code>, etc. Google reads <code>lang="en"</code> at SSR. The post-hydration <code>useEffect</code> that mutates <code>document.documentElement.lang</code> on the client is too late for SEO.</p>
+<p><strong>Fix:</strong> Move <code>&lt;html&gt;</code> from the root layout into <code>app/[locale]/layout.tsx</code> (the root must still render <code>&lt;html&gt;</code> per Next.js convention; the cleanest workaround in Next 14 is to keep the root as a pass-through and place real <code>&lt;html lang={locale}&gt;</code> inside the locale layout, or alternatively read the path via <code>headers()</code> in the root layout to compute the right lang at SSR).</p>
+</div>
+
+<div class="callout">
+<h4 style="margin-top:0;"><span class="pill critical">Critical 4</span> &nbsp; <code>robots.txt</code> returns HTTP 404 (HTML, not text/plain)</h4>
+<p>The Next.js <code>[locale]</code> catch-all route is intercepting <code>/robots.txt</code> before any file-system fallback can serve a real <code>robots.txt</code>. Result: GET <code>/robots.txt</code> returns 404 with <code>content-type: text/html</code> and <code>x-matched-path: /[locale]</code>. There is no crawl directive, no sitemap declaration, and no AI bot allow signal (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot).</p>
+<p><strong>Fix:</strong> add <code>app/robots.ts</code> using the Next.js Metadata API. Sample below.</p>
+<pre><code>// app/robots.ts
+import { MetadataRoute } from 'next'
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: [
+      { userAgent: '*', allow: '/' },
+      { userAgent: ['GPTBot', 'OAI-SearchBot', 'ClaudeBot', 'PerplexityBot', 'Google-Extended'], allow: '/' },
+    ],
+    sitemap: 'https://truecalling.app/sitemap.xml',
+  }
+}</code></pre>
+</div>
+
+<div class="callout">
+<h4 style="margin-top:0;"><span class="pill critical">Critical 5</span> &nbsp; Staging deployment is openly indexable</h4>
+<p><code>truecalling-lyart.vercel.app</code> is live, returns <code>meta name="robots" content="index, follow"</code> on every page, and serves a sitemap that references the production domain <code>truecalling.app</code>. Googlebot can crawl both — duplicate content risk and PageRank dilution.</p>
+<p><strong>Fix:</strong> in <code>next.config.js</code>, add a <code>X-Robots-Tag: noindex</code> header conditional on <code>process.env.VERCEL_ENV !== 'production'</code>. Reinforce in <code>generateMetadata()</code> with <code>robots: { index: false }</code> on the same condition.</p>
+</div>
+
+<h2 id="proximate">Visible bugs to users (fix first — affect credibility)</h2>
+<table>
+  <thead><tr><th>Bug</th><th>Impact</th><th>Effort</th></tr></thead>
+  <tbody>
+    <tr><td><strong>"[À confirmer], Le Chiller"</strong> testimonial live on the home — placeholder visible to every visitor</td><td>Tue la crédibilité commerciale; signalé par SXO comme principale faille de trust</td><td>15 min — replace with real attribution or remove the section</td></tr>
+    <tr><td><code>/logos/lechiller.png</code> returns <strong>HTTP 404</strong> — the logo preloaded as the LCP candidate is missing from the deployment</td><td>Broken image visible in the case study; preload bandwidth wasted; LCP timing destroyed</td><td>15 min — commit the file to <code>/public/logos/</code> and switch to <code>&lt;Image priority&gt;</code></td></tr>
+  </tbody>
+</table>
+
+<h2 id="actions">Prioritized action plan</h2>
+
+<h3>Critical — fix this week</h3>
+<table>
+  <thead><tr><th style="width: 38px;">#</th><th>Action</th><th style="width: 80px;">Effort</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><code>generateMetadata()</code> per sub-route (canonical + alternates.languages correct)</td><td>3-4 h</td></tr>
+    <tr><td>2</td><td>Create <code>app/robots.ts</code> with Allow on AI bots + Sitemap declaration</td><td>30 min</td></tr>
+    <tr><td>3</td><td>Block staging indexation (<code>X-Robots-Tag</code> conditional on <code>VERCEL_ENV</code>)</td><td>30 min</td></tr>
+    <tr><td>4</td><td>Remove or replace "[À confirmer], Le Chiller" testimonial</td><td>15 min</td></tr>
+    <tr><td>5</td><td>Fix dynamic <code>&lt;html lang&gt;</code> per locale at SSR</td><td>1-2 h</td></tr>
+    <tr><td>6</td><td>Fix <code>/logos/lechiller.png</code> 404 + switch to <code>next/image priority</code></td><td>15 min</td></tr>
+  </tbody>
+</table>
+
+<h3>High — fix this month</h3>
+<table>
+  <thead><tr><th style="width: 38px;">#</th><th>Action</th><th style="width: 80px;">Effort</th></tr></thead>
+  <tbody>
+    <tr><td>7</td><td>Add <code>Organization</code> + <code>WebSite</code> + <code>BreadcrumbList</code> schemas. Move <code>SoftwareApplication</code> from layout to home page only.</td><td>2-3 h</td></tr>
+    <tr><td>8</td><td>Fix <code>BlogPosting</code> schema: add <code>image</code> (required), <code>dateModified</code>, <code>publisher.logo</code></td><td>2 h</td></tr>
+    <tr><td>9</td><td>Unique titles + meta descriptions per sub-page across all 8 locales</td><td>4 h</td></tr>
+    <tr><td>10</td><td>Sitemap: add <code>x-default</code>, switch <code>lastmod</code> from <code>Date.now()</code> to real values</td><td>1 h</td></tr>
+    <tr><td>11</td><td>Security headers: CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy</td><td>30 min</td></tr>
+  </tbody>
+</table>
+
+<h3>Medium — fix in 1-2 months</h3>
+<table>
+  <thead><tr><th style="width: 38px;">#</th><th>Action</th><th style="width: 80px;">Effort</th></tr></thead>
+  <tbody>
+    <tr><td>12</td><td>Create <code>llms.txt</code> with entity definitions for EMILY™, TrueFit 360</td><td>2-3 h</td></tr>
+    <tr><td>13</td><td>Named author bylines + bios on all blog articles + author schema (E-E-A-T)</td><td>1-2 days</td></tr>
+    <tr><td>14</td><td>Source all statistics in blog (98 % WhatsApp open rate, 1.2B profiles, etc.) — link primary sources or label as internal data</td><td>3-5 h / article</td></tr>
+    <tr><td>15</td><td>Create comparison content asset "AI sourcing software vs Gem / Fetcher / hireEZ" — the home page cannot rank for "AI sourcing software" (SERP = listicles, 90 % of top 10)</td><td>1-2 weeks</td></tr>
+    <tr><td>16</td><td>Add a GDPR / compliance section to the home body (HR Director persona blocked without it)</td><td>1 day</td></tr>
+    <tr><td>17</td><td>Self-serve CTA alternative to "Book a demo" (ROI calculator, free first search) for the agency founder persona</td><td>2-3 days</td></tr>
+  </tbody>
+</table>
+
+<h3>Low — backlog</h3>
+<ul>
+  <li>YouTube channel (0.737 correlation with AI citation rate)</li>
+  <li>IndexNow integration on blog publish</li>
+  <li>Reduce font preloads from 5 to 2 above-fold subsets</li>
+  <li>307 → 308 root redirect</li>
+  <li>Pursue Wikipedia entity page for TrueCalling once notability evidence accumulates</li>
+</ul>
+
+<h2 id="technical" class="page-break">Technical SEO findings (51 / 100)</h2>
+<p>9-category scoring:</p>
+<table>
+  <thead><tr><th>Category</th><th>Score</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>Crawlability</td><td>25 / 100</td><td><span class="pill critical">Fail (robots.txt 404)</span></td></tr>
+    <tr><td>Indexability</td><td>30 / 100</td><td><span class="pill critical">Fail (canonical collapse, staging indexable)</span></td></tr>
+    <tr><td>Security</td><td>70 / 100</td><td><span class="pill medium">Partial (HSTS preload OK, no CSP/X-Frame)</span></td></tr>
+    <tr><td>URL structure</td><td>65 / 100</td><td><span class="pill medium">Partial (clean slugs, hreflang issues)</span></td></tr>
+    <tr><td>Mobile optimization</td><td>80 / 100</td><td><span class="pill pass">Pass</span></td></tr>
+    <tr><td>Core Web Vitals (potential)</td><td>60 / 100</td><td><span class="pill medium">Partial (5 fonts preloaded, broken LCP image)</span></td></tr>
+    <tr><td>Structured data</td><td>55 / 100</td><td><span class="pill medium">Partial</span></td></tr>
+    <tr><td>JavaScript rendering (SSR)</td><td>90 / 100</td><td><span class="pill pass">Pass</span></td></tr>
+    <tr><td>IndexNow protocol</td><td>0 / 100</td><td><span class="pill low">Not implemented</span></td></tr>
+  </tbody>
+</table>
+
+<h3>Strengths</h3>
+<ul>
+  <li>HTTPS with HSTS preload (<code>max-age=63072000; includeSubDomains; preload</code>)</li>
+  <li>SSR fully operational — Googlebot does not need JS execution to read content</li>
+  <li>Locale titles unique and translated (8 distinct titles)</li>
+  <li><code>font-display: swap</code> on all 5 preloaded font faces</li>
+  <li>Sitemap is valid XML with <code>xhtml:link</code> alternates per URL</li>
+  <li>Viewport meta correctly set</li>
+  <li>404 pages return real HTTP 404 (no soft-404 issues)</li>
+</ul>
+
+<h2 id="schema">Schema findings (45 / 100)</h2>
+<h3>Existing</h3>
+<table>
+  <thead><tr><th>Route</th><th>Type</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td><code>/en</code> + every locale page</td><td>SoftwareApplication</td><td><span class="pill medium">Valid but injected on every locale page (conflict with BlogPosting on /blog/[slug])</span></td></tr>
+    <tr><td><code>/en/blog/[slug]</code></td><td>BlogPosting</td><td><span class="pill critical">Missing required <code>image</code> — articles ineligible for Google rich results</span></td></tr>
+    <tr><td><code>/en/faq</code></td><td>FAQPage</td><td><span class="pill low">Valid but client-rendered; Google rich results restricted to gov/health since Aug 2023; retain for AI/LLM citation</span></td></tr>
+  </tbody>
+</table>
+
+<h3>Critical gaps</h3>
+<ul>
+  <li><strong>No <code>Organization</code> schema</strong> anywhere — breaks <code>publisher.logo</code> on BlogPosting, prevents Knowledge Panel</li>
+  <li><strong>No <code>WebSite</code> schema</strong> — site name + sitelinks search box ineligible</li>
+  <li><strong>No <code>BreadcrumbList</code></strong> on blog index or articles</li>
+  <li><code>SoftwareApplication.offers.offerCount</code> claims "3" but only 2 plans have numeric prices (Starter, Core); Enterprise is custom</li>
+</ul>
+
+<h3>Recommended @graph block to add to root layout</h3>
+<pre><code>{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://truecalling.app/#organization",
+      "name": "TrueCalling",
+      "url": "https://truecalling.app",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://truecalling.app/#logo",
+        "url": "https://truecalling.app/brand/truecalling-vertical.png",
+        "width": 512, "height": 512
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/truecalling-ai/",
+        "https://x.com/TruecallinAI",
+        "https://www.instagram.com/truecalling.ai/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://truecalling.app/#website",
+      "url": "https://truecalling.app",
+      "name": "TrueCalling",
+      "publisher": { "@id": "https://truecalling.app/#organization" },
+      "inLanguage": "en"
+    }
+  ]
+}</code></pre>
+
+<h2 id="geo">GEO / AI search findings (38 / 100)</h2>
+<p>5-dimension scoring:</p>
+<table>
+  <thead><tr><th>Dimension</th><th>Weight</th><th>Score</th></tr></thead>
+  <tbody>
+    <tr><td>Citability</td><td>25 %</td><td>32 / 100</td></tr>
+    <tr><td>Structural readability</td><td>20 %</td><td>52 / 100</td></tr>
+    <tr><td>Multi-modal content</td><td>15 %</td><td>20 / 100</td></tr>
+    <tr><td>Authority &amp; brand signals</td><td>20 %</td><td>28 / 100</td></tr>
+    <tr><td>Technical accessibility</td><td>20 %</td><td>55 / 100</td></tr>
+  </tbody>
+</table>
+
+<h3>Per-platform scores</h3>
+<table>
+  <thead><tr><th>Platform</th><th>Score</th><th>Bottleneck</th></tr></thead>
+  <tbody>
+    <tr><td>Google AI Overviews</td><td>28 / 100</td><td>No schema, no E-E-A-T, no sourced statistics</td></tr>
+    <tr><td>ChatGPT Search</td><td>35 / 100</td><td>No GPTBot Allow, no author attribution, no Wikipedia entity</td></tr>
+    <tr><td>Perplexity</td><td>42 / 100</td><td>Blog-friendly but no anchored ToC, no sourced stats</td></tr>
+    <tr><td>Bing Copilot</td><td>33 / 100</td><td>No Organization schema, no authority signals</td></tr>
+  </tbody>
+</table>
+<p>Perplexity is the most achievable platform short-term — its crawler favors structured long-form content, which the blog already provides. Google AIO requires the most foundational work (schema, E-E-A-T).</p>
+
+<h3>Top 5 highest-impact GEO changes</h3>
+<ol>
+  <li><strong>Create <code>robots.txt</code> with explicit AI crawler allow</strong> — 30 min, affects all 4 platforms</li>
+  <li><strong>Create <code>llms.txt</code></strong> with definitions of TrueCalling, EMILY™, TrueFit 360 — 2-3 h, affects all LLM training pipelines</li>
+  <li><strong>Named author bylines + bios on every blog article</strong> with author schema — 1-2 days, affects Google AIO and Perplexity</li>
+  <li><strong>Add JSON-LD schema across page types</strong> (Organization, FAQPage, Article, SoftwareApplication) — 1-2 days, affects Google AIO primarily</li>
+  <li><strong>Source all statistics</strong> with primary references or "internal data, n=X" labels — 3-5 h per article, affects Perplexity and ChatGPT Search</li>
+</ol>
+
+<h2 id="sxo" class="page-break">SXO findings (41 / 100)</h2>
+
+<div class="callout">
+<h4 style="margin-top:0;"><span class="pill critical">Critical finding</span> &nbsp; Page-type mismatch on primary keywords</h4>
+<p>9 of 10 top results for <em>"AI sourcing software"</em> are comparison listicles or buyer's guides. The TrueCalling homepage is a SaaS landing page. Google has formed an unambiguous editorial consensus: for these queries, it rewards third-party comparison content, not vendor homepages.</p>
+<p>The homepage cannot rank for "AI sourcing software" or "recruiting AI tool" regardless of on-page optimization. The fix is not rewriting the home — it is creating a separate comparison guide asset (4-6 k words) that ranks for these queries; the homepage is reserved for branded and bottom-of-funnel traffic.</p>
+</div>
+
+<h3>Persona scoring (out of 100)</h3>
+<table>
+  <thead><tr><th>Persona</th><th>Relevance</th><th>Clarity</th><th>Trust</th><th>Action</th><th>Total</th></tr></thead>
+  <tbody>
+    <tr><td>TA Manager evaluating tools</td><td>16 / 25</td><td>14 / 25</td><td>8 / 25</td><td>12 / 25</td><td>50 / 100</td></tr>
+    <tr><td>Agency Founder / CEO</td><td>18 / 25</td><td>13 / 25</td><td>6 / 25</td><td>10 / 25</td><td>47 / 100</td></tr>
+    <tr><td>HR Director (scale-up)</td><td>15 / 25</td><td>11 / 25</td><td>7 / 25</td><td>9 / 25</td><td>42 / 100</td></tr>
+  </tbody>
+</table>
+<p><strong>Systemic weak points:</strong> Trust (avg 7.3 / 25) and Action (avg 10.3 / 25). The single CTA "Book a demo" serves a $595 / month product where buyers range from ready-to-trial founders to compliance-checking HR Directors needing weeks of internal buy-in — the CTA architecture needs to support browse / evaluate / decide simultaneously.</p>
+
+<h2 id="hreflang">Hreflang findings</h2>
+<table>
+  <thead><tr><th>Pattern</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>Home page (<code>/en</code>, <code>/fr</code>, <code>/he</code>, etc.)</td><td><span class="pill pass">8 locales + x-default rendered correctly</span></td></tr>
+    <tr><td>Self-reference</td><td><span class="pill pass">Each page declares itself as alternate</span></td></tr>
+    <tr><td>Sitemap <code>xhtml:link</code> alternates</td><td><span class="pill pass">Per-URL with localized slugs</span></td></tr>
+    <tr><td>Sub-routes (book-a-demo, contact, etc.)</td><td><span class="pill critical">Hreflang point at locale homepages instead of equivalent slugs</span></td></tr>
+    <tr><td>Blog article hreflang</td><td><span class="pill critical">Absent — only canonical present</span></td></tr>
+    <tr><td><code>&lt;html lang&gt;</code></td><td><span class="pill critical">Hardcoded "en" on every locale</span></td></tr>
+    <tr><td>Sitemap x-default</td><td><span class="pill high">Missing</span></td></tr>
+    <tr><td>Attribute case</td><td><span class="pill low"><code>hrefLang</code> camelCase (Next.js default; HTML is case-insensitive)</span></td></tr>
+  </tbody>
+</table>
+
+<h2 id="partial">Partial reports</h2>
+<p>Three audit agents returned only short summaries — they were rate-limited or hit timeout during analysis:</p>
+<ul>
+  <li><strong>Performance</strong>: PSI quota exhausted; agent fell back to local Lighthouse but did not produce a final scored report. Estimated CWV: probably acceptable (Vercel + SSR + light JS) but actual measurement needed. Re-run separately with <code>/seo google pagespeed &lt;url&gt;</code> after Google API credentials are configured.</li>
+  <li><strong>Content</strong>: returned a planning summary only. The blog has good editorial structure (per the GEO agent's deeper read) but no author attribution, no last-updated dates, and unsourced statistics. E-E-A-T scoring would land in the 55-60 range pending a full re-run.</li>
+  <li><strong>Sitemap</strong>: returned an investigation summary; the sitemap was directly verified (66 URLs across 8 locales, valid XML, hreflang per URL, missing x-default, lastmod = "now"). Quality gates pass (well below the 30+ location-page warning threshold).</li>
+</ul>
+
+<div class="footer">
+  <p>Generated from /seo audit run on <code>https://truecalling-lyart.vercel.app/en</code> on 2026-05-06.</p>
+  <p>To convert this report to PDF: open in browser → Cmd+P → Destination "Save as PDF".</p>
+  <p>Built with <a href="https://github.com/AgriciDaniel/claude-seo">claude-seo</a> · Print stylesheet ready.</p>
+</div>
+
+</body>
+</html>
