@@ -122,7 +122,7 @@ export function MobileMenu() {
 
             <div className="mt-auto flex flex-col gap-3 border-t border-ink/[0.06] pt-5">
               <a
-                href="https://truecalling.vercel.app/login"
+                href="https://www.truecalling.co/menupb2b"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-11 items-center justify-center rounded-full border border-ink/15 bg-ink/[0.03] px-4 text-[14px] font-medium text-ink transition-colors hover:border-ink/30 hover:bg-ink/[0.06]"

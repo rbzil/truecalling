@@ -200,7 +200,7 @@ export function Navbar() {
             <ThemeToggle />
             <LanguageSwitcher />
             <a
-              href="https://truecalling.vercel.app/login"
+              href="https://www.truecalling.co/menupb2b"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden h-9 items-center rounded-full border border-ink/15 bg-ink/[0.03] px-4 text-[13px] font-medium text-ink transition-colors hover:border-ink/30 hover:bg-ink/[0.06] lg:inline-flex cursor-pointer"
