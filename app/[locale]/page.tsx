@@ -124,20 +124,55 @@ function Hero() {
 
           <motion.div
             variants={fadeUp}
-            className="mt-14 flex flex-col items-center gap-4 text-xs uppercase tracking-[0.2em] text-ink-muted/70"
+            className="mt-14 flex w-full flex-col items-center gap-4 text-xs uppercase tracking-[0.2em] text-ink-muted/70"
           >
             <span>{t("hero_social")}</span>
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 opacity-60">
-              {["Lattice", "Notion", "Alan", "Doctolib", "Qonto", "Spendesk"].map((c) => (
-                <span key={c} className="text-sm font-semibold tracking-normal text-ink/55">
-                  {c}
-                </span>
-              ))}
-            </div>
+            <LogoCarousel
+              items={[
+                "Prodware",
+                "Le Chiller",
+                "Deel",
+                "01 Talent",
+                "Entity Search",
+                "SBC",
+                "EISC",
+                "IQO",
+              ]}
+            />
           </motion.div>
         </Reveal>
       </div>
     </section>
+  );
+}
+
+/* Infinite-scrolling logo carousel.
+   The track renders the items twice; CSS marquee animation translates the
+   track by -50%, looping seamlessly. Edges fade via mask-image so the scroll
+   feels gradual rather than cropped. */
+function LogoCarousel({ items }: { items: string[] }) {
+  const loop = [...items, ...items];
+  return (
+    <div
+      className="group relative w-full max-w-3xl overflow-hidden"
+      style={{
+        WebkitMaskImage:
+          "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
+        maskImage:
+          "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
+      }}
+    >
+      <div className="flex w-max animate-marquee gap-12 group-hover:[animation-play-state:paused]">
+        {loop.map((c, i) => (
+          <span
+            key={`${c}-${i}`}
+            className="shrink-0 text-sm font-semibold tracking-normal text-ink/55"
+          >
+            {c}
+          </span>
+        ))}
+      </div>
+    </div>
   );
 }
 

@@ -34,6 +34,7 @@ const config: Config = {
         "blob-1": "blob1 22s ease-in-out infinite",
         "blob-2": "blob2 26s ease-in-out infinite",
         "pulse-soft": "pulseSoft 1.6s ease-in-out infinite",
+        marquee: "marquee 30s linear infinite",
       },
       keyframes: {
         blob1: {
@@ -48,6 +49,12 @@ const config: Config = {
         pulseSoft: {
           "0%,100%": { opacity: "0.4" },
           "50%": { opacity: "1" },
+        },
+        // Carousel: track contains items duplicated twice → translate by -50%
+        // creates a seamless infinite loop.
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
         },
       },
     },
