@@ -2003,6 +2003,7 @@ const Article10Content: ReactNode = (
 export const articles: Article[] = [
   {
     slug: "ai-sourcing-guide-2026",
+    canonicalId: "ai-sourcing-guide-2026",
     title: "AI Sourcing in 2026: The Complete Guide for Recruiters (Methods, Tools, Examples)",
     description:
       "AI sourcing in 2026: methods, tools, real-world examples, matching scores, and the recommended stack to hire twice as fast without sacrificing quality.",
@@ -2017,6 +2018,7 @@ export const articles: Article[] = [
   },
   {
     slug: "whatsapp-recruiting-gdpr-2026",
+    canonicalId: "whatsapp-recruiting-gdpr-2026",
     title: "WhatsApp Recruiting: How to Use It Without GDPR Risk (2026 Guide)",
     description:
       "WhatsApp recruiting and GDPR: rules, tooling, and concrete examples to capture 98% open rates without risking a CNIL audit in 2026.",
@@ -2031,6 +2033,7 @@ export const articles: Article[] = [
   },
   {
     slug: "ai-copilot-for-recruiters-daily",
+    canonicalId: "ai-copilot-for-recruiters-daily",
     title: "AI Copilot for Recruiters: What It Really Changes Day-to-Day",
     description:
       "AI recruiting copilot: what really changes in a recruiter's day, which tasks to automate, which to keep human, and the measured time savings.",
@@ -2045,6 +2048,7 @@ export const articles: Article[] = [
   },
   {
     slug: "truecalling-vs-hiresweet",
+    canonicalId: "truecalling-vs-hiresweet",
     title: "TrueCalling vs HireSweet: Which Sourcing Software for Your Talent Team?",
     description:
       "HireSweet alternative: factual TrueCalling vs HireSweet comparison on sourcing, matching, channels, ATS, pricing, and use cases in 2026.",
@@ -2059,6 +2063,7 @@ export const articles: Article[] = [
   },
   {
     slug: "truecalling-vs-linkedin-recruiter",
+    canonicalId: "truecalling-vs-linkedin-recruiter",
     title: "TrueCalling vs LinkedIn Recruiter: Limits, Alternatives and Use Cases",
     description:
       "LinkedIn Recruiter alternative: Recruiter's limits in 2026, a TrueCalling vs LinkedIn Recruiter comparison and a 4-week migration plan.",
@@ -2073,6 +2078,7 @@ export const articles: Article[] = [
   },
   {
     slug: "candidate-job-matching-score-ai",
+    canonicalId: "candidate-job-matching-score-ai",
     title: "Candidate-Job Matching Score: How AI Evaluates (and Where It Goes Wrong)",
     description:
       "Candidate matching score: how AI calculates fit, what TrueFit 360 measures, biases to watch for and how to evaluate a score before you buy.",
@@ -2087,6 +2093,7 @@ export const articles: Article[] = [
   },
   {
     slug: "time-to-hire-7-levers-2026",
+    canonicalId: "time-to-hire-7-levers-2026",
     title: "Time-to-hire: 7 concrete levers to cut it in half in 2026",
     description:
       "Reduce time-to-hire: 7 concrete, quantified levers to go from 35 days to under 22, without overhauling your entire recruiting process.",
@@ -2101,6 +2108,7 @@ export const articles: Article[] = [
   },
   {
     slug: "multichannel-sourcing-beyond-linkedin",
+    canonicalId: "multichannel-sourcing-beyond-linkedin",
     title: "Multichannel sourcing: why LinkedIn alone isn&apos;t enough (and what to pair it with)",
     description:
       "Multichannel sourcing: why LinkedIn alone is no longer enough in 2026, the 5 channels to activate, and the typical sequence that converts at 57%.",
@@ -2115,6 +2123,7 @@ export const articles: Article[] = [
   },
   {
     slug: "ai-sourcing-agent-new-standard",
+    canonicalId: "ai-sourcing-agent-new-standard",
     title: "AI sourcing agent: the new standard for recruiting?",
     description:
       "AI sourcing agent: what these agents can actually do in 2026, their limits, the distinction with an AI copilot, and the 5 questions to ask before choosing one.",
@@ -2129,6 +2138,7 @@ export const articles: Article[] = [
   },
   {
     slug: "automate-sourcing-without-dehumanizing",
+    canonicalId: "automate-sourcing-without-dehumanizing",
     title: "How to automate candidate sourcing without dehumanizing the process",
     description:
       "Automate sourcing without dehumanizing: 5 rules to personalize at scale, GDPR compliance, and the warning signs that you&apos;ve pushed it too far.",

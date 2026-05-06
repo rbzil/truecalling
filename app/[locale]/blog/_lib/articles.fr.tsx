@@ -3,6 +3,12 @@ import Link from "next/link";
 
 export type Article = {
   slug: string;
+  /**
+   * Stable cross-locale identifier. Same value in fr.tsx + en.tsx for the
+   * same article so the blog/[slug] page can build hreflang alternates
+   * pointing at the equivalent translated slug.
+   */
+  canonicalId: string;
   title: string;
   description: string;
   excerpt: string;
@@ -2036,6 +2042,7 @@ const Article10Content: ReactNode = (
 export const articles: Article[] = [
   {
     slug: "sourcing-ia-guide-2026",
+    canonicalId: "ai-sourcing-guide-2026",
     title: "Sourcing IA en 2026 : guide complet pour recruteurs (méthodes, outils, exemples)",
     description:
       "Le sourcing IA en 2026 : méthodes, outils, exemples concrets, scores de matching et stack recommandée pour recruter deux fois plus vite sans sacrifier la qualité.",
@@ -2050,6 +2057,7 @@ export const articles: Article[] = [
   },
   {
     slug: "recrutement-whatsapp-rgpd-2026",
+    canonicalId: "whatsapp-recruiting-gdpr-2026",
     title: "Recrutement WhatsApp : comment l'utiliser sans risque RGPD (guide 2026)",
     description:
       "Recrutement WhatsApp et RGPD : règles, outillage et exemples concrets pour exploiter 98 % de taux d'ouverture sans risquer un contrôle CNIL en 2026.",
@@ -2064,6 +2072,7 @@ export const articles: Article[] = [
   },
   {
     slug: "copilote-ia-recruteurs-au-quotidien",
+    canonicalId: "ai-copilot-for-recruiters-daily",
     title: "Copilote IA pour recruteurs : ce que ça change (vraiment) au quotidien",
     description:
       "Copilote IA recrutement : ce qui change réellement dans la journée d'un recruteur, les tâches à automatiser, celles à garder humaines, et le gain de temps mesuré.",
@@ -2078,6 +2087,7 @@ export const articles: Article[] = [
   },
   {
     slug: "truecalling-vs-hiresweet",
+    canonicalId: "truecalling-vs-hiresweet",
     title: "TrueCalling vs HireSweet : quel logiciel de sourcing pour mon équipe Talent ?",
     description:
       "Alternative à HireSweet : comparatif factuel TrueCalling vs HireSweet sur sourcing, matching, canaux, ATS, tarifs et cas d'usage en 2026.",
@@ -2092,6 +2102,7 @@ export const articles: Article[] = [
   },
   {
     slug: "truecalling-vs-linkedin-recruiter",
+    canonicalId: "truecalling-vs-linkedin-recruiter",
     title: "TrueCalling vs LinkedIn Recruiter : limites, alternatives et cas d'usage",
     description:
       "Alternative à LinkedIn Recruiter : limites de Recruiter en 2026, comparatif TrueCalling vs LinkedIn Recruiter et plan de migration en 4 semaines.",
@@ -2106,6 +2117,7 @@ export const articles: Article[] = [
   },
   {
     slug: "score-matching-candidat-poste-ia",
+    canonicalId: "candidate-job-matching-score-ai",
     title: "Score de matching candidat-poste : comment l'IA évalue (et où elle se trompe)",
     description:
       "Score de matching candidat : comment l'IA calcule la pertinence, ce que mesure TrueFit 360, les biais à surveiller et comment évaluer un score avant achat.",
@@ -2120,6 +2132,7 @@ export const articles: Article[] = [
   },
   {
     slug: "time-to-hire-7-leviers-2026",
+    canonicalId: "time-to-hire-7-levers-2026",
     title: "Time-to-hire : 7 leviers concrets pour le diviser par deux en 2026",
     description:
       "Réduire le time-to-hire : 7 leviers concrets et chiffrés pour passer de 35 jours à moins de 22, sans transformer tout le process de recrutement.",
@@ -2134,6 +2147,7 @@ export const articles: Article[] = [
   },
   {
     slug: "sourcing-multicanal-linkedin-ne-suffit-plus",
+    canonicalId: "multichannel-sourcing-beyond-linkedin",
     title: "Sourcing multicanal : pourquoi LinkedIn seul ne suffit plus (et par quoi le compléter)",
     description:
       "Sourcing multicanal : pourquoi LinkedIn seul ne suffit plus en 2026, les 5 canaux à activer et la séquence type qui convertit à 57 %.",
@@ -2148,6 +2162,7 @@ export const articles: Article[] = [
   },
   {
     slug: "agent-ia-sourcing-nouveau-standard",
+    canonicalId: "ai-sourcing-agent-new-standard",
     title: "Agent IA de sourcing : le nouveau standard du recrutement ?",
     description:
       "Agent IA sourcing : ce que ces agents savent faire en 2026, leurs limites, la nuance avec un copilote IA et les 5 questions à poser avant de choisir.",
@@ -2162,6 +2177,7 @@ export const articles: Article[] = [
   },
   {
     slug: "automatiser-sourcing-sans-deshumaniser",
+    canonicalId: "automate-sourcing-without-dehumanizing",
     title: "Comment automatiser le sourcing de candidats sans déshumaniser le process",
     description:
       "Automatiser le sourcing sans déshumaniser : 5 règles pour personnaliser à grande échelle, conformité RGPD et signaux qui montrent que vous êtes allé trop loin.",

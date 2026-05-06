@@ -24,6 +24,33 @@ export function getArticle(slug: string, locale: Locale): Article | undefined {
   return getArticles(locale).find((a) => a.slug === slug);
 }
 
+/**
+ * Find the equivalent article in a different locale using its stable
+ * cross-locale canonicalId. Returns undefined if no translation exists.
+ */
+export function getArticleByCanonicalId(
+  canonicalId: string,
+  locale: Locale,
+): Article | undefined {
+  return getArticles(locale).find((a) => a.canonicalId === canonicalId);
+}
+
+/**
+ * Build a map of locale → article slug for every locale that has a
+ * translation of the given canonicalId. Used to render hreflang alternates
+ * on blog article pages.
+ */
+export function getSlugByLocale(
+  canonicalId: string,
+): Partial<Record<Locale, string>> {
+  const out: Partial<Record<Locale, string>> = {};
+  for (const l of Object.keys(byLocale) as Locale[]) {
+    const article = getArticleByCanonicalId(canonicalId, l);
+    if (article) out[l] = article.slug;
+  }
+  return out;
+}
+
 export function getRelatedArticles(
   slug: string,
   locale: Locale,

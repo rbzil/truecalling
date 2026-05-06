@@ -40,6 +40,14 @@ function getLocale(request: NextRequest): Locale {
   }
 }
 
+function withRequestHeaders(request: NextRequest, locale: Locale) {
+  // Forwarded to RSC so the root <html lang> can be set per request.
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", request.nextUrl.pathname);
+  requestHeaders.set("x-locale", locale);
+  return requestHeaders;
+}
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -57,20 +65,23 @@ export function middleware(request: NextRequest) {
   const first = segments[0];
   const isLocalePrefixed = first && (locales as readonly string[]).includes(first);
 
-  // 1. No locale prefix → detect & redirect
+  // 1. No locale prefix → detect & redirect (308 = permanent, preserves PageRank)
   if (!isLocalePrefixed) {
     const locale = getLocale(request);
     const targetUrl = new URL(`/${locale}${pathname === "/" ? "" : pathname}`, request.url);
     targetUrl.search = request.nextUrl.search;
-    return NextResponse.redirect(targetUrl);
+    return NextResponse.redirect(targetUrl, 308);
   }
 
   // 2. Locale-prefixed: handle slug rewrite
   const locale = first as Locale;
   const slug = segments[1];
+  const requestHeaders = withRequestHeaders(request, locale);
 
-  // /<locale> (home) — nothing to rewrite
-  if (!slug) return NextResponse.next();
+  // /<locale> (home) — nothing to rewrite, but forward headers
+  if (!slug) {
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  }
 
   // Resolve the localized slug → canonical route key
   const route = resolveRouteFromSlug(slug, locale);
@@ -101,17 +112,23 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(`/${locale}`, request.url));
   }
 
-  // 4. If the slug is already canonical, no rewrite needed
-  if (route === "home") return NextResponse.next();
+  // 4. If the slug is already canonical, no rewrite needed (forward headers)
+  if (route === "home") {
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  }
   const canonical = canonicalSlug[route as Exclude<RouteKey, "home">];
-  if (slug === canonical) return NextResponse.next();
+  if (slug === canonical) {
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  }
 
-  // 5. Rewrite localized → canonical (URL stays as-is in the browser)
+  // 5. Rewrite localized → canonical (URL stays as-is in the browser, headers forwarded)
   const tail = segments.slice(2).join("/");
   const canonicalPath = `/${locale}/${canonical}${tail ? "/" + tail : ""}`;
   const rewriteUrl = new URL(canonicalPath, request.url);
   rewriteUrl.search = request.nextUrl.search;
-  return NextResponse.rewrite(rewriteUrl);
+  return NextResponse.rewrite(rewriteUrl, {
+    request: { headers: requestHeaders },
+  });
 }
 
 export const config = {

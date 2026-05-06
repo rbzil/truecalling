@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { Inter, Instrument_Serif, Frank_Ruhl_Libre } from "next/font/google";
+import { defaultLocale, locales, rtlLocales, type Locale } from "@/lib/i18n-config";
 import "./globals.css";
 
 const inter = Inter({
@@ -35,6 +37,8 @@ const ogImage = "/brand/truecalling-vertical.png";
 const ogImageAlt =
   "TrueCalling — AI sourcing software with WhatsApp outreach";
 
+const isProduction = process.env.VERCEL_ENV === "production";
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: titleDefault, template: "%s · TrueCalling" },
@@ -53,7 +57,11 @@ export const metadata: Metadata = {
     description,
     images: [ogImage],
   },
-  robots: { index: true, follow: true },
+  // Belt-and-braces: noindex previews/staging at the meta level too.
+  // Production deployments still get default index, follow.
+  robots: isProduction
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
 };
 
 export const viewport: Viewport = {
@@ -62,10 +70,30 @@ export const viewport: Viewport = {
   themeColor: "#0A1628",
 };
 
+function resolveLocale(): Locale {
+  // Middleware sets x-locale on every locale-prefixed request.
+  // Falls back to parsing x-pathname, then defaultLocale.
+  const h = headers();
+  const fromHeader = h.get("x-locale");
+  if (fromHeader && (locales as readonly string[]).includes(fromHeader)) {
+    return fromHeader as Locale;
+  }
+  const pathname = h.get("x-pathname") ?? "";
+  const first = pathname.split("/").filter(Boolean)[0];
+  if (first && (locales as readonly string[]).includes(first)) {
+    return first as Locale;
+  }
+  return defaultLocale;
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = resolveLocale();
+  const dir = (rtlLocales as readonly Locale[]).includes(locale) ? "rtl" : "ltr";
+
   return (
     <html
-      lang="en"
+      lang={locale}
+      dir={dir}
       className={`${inter.variable} ${instrumentSerif.variable} ${frankRuhlLibre.variable}`}
       suppressHydrationWarning
     >

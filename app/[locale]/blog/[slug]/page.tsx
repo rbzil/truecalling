@@ -5,6 +5,7 @@ import {
   getArticles,
   getArticle,
   getRelatedArticles,
+  getSlugByLocale,
   type Article,
 } from "../_lib/articles";
 import { getDictionary, type Dictionary } from "@/lib/get-dictionary";
@@ -13,6 +14,7 @@ import {
   type Locale,
   blogEnabledLocales,
 } from "@/lib/i18n-config";
+import { buildArticleAlternates } from "@/lib/seo-metadata";
 import { Navbar } from "@/components/SiteNavbar";
 
 const SITE_URL = "https://truecalling.app";
@@ -30,11 +32,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const a = getArticle(params.slug, params.locale);
   if (!a) return {};
-  const url = `${SITE_URL}${getLocalizedPath("blog", params.locale)}/${a.slug}`;
+
+  const slugByLocale = getSlugByLocale(a.canonicalId);
+  const alternates = buildArticleAlternates(slugByLocale, params.locale);
+  const url = alternates.canonical as string;
+
   return {
-    title: `${a.title} · TrueCalling`,
+    title: a.title,
     description: a.description,
-    alternates: { canonical: url },
+    alternates,
     openGraph: {
       type: "article",
       title: a.title,
@@ -42,6 +48,7 @@ export async function generateMetadata({
       url,
       locale: params.locale,
       publishedTime: a.publishedAt,
+      siteName: "TrueCalling",
     },
     twitter: {
       card: "summary_large_image",

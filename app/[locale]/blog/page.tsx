@@ -8,6 +8,7 @@ import {
   locales,
   blogEnabledLocales,
 } from "@/lib/i18n-config";
+import { buildAlternates } from "@/lib/seo-metadata";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/SiteNavbar";
 
@@ -23,24 +24,18 @@ export async function generateMetadata({
   params: { locale: Locale };
 }): Promise<Metadata> {
   const dict = await getDictionary(params.locale);
-  const url = `${SITE_URL}${getLocalizedPath("blog", params.locale)}`;
+  const alternates = buildAlternates("blog", params.locale, {
+    localeSubset: blogEnabledLocales,
+  });
   return {
     title: dict.blog_meta_title,
     description: dict.blog_meta_desc,
-    alternates: {
-      canonical: url,
-      languages: Object.fromEntries(
-        blogEnabledLocales.map((l) => [
-          l,
-          `${SITE_URL}${getLocalizedPath("blog", l)}`,
-        ]),
-      ),
-    },
+    alternates,
     openGraph: {
       type: "website",
       title: dict.blog_meta_title,
       description: dict.blog_meta_desc,
-      url,
+      url: alternates.canonical as string,
       locale: params.locale,
     },
   };

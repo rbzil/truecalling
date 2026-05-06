@@ -1,13 +1,36 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { type Locale, locales } from "@/lib/i18n-config";
+import { buildAlternates } from "@/lib/seo-metadata";
+import { getSeoMeta } from "@/lib/seo-translations";
 
-export const metadata: Metadata = {
-  title: "Conditions Générales d'Utilisation · TrueCalling",
-  description:
-    "Conditions Générales d'Utilisation de la plateforme TrueCalling.ai. RGPD, gouvernance IA, propriété intellectuelle, responsabilité.",
-  alternates: { canonical: "/cgu" },
-  robots: { index: true, follow: true },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const locale = params.locale as Locale;
+  if (!(locales as readonly string[]).includes(locale)) return {};
+
+  const { title, description } = getSeoMeta("terms", locale);
+  const alternates = buildAlternates("terms", locale);
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      type: "website",
+      title,
+      description,
+      url: alternates.canonical as string,
+      locale: locale.replace("-", "_"),
+      siteName: "TrueCalling",
+    },
+    twitter: { card: "summary_large_image", title, description },
+    robots: { index: true, follow: true },
+  };
+}
 
 const SECTIONS: { id: string; n: string; title: string }[] = [
   { id: "positioning", n: "0", title: "Énoncé de positionnement" },

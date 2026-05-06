@@ -7,14 +7,13 @@ import {
   type Locale,
 } from "@/lib/i18n-config";
 import { getDictionary } from "@/lib/get-dictionary";
+import { buildAlternates, SITE_URL } from "@/lib/seo-metadata";
 import { Providers } from "../providers";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
-
-const SITE_URL = "https://truecalling.app";
 
 export async function generateMetadata({
   params,
@@ -25,23 +24,15 @@ export async function generateMetadata({
   if (!(locales as readonly string[]).includes(locale)) return {};
   const dict = await getDictionary(locale);
 
-  // Hreflang alternates for every supported locale
-  const languages: Record<string, string> = {};
-  for (const l of locales) {
-    languages[l] = `${SITE_URL}${getLocalizedPath("home", l)}`;
-  }
-  languages["x-default"] = `${SITE_URL}/en`;
+  const alternates = buildAlternates("home", locale);
 
   return {
     title: dict.hero_h1_a + " " + dict.hero_h1_b,
     description: dict.meta_description,
-    alternates: {
-      canonical: `${SITE_URL}${getLocalizedPath("home", locale)}`,
-      languages,
-    },
+    alternates,
     openGraph: {
       locale: locale.replace("-", "_"),
-      url: `${SITE_URL}${getLocalizedPath("home", locale)}`,
+      url: alternates.canonical as string,
     },
   };
 }
