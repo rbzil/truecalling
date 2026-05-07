@@ -8,6 +8,7 @@ import {
   getSlugByLocale,
   type Article,
 } from "../_lib/articles";
+import { getAuthor } from "../_lib/authors";
 import { getDictionary, type Dictionary } from "@/lib/get-dictionary";
 import {
   getLocalizedPath,
@@ -76,14 +77,24 @@ export default async function Page({
   const blogIndexUrl = `${SITE_URL}${getLocalizedPath("blog", params.locale)}`;
   const homeUrl = `${SITE_URL}${getLocalizedPath("home", params.locale)}`;
 
+  const author = getAuthor(article.author);
+
   const articleSchema = blogPostingSchema({
     title: article.title,
     description: article.description,
     url: articleUrl,
     slug: article.slug,
     publishedAt: article.publishedAt,
+    modifiedAt: article.updatedAt,
     keyword: article.keyword,
     locale: params.locale,
+    author: {
+      id: author.id,
+      name: author.name,
+      url: author.url,
+      jobTitle: author.role,
+      sameAs: author.linkedin ? [author.linkedin] : undefined,
+    },
   });
 
   const breadcrumb = breadcrumbSchema([
@@ -141,9 +152,18 @@ export default async function Page({
             {article.description}
           </p>
 
+          <Byline
+            author={author}
+            locale={params.locale}
+            updatedAt={article.updatedAt}
+            dict={dict}
+          />
+
           <div className="mt-10 border-t border-ink/[0.06] pt-10">
             <ProseContent>{article.content}</ProseContent>
           </div>
+
+          <AuthorBio author={author} dict={dict} />
 
           <ShareBar
             slug={article.slug}
@@ -160,6 +180,82 @@ export default async function Page({
         dict={dict}
       />
     </main>
+  );
+}
+
+function Byline({
+  author,
+  locale,
+  updatedAt,
+  dict,
+}: {
+  author: ReturnType<typeof getAuthor>;
+  locale: Locale;
+  updatedAt?: string;
+  dict: Dictionary;
+}) {
+  return (
+    <div className="mt-7 flex flex-wrap items-center gap-3 text-[12.5px] text-ink-muted">
+      <span className="inline-flex items-center gap-2">
+        <span aria-hidden className="size-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(233,30,140,0.6)]" />
+        <span>
+          {dict.blog_byline_by ?? "By"}{" "}
+          {author.linkedin ? (
+            <a
+              href={author.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-ink hover:text-accent"
+            >
+              {author.name}
+            </a>
+          ) : (
+            <span className="font-semibold text-ink">{author.name}</span>
+          )}
+          <span className="text-ink-muted/70"> · {author.role}</span>
+        </span>
+      </span>
+      {updatedAt ? (
+        <>
+          <span className="text-ink-muted/40">·</span>
+          <span>
+            {dict.blog_byline_updated ?? "Updated"}{" "}
+            <time>{formatDate(updatedAt, locale)}</time>
+          </span>
+        </>
+      ) : null}
+    </div>
+  );
+}
+
+function AuthorBio({
+  author,
+  dict,
+}: {
+  author: ReturnType<typeof getAuthor>;
+  dict: Dictionary;
+}) {
+  return (
+    <aside className="mt-12 rounded-2xl border border-ink/[0.08] bg-surface/30 p-6 backdrop-blur-md">
+      <div className="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-accent">
+        {dict.blog_byline_about ?? "About the author"}
+      </div>
+      <div className="mt-3 text-[15px] font-semibold text-ink">
+        {author.name}{" "}
+        <span className="font-normal text-ink-muted/80">· {author.role}</span>
+      </div>
+      <p className="mt-2 text-[13.5px] leading-relaxed text-ink-muted">{author.bio}</p>
+      {author.linkedin ? (
+        <a
+          href={author.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-1.5 text-[12.5px] font-medium text-accent hover:underline"
+        >
+          {dict.blog_byline_linkedin ?? "LinkedIn"} →
+        </a>
+      ) : null}
+    </aside>
   );
 }
 
