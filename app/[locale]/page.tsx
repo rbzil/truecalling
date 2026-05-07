@@ -12,8 +12,9 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useT, useLocalizedHref, useLocale } from "../_i18n/locale-context";
 import { SITE_URL } from "@/lib/seo-metadata";
-import { getLocalizedPath } from "@/lib/i18n-config";
+import { getLocalizedPath, type Locale } from "@/lib/i18n-config";
 import { softwareApplicationSchema, breadcrumbSchema, jsonLd } from "@/lib/schema";
+import { getDemoData, type DemoCandidate, type DemoSet } from "@/lib/demo-data";
 import { Navbar, FingerprintMark, CTAButton } from "../../components/SiteNavbar";
 import { NewsletterPopup } from "../../components/NewsletterPopup";
 
@@ -402,9 +403,12 @@ function RoiField({
 }
 
 /* Infinite-scrolling logo carousel.
-   The track renders the items twice; CSS marquee animation translates the
-   track by -50%, looping seamlessly. Edges fade via mask-image so the scroll
-   feels gradual rather than cropped. */
+   Track renders items twice and translates by -50% to loop seamlessly.
+   IMPORTANT: spacing is on each ITEM (me-12), not the parent (gap-X) — a
+   parent gap injects 2n-1 gaps in the duplicated track, which breaks the
+   seamless wrap by one gap-width. With per-item trailing margin every half
+   is exactly n*(itemWidth + 48px) so -50% translation lands cleanly.
+   Works identically in LTR and RTL. */
 function LogoCarousel({ items }: { items: string[] }) {
   const loop = [...items, ...items];
   return (
@@ -417,11 +421,11 @@ function LogoCarousel({ items }: { items: string[] }) {
           "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
       }}
     >
-      <div className="flex w-max animate-marquee gap-12 group-hover:[animation-play-state:paused]">
+      <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
         {loop.map((c, i) => (
           <span
             key={`${c}-${i}`}
-            className="shrink-0 text-sm font-semibold tracking-normal text-ink/55"
+            className="me-12 shrink-0 text-sm font-semibold tracking-normal text-ink/55"
           >
             {c}
           </span>
@@ -1337,56 +1341,13 @@ function ATSBlock() {
    DEMO + CASE STUDY — unified section: animated mockup followed
    by Le Chiller case study (timeline + count-up + verbatim)
 ---------------------------------------------------------- */
-type Candidate = {
-  rank: number;
-  initials: string;
-  name: string;
-  role: string;
-  company: string;
-  city: string;
-  years: number;
-  score: number;
-  locScore: number;
-  matched: string[];
-  missing: string[];
-  avatar: string;
-};
+type Candidate = DemoCandidate;
 
-const CANDIDATES: Candidate[] = [
-  {
-    rank: 1, initials: "MD", name: "M. Dubois", role: "Senior Product Designer",
-    company: "Doctolib", city: "Paris", years: 7.2, score: 96, locScore: 40,
-    matched: ["Figma", "Design Systems", "User Research", "Prototyping"],
-    missing: [],
-    avatar: "from-pink-500 to-fuchsia-600",
-  },
-  {
-    rank: 2, initials: "SK", name: "S. Klein", role: "Lead Product Designer",
-    company: "Alan", city: "Remote FR", years: 5.8, score: 92, locScore: 40,
-    matched: ["Figma", "Design Systems", "User Research", "Prototyping"],
-    missing: ["Motion"],
-    avatar: "from-violet-500 to-indigo-600",
-  },
-  {
-    rank: 3, initials: "LP", name: "L. Petit", role: "Senior UX Designer",
-    company: "Qonto", city: "Lyon", years: 6.4, score: 88, locScore: 40,
-    matched: ["Figma", "User Research", "Prototyping"],
-    missing: ["Design Systems"],
-    avatar: "from-cyan-500 to-blue-600",
-  },
-  {
-    rank: 4, initials: "AB", name: "A. Bernard", role: "Product Designer",
-    company: "Spendesk", city: "Bordeaux", years: 4.1, score: 85, locScore: 40,
-    matched: ["Figma", "Design Systems", "Prototyping"],
-    missing: ["Accessibility"],
-    avatar: "from-amber-500 to-orange-600",
-  },
-];
-
-const BRIEF_TITLE = "Senior Product Designer";
-
-const WHATSAPP_MSG =
-  "Bonjour M., je vous contacte au sujet d'un poste de Senior Product Designer chez [Client]. Votre profil correspond très précisément à ce qu'ils cherchent — auriez-vous 15 min cette semaine pour en discuter ?";
+/** Hook: locale-aware demo dataset (candidates, brief title, WhatsApp message). */
+function useDemo(): DemoSet {
+  const { locale } = useLocale();
+  return getDemoData(locale);
+}
 
 function DemoAndCaseStudy() {
   const t = useT();
@@ -1692,6 +1653,8 @@ function useIsMobile() {
    bottom sheet → 4. iOS-style reply notification.
 ---------------------------------------------------------- */
 function MobileDemoMockup({ step, runId }: { step: number; runId: number }) {
+  const { candidates, mobileNotifMsg, ui } = useDemo();
+  const top = candidates[0];
   return (
     <div className="relative mx-auto" style={{ maxWidth: 320 }}>
       {/* iPhone frame */}
@@ -1731,11 +1694,11 @@ function MobileDemoMockup({ step, runId }: { step: number; runId: number }) {
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-2 text-[10px] text-slate-500">
-                    <span className="font-semibold text-slate-700">M. Dubois</span>
-                    <span>now</span>
+                    <span className="font-semibold text-slate-700">{top.name}</span>
+                    <span>{ui.now}</span>
                   </div>
                   <div className="truncate text-[12px] font-medium text-slate-900">
-                    Sounds great — when do we chat?
+                    {mobileNotifMsg}
                   </div>
                 </div>
               </motion.div>
@@ -1748,6 +1711,8 @@ function MobileDemoMockup({ step, runId }: { step: number; runId: number }) {
 }
 
 function MobileDemoContent({ step, runId }: { step: number; runId: number }) {
+  const { candidates, emilyAnalysed, ui } = useDemo();
+  const top3 = candidates.slice(0, 3);
   return (
     <div className="relative flex h-full flex-col gap-3 px-4">
       {/* App header */}
@@ -1771,12 +1736,12 @@ function MobileDemoContent({ step, runId }: { step: number; runId: number }) {
           animate={{ opacity: 1, y: 0 }}
           className="mt-2 rounded-xl border border-slate-200 bg-white p-3 shadow-sm"
         >
-          <div className="text-[9.5px] uppercase tracking-[0.18em] text-slate-500">Brief</div>
+          <div className="text-[9.5px] uppercase tracking-[0.18em] text-slate-500">{ui.brief}</div>
           <div className="mt-1.5 min-h-[44px] text-[12.5px] leading-relaxed text-slate-900">
             <BriefTypewriter runId={runId} />
           </div>
           <button className="mt-3 w-full rounded-md bg-accent py-2 text-[11.5px] font-semibold text-white">
-            Search
+            {ui.search}
           </button>
         </motion.div>
       )}
@@ -1789,31 +1754,20 @@ function MobileDemoContent({ step, runId }: { step: number; runId: number }) {
               E
             </span>
             <span className="text-[10.5px] font-medium text-accent">
-              EMILY analysed 1.2B profiles
+              {emilyAnalysed}
             </span>
           </div>
-          <MobileCandidateCard
-            initials="MD"
-            name="M. Dubois"
-            role="Senior Product Designer"
-            score={96}
-            highlight={step >= 2}
-            delay={0}
-          />
-          <MobileCandidateCard
-            initials="SK"
-            name="S. Klein"
-            role="Lead Product Designer"
-            score={92}
-            delay={0.15}
-          />
-          <MobileCandidateCard
-            initials="LP"
-            name="L. Petit"
-            role="Senior UX Designer"
-            score={88}
-            delay={0.3}
-          />
+          {top3.map((c, idx) => (
+            <MobileCandidateCard
+              key={c.initials}
+              initials={c.initials}
+              name={c.name}
+              role={c.role}
+              score={c.score}
+              highlight={idx === 0 && step >= 2}
+              delay={idx * 0.15}
+            />
+          ))}
         </div>
       )}
 
@@ -1834,8 +1788,8 @@ function MobileDemoContent({ step, runId }: { step: number; runId: number }) {
                 <WhatsAppCircleIcon />
               </span>
               <div className="flex-1">
-                <div className="text-[12px] font-semibold text-slate-900">M. Dubois</div>
-                <div className="text-[10px] text-slate-500">via WhatsApp</div>
+                <div className="text-[12px] font-semibold text-slate-900">{top3[0]?.name}</div>
+                <div className="text-[10px] text-slate-500">{ui.viaWhatsapp}</div>
               </div>
             </div>
             <div className="flex-1 overflow-hidden p-4">
@@ -1889,18 +1843,18 @@ function MobileCandidateCard({
 }
 
 function BriefTypewriter({ runId }: { runId: number }) {
-  const text = "Senior Product Designer, Paris, 5+ years, SaaS B2B";
+  const { briefSearch } = useDemo();
   const [shown, setShown] = useState("");
   useEffect(() => {
     setShown("");
     let i = 0;
     const id = setInterval(() => {
       i++;
-      setShown(text.slice(0, i));
-      if (i >= text.length) clearInterval(id);
+      setShown(briefSearch.slice(0, i));
+      if (i >= briefSearch.length) clearInterval(id);
     }, 45);
     return () => clearInterval(id);
-  }, [runId]);
+  }, [runId, briefSearch]);
   return (
     <span>
       {shown}
@@ -1910,19 +1864,18 @@ function BriefTypewriter({ runId }: { runId: number }) {
 }
 
 function WaTypewriter({ runId }: { runId: number }) {
-  const text =
-    "Hi M., I have a Senior Product Designer role that fits your profile. 15 min this week to chat?";
+  const { whatsappMsg } = useDemo();
   const [shown, setShown] = useState("");
   useEffect(() => {
     setShown("");
     let i = 0;
     const id = setInterval(() => {
       i++;
-      setShown(text.slice(0, i));
-      if (i >= text.length) clearInterval(id);
+      setShown(whatsappMsg.slice(0, i));
+      if (i >= whatsappMsg.length) clearInterval(id);
     }, 22);
     return () => clearInterval(id);
-  }, [runId]);
+  }, [runId, whatsappMsg]);
   return <>{shown}</>;
 }
 
@@ -2041,17 +1994,23 @@ function DemoSidebar({ step }: { step: number }) {
 }
 
 /* ----- Top bar ----- */
+const LOCALE_BADGE: Record<Locale, string> = {
+  fr: "Français", en: "English", he: "עברית",
+  "pt-BR": "Português", es: "Español", de: "Deutsch", it: "Italiano", nl: "Nederlands",
+};
 function DemoTopBar() {
+  const { briefTitle } = useDemo();
+  const { locale } = useLocale();
   return (
     <div className="flex items-center justify-between border-b border-slate-200 bg-white px-5 py-2.5">
       <div className="flex items-center gap-2 text-[12px]">
         <span className="font-semibold text-slate-900">TrueCalling</span>
         <span className="text-slate-300">·</span>
-        <span className="text-slate-500">{BRIEF_TITLE}</span>
+        <span className="text-slate-500">{briefTitle}</span>
       </div>
       <div className="flex items-center gap-2">
         <span className="rounded-full border border-slate-200 bg-white px-2.5 py-0.5 text-[10.5px] text-slate-600">
-          English
+          {LOCALE_BADGE[locale]}
         </span>
         <div className="flex size-7 items-center justify-center rounded-full bg-accent text-[10.5px] font-semibold text-white">
           R
@@ -2063,17 +2022,19 @@ function DemoTopBar() {
 
 /* ----- Step 0: New position modal ----- */
 function BriefModal() {
+  const { briefTitle, candidates, ui } = useDemo();
+  const topCity = candidates[0]?.city ?? "";
   const [typed, setTyped] = useState("");
   useEffect(() => {
     setTyped("");
     let i = 0;
     const id = setInterval(() => {
       i += 1;
-      setTyped(BRIEF_TITLE.slice(0, i));
-      if (i >= BRIEF_TITLE.length) clearInterval(id);
+      setTyped(briefTitle.slice(0, i));
+      if (i >= briefTitle.length) clearInterval(id);
     }, 60);
     return () => clearInterval(id);
-  }, []);
+  }, [briefTitle]);
 
   return (
     <motion.div
@@ -2091,12 +2052,12 @@ function BriefModal() {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-4 pb-2">
-          <h3 className="text-[15px] font-semibold tracking-tight text-slate-900">New position</h3>
+          <h3 className="text-[15px] font-semibold tracking-tight text-slate-900">{ui.newPosition}</h3>
           <span className="text-[16px] leading-none text-slate-400">×</span>
         </div>
         {/* Tabs */}
         <div className="flex items-center gap-5 border-b border-slate-100 px-5">
-          {["Information", "Description", "Training", "Advanced"].map((t, i) => (
+          {ui.tabs.map((t, i) => (
             <span
               key={t}
               className={`relative py-2.5 text-[12px] ${
@@ -2117,7 +2078,7 @@ function BriefModal() {
         <div className="space-y-3 px-5 py-4">
           <div>
             <label className="text-[10px] font-medium uppercase tracking-[0.06em] text-slate-500">
-              Job title <span className="text-accent">*</span>
+              {ui.jobTitle} <span className="text-accent">*</span>
             </label>
             <div className="mt-1 flex h-9 items-center rounded-md border border-slate-200 bg-white px-3 text-[12.5px] text-slate-900">
               {typed}
@@ -2127,23 +2088,23 @@ function BriefModal() {
           <div className="flex gap-3">
             <div className="flex-1">
               <label className="text-[10px] font-medium uppercase tracking-[0.06em] text-slate-500">
-                Location
+                {ui.location}
               </label>
               <div className="mt-1 flex h-9 items-center rounded-md border border-slate-200 bg-white px-3 text-[12.5px] text-slate-700">
-                Paris · Remote FR
+                {topCity} · {ui.locationTag}
               </div>
             </div>
             <div className="flex items-center gap-2 self-end pb-1.5">
               <span className="flex size-3.5 items-center justify-center rounded-[3px] border border-pink-300 bg-pink-50">
                 <CheckIcon className="size-2.5 text-accent" />
               </span>
-              <span className="text-[11px] text-slate-700">Remote</span>
+              <span className="text-[11px] text-slate-700">{ui.remote}</span>
             </div>
           </div>
           <div className="flex gap-3">
             <div className="flex-1">
               <label className="text-[10px] font-medium uppercase tracking-[0.06em] text-slate-500">
-                Recruiter
+                {ui.recruiter}
               </label>
               <div className="mt-1 flex h-9 items-center justify-between rounded-md border border-slate-200 bg-white px-3 text-[12.5px] text-slate-700">
                 <span>Raphaël · raphael@truecalling.ai</span>
@@ -2152,17 +2113,17 @@ function BriefModal() {
             </div>
             <div className="flex-1">
               <label className="text-[10px] font-medium uppercase tracking-[0.06em] text-slate-500">
-                Contact email
+                {ui.contactEmail}
               </label>
               <div className="mt-1 flex h-9 items-center rounded-md border border-slate-200 bg-white px-3 text-[12.5px] text-slate-400">
-                recruteur@entreprise.com
+                {ui.contactEmailPlaceholder}
               </div>
             </div>
           </div>
           <div className="flex items-end justify-between gap-3">
             <div>
               <label className="text-[10px] font-medium uppercase tracking-[0.06em] text-slate-500">
-                Min score
+                {ui.minScore}
               </label>
               <div className="mt-1 flex h-9 w-24 items-center rounded-md border border-slate-200 bg-white px-3 text-[12.5px] text-slate-700">
                 0
@@ -2172,18 +2133,18 @@ function BriefModal() {
               <span className="flex h-5 w-9 items-center rounded-full bg-accent p-0.5">
                 <span className="ml-auto block size-4 rounded-full bg-white shadow-sm" />
               </span>
-              <span className="text-[11.5px] text-slate-700">Active position</span>
+              <span className="text-[11.5px] text-slate-700">{ui.activePosition}</span>
             </div>
           </div>
         </div>
         {/* Footer */}
         <div className="flex items-center justify-end gap-2 border-t border-slate-100 bg-slate-50 px-5 py-3">
-          <button className="rounded-md px-3 py-1.5 text-[11.5px] text-slate-600">Cancel</button>
+          <button className="rounded-md px-3 py-1.5 text-[11.5px] text-slate-600">{ui.cancel}</button>
           <button className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-3 py-1.5 text-[11.5px] text-slate-700 shadow-sm">
-            Next <ChevronIcon />
+            {ui.next} <ChevronIcon />
           </button>
           <button className="rounded-md bg-accent px-3 py-1.5 text-[11.5px] font-semibold text-white shadow-sm">
-            Create position
+            {ui.createPosition}
           </button>
         </div>
       </motion.div>
@@ -2193,6 +2154,8 @@ function BriefModal() {
 
 /* ----- Step 1+ : Advanced Search results ----- */
 function ResultsView({ step, runId }: { step: number; runId: number }) {
+  const { candidates, analyzedLabel, topShownLabel, ui } = useDemo();
+  const topCity = candidates[0]?.city ?? "";
   const analyzing = step === 1;
   return (
     <motion.div
@@ -2205,12 +2168,12 @@ function ResultsView({ step, runId }: { step: number; runId: number }) {
       {/* Refine search criteria — inline text with pink links */}
       <div className="mb-3 flex items-center gap-2 text-[11px] text-slate-700">
         <FilterIcon />
-        <span className="font-semibold text-slate-900">Refine search criteria</span>
-        <span className="text-accent">Paris</span>
+        <span className="font-semibold text-slate-900">{ui.refineSearch}</span>
+        <span className="text-accent">{topCity}</span>
         <span className="text-slate-300">·</span>
         <span className="text-accent">Figma, Design Systems, User Research, Prototyping</span>
         <span className="text-slate-300">·</span>
-        <span className="text-accent">Remote, Senior</span>
+        <span className="text-accent">{ui.remote}, Senior</span>
       </div>
 
       {/* Status line */}
@@ -2219,7 +2182,7 @@ function ResultsView({ step, runId }: { step: number; runId: number }) {
           <>
             <SparkleIconSm />
             <span className="font-semibold text-violet-700">
-              AI analysis in progress…{" "}
+              {ui.aiAnalysis}{" "}
               <span className="font-medium text-violet-400">(12/50)</span>
             </span>
             <span className="ml-1 inline-flex gap-0.5">
@@ -2239,8 +2202,8 @@ function ResultsView({ step, runId }: { step: number; runId: number }) {
               <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500" />
             </span>
             <span className="font-semibold text-slate-700">
-              50 candidats analysés{" "}
-              <span className="font-medium text-slate-500">· top 4 affichés</span>
+              {analyzedLabel}{" "}
+              <span className="font-medium text-slate-500">· {topShownLabel}</span>
             </span>
           </>
         )}
@@ -2249,7 +2212,7 @@ function ResultsView({ step, runId }: { step: number; runId: number }) {
       {/* Cards grid */}
       <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
         <AnimatePresence mode="popLayout">
-          {CANDIDATES.map((c, i) => (
+          {candidates.map((c, i) => (
             <ResultCard
               key={`${runId}-${c.initials}`}
               c={c}
@@ -2442,17 +2405,19 @@ function Cursor() {
 /* ----- Step 2-3: WhatsApp panel slides from right (covers ~55%) ----- */
 function WhatsAppOverlay({ runId, showResponse }: { runId: number; showResponse: boolean }) {
   void runId;
+  const { whatsappMsg, whatsappReply, whatsappStatus, composerPlaceholder, candidates } = useDemo();
+  const top = candidates[0];
   const [typed, setTyped] = useState("");
   useEffect(() => {
     setTyped("");
     let i = 0;
     const id = setInterval(() => {
       i += 2;
-      setTyped(WHATSAPP_MSG.slice(0, i));
-      if (i >= WHATSAPP_MSG.length) clearInterval(id);
+      setTyped(whatsappMsg.slice(0, i));
+      if (i >= whatsappMsg.length) clearInterval(id);
     }, 22);
     return () => clearInterval(id);
-  }, []);
+  }, [whatsappMsg]);
 
   return (
     <motion.div
@@ -2468,8 +2433,8 @@ function WhatsAppOverlay({ runId, showResponse }: { runId: number; showResponse:
           <WhatsAppGlyph />
         </div>
         <div className="flex-1">
-          <div className="text-[12.5px] font-semibold text-slate-900">M. Dubois</div>
-          <div className="text-[10.5px] text-slate-500">WhatsApp · en ligne</div>
+          <div className="text-[12.5px] font-semibold text-slate-900">{top.name}</div>
+          <div className="text-[10.5px] text-slate-500">{whatsappStatus}</div>
         </div>
         <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 ring-1 ring-emerald-100">
           <CheckIcon className="size-2.5" /> 96%
@@ -2493,7 +2458,7 @@ function WhatsAppOverlay({ runId, showResponse }: { runId: number; showResponse:
           className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-accent px-3.5 py-2.5 text-[12px] leading-relaxed text-white shadow-[0_4px_12px_-6px_rgba(233,30,140,0.45)]"
         >
           {typed}
-          {typed.length < WHATSAPP_MSG.length && (
+          {typed.length < whatsappMsg.length && (
             <span className="ml-0.5 inline-block h-3 w-[1.5px] translate-y-0.5 bg-ink/80 align-middle animate-pulse" />
           )}
         </motion.div>
@@ -2505,7 +2470,7 @@ function WhatsAppOverlay({ runId, showResponse }: { runId: number; showResponse:
             transition={{ delay: 0.4 }}
             className="max-w-[75%] rounded-2xl rounded-bl-sm bg-white px-3.5 py-2.5 text-[12px] leading-relaxed text-slate-900 shadow-[0_2px_6px_-2px_rgba(15,23,42,0.12)]"
           >
-            Bonjour, oui avec plaisir. Jeudi 14h ça vous convient&nbsp;?
+            {whatsappReply}
           </motion.div>
         )}
       </div>
@@ -2513,7 +2478,7 @@ function WhatsAppOverlay({ runId, showResponse }: { runId: number; showResponse:
       {/* Composer */}
       <div className="flex items-center gap-2 border-t border-slate-200 bg-white px-3 py-2.5">
         <div className="flex-1 rounded-full bg-slate-100 px-3 py-1.5 text-[11px] text-slate-400">
-          Tapez un message…
+          {composerPlaceholder}
         </div>
         <button className="flex size-7 items-center justify-center rounded-full bg-accent shadow-sm">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -2536,6 +2501,9 @@ function WhatsAppGlyph() {
 
 /* ----- Step 3: response toast (light theme) ----- */
 function ResponseToast() {
+  const { candidates, repliedTitle, repliedTimeAgo } = useDemo();
+  const top = candidates[0];
+  const title = repliedTitle.replace("{name}", top.name);
   return (
     <motion.div
       initial={{ opacity: 0, y: -10, x: 20 }}
@@ -2549,8 +2517,8 @@ function ResponseToast() {
         <span className="relative inline-flex size-2.5 rounded-full bg-emerald-500" />
       </span>
       <div className="text-[11.5px]">
-        <div className="font-semibold text-slate-900">M. Dubois a répondu</div>
-        <div className="text-[10px] text-slate-500">il y a 2 minutes</div>
+        <div className="font-semibold text-slate-900">{title}</div>
+        <div className="text-[10px] text-slate-500">{repliedTimeAgo}</div>
       </div>
     </motion.div>
   );
