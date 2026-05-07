@@ -15,6 +15,7 @@ import {
   blogEnabledLocales,
 } from "@/lib/i18n-config";
 import { buildArticleAlternates } from "@/lib/seo-metadata";
+import { blogPostingSchema, breadcrumbSchema, jsonLd } from "@/lib/schema";
 import { Navbar } from "@/components/SiteNavbar";
 
 const SITE_URL = "https://truecalling.ai";
@@ -71,31 +72,35 @@ export default async function Page({
   const related = getRelatedArticles(article.slug, params.locale, 3);
   const dict = await getDictionary(params.locale);
 
-  const ldJson = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: article.title,
+  const articleUrl = `${SITE_URL}${getLocalizedPath("blog", params.locale)}/${article.slug}`;
+  const blogIndexUrl = `${SITE_URL}${getLocalizedPath("blog", params.locale)}`;
+  const homeUrl = `${SITE_URL}${getLocalizedPath("home", params.locale)}`;
+
+  const articleSchema = blogPostingSchema({
+    title: article.title,
     description: article.description,
-    datePublished: article.publishedAt,
-    author: { "@type": "Organization", name: "TrueCalling" },
-    publisher: {
-      "@type": "Organization",
-      name: "TrueCalling",
-      url: "https://truecalling.ai",
-    },
-    keywords: article.keyword,
-    inLanguage: params.locale,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${SITE_URL}${getLocalizedPath("blog", params.locale)}/${article.slug}`,
-    },
-  };
+    url: articleUrl,
+    slug: article.slug,
+    publishedAt: article.publishedAt,
+    keyword: article.keyword,
+    locale: params.locale,
+  });
+
+  const breadcrumb = breadcrumbSchema([
+    { name: "TrueCalling", url: homeUrl },
+    { name: dict.blog_meta_title ?? "Blog", url: blogIndexUrl },
+    { name: article.title, url: articleUrl },
+  ]);
 
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-bg text-ink">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumb) }}
       />
       <BackgroundDecor />
       <Navbar />
