@@ -12,7 +12,7 @@ import { buildAlternates } from "@/lib/seo-metadata";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/SiteNavbar";
 
-const SITE_URL = "https://truecalling.app";
+const SITE_URL = "https://truecalling.ai";
 
 export function generateStaticParams() {
   return blogEnabledLocales.map((locale) => ({ locale }));

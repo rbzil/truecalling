@@ -50,24 +50,30 @@ export default async function LocaleLayout({
   const dictionary = await getDictionary(locale);
   const dir = rtlLocales.includes(locale) ? "rtl" : "ltr";
 
-  // Locale-aware structured data (one per locale page)
-  const ldJson = {
+  // Organization schema
+  const organizationLdJson = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "Organization",
     name: "TrueCalling",
-    applicationCategory: "BusinessApplication",
-    operatingSystem: "Web",
-    description: `${dictionary.hero_subtitle_line1} ${dictionary.hero_subtitle_line2}`,
-    url: `${SITE_URL}${getLocalizedPath("home", locale)}`,
-    image: `${SITE_URL}/brand/truecalling-vertical.png`,
-    inLanguage: locale,
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: "USD",
-      lowPrice: "595",
-      highPrice: "895",
-      offerCount: "3",
+    url: SITE_URL,
+    logo: `${SITE_URL}/brand/truecalling-vertical.png`,
+    description: "AI sourcing software for recruiters",
+    foundingDate: "2023",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      availableLanguage: locales,
     },
+  };
+
+  // WebSite schema
+  const websiteLdJson = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "TrueCalling",
+    url: SITE_URL,
+    description: "AI sourcing software for recruiters",
+    inLanguage: locale,
   };
 
   return (
@@ -77,7 +83,11 @@ export default async function LocaleLayout({
       <div dir={dir} lang={locale}>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLdJson) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLdJson) }}
         />
         {children}
         <SiteFooter />

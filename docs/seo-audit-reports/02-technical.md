@@ -1,7 +1,7 @@
 # Technical SEO Audit — TrueCalling
 
 **URL:** https://truecalling-lyart.vercel.app/en
-**Production canonical:** https://truecalling.app
+**Production canonical:** https://truecalling.ai
 **Stack:** Next.js 14 App Router, Vercel, 8 locales
 **Date:** 2026-05-06
 **Score: 51 / 100**
@@ -46,7 +46,7 @@ import { MetadataRoute } from 'next'
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: '*', allow: '/' },
-    sitemap: 'https://truecalling.app/sitemap.xml',
+    sitemap: 'https://truecalling.ai/sitemap.xml',
   }
 }
 ```
@@ -58,12 +58,12 @@ Alternatively, add `robots.txt` to the `/public` directory and ensure the Next.j
 
 **Observed:**
 ```
-/en/book-a-demo  →  canonical: https://truecalling.app/en   ← WRONG
-/en/faq          →  canonical: https://truecalling.app/en   ← WRONG
-/en/contact      →  canonical: https://truecalling.app/en   ← WRONG
-/fr/reserver-une-demo → canonical: https://truecalling.app/fr  ← WRONG
+/en/book-a-demo  →  canonical: https://truecalling.ai/en   ← WRONG
+/en/faq          →  canonical: https://truecalling.ai/en   ← WRONG
+/en/contact      →  canonical: https://truecalling.ai/en   ← WRONG
+/fr/reserver-une-demo → canonical: https://truecalling.ai/fr  ← WRONG
 ```
-The only exception is `/en/blog` which correctly self-canonicalizes to `https://truecalling.app/en/blog`.
+The only exception is `/en/blog` which correctly self-canonicalizes to `https://truecalling.ai/en/blog`.
 
 The root cause is likely a static `canonical` being set in the root layout (`app/[locale]/layout.tsx`) pointing to the locale homepage, rather than being computed dynamically per-page.
 
@@ -73,7 +73,7 @@ The root cause is likely a static `canonical` being set in the root layout (`app
 export async function generateMetadata({ params }: Props) {
   return {
     alternates: {
-      canonical: `https://truecalling.app/${params.locale}/book-a-demo`,
+      canonical: `https://truecalling.ai/${params.locale}/book-a-demo`,
     },
   }
 }
@@ -82,7 +82,7 @@ Use a helper that maps `[locale]/[slug]` to the correct localized path for pages
 
 ### C3 — Staging Environment Is Indexable
 
-**Impact:** `truecalling-lyart.vercel.app` is live, returns `index, follow` on all pages, has a sitemap referencing `truecalling.app`, and is reachable by Googlebot. This creates a duplicate content risk and can split PageRank. The production domain `truecalling.app` would compete with staging for every crawled URL.
+**Impact:** `truecalling-lyart.vercel.app` is live, returns `index, follow` on all pages, has a sitemap referencing `truecalling.ai`, and is reachable by Googlebot. This creates a duplicate content risk and can split PageRank. The production domain `truecalling.ai` would compete with staging for every crawled URL.
 
 **Observed:**
 ```
@@ -132,16 +132,16 @@ All three sub-pages share the homepage title and a 147-character description. On
 ### H3 — og:url Static and Wrong on Sub-pages
 
 ```
-/en/book-a-demo  og:url: "https://truecalling.app/en"  ← homepage, not book-a-demo
-/en/faq          og:url: "https://truecalling.app/en"  ← same
-/fr/reserver-une-demo  og:url: "https://truecalling.app/fr"  ← wrong
+/en/book-a-demo  og:url: "https://truecalling.ai/en"  ← homepage, not book-a-demo
+/en/faq          og:url: "https://truecalling.ai/en"  ← same
+/fr/reserver-une-demo  og:url: "https://truecalling.ai/fr"  ← wrong
 ```
 
 Same fix as H2 / C2 — set `og:url` per page in `generateMetadata`.
 
 ### H4 — Sitemap Domain Mismatch
 
-The sitemap is served at `truecalling-lyart.vercel.app/sitemap.xml` but all 66 `<loc>` URLs point to `https://truecalling.app`. When Googlebot discovers the sitemap from staging, it cannot verify ownership of `truecalling.app` via the staging domain. Sitemap is only usable once submitted directly to Search Console under the production property.
+The sitemap is served at `truecalling-lyart.vercel.app/sitemap.xml` but all 66 `<loc>` URLs point to `https://truecalling.ai`. When Googlebot discovers the sitemap from staging, it cannot verify ownership of `truecalling.ai` via the staging domain. Sitemap is only usable once submitted directly to Search Console under the production property.
 
 **Additional:** Missing `x-default` hreflang in every sitemap URL block.
 

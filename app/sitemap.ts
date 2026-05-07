@@ -8,7 +8,7 @@ import {
 } from "@/lib/i18n-config";
 import { getArticles } from "./[locale]/blog/_lib/articles";
 
-const SITE_URL = "https://truecalling.app";
+const SITE_URL = "https://truecalling.ai";
 
 function withXDefault(
   languages: Record<string, string>,

@@ -168,7 +168,7 @@ Allow: /
 User-agent: CCBot
 Disallow: /
 
-Sitemap: https://truecalling.app/sitemap.xml
+Sitemap: https://truecalling.ai/sitemap.xml
 ```
 
 CCBot disallow optional — limits training data scraping by Common Crawl while opening doors to product-search-integrated crawlers.

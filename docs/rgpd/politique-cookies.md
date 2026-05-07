@@ -2,7 +2,7 @@
 
 *Dernière mise à jour : 6 mai 2026*
 
-Cette politique décrit l'utilisation de cookies et de technologies équivalentes (LocalStorage) sur le site **truecalling.app**.
+Cette politique décrit l'utilisation de cookies et de technologies équivalentes (LocalStorage) sur le site **truecalling.ai**.
 
 ---
 

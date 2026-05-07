@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://truecalling.app";
+const SITE_URL = "https://truecalling.ai";
 
 export default function robots(): MetadataRoute.Robots {
   const isProduction = process.env.VERCEL_ENV === "production";

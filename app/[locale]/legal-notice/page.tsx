@@ -49,7 +49,7 @@ export default function Page() {
               Conformément aux dispositions des articles 6-III et 19 de la
               loi n° 2004-575 du 21 juin 2004 pour la confiance dans
               l&apos;économie numérique (« LCEN »), il est précisé aux
-              utilisateurs du site <strong>truecalling.app</strong> l&apos;identité
+              utilisateurs du site <strong>truecalling.ai</strong> l&apos;identité
               des différents intervenants dans le cadre de sa réalisation et
               de son suivi.
             </p>
@@ -129,7 +129,7 @@ export default function Page() {
             <h2>3. Propriété intellectuelle</h2>
             <p>
               L&apos;ensemble du contenu présent sur le site{" "}
-              <strong>truecalling.app</strong> (textes, illustrations, logos,
+              <strong>truecalling.ai</strong> (textes, illustrations, logos,
               icônes, mises en page, animations, code source, marques) est la
               propriété exclusive de <strong>TRUECALLING AI</strong> ou de ses
               partenaires, et est protégé par le droit français et

@@ -2,7 +2,7 @@
 
 *Dernière mise à jour : 6 mai 2026*
 
-Conformément aux dispositions des articles 6-III et 19 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (« LCEN »), il est précisé aux utilisateurs du site **truecalling.app** l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.
+Conformément aux dispositions des articles 6-III et 19 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (« LCEN »), il est précisé aux utilisateurs du site **truecalling.ai** l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.
 
 ---
 
@@ -49,7 +49,7 @@ Site : [vercel.com](https://vercel.com)
 
 ## 4. Propriété intellectuelle
 
-L'ensemble du contenu présent sur le site **truecalling.app** (textes, illustrations, logos, icônes, mises en page, animations, code source, marques) est la propriété exclusive de **TRUECALLING AI** ou de ses partenaires, et est protégé par le droit français et international de la propriété intellectuelle (Code de la propriété intellectuelle).
+L'ensemble du contenu présent sur le site **truecalling.ai** (textes, illustrations, logos, icônes, mises en page, animations, code source, marques) est la propriété exclusive de **TRUECALLING AI** ou de ses partenaires, et est protégé par le droit français et international de la propriété intellectuelle (Code de la propriété intellectuelle).
 
 Toute reproduction, représentation, modification, publication, adaptation totale ou partielle des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite sans autorisation écrite préalable, sauf exception prévue par la loi (notamment pour la copie privée à usage strictement personnel).
 
@@ -77,7 +77,7 @@ Les liens hypertextes mis en place dans le cadre du site en direction d'autres r
 ## 6. Conditions Générales d'Utilisation (CGU)
 
 Les conditions générales d'utilisation du Site sont publiées séparément à l'adresse :
-👉 [`/cgu`](https://truecalling.app/cgu)
+👉 [`/cgu`](https://truecalling.ai/cgu)
 
 Ces CGU régissent l'usage du Site et de la plateforme TrueCalling. Pour la conformité RGPD et le traitement des données personnelles, consultez la [Politique de confidentialité](./politique-confidentialite.md) et la [Politique de cookies](./politique-cookies.md).
 
