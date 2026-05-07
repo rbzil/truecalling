@@ -36,7 +36,7 @@ const FALLBACK: Copy = {
   body2:
     "In the meantime, feel free to explore the product and the latest articles on AI sourcing.",
   next: "What happens next",
-  ctaSite: "Visit truecalling.app",
+  ctaSite: "Visit truecalling.ai",
   ctaBlog: "Read the blog",
   contactPrefix: "Need to reach us sooner? Reply to this email or write to",
   signOff: "Talk soon,",
@@ -53,7 +53,7 @@ const COPIES: Record<string, Copy> = {
     body2:
       "En attendant, vous pouvez explorer le produit et nos derniers articles sur le sourcing IA.",
     next: "Les prochaines étapes",
-    ctaSite: "Découvrir truecalling.app",
+    ctaSite: "Découvrir truecalling.ai",
     ctaBlog: "Lire le blog",
     contactPrefix:
       "Besoin de nous joindre plus vite ? Répondez à cet email ou écrivez à",
@@ -70,7 +70,7 @@ const COPIES: Record<string, Copy> = {
       "תודה שביקשת דמו עם TrueCalling. קיבלנו את הבקשה וניצור איתך קשר תוך 24 שעות עבודה כדי לתאם את הפגישה.",
     body2: "בינתיים, אפשר לעיין במוצר ובמאמרים האחרונים שלנו על Sourcing מבוסס AI.",
     next: "מה עכשיו",
-    ctaSite: "לאתר truecalling.app",
+    ctaSite: "לאתר truecalling.ai",
     ctaBlog: "לבלוג",
     contactPrefix: "צריך/ה אותנו מהר יותר? השב/י למייל זה או כתוב/בי אל",
     signOff: "להתראות,",
@@ -85,7 +85,7 @@ const COPIES: Record<string, Copy> = {
     body2:
       "Enquanto isso, sinta-se à vontade para explorar o produto e nossos artigos mais recentes sobre sourcing por IA.",
     next: "Próximos passos",
-    ctaSite: "Visitar truecalling.app",
+    ctaSite: "Visitar truecalling.ai",
     ctaBlog: "Ler o blog",
     contactPrefix: "Precisa nos falar antes? Responda este email ou escreva para",
     signOff: "Até breve,",
@@ -101,7 +101,7 @@ const COPIES: Record<string, Copy> = {
     body2:
       "Mientras tanto, puedes explorar el producto y nuestros últimos artículos sobre sourcing con IA.",
     next: "Próximos pasos",
-    ctaSite: "Visitar truecalling.app",
+    ctaSite: "Visitar truecalling.ai",
     ctaBlog: "Leer el blog",
     contactPrefix:
       "¿Necesitas contactarnos antes? Responde a este email o escribe a",
@@ -118,7 +118,7 @@ const COPIES: Record<string, Copy> = {
     body2:
       "In der Zwischenzeit können Sie das Produkt und unsere neuesten Beiträge zum KI-Sourcing entdecken.",
     next: "Die nächsten Schritte",
-    ctaSite: "truecalling.app besuchen",
+    ctaSite: "truecalling.ai besuchen",
     ctaBlog: "Zum Blog",
     contactPrefix:
       "Möchten Sie uns früher erreichen? Antworten Sie auf diese E-Mail oder schreiben Sie an",
@@ -135,7 +135,7 @@ const COPIES: Record<string, Copy> = {
     body2:
       "Nel frattempo, puoi esplorare il prodotto e i nostri ultimi articoli sul sourcing con IA.",
     next: "I prossimi passi",
-    ctaSite: "Visita truecalling.app",
+    ctaSite: "Visita truecalling.ai",
     ctaBlog: "Leggi il blog",
     contactPrefix: "Hai bisogno di contattarci prima? Rispondi a questa email o scrivi a",
     signOff: "A presto,",
@@ -151,7 +151,7 @@ const COPIES: Record<string, Copy> = {
     body2:
       "In de tussentijd kun je het product en onze laatste artikelen over AI-sourcing alvast bekijken.",
     next: "Wat er nu gebeurt",
-    ctaSite: "Bezoek truecalling.app",
+    ctaSite: "Bezoek truecalling.ai",
     ctaBlog: "Lees de blog",
     contactPrefix:
       "Wil je ons sneller bereiken? Reageer op deze e-mail of schrijf naar",
@@ -162,7 +162,7 @@ const COPIES: Record<string, Copy> = {
   },
 };
 
-const SITE_URL = "https://truecalling.app";
+const SITE_URL = "https://truecalling.ai";
 const RTL_LOCALES = new Set(["he"]);
 
 export function ConfirmationEmail({ data }: { data: DemoRequestData }) {

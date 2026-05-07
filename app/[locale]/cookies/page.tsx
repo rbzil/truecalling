@@ -48,7 +48,7 @@ export default function Page() {
             <p>
               Cette politique décrit l&apos;utilisation de cookies et de
               technologies équivalentes (LocalStorage) sur le site{" "}
-              <strong>truecalling.app</strong>.
+              <strong>truecalling.ai</strong>.
             </p>
 
             <h2>1. Qu&apos;est-ce qu&apos;un cookie ?</h2>

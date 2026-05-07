@@ -75,7 +75,7 @@ Recommend running per-article (not just homepage) for full E-E-A-T scoring:
 - **`lastmod`:** Dynamic `now()` timestamp — Googlebot treats this as low-signal noise. Should reflect git/CMS-derived modification dates.
 - **`priority`:** Set per URL (homepage 1.0, sub-pages 0.8, blog 0.7, legal 0.3). Note: `priority` is a hint Google largely ignores.
 - **`changefreq`:** Set per URL. Same: Google largely ignores.
-- **Domain mismatch:** Sitemap served on `truecalling-lyart.vercel.app` but `<loc>` URLs all point to `https://truecalling.app`. Cannot be auto-discovered by Googlebot from staging — must be submitted manually in Search Console under the production property.
+- **Domain mismatch:** Sitemap served on `truecalling-lyart.vercel.app` but `<loc>` URLs all point to `https://truecalling.ai`. Cannot be auto-discovered by Googlebot from staging — must be submitted manually in Search Console under the production property.
 - **`x-default`:** **Missing** in every URL block. Should be added — see [`06-hreflang.md`](./06-hreflang.md) High 5.
 
 ### What was NOT delivered
@@ -90,7 +90,7 @@ Recommend running per-article (not just homepage) for full E-E-A-T scoring:
 
 1. Add `x-default` hreflang in every URL's `xhtml:link` block
 2. Switch `lastmod` to actual content modification dates (git timestamps for static pages, CMS timestamps for blog)
-3. Once production migrates from staging, ensure sitemap is served at `https://truecalling.app/sitemap.xml` and submit to GSC
+3. Once production migrates from staging, ensure sitemap is served at `https://truecalling.ai/sitemap.xml` and submit to GSC
 
 ### Re-run
 
@@ -143,7 +143,7 @@ PageSpeed Insights quota resets at midnight Pacific Time. Re-run after reset:
 For more reliable field data, configure Google Search Console + CrUX API:
 
 ```
-/seo google cwv https://truecalling.app
+/seo google cwv https://truecalling.ai
 ```
 
 (Requires production traffic for CrUX to have data — staging won't.)

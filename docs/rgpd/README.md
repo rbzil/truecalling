@@ -2,7 +2,7 @@
 
 *Audit + documents de conformité — 6 mai 2026*
 
-Ce dossier contient le pack RGPD complet généré après audit du code du site `truecalling.app`.
+Ce dossier contient le pack RGPD complet généré après audit du code du site `truecalling.ai`.
 
 ## Identité du responsable de traitement (confirmée)
 

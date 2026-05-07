@@ -7,7 +7,7 @@ import {
   type RouteKey,
 } from "./i18n-config";
 
-export const SITE_URL = "https://truecalling.app";
+export const SITE_URL = "https://truecalling.ai";
 
 /**
  * Build the canonical URL + complete hreflang `languages` map (incl. x-default)

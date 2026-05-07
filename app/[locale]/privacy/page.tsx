@@ -49,7 +49,7 @@ export default function Page() {
               La présente politique décrit comment <strong>TrueCalling</strong>{" "}
               (« nous », « nos », « notre ») collecte, utilise et protège les
               données personnelles des visiteurs et prospects sur le site{" "}
-              <strong>truecalling.app</strong> (le « Site »). Elle est rédigée
+              <strong>truecalling.ai</strong> (le « Site »). Elle est rédigée
               conformément au Règlement (UE) 2016/679 (« RGPD ») et à la loi
               française n° 78-17 du 6 janvier 1978 modifiée (« Loi Informatique
               et Libertés »).

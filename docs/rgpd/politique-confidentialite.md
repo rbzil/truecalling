@@ -2,7 +2,7 @@
 
 *Dernière mise à jour : 6 mai 2026*
 
-La présente politique décrit comment **TrueCalling** (« nous », « nos », « notre ») collecte, utilise et protège les données personnelles des visiteurs et prospects sur le site **truecalling.app** (le « Site »).
+La présente politique décrit comment **TrueCalling** (« nous », « nos », « notre ») collecte, utilise et protège les données personnelles des visiteurs et prospects sur le site **truecalling.ai** (le « Site »).
 
 Elle est rédigée conformément au Règlement (UE) 2016/679 (« RGPD ») et à la loi française n° 78-17 du 6 janvier 1978 modifiée (« Loi Informatique et Libertés »).
 

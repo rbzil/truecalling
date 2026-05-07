@@ -65,7 +65,7 @@ The `<div lang={locale} dir={dir}>` inside the locale layout sets the right valu
 ### Canonical + hreflang on home pages (Working)
 
 ```
-/fr canonical → https://truecalling.app/fr ✅
+/fr canonical → https://truecalling.ai/fr ✅
 /fr hreflang →
   fr → /fr ✅
   en → /en ✅
@@ -82,7 +82,7 @@ The `<div lang={locale} dir={dir}>` inside the locale layout sets the right valu
 
 ```
 /fr/reserver-une-demo
-  canonical → https://truecalling.app/fr  ← WRONG (should be /fr/reserver-une-demo)
+  canonical → https://truecalling.ai/fr  ← WRONG (should be /fr/reserver-une-demo)
   hreflang fr → /fr                  ← WRONG (should be /fr/reserver-une-demo)
   hreflang en → /en                  ← WRONG (should be /en/book-a-demo)
   hreflang de → /de                  ← WRONG (should be /de/demo-buchen)
@@ -95,7 +95,7 @@ Same pattern on `/fr/contact` and `/fr/politique-de-confidentialite`.
 ### Blog index `/fr/blog` (Working — partial)
 
 ```
-canonical → https://truecalling.app/fr/blog ✅
+canonical → https://truecalling.ai/fr/blog ✅
 hreflang fr → /fr/blog ✅
 hreflang en → /en/blog ✅
 ```
@@ -105,7 +105,7 @@ Only 2 hreflang because blog is gated to FR + EN only (via `blogEnabledLocales`)
 ### Blog article `/fr/blog/sourcing-ia-guide-2026` (Critical 4)
 
 ```
-canonical → https://truecalling.app/fr/blog/sourcing-ia-guide-2026 ✅
+canonical → https://truecalling.ai/fr/blog/sourcing-ia-guide-2026 ✅
 hreflang → (none)  ← MISSING
 ```
 
@@ -115,15 +115,15 @@ The article's `generateMetadata` sets `alternates.canonical` but not `alternates
 
 ```xml
 <url>
-  <loc>https://truecalling.app/fr/reserver-une-demo</loc>
-  <xhtml:link rel="alternate" hreflang="fr" href="https://truecalling.app/fr/reserver-une-demo" />
-  <xhtml:link rel="alternate" hreflang="en" href="https://truecalling.app/en/book-a-demo" />
-  <xhtml:link rel="alternate" hreflang="he" href="https://truecalling.app/he/book-a-demo" />
-  <xhtml:link rel="alternate" hreflang="pt-BR" href="https://truecalling.app/pt-BR/agendar-uma-demo" />
-  <xhtml:link rel="alternate" hreflang="es" href="https://truecalling.app/es/reservar-una-demo" />
-  <xhtml:link rel="alternate" hreflang="de" href="https://truecalling.app/de/demo-buchen" />
-  <xhtml:link rel="alternate" hreflang="it" href="https://truecalling.app/it/prenota-una-demo" />
-  <xhtml:link rel="alternate" hreflang="nl" href="https://truecalling.app/nl/demo-boeken" />
+  <loc>https://truecalling.ai/fr/reserver-une-demo</loc>
+  <xhtml:link rel="alternate" hreflang="fr" href="https://truecalling.ai/fr/reserver-une-demo" />
+  <xhtml:link rel="alternate" hreflang="en" href="https://truecalling.ai/en/book-a-demo" />
+  <xhtml:link rel="alternate" hreflang="he" href="https://truecalling.ai/he/book-a-demo" />
+  <xhtml:link rel="alternate" hreflang="pt-BR" href="https://truecalling.ai/pt-BR/agendar-uma-demo" />
+  <xhtml:link rel="alternate" hreflang="es" href="https://truecalling.ai/es/reservar-una-demo" />
+  <xhtml:link rel="alternate" hreflang="de" href="https://truecalling.ai/de/demo-buchen" />
+  <xhtml:link rel="alternate" hreflang="it" href="https://truecalling.ai/it/prenota-una-demo" />
+  <xhtml:link rel="alternate" hreflang="nl" href="https://truecalling.ai/nl/demo-boeken" />
   ... no x-default ← HIGH (missing for every URL block)
 </url>
 ```
@@ -167,7 +167,7 @@ For each sub-page, add a `generateMetadata` that sets canonical and full hreflan
 import type { Metadata } from "next";
 import { locales, getLocalizedPath, type Locale } from "@/lib/i18n-config";
 
-const SITE = "https://truecalling.app";
+const SITE = "https://truecalling.ai";
 
 export async function generateMetadata({
   params,

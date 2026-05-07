@@ -10,7 +10,9 @@ import {
   type Variants,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { useT, useLocalizedHref } from "../_i18n/locale-context";
+import { useT, useLocalizedHref, useLocale } from "../_i18n/locale-context";
+import { SITE_URL } from "@/lib/seo-metadata";
+import { getLocalizedPath } from "@/lib/i18n-config";
 import { Navbar, FingerprintMark, CTAButton } from "../../components/SiteNavbar";
 import { NewsletterPopup } from "../../components/NewsletterPopup";
 
@@ -21,8 +23,52 @@ import { NewsletterPopup } from "../../components/NewsletterPopup";
    ============================================================ */
 
 export default function Page() {
+  const { locale, t } = useLocale();
+
+  // SoftwareApplication schema for home page
+  const softwareAppLdJson = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "TrueCalling",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    description: `${t('hero_subtitle_line1')} ${t('hero_subtitle_line2')}`,
+    url: `${SITE_URL}${getLocalizedPath("home", locale)}`,
+    image: `${SITE_URL}/brand/truecalling-vertical.png`,
+    inLanguage: locale,
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: "USD",
+      lowPrice: "595",
+      highPrice: "895",
+      offerCount: "3",
+    },
+  };
+
+  // BreadcrumbList schema for home page
+  const breadcrumbLdJson = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: `${SITE_URL}${getLocalizedPath("home", locale)}`,
+      },
+    ],
+  };
+
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-bg text-ink">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppLdJson) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLdJson) }}
+      />
       <Navbar />
       <Hero />
       <DemoAndCaseStudy />
@@ -1703,7 +1749,7 @@ function BrowserChrome({ children }: { children: React.ReactNode }) {
         <span className="size-2.5 rounded-full bg-[#FEBC2E]" />
         <span className="size-2.5 rounded-full bg-[#28C840]" />
         <div className="ml-4 flex h-6 flex-1 items-center justify-center rounded-md bg-ink/[0.04] px-3 text-[11px] text-ink-muted">
-          app.truecalling.app/advanced-search
+          app.truecalling.ai/advanced-search
         </div>
       </div>
       <div className="relative aspect-[16/10] w-full bg-[#F7F8FA]">

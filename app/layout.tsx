@@ -29,7 +29,7 @@ const frankRuhlLibre = Frank_Ruhl_Libre({
   display: "swap",
 });
 
-const siteUrl = "https://truecalling.app";
+const siteUrl = "https://truecalling.ai";
 const titleDefault = "TrueCalling — AI sourcing software for recruiters";
 const description =
   "TrueCalling turns a brief into qualified candidates in minutes. AI copilot EMILY, TrueFit 360 matching, multichannel outreach (WhatsApp, email, phone).";

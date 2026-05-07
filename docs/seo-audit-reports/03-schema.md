@@ -30,8 +30,8 @@ No Microdata or RDFa detected anywhere in the codebase.
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
   "description": "Built for recruiting teams, TrueCalling turns a job description into qualified candidates in minutes. EMILY™, our AI copilot, handles matching and multichannel outreach on WhatsApp, email, and phone.",
-  "url": "https://truecalling.app/en",
-  "image": "https://truecalling.app/brand/truecalling-vertical.png",
+  "url": "https://truecalling.ai/en",
+  "image": "https://truecalling.ai/brand/truecalling-vertical.png",
   "inLanguage": "en",
   "offers": {
     "@type": "AggregateOffer",
@@ -71,13 +71,13 @@ No Microdata or RDFa detected anywhere in the codebase.
   "publisher": {
     "@type": "Organization",
     "name": "TrueCalling",
-    "url": "https://truecalling.app"
+    "url": "https://truecalling.ai"
   },
   "keywords": "AI sourcing",
   "inLanguage": "en",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://truecalling.app/en/blog/ai-sourcing-guide-2026"
+    "@id": "https://truecalling.ai/en/blog/ai-sourcing-guide-2026"
   }
 }
 ```
@@ -168,10 +168,10 @@ Optional. `Service` schema can help surface for service-intent queries. **Priori
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
   "description": "Built for recruiting teams, TrueCalling turns a job description into qualified candidates in minutes. EMILY™, our AI copilot, handles matching and multichannel outreach on WhatsApp, email, and phone.",
-  "url": "https://truecalling.app/en",
+  "url": "https://truecalling.ai/en",
   "image": {
     "@type": "ImageObject",
-    "url": "https://truecalling.app/brand/truecalling-vertical.png",
+    "url": "https://truecalling.ai/brand/truecalling-vertical.png",
     "width": 800,
     "height": 600
   },
@@ -198,17 +198,17 @@ Move from `app/[locale]/layout.tsx` to `app/[locale]/page.tsx`. `offerCount` cor
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://truecalling.app/#organization",
+      "@id": "https://truecalling.ai/#organization",
       "name": "TrueCalling",
-      "url": "https://truecalling.app",
+      "url": "https://truecalling.ai",
       "logo": {
         "@type": "ImageObject",
-        "@id": "https://truecalling.app/#logo",
-        "url": "https://truecalling.app/brand/truecalling-vertical.png",
+        "@id": "https://truecalling.ai/#logo",
+        "url": "https://truecalling.ai/brand/truecalling-vertical.png",
         "width": 512, "height": 512,
         "caption": "TrueCalling"
       },
-      "image": { "@id": "https://truecalling.app/#logo" },
+      "image": { "@id": "https://truecalling.ai/#logo" },
       "description": "AI sourcing, matching and multi-channel outreach for modern recruiting teams.",
       "email": "hello@truecalling.ai",
       "foundingDate": "2024",
@@ -221,11 +221,11 @@ Move from `app/[locale]/layout.tsx` to `app/[locale]/page.tsx`. `offerCount` cor
     },
     {
       "@type": "WebSite",
-      "@id": "https://truecalling.app/#website",
-      "url": "https://truecalling.app",
+      "@id": "https://truecalling.ai/#website",
+      "url": "https://truecalling.ai",
       "name": "TrueCalling",
       "description": "AI sourcing software for recruiting teams.",
-      "publisher": { "@id": "https://truecalling.app/#organization" },
+      "publisher": { "@id": "https://truecalling.ai/#organization" },
       "inLanguage": "en"
     }
   ]
@@ -246,7 +246,7 @@ In `app/[locale]/blog/[slug]/page.tsx`, update `ldJson` to include missing field
   "description": "AI sourcing in 2026: methods, tools, real-world examples...",
   "image": {
     "@type": "ImageObject",
-    "url": "https://truecalling.app/og/ai-sourcing-guide-2026.jpg",
+    "url": "https://truecalling.ai/og/ai-sourcing-guide-2026.jpg",
     "width": 1200,
     "height": 630
   },
@@ -255,17 +255,17 @@ In `app/[locale]/blog/[slug]/page.tsx`, update `ldJson` to include missing field
   "author": {
     "@type": "Organization",
     "name": "TrueCalling",
-    "url": "https://truecalling.app",
-    "@id": "https://truecalling.app/#organization"
+    "url": "https://truecalling.ai",
+    "@id": "https://truecalling.ai/#organization"
   },
   "publisher": {
     "@type": "Organization",
     "name": "TrueCalling",
-    "url": "https://truecalling.app",
-    "@id": "https://truecalling.app/#organization",
+    "url": "https://truecalling.ai",
+    "@id": "https://truecalling.ai/#organization",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://truecalling.app/brand/truecalling-vertical.png",
+      "url": "https://truecalling.ai/brand/truecalling-vertical.png",
       "width": 512, "height": 512
     }
   },
@@ -273,7 +273,7 @@ In `app/[locale]/blog/[slug]/page.tsx`, update `ldJson` to include missing field
   "inLanguage": "en",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://truecalling.app/en/blog/ai-sourcing-guide-2026"
+    "@id": "https://truecalling.ai/en/blog/ai-sourcing-guide-2026"
   }
 }
 ```
@@ -287,8 +287,8 @@ In `app/[locale]/blog/[slug]/page.tsx`, update `ldJson` to include missing field
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://truecalling.app/en" },
-    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://truecalling.app/en/blog" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://truecalling.ai/en" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://truecalling.ai/en/blog" }
   ]
 }
 ```
@@ -300,9 +300,9 @@ In `app/[locale]/blog/[slug]/page.tsx`, update `ldJson` to include missing field
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://truecalling.app/en" },
-    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://truecalling.app/en/blog" },
-    { "@type": "ListItem", "position": 3, "name": "AI Sourcing in 2026: …", "item": "https://truecalling.app/en/blog/ai-sourcing-guide-2026" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://truecalling.ai/en" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://truecalling.ai/en/blog" },
+    { "@type": "ListItem", "position": 3, "name": "AI Sourcing in 2026: …", "item": "https://truecalling.ai/en/blog/ai-sourcing-guide-2026" }
   ]
 }
 ```

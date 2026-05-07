@@ -17,7 +17,7 @@ import {
 import { buildArticleAlternates } from "@/lib/seo-metadata";
 import { Navbar } from "@/components/SiteNavbar";
 
-const SITE_URL = "https://truecalling.app";
+const SITE_URL = "https://truecalling.ai";
 
 export function generateStaticParams() {
   return blogEnabledLocales.flatMap((locale) =>
@@ -81,7 +81,7 @@ export default async function Page({
     publisher: {
       "@type": "Organization",
       name: "TrueCalling",
-      url: "https://truecalling.app",
+      url: "https://truecalling.ai",
     },
     keywords: article.keyword,
     inLanguage: params.locale,

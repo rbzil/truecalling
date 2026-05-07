@@ -6,7 +6,7 @@ L'**Analyse d'Impact relative à la Protection des Données** (AIPD, ou DPIA en 
 
 ## Conclusion : **AIPD non obligatoire**
 
-Au vu de l'audit réalisé sur le code du site truecalling.app, **aucune AIPD n'est requise** pour les traitements actuels. Justification ci-dessous.
+Au vu de l'audit réalisé sur le code du site truecalling.ai, **aucune AIPD n'est requise** pour les traitements actuels. Justification ci-dessous.
 
 ---
 
@@ -24,7 +24,7 @@ Au vu de l'audit réalisé sur le code du site truecalling.app, **aucune AIPD n'
 
 Une AIPD devient également recommandée si le traitement remplit **au moins deux** des neuf critères suivants. Chaque critère est évalué pour TrueCalling.
 
-| # | Critère CEPD | Site truecalling.app |
+| # | Critère CEPD | Site truecalling.ai |
 |---|---|---|
 | 1 | Évaluation ou notation (scoring, profilage) | ❌ Non |
 | 2 | Décision automatisée avec effet juridique ou similaire | ❌ Non |
@@ -48,9 +48,9 @@ Aucun des traitements identifiés sur le site ne figure dans la liste CNIL des t
 
 ## Recommandation
 
-**Pour le site truecalling.app uniquement** : aucune AIPD n'est nécessaire. Tenir le registre RPA à jour suffit.
+**Pour le site truecalling.ai uniquement** : aucune AIPD n'est nécessaire. Tenir le registre RPA à jour suffit.
 
-**Pour la plateforme produit TrueCalling** (l'application accessible à `app.truecalling.app` ou équivalent, qui fait du sourcing IA, du scoring de candidats, et du matching automatique) : une AIPD est très probablement **obligatoire**, car elle remplit au moins deux des critères CEPD :
+**Pour la plateforme produit TrueCalling** (l'application accessible à `app.truecalling.ai` ou équivalent, qui fait du sourcing IA, du scoring de candidats, et du matching automatique) : une AIPD est très probablement **obligatoire**, car elle remplit au moins deux des critères CEPD :
 
 - **Critère 1** (scoring) : le score TrueFit 360 évalue les candidats sur 100 points
 - **Critère 8** (technologie innovante) : matching IA, recherche sémantique
@@ -73,4 +73,4 @@ Réévaluer la nécessité d'une AIPD si l'un de ces événements survient :
 
 ---
 
-> **Avertissement.** Cette évaluation porte exclusivement sur le **site vitrine truecalling.app**. Elle ne traite pas de la plateforme produit TrueCalling (sourcing IA, matching, EMILY) qui doit faire l'objet d'une AIPD dédiée — ce travail dépasse le périmètre de la présente skill et requiert l'intervention d'un DPO ou d'un avocat spécialisé en protection des données. Si un doute subsiste, ne pas hésiter à consulter directement la CNIL via leur formulaire en ligne.
+> **Avertissement.** Cette évaluation porte exclusivement sur le **site vitrine truecalling.ai**. Elle ne traite pas de la plateforme produit TrueCalling (sourcing IA, matching, EMILY) qui doit faire l'objet d'une AIPD dédiée — ce travail dépasse le périmètre de la présente skill et requiert l'intervention d'un DPO ou d'un avocat spécialisé en protection des données. Si un doute subsiste, ne pas hésiter à consulter directement la CNIL via leur formulaire en ligne.

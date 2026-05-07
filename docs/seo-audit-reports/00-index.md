@@ -2,7 +2,7 @@
 
 **Audit date:** 2026-05-06
 **URL audited:** https://truecalling-lyart.vercel.app/en
-**Production canonical:** https://truecalling.app
+**Production canonical:** https://truecalling.ai
 **Type detected:** SaaS B2B (recruiting AI), 8 locales
 
 ## Files
