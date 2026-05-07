@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import type { AuthorId } from "./authors";
 
 export type Article = {
   slug: string;
@@ -9,12 +10,16 @@ export type Article = {
    * pointing at the equivalent translated slug.
    */
   canonicalId: string;
+  /** Author key from authors.ts. Falls back to "editorial" when undefined. */
+  author?: AuthorId;
   title: string;
   description: string;
   excerpt: string;
   keyword: string;
   category: string;
   publishedAt: string;
+  /** ISO date of last meaningful content update. Defaults to publishedAt. */
+  updatedAt?: string;
   readingMinutes: number;
   homepageAnchor: string;
   content: ReactNode;

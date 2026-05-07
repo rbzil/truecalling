@@ -50,6 +50,8 @@ export default function Page() {
       <Features />
       <HowItWorks />
       <Benefits />
+      <TrustStrip />
+      <RoiCalculator />
       <Pricing />
       <FinalCTA />
       <NewsletterPopup />
@@ -138,8 +140,8 @@ function Hero() {
             <CTAButton href={href("book-a-demo")} size="lg">
               {t("hero_cta_demo")}
             </CTAButton>
-            <CTAButton href="#demo" size="lg" variant="outline">
-              <PlayIcon /> {t("hero_cta_video")}
+            <CTAButton href="#roi" size="lg" variant="outline">
+              {t("hero_cta_roi")}
             </CTAButton>
           </motion.div>
 
@@ -164,6 +166,238 @@ function Hero() {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+/* ----------------------------------------------------------
+   TRUST STRIP — GDPR & data residency block.
+   Sits between Benefits and Pricing. Targets the HR Director persona
+   who blocks on compliance signals before forwarding to legal.
+---------------------------------------------------------- */
+function TrustStrip() {
+  const t = useT();
+  const href = useLocalizedHref();
+  const items = [
+    { title: t("trust_b1_title"), desc: t("trust_b1_desc") },
+    { title: t("trust_b2_title"), desc: t("trust_b2_desc") },
+    { title: t("trust_b3_title"), desc: t("trust_b3_desc") },
+    { title: t("trust_b4_title"), desc: t("trust_b4_desc") },
+  ];
+  return (
+    <section
+      id="compliance"
+      className="relative px-5 py-16 sm:px-8 sm:py-20 scroll-mt-24"
+    >
+      <SectionAmbience variant="left" />
+      <Reveal className="mx-auto max-w-6xl">
+        <motion.span
+          variants={fadeUp}
+          className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-[11.5px] font-medium text-emerald-300"
+        >
+          <CheckIcon className="size-3" /> {t("trust_eyebrow")}
+        </motion.span>
+        <motion.h2
+          variants={fadeUp}
+          className="mt-4 max-w-3xl text-balance font-semibold tracking-tight"
+          style={{ fontSize: "clamp(1.75rem, 3.2vw, 2.5rem)" }}
+        >
+          {t("trust_h2")}
+        </motion.h2>
+        <motion.p
+          variants={fadeUp}
+          className="mt-3 max-w-2xl text-[15px] leading-relaxed text-ink-muted"
+        >
+          {t("trust_lede")}
+        </motion.p>
+        <motion.div
+          variants={fadeUp}
+          className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {items.map((it) => (
+            <div
+              key={it.title}
+              className="rounded-2xl border border-ink/[0.08] bg-surface/30 p-5 backdrop-blur-md"
+            >
+              <div className="flex items-start gap-3">
+                <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
+                  <CheckIcon className="size-3.5" />
+                </span>
+                <div>
+                  <div className="text-[14px] font-semibold leading-snug text-ink">
+                    {it.title}
+                  </div>
+                  <p className="mt-1.5 text-[12.5px] leading-relaxed text-ink-muted">
+                    {it.desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+        <motion.div variants={fadeUp} className="mt-6">
+          <a
+            href={href("privacy")}
+            className="inline-flex items-center gap-1.5 text-[13px] font-medium text-accent hover:underline"
+          >
+            {t("trust_dpa_link")} →
+          </a>
+        </motion.div>
+      </Reveal>
+    </section>
+  );
+}
+
+/* ----------------------------------------------------------
+   ROI CALCULATOR — self-serve estimator for the agency-founder
+   persona that wants to evaluate value without booking a demo.
+   Pure client compute, no email/data submission, immediate output.
+---------------------------------------------------------- */
+function RoiCalculator() {
+  const t = useT();
+  const href = useLocalizedHref();
+  const [roles, setRoles] = useState(8);
+  const [tth, setTth] = useState(45);
+  const [costPerDay, setCostPerDay] = useState(500);
+
+  // Conservative model: 40 % time-to-hire reduction. Days saved = roles * tth * 0.4.
+  // Dollars saved = days saved * cost-per-day-of-vacancy.
+  const daysSaved = Math.round(roles * tth * 0.4);
+  const dollarsSaved = daysSaved * costPerDay;
+  const fmtNum = (n: number) => n.toLocaleString();
+
+  return (
+    <section
+      id="roi"
+      className="relative px-5 py-16 sm:px-8 sm:py-20 scroll-mt-24"
+    >
+      <SectionAmbience variant="right" />
+      <Reveal className="mx-auto max-w-5xl">
+        <motion.span
+          variants={fadeUp}
+          className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[11.5px] font-medium text-accent"
+        >
+          <SparkleIconSmall /> {t("roi_eyebrow")}
+        </motion.span>
+        <motion.h2
+          variants={fadeUp}
+          className="mt-4 max-w-3xl text-balance font-semibold tracking-tight"
+          style={{ fontSize: "clamp(1.75rem, 3.2vw, 2.5rem)" }}
+        >
+          {t("roi_h2")}
+        </motion.h2>
+        <motion.p
+          variants={fadeUp}
+          className="mt-3 max-w-2xl text-[15px] leading-relaxed text-ink-muted"
+        >
+          {t("roi_lede")}
+        </motion.p>
+
+        <motion.div
+          variants={fadeUp}
+          className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-[1fr_1fr] lg:items-stretch"
+        >
+          {/* Inputs */}
+          <div className="rounded-2xl border border-ink/[0.08] bg-surface/30 p-6 backdrop-blur-md">
+            <RoiField
+              label={t("roi_input_roles")}
+              value={roles}
+              min={1}
+              max={200}
+              step={1}
+              onChange={setRoles}
+            />
+            <RoiField
+              label={t("roi_input_tth")}
+              value={tth}
+              min={5}
+              max={180}
+              step={1}
+              onChange={setTth}
+            />
+            <RoiField
+              label={t("roi_input_cost")}
+              value={costPerDay}
+              min={50}
+              max={5000}
+              step={50}
+              onChange={setCostPerDay}
+            />
+          </div>
+
+          {/* Outputs */}
+          <div className="flex flex-col justify-between rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/[0.08] to-transparent p-6 backdrop-blur-md">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div>
+                <div className="text-[11px] uppercase tracking-[0.18em] text-ink-muted">
+                  {t("roi_output_days")}
+                </div>
+                <div className="mt-2 font-semibold tracking-tight text-accent" style={{ fontSize: "clamp(2rem, 4.5vw, 3rem)" }}>
+                  {fmtNum(daysSaved)}
+                </div>
+              </div>
+              <div>
+                <div className="text-[11px] uppercase tracking-[0.18em] text-ink-muted">
+                  {t("roi_output_dollars")}
+                </div>
+                <div className="mt-2 font-semibold tracking-tight text-accent" style={{ fontSize: "clamp(2rem, 4.5vw, 3rem)" }}>
+                  ${fmtNum(dollarsSaved)}
+                </div>
+              </div>
+            </div>
+            <div className="mt-6 space-y-3">
+              <p className="text-[12px] leading-relaxed text-ink-muted/80">
+                {t("roi_assumption")}
+              </p>
+              <CTAButton href={href("book-a-demo")} size="md">
+                {t("roi_cta")}
+              </CTAButton>
+            </div>
+          </div>
+        </motion.div>
+      </Reveal>
+    </section>
+  );
+}
+
+function RoiField({
+  label,
+  value,
+  min,
+  max,
+  step,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+  onChange: (n: number) => void;
+}) {
+  return (
+    <label className="block py-3 first:pt-0 last:pb-0">
+      <div className="flex items-baseline justify-between gap-3">
+        <span className="text-[13px] font-medium text-ink">{label}</span>
+        <input
+          type="number"
+          value={value}
+          min={min}
+          max={max}
+          step={step}
+          onChange={(e) => onChange(Math.max(min, Math.min(max, Number(e.target.value) || min)))}
+          className="w-28 rounded-md border border-ink/15 bg-bg/40 px-2.5 py-1 text-right text-[13px] font-semibold text-ink focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/40"
+        />
+      </div>
+      <input
+        type="range"
+        value={value}
+        min={min}
+        max={max}
+        step={step}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="mt-2 w-full accent-accent"
+      />
+    </label>
   );
 }
 

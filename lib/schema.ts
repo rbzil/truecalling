@@ -104,6 +104,14 @@ export type BlogPostingInput = {
   keyword?: string;
   locale: Locale;
   image?: string;
+  /** Named author for E-E-A-T. Falls back to Organization (@id) when absent. */
+  author?: {
+    id: string;
+    name: string;
+    url?: string;
+    sameAs?: string[];
+    jobTitle?: string;
+  };
 };
 
 /**
@@ -114,6 +122,17 @@ export type BlogPostingInput = {
  */
 export function blogPostingSchema(input: BlogPostingInput) {
   const image = input.image ?? `${SITE_URL}/brand/truecalling-vertical.png`;
+  const author = input.author
+    ? {
+        "@type": "Person" as const,
+        "@id": `${SITE_URL}/#author-${input.author.id}`,
+        name: input.author.name,
+        ...(input.author.jobTitle ? { jobTitle: input.author.jobTitle } : {}),
+        ...(input.author.url ? { url: input.author.url } : {}),
+        ...(input.author.sameAs ? { sameAs: input.author.sameAs } : {}),
+        worksFor: { "@id": ORG_ID },
+      }
+    : { "@id": ORG_ID };
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -122,7 +141,7 @@ export function blogPostingSchema(input: BlogPostingInput) {
     image: [image],
     datePublished: input.publishedAt,
     dateModified: input.modifiedAt ?? input.publishedAt,
-    author: { "@id": ORG_ID },
+    author,
     publisher: {
       "@type": "Organization",
       "@id": ORG_ID,
