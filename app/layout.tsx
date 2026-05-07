@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Inter, Instrument_Serif, Frank_Ruhl_Libre } from "next/font/google";
 import { defaultLocale, locales, rtlLocales, type Locale } from "@/lib/i18n-config";
+import { organizationSchema, websiteSchema, jsonLd } from "@/lib/schema";
 import "./globals.css";
 
 const inter = Inter({
@@ -97,6 +98,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${instrumentSerif.variable} ${frankRuhlLibre.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd(organizationSchema()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd(websiteSchema()) }}
+        />
+      </head>
       <body className="font-sans antialiased bg-bg text-ink">{children}</body>
     </html>
   );

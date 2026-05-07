@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import { useT, useLocalizedHref, useLocale } from "../_i18n/locale-context";
 import { SITE_URL } from "@/lib/seo-metadata";
 import { getLocalizedPath } from "@/lib/i18n-config";
+import { softwareApplicationSchema, breadcrumbSchema, jsonLd } from "@/lib/schema";
 import { Navbar, FingerprintMark, CTAButton } from "../../components/SiteNavbar";
 import { NewsletterPopup } from "../../components/NewsletterPopup";
 
@@ -24,50 +25,24 @@ import { NewsletterPopup } from "../../components/NewsletterPopup";
 
 export default function Page() {
   const { locale, t } = useLocale();
-
-  // SoftwareApplication schema for home page
-  const softwareAppLdJson = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "TrueCalling",
-    applicationCategory: "BusinessApplication",
-    operatingSystem: "Web",
-    description: `${t('hero_subtitle_line1')} ${t('hero_subtitle_line2')}`,
-    url: `${SITE_URL}${getLocalizedPath("home", locale)}`,
-    image: `${SITE_URL}/brand/truecalling-vertical.png`,
-    inLanguage: locale,
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: "USD",
-      lowPrice: "595",
-      highPrice: "895",
-      offerCount: "3",
-    },
-  };
-
-  // BreadcrumbList schema for home page
-  const breadcrumbLdJson = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: `${SITE_URL}${getLocalizedPath("home", locale)}`,
-      },
-    ],
-  };
+  const description = `${t("hero_subtitle_line1")} ${t("hero_subtitle_line2")}`;
+  const homeUrl = `${SITE_URL}${getLocalizedPath("home", locale)}`;
 
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-bg text-ink">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppLdJson) }}
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(softwareApplicationSchema(locale, description)),
+        }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLdJson) }}
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            breadcrumbSchema([{ name: "TrueCalling", url: homeUrl }]),
+          ),
+        }}
       />
       <Navbar />
       <Hero />
