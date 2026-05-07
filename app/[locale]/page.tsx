@@ -326,32 +326,43 @@ function RoiCalculator() {
           </div>
 
           {/* Outputs */}
-          <div className="flex flex-col justify-between rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/[0.08] to-transparent p-6 backdrop-blur-md">
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <div>
+          <div className="flex flex-col justify-between gap-6 rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/[0.08] to-transparent p-6 backdrop-blur-md">
+            {/* Two output cells; each is a column that pushes its big number to
+                the bottom so a 1-line vs 2-line label doesn't mis-align the
+                two pink figures. */}
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <div className="flex min-w-0 flex-col justify-end">
                 <div className="text-[11px] uppercase tracking-[0.18em] text-ink-muted">
                   {t("roi_output_days")}
                 </div>
-                <div className="mt-2 font-semibold tracking-tight text-accent" style={{ fontSize: "clamp(2rem, 4.5vw, 3rem)" }}>
+                <div
+                  className="mt-2 truncate font-semibold tracking-tight tabular-nums text-accent"
+                  style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)" }}
+                >
                   {fmtNum(daysSaved)}
                 </div>
               </div>
-              <div>
+              <div className="flex min-w-0 flex-col justify-end">
                 <div className="text-[11px] uppercase tracking-[0.18em] text-ink-muted">
                   {t("roi_output_dollars")}
                 </div>
-                <div className="mt-2 font-semibold tracking-tight text-accent" style={{ fontSize: "clamp(2rem, 4.5vw, 3rem)" }}>
+                <div
+                  className="mt-2 truncate font-semibold tracking-tight tabular-nums text-accent"
+                  style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)" }}
+                >
                   ${fmtNum(dollarsSaved)}
                 </div>
               </div>
             </div>
-            <div className="mt-6 space-y-3">
+            <div className="space-y-4">
               <p className="text-[12px] leading-relaxed text-ink-muted/80">
                 {t("roi_assumption")}
               </p>
-              <CTAButton href={href("book-a-demo")} size="md">
-                {t("roi_cta")}
-              </CTAButton>
+              <div>
+                <CTAButton href={href("book-a-demo")} size="md">
+                  {t("roi_cta")}
+                </CTAButton>
+              </div>
             </div>
           </div>
         </motion.div>
