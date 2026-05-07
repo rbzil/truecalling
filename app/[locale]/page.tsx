@@ -188,7 +188,7 @@ function TrustStrip() {
       id="compliance"
       className="relative px-5 py-16 sm:px-8 sm:py-20 scroll-mt-24"
     >
-      <SectionAmbience variant="left" />
+      <SectionAmbience top intensity={0.35} />
       <Reveal className="mx-auto max-w-6xl">
         <motion.span
           variants={fadeUp}
@@ -270,7 +270,7 @@ function RoiCalculator() {
       id="roi"
       className="relative px-5 py-16 sm:px-8 sm:py-20 scroll-mt-24"
     >
-      <SectionAmbience variant="right" />
+      <SectionAmbience bottom intensity={0.4} />
       <Reveal className="mx-auto max-w-5xl">
         <motion.span
           variants={fadeUp}
