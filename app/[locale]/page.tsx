@@ -181,7 +181,7 @@ function Hero() {
                 "01 Talent",
                 "Entity Search",
                 "SBC",
-                "EISC",
+                "ESIC",
                 "IQO",
               ]}
             />
