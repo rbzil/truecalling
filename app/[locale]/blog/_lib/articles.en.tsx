@@ -79,7 +79,7 @@ const Article1Content: ReactNode = (
     <h3>3. Multichannel automated outreach</h3>
     <p>
       AI doesn&apos;t stop at finding people. It writes the first message, schedules follow-ups,
-      and switches channels based on responses. On WhatsApp, the average open rate is 98% versus
+      and switches channels based on responses. On WhatsApp, the average open rate is 90 % versus
       20% on email — a gap wide enough to completely rewrite your contact strategy.
     </p>
 
@@ -195,7 +195,7 @@ const Article2Content: ReactNode = (
   <>
     <p>
       <strong>WhatsApp recruiting</strong> has become, in 2026, the most effective channel for
-      reaching passive candidates. With an average open rate of 98% versus 20% on email, the
+      reaching passive candidates. With an average open rate of 90 % versus 20% on email, the
       performance gap is so wide that no serious Talent team can afford to ignore it. One critical
       question remains: how do you use it without exposing yourself to a CNIL audit? This guide
       lays out the rules clearly.
@@ -209,7 +209,7 @@ const Article2Content: ReactNode = (
     </p>
     <ul>
       <li>
-        <strong>98% open rate</strong> on a WhatsApp message within 4 hours.
+        <strong>90 % open rate</strong> on a WhatsApp message within 4 hours.
       </li>
       <li>
         <strong>~45% reply rate</strong> on a well-crafted first message, versus 8 to 12% on a
@@ -358,7 +358,7 @@ const Article2Content: ReactNode = (
       <strong>WhatsApp recruiting</strong> is not a hack — it&apos;s now the channel that
       structurally outperforms email and InMail. GDPR compliance is a question of tooling and
       discipline, not a legal impossibility. With a platform that integrates the official API,
-      validated templates, and centralized opt-out management, you capture the 98% open rate
+      validated templates, and centralized opt-out management, you capture the 90 % open rate
       without risking an audit.
     </p>
 
@@ -582,7 +582,7 @@ const Article4Content: ReactNode = (
     <p>
       TrueCalling, more recent, starts from a blank page with three priorities missing from
       legacy tools: a conversational AI copilot (EMILY), an explainable contextual matching
-      score (TrueFit 360), and native multichannel outreach including WhatsApp with a 98%
+      score (TrueFit 360), and native multichannel outreach including WhatsApp with a 90 %
       open rate. If you&apos;re looking for a <strong>HireSweet alternative</strong> that
       pushes the AI layer further, this is exactly the playing field.
     </p>
@@ -619,7 +619,7 @@ const Article4Content: ReactNode = (
         </tr>
         <tr>
           <td>WhatsApp open rate</td>
-          <td>98% vs 20% email — native in the tool</td>
+          <td>90 % vs 20% email — native in the tool</td>
           <td>No native WhatsApp</td>
         </tr>
         <tr>
@@ -825,12 +825,12 @@ const Article5Content: ReactNode = (
         </tr>
         <tr>
           <td>Outreach channels</td>
-          <td>WhatsApp 98% + email + phone</td>
+          <td>WhatsApp 90 % + email + phone</td>
           <td>InMail only (monthly limits)</td>
         </tr>
         <tr>
           <td>Average open rate</td>
-          <td>98% WhatsApp / 20% email</td>
+          <td>90 % WhatsApp / 20% email</td>
           <td>~20% InMail (declining)</td>
         </tr>
         <tr>
@@ -871,7 +871,7 @@ const Article5Content: ReactNode = (
     <p>
       InMail isn&apos;t enough anymore. The best candidates receive 8 to 15 InMails per month and
       barely open half of them. With multichannel outreach including WhatsApp, the average open
-      rate jumps from 20% to 98% on the first message.
+      rate jumps from 20% to 90 % on the first message.
     </p>
 
     <h3>4. Pricing disconnected from value delivered</h3>
@@ -1189,7 +1189,7 @@ const Article7Content: ReactNode = (
 
     <h2>Lever 1 — Source multichannel from day one</h2>
     <p>
-      If you only send InMails, you wait. WhatsApp opens at 98%, versus 20% for email. Simply
+      If you only send InMails, you wait. WhatsApp opens at 90 %, versus 20% for email. Simply
       adding WhatsApp to the outreach sequence{" "}
       <strong>reduces time-to-hire</strong> by 4 to 7 days on average for first responses.
     </p>
@@ -1392,7 +1392,7 @@ const Article8Content: ReactNode = (
         to date; you miss stacks and availability signals.
       </li>
       <li>
-        <strong>Candidate migration to WhatsApp.</strong> 98% open rate on WhatsApp vs 20% on
+        <strong>Candidate migration to WhatsApp.</strong> 90 % open rate on WhatsApp vs 20% on
         email — the gap is too massive to ignore.
       </li>
     </ul>
@@ -1407,7 +1407,7 @@ const Article8Content: ReactNode = (
 
     <h3>2. WhatsApp</h3>
     <p>
-      The channel that massively outperforms in 2026. 98% open rate, ~45% response rate,
+      The channel that massively outperforms in 2026. 90 % open rate, ~45% response rate,
       time-to-first-response divided by 5. It should become your number-one channel on profiles
       where you have a verified phone number.
     </p>
@@ -2021,9 +2021,9 @@ export const articles: Article[] = [
     canonicalId: "whatsapp-recruiting-gdpr-2026",
     title: "WhatsApp Recruiting: How to Use It Without GDPR Risk (2026 Guide)",
     description:
-      "WhatsApp recruiting and GDPR: rules, tooling, and concrete examples to capture 98% open rates without risking a CNIL audit in 2026.",
+      "WhatsApp recruiting and GDPR: rules, tooling, and concrete examples to capture 90 % open rates without risking a CNIL audit in 2026.",
     excerpt:
-      "98% open rate on WhatsApp vs 20% on email: the GDPR rules and tooling to take advantage of it risk-free in 2026.",
+      "90 % open rate on WhatsApp vs 20% on email: the GDPR rules and tooling to take advantage of it risk-free in 2026.",
     keyword: "WhatsApp recruiting",
     category: "Outreach",
     publishedAt: "2026-03-18",
@@ -2113,7 +2113,7 @@ export const articles: Article[] = [
     description:
       "Multichannel sourcing: why LinkedIn alone is no longer enough in 2026, the 5 channels to activate, and the typical sequence that converts at 57%.",
     excerpt:
-      "InMail saturation, 98% open rate on WhatsApp: the method to orchestrate multichannel sourcing that converts in 2026.",
+      "InMail saturation, 90 % open rate on WhatsApp: the method to orchestrate multichannel sourcing that converts in 2026.",
     keyword: "multichannel sourcing",
     category: "Outreach",
     publishedAt: "2025-10-30",

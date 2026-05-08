@@ -245,7 +245,7 @@ Pour chaque requête, j'ai inspecté la SERP Google.fr (top 10), l'intent domina
 
 **FAQ 3**
 - **Q :** Sur quels canaux puis-je contacter les candidats — WhatsApp, email, téléphone ?
-- **A :** WhatsApp, email et téléphone, depuis la même interface. C'est notre signature : un outreach multicanal où chaque candidat est contacté sur le canal où il a le plus de chances de répondre. WhatsApp atteint 98 % de taux d'ouverture vs 20 % pour l'email — d'où sa place centrale chez TrueCalling. Les messages sont pré-rédigés selon le profil et le poste, et le suivi est automatisé.
+- **A :** WhatsApp, email et téléphone, depuis la même interface. C'est notre signature : un outreach multicanal où chaque candidat est contacté sur le canal où il a le plus de chances de répondre. WhatsApp atteint 90 % de taux d'ouverture vs 20 % pour l'email — d'où sa place centrale chez TrueCalling. Les messages sont pré-rédigés selon le profil et le poste, et le suivi est automatisé.
 - **Long-tail visé :** *recrutement WhatsApp*, *outreach candidat WhatsApp email téléphone*, *sourcing multicanal*
 
 **FAQ 4**
@@ -330,7 +330,7 @@ FAQ_1_A: TrueCalling est un logiciel de sourcing IA conçu pour les équipes Tal
 FAQ_2_Q: Comment fonctionne le sourcing par IA chez TrueCalling ?
 FAQ_2_A: Vous décrivez le poste en langage naturel. EMILY, notre copilote IA, analyse le brief, interroge les viviers pertinents et applique plus de cent critères (compétences, contexte, soft skills) pour remonter une shortlist classée par score de matching. Le sourcing IA réduit le time-to-hire en ciblant immédiatement les profils les plus pertinents.
 FAQ_3_Q: Sur quels canaux puis-je contacter les candidats — WhatsApp, email, téléphone ?
-FAQ_3_A: WhatsApp, email et téléphone, depuis la même interface. C'est notre signature : un outreach multicanal où chaque candidat est contacté sur le canal où il a le plus de chances de répondre. WhatsApp atteint 98 % de taux d'ouverture vs 20 % pour l'email — d'où sa place centrale chez TrueCalling. Les messages sont pré-rédigés selon le profil et le poste, et le suivi est automatisé.
+FAQ_3_A: WhatsApp, email et téléphone, depuis la même interface. C'est notre signature : un outreach multicanal où chaque candidat est contacté sur le canal où il a le plus de chances de répondre. WhatsApp atteint 90 % de taux d'ouverture vs 20 % pour l'email — d'où sa place centrale chez TrueCalling. Les messages sont pré-rédigés selon le profil et le poste, et le suivi est automatisé.
 FAQ_4_Q: TrueCalling s'intègre-t-il à mon ATS (Lever, Greenhouse, Recruitee, Teamtailor, Workable) ?
 FAQ_4_A: Oui. Le plan Core inclut une intégration ATS et le plan Enterprise en propose un nombre illimité. Les candidats sourcés et leurs interactions se synchronisent automatiquement avec votre pipeline existant — TrueCalling vient enrichir votre ATS, pas le remplacer.
 FAQ_5_Q: Quel est le prix d'un logiciel de sourcing IA comme TrueCalling et y a-t-il un essai ?

@@ -99,7 +99,7 @@ const Article1Content: ReactNode = (
     <h3>3. Outreach automatisé multicanal</h3>
     <p>
       L&apos;IA ne se limite pas à trouver. Elle écrit le premier message, planifie les relances et
-      bascule de canal selon les réponses. Sur WhatsApp, le taux d&apos;ouverture moyen est de 98 %
+      bascule de canal selon les réponses. Sur WhatsApp, le taux d&apos;ouverture moyen est de 90 %
       contre 20 % sur l&apos;email — un écart suffisant pour réécrire complètement votre stratégie de
       contact.
     </p>
@@ -218,7 +218,7 @@ const Article2Content: ReactNode = (
   <>
     <p>
       Le <strong>recrutement WhatsApp</strong> est devenu en 2026 le canal le plus efficace pour
-      contacter des candidats passifs. Avec un taux d&apos;ouverture moyen de 98 % contre 20 % sur
+      contacter des candidats passifs. Avec un taux d&apos;ouverture moyen de 90 % contre 20 % sur
       l&apos;email, l&apos;écart de performance est tel qu&apos;aucune équipe Talent sérieuse ne peut
       l&apos;ignorer. Reste une question critique : comment l&apos;utiliser sans s&apos;exposer à un
       contrôle CNIL ? Ce guide pose les règles claires.
@@ -233,7 +233,7 @@ const Article2Content: ReactNode = (
     </p>
     <ul>
       <li>
-        <strong>98 % de taux d&apos;ouverture</strong> sur un message WhatsApp dans les 4 heures.
+        <strong>90 % de taux d&apos;ouverture</strong> sur un message WhatsApp dans les 4 heures.
       </li>
       <li>
         <strong>~45 % de taux de réponse</strong> sur un premier contact bien rédigé, contre 8 à
@@ -385,7 +385,7 @@ const Article2Content: ReactNode = (
       canal qui surperforme structurellement l&apos;email et l&apos;InMail. La conformité RGPD est
       une question d&apos;outillage et de discipline, pas d&apos;impossibilité juridique. Avec une
       plateforme qui intègre l&apos;API officielle, des templates validés et une gestion centralisée
-      des opt-out, vous capturez les 98 % d&apos;ouverture sans risquer un contrôle.
+      des opt-out, vous capturez les 90 % d&apos;ouverture sans risquer un contrôle.
     </p>
 
     <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
@@ -608,7 +608,7 @@ const Article4Content: ReactNode = (
     <p>
       TrueCalling, plus récent, repart d&apos;une page blanche avec trois priorités absentes des
       outils historiques : un copilote IA conversationnel (EMILY), un score de matching contextuel
-      explicable (TrueFit 360) et un outreach multicanal natif intégrant WhatsApp avec 98 % de taux
+      explicable (TrueFit 360) et un outreach multicanal natif intégrant WhatsApp avec 90 % de taux
       d&apos;ouverture. Si vous cherchez une <strong>alternative à HireSweet</strong> qui pousse plus
       loin la couche IA, c&apos;est exactement le terrain de jeu.
     </p>
@@ -645,7 +645,7 @@ const Article4Content: ReactNode = (
         </tr>
         <tr>
           <td>Taux d&apos;ouverture WhatsApp</td>
-          <td>98 % vs 20 % email — natif dans l&apos;outil</td>
+          <td>90 % vs 20 % email — natif dans l&apos;outil</td>
           <td>Pas de WhatsApp natif</td>
         </tr>
         <tr>
@@ -851,12 +851,12 @@ const Article5Content: ReactNode = (
         </tr>
         <tr>
           <td>Canaux d&apos;outreach</td>
-          <td>WhatsApp 98 % + email + téléphone</td>
+          <td>WhatsApp 90 % + email + téléphone</td>
           <td>InMail uniquement (limites mensuelles)</td>
         </tr>
         <tr>
           <td>Taux d&apos;ouverture moyen</td>
-          <td>98 % WhatsApp / 20 % email</td>
+          <td>90 % WhatsApp / 20 % email</td>
           <td>~20 % InMail (en baisse)</td>
         </tr>
         <tr>
@@ -897,7 +897,7 @@ const Article5Content: ReactNode = (
     <p>
       L&apos;InMail ne suffit plus. Les meilleurs candidats reçoivent 8 à 15 InMails par mois et
       ouvrent à peine la moitié. Avec un outreach multicanal incluant WhatsApp, le taux
-      d&apos;ouverture moyen passe de 20 % à 98 % sur le premier message.
+      d&apos;ouverture moyen passe de 20 % à 90 % sur le premier message.
     </p>
 
     <h3>4. Tarif déconnecté de la valeur livrée</h3>
@@ -1220,7 +1220,7 @@ const Article7Content: ReactNode = (
 
     <h2>Levier 1 — Sourcer en multicanal dès J1</h2>
     <p>
-      Si vous n&apos;envoyez que des InMails, vous attendez. WhatsApp ouvre à 98 %, contre 20 %
+      Si vous n&apos;envoyez que des InMails, vous attendez. WhatsApp ouvre à 90 %, contre 20 %
       pour l&apos;email. Le simple ajout du WhatsApp dans la séquence d&apos;outreach{" "}
       <strong>réduit le time-to-hire</strong> de 4 à 7 jours en moyenne sur les premières réponses.
     </p>
@@ -1425,7 +1425,7 @@ const Article8Content: ReactNode = (
         jour ; vous ratez des stacks et des disponibilités.
       </li>
       <li>
-        <strong>Migration des candidats vers WhatsApp.</strong> 98 % de taux d&apos;ouverture sur
+        <strong>Migration des candidats vers WhatsApp.</strong> 90 % de taux d&apos;ouverture sur
         WhatsApp, vs 20 % email — l&apos;écart est trop massif pour l&apos;ignorer.
       </li>
     </ul>
@@ -1440,7 +1440,7 @@ const Article8Content: ReactNode = (
 
     <h3>2. WhatsApp</h3>
     <p>
-      Le canal qui surperforme massivement en 2026. 98 % de taux d&apos;ouverture, ~45 % de taux
+      Le canal qui surperforme massivement en 2026. 90 % de taux d&apos;ouverture, ~45 % de taux
       de réponse, time-to-first-response divisé par 5. Il doit devenir votre canal numéro 1 sur les
       profils où vous avez un numéro vérifié.
     </p>
@@ -2065,9 +2065,9 @@ export const articles: Article[] = [
     canonicalId: "whatsapp-recruiting-gdpr-2026",
     title: "Recrutement WhatsApp : comment l'utiliser sans risque RGPD (guide 2026)",
     description:
-      "Recrutement WhatsApp et RGPD : règles, outillage et exemples concrets pour exploiter 98 % de taux d'ouverture sans risquer un contrôle CNIL en 2026.",
+      "Recrutement WhatsApp et RGPD : règles, outillage et exemples concrets pour exploiter 90 % de taux d'ouverture sans risquer un contrôle CNIL en 2026.",
     excerpt:
-      "98 % d'ouverture sur WhatsApp vs 20 % email : les règles RGPD et l'outillage pour en profiter sans risque en 2026.",
+      "90 % d'ouverture sur WhatsApp vs 20 % email : les règles RGPD et l'outillage pour en profiter sans risque en 2026.",
     keyword: "recrutement WhatsApp",
     category: "Outreach",
     publishedAt: "2026-03-18",
@@ -2157,7 +2157,7 @@ export const articles: Article[] = [
     description:
       "Sourcing multicanal : pourquoi LinkedIn seul ne suffit plus en 2026, les 5 canaux à activer et la séquence type qui convertit à 57 %.",
     excerpt:
-      "Saturation des InMails, 98 % d'ouverture sur WhatsApp : la méthode pour orchestrer un sourcing multicanal qui convertit en 2026.",
+      "Saturation des InMails, 90 % d'ouverture sur WhatsApp : la méthode pour orchestrer un sourcing multicanal qui convertit en 2026.",
     keyword: "sourcing multicanal",
     category: "Outreach",
     publishedAt: "2025-10-30",

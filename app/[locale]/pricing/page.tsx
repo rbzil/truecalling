@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useT, useLocalizedHref } from "../../_i18n/locale-context";
 import { Navbar, CTAButton } from "@/components/SiteNavbar";
+import { faqPageSchema, jsonLd } from "@/lib/schema";
 
 /* ============================================================
    Standalone Pricing page — /[locale]/tarifs etc.
@@ -90,8 +91,20 @@ export default function PricingPage() {
     { q: t("pricing_faq_q4"), a: t("pricing_faq_a4") },
   ];
 
+  // FAQPage JSON-LD — feeds AI Overviews / ChatGPT Search / Perplexity / Bing
+  // Copilot. (Google restricted FAQ rich results to government and healthcare
+  // sites in Aug 2023, so no SERP rich result for commercial pages — but the
+  // schema still grounds AI assistants.)
+  const faqSchema = faqPageSchema(
+    faq.map((f) => ({ question: f.q, answer: f.a })),
+  );
+
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-bg text-ink">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(faqSchema) }}
+      />
       <BackgroundDecor />
       <Navbar />
 
