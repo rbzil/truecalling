@@ -15,7 +15,7 @@ import {
   type Locale,
   blogEnabledLocales,
 } from "@/lib/i18n-config";
-import { buildArticleAlternates } from "@/lib/seo-metadata";
+import { buildArticleAlternates, OG_IMAGES } from "@/lib/seo-metadata";
 import { blogPostingSchema, breadcrumbSchema, jsonLd } from "@/lib/schema";
 import { Navbar } from "@/components/SiteNavbar";
 
@@ -51,11 +51,13 @@ export async function generateMetadata({
       locale: params.locale,
       publishedTime: a.publishedAt,
       siteName: "TrueCalling",
+      images: [...OG_IMAGES],
     },
     twitter: {
       card: "summary_large_image",
       title: a.title,
       description: a.description,
+      images: [OG_IMAGES[0].url],
     },
   };
 }

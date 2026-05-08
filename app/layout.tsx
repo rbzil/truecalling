@@ -34,9 +34,9 @@ const siteUrl = "https://truecalling.ai";
 const titleDefault = "TrueCalling — AI sourcing software for recruiters";
 const description =
   "TrueCalling turns a brief into qualified candidates in minutes. AI copilot EMILY, TrueFit 360 matching, multichannel outreach (WhatsApp, email, phone).";
-const ogImage = "/brand/truecalling-vertical.png";
+const ogImage = "/brand/og-image.png";
 const ogImageAlt =
-  "TrueCalling — AI sourcing software with WhatsApp outreach";
+  "TrueCalling — AI sourcing software for recruiters. EMILY copilot for WhatsApp, email and phone outreach.";
 
 const isProduction = process.env.VERCEL_ENV === "production";
 
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     siteName: "TrueCalling",
     title: titleDefault,
     description,
-    images: [{ url: ogImage, width: 1080, height: 1080, alt: ogImageAlt }],
+    images: [{ url: ogImage, width: 1200, height: 630, alt: ogImageAlt }],
   },
   twitter: {
     card: "summary_large_image",

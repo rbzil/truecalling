@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { locales, rtlLocales, type Locale } from "@/lib/i18n-config";
 import { getDictionary } from "@/lib/get-dictionary";
-import { buildAlternates } from "@/lib/seo-metadata";
+import { buildAlternates, OG_IMAGES } from "@/lib/seo-metadata";
 import { Providers } from "../providers";
 import { SiteFooter } from "@/components/SiteFooter";
 
@@ -26,9 +26,13 @@ export async function generateMetadata({
     description: dict.meta_description,
     alternates,
     openGraph: {
+      type: "website",
       locale: locale.replace("-", "_"),
       url: alternates.canonical as string,
+      siteName: "TrueCalling",
+      images: [...OG_IMAGES],
     },
+    twitter: { card: "summary_large_image", images: [OG_IMAGES[0].url] },
   };
 }
 
