@@ -1,0 +1,674 @@
+{
+  "en_desktop": {
+    "url": "https://truecalling.ai/en",
+    "viewport": "desktop",
+    "checks": {
+      "above_fold_not_blank": true,
+      "broken_images": [],
+      "no_broken_images": true,
+      "lechiller_present": true,
+      "lechiller_loads_ok": true,
+      "no_horizontal_scroll": true,
+      "scroll_width": 1920,
+      "viewport_width": 1920,
+      "tap_targets_small_count": 44,
+      "tap_targets_small_examples": [
+        {
+          "tag": "A",
+          "text": "TrueCalling",
+          "w": 157,
+          "h": 26
+        },
+        {
+          "tag": "A",
+          "text": "Demo",
+          "w": 64,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "Features",
+          "w": 82,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "How it works",
+          "w": 109,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "Benefits",
+          "w": 79,
+          "h": 32
+        }
+      ],
+      "tap_targets_ok": false,
+      "trust_strip_compliance_data": true,
+      "roi_calculator_present": true,
+      "carousel_animated": true,
+      "image_formats": {
+        "total": 1,
+        "webp": 0,
+        "avif": 0,
+        "png": 1,
+        "jpg": 0,
+        "sample_webp": [],
+        "sample_avif": []
+      },
+      "modern_image_ratio": 0.0,
+      "h1_above_fold": true,
+      "h1_text": "The AI sourcing software that hires with precision.",
+      "cta_above_fold": true
+    },
+    "http_status": 200,
+    "screenshot": "/Users/raphaelbouaziz/nouveu site/docs/seo-audit-2/screenshots/en_desktop.png"
+  },
+  "fr_desktop": {
+    "url": "https://truecalling.ai/fr",
+    "viewport": "desktop",
+    "checks": {
+      "above_fold_not_blank": true,
+      "broken_images": [],
+      "no_broken_images": true,
+      "lechiller_present": true,
+      "lechiller_loads_ok": true,
+      "no_horizontal_scroll": true,
+      "scroll_width": 1920,
+      "viewport_width": 1920,
+      "tap_targets_small_count": 44,
+      "tap_targets_small_examples": [
+        {
+          "tag": "A",
+          "text": "TrueCalling",
+          "w": 157,
+          "h": 26
+        },
+        {
+          "tag": "A",
+          "text": "D\u00e9mo",
+          "w": 64,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "Fonctionnalit\u00e9s",
+          "w": 122,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "Comment \u00e7a marche",
+          "w": 157,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "B\u00e9n\u00e9fices",
+          "w": 90,
+          "h": 32
+        }
+      ],
+      "tap_targets_ok": false,
+      "trust_strip_compliance_data": false,
+      "roi_calculator_present": true,
+      "carousel_animated": true,
+      "image_formats": {
+        "total": 1,
+        "webp": 0,
+        "avif": 0,
+        "png": 1,
+        "jpg": 0,
+        "sample_webp": [],
+        "sample_avif": []
+      },
+      "modern_image_ratio": 0.0,
+      "h1_above_fold": true,
+      "h1_text": "Le logiciel de sourcing IA qui recrute avec pr\u00e9cision.",
+      "cta_above_fold": false
+    },
+    "http_status": 200,
+    "screenshot": "/Users/raphaelbouaziz/nouveu site/docs/seo-audit-2/screenshots/fr_desktop.png"
+  },
+  "he_desktop": {
+    "url": "https://truecalling.ai/he",
+    "viewport": "desktop",
+    "checks": {
+      "above_fold_not_blank": true,
+      "broken_images": [],
+      "no_broken_images": true,
+      "lechiller_present": true,
+      "lechiller_loads_ok": true,
+      "no_horizontal_scroll": true,
+      "scroll_width": 1920,
+      "viewport_width": 1920,
+      "tap_targets_small_count": 43,
+      "tap_targets_small_examples": [
+        {
+          "tag": "A",
+          "text": "TrueCalling",
+          "w": 157,
+          "h": 26
+        },
+        {
+          "tag": "A",
+          "text": "\u05d4\u05d3\u05d2\u05de\u05d4",
+          "w": 66,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "\u05ea\u05db\u05d5\u05e0\u05d5\u05ea",
+          "w": 64,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "\u05d0\u05d9\u05da \u05d6\u05d4 \u05e2\u05d5\u05d1\u05d3",
+          "w": 92,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "\u05d9\u05ea\u05e8\u05d5\u05e0\u05d5\u05ea",
+          "w": 68,
+          "h": 32
+        }
+      ],
+      "tap_targets_ok": false,
+      "rtl_dir_attr": "rtl",
+      "html_lang": "he",
+      "rtl_correct": true,
+      "he_logo_strip_present": false,
+      "he_pricing_card_present": false,
+      "he_roi_section_present": false,
+      "trust_strip_compliance_data": false,
+      "roi_calculator_present": true,
+      "carousel_animated": true,
+      "image_formats": {
+        "total": 1,
+        "webp": 0,
+        "avif": 0,
+        "png": 1,
+        "jpg": 0,
+        "sample_webp": [],
+        "sample_avif": []
+      },
+      "modern_image_ratio": 0.0,
+      "h1_above_fold": true,
+      "h1_text": "\u05ea\u05d5\u05db\u05e0\u05ea \u05d4\u05e1\u05d5\u05e8\u05e1\u05d9\u05e0\u05d2 \u05de\u05d1\u05d5\u05e1\u05e1\u05ea \u05d4-AI \u05e9\u05de\u05d2\u05d9\u05d9\u05e1\u05ea \u05d1\u05d3\u05d9\u05d5\u05e7.",
+      "cta_above_fold": false
+    },
+    "http_status": 200,
+    "screenshot": "/Users/raphaelbouaziz/nouveu site/docs/seo-audit-2/screenshots/he_desktop.png"
+  },
+  "en_book-a-demo_desktop": {
+    "url": "https://truecalling.ai/en/book-a-demo",
+    "viewport": "desktop",
+    "checks": {
+      "above_fold_not_blank": true,
+      "broken_images": [],
+      "no_broken_images": true,
+      "lechiller_present": false,
+      "lechiller_loads_ok": null,
+      "no_horizontal_scroll": true,
+      "scroll_width": 1920,
+      "viewport_width": 1920,
+      "tap_targets_small_count": 31,
+      "tap_targets_small_examples": [
+        {
+          "tag": "A",
+          "text": "TrueCalling",
+          "w": 157,
+          "h": 26
+        },
+        {
+          "tag": "A",
+          "text": "Demo",
+          "w": 64,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "Features",
+          "w": 82,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "How it works",
+          "w": 109,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "Benefits",
+          "w": 79,
+          "h": 32
+        }
+      ],
+      "tap_targets_ok": false,
+      "trust_strip_compliance_data": true,
+      "roi_calculator_present": true,
+      "carousel_animated": null,
+      "image_formats": {
+        "total": 0,
+        "webp": 0,
+        "avif": 0,
+        "png": 0,
+        "jpg": 0,
+        "sample_webp": [],
+        "sample_avif": []
+      },
+      "modern_image_ratio": 0.0,
+      "h1_above_fold": true,
+      "h1_text": "Book your demo.",
+      "cta_above_fold": true
+    },
+    "http_status": 200,
+    "screenshot": "/Users/raphaelbouaziz/nouveu site/docs/seo-audit-2/screenshots/en_book-a-demo_desktop.png"
+  },
+  "en_blog_ai-sourcing-guide-2026_desktop": {
+    "url": "https://truecalling.ai/en/blog/ai-sourcing-guide-2026",
+    "viewport": "desktop",
+    "checks": {
+      "above_fold_not_blank": true,
+      "broken_images": [],
+      "no_broken_images": true,
+      "lechiller_present": false,
+      "lechiller_loads_ok": null,
+      "no_horizontal_scroll": true,
+      "scroll_width": 1920,
+      "viewport_width": 1920,
+      "tap_targets_small_count": 36,
+      "tap_targets_small_examples": [
+        {
+          "tag": "A",
+          "text": "TrueCalling",
+          "w": 157,
+          "h": 26
+        },
+        {
+          "tag": "A",
+          "text": "Demo",
+          "w": 64,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "Features",
+          "w": 82,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "How it works",
+          "w": 109,
+          "h": 32
+        },
+        {
+          "tag": "A",
+          "text": "Benefits",
+          "w": 79,
+          "h": 32
+        }
+      ],
+      "tap_targets_ok": false,
+      "trust_strip_compliance_data": true,
+      "roi_calculator_present": true,
+      "carousel_animated": null,
+      "image_formats": {
+        "total": 0,
+        "webp": 0,
+        "avif": 0,
+        "png": 0,
+        "jpg": 0,
+        "sample_webp": [],
+        "sample_avif": []
+      },
+      "modern_image_ratio": 0.0,
+      "h1_above_fold": true,
+      "h1_text": "AI Sourcing in 2026: The Complete Guide for Recruiters (Methods, Tools, Examples)",
+      "cta_above_fold": true
+    },
+    "http_status": 200,
+    "screenshot": "/Users/raphaelbouaziz/nouveu site/docs/seo-audit-2/screenshots/en_blog_ai-sourcing-guide-2026_desktop.png"
+  },
+  "en_mobile": {
+    "url": "https://truecalling.ai/en",
+    "viewport": "mobile",
+    "checks": {
+      "above_fold_not_blank": true,
+      "broken_images": [],
+      "no_broken_images": true,
+      "lechiller_present": true,
+      "lechiller_loads_ok": true,
+      "no_horizontal_scroll": true,
+      "scroll_width": 375,
+      "viewport_width": 375,
+      "tap_targets_small_count": 33,
+      "tap_targets_small_examples": [
+        {
+          "tag": "A",
+          "text": "TrueCalling",
+          "w": 26,
+          "h": 26
+        },
+        {
+          "tag": "A",
+          "text": "DemoBook a demo",
+          "w": 70,
+          "h": 36
+        },
+        {
+          "tag": "BUTTON",
+          "text": "",
+          "w": 40,
+          "h": 40
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Search",
+          "w": 248,
+          "h": 33
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Replay",
+          "w": 93,
+          "h": 30
+        }
+      ],
+      "tap_targets_ok": false,
+      "trust_strip_compliance_data": true,
+      "roi_calculator_present": true,
+      "carousel_animated": true,
+      "image_formats": {
+        "total": 1,
+        "webp": 0,
+        "avif": 0,
+        "png": 1,
+        "jpg": 0,
+        "sample_webp": [],
+        "sample_avif": []
+      },
+      "modern_image_ratio": 0.0,
+      "h1_above_fold": true,
+      "h1_text": "The AI sourcing software that hires with precision.",
+      "cta_above_fold": true
+    },
+    "http_status": 200,
+    "screenshot": "/Users/raphaelbouaziz/nouveu site/docs/seo-audit-2/screenshots/en_mobile.png"
+  },
+  "fr_mobile": {
+    "url": "https://truecalling.ai/fr",
+    "viewport": "mobile",
+    "checks": {
+      "above_fold_not_blank": true,
+      "broken_images": [],
+      "no_broken_images": true,
+      "lechiller_present": true,
+      "lechiller_loads_ok": true,
+      "no_horizontal_scroll": true,
+      "scroll_width": 375,
+      "viewport_width": 375,
+      "tap_targets_small_count": 33,
+      "tap_targets_small_examples": [
+        {
+          "tag": "A",
+          "text": "TrueCalling",
+          "w": 26,
+          "h": 26
+        },
+        {
+          "tag": "A",
+          "text": "D\u00e9moR\u00e9server une d\u00e9mo",
+          "w": 70,
+          "h": 36
+        },
+        {
+          "tag": "BUTTON",
+          "text": "",
+          "w": 40,
+          "h": 40
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Rechercher",
+          "w": 248,
+          "h": 33
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Rejouer",
+          "w": 98,
+          "h": 30
+        }
+      ],
+      "tap_targets_ok": false,
+      "trust_strip_compliance_data": false,
+      "roi_calculator_present": true,
+      "carousel_animated": true,
+      "image_formats": {
+        "total": 1,
+        "webp": 0,
+        "avif": 0,
+        "png": 1,
+        "jpg": 0,
+        "sample_webp": [],
+        "sample_avif": []
+      },
+      "modern_image_ratio": 0.0,
+      "h1_above_fold": true,
+      "h1_text": "Le logiciel de sourcing IA qui recrute avec pr\u00e9cision.",
+      "cta_above_fold": false
+    },
+    "http_status": 200,
+    "screenshot": "/Users/raphaelbouaziz/nouveu site/docs/seo-audit-2/screenshots/fr_mobile.png"
+  },
+  "he_mobile": {
+    "url": "https://truecalling.ai/he",
+    "viewport": "mobile",
+    "checks": {
+      "above_fold_not_blank": true,
+      "broken_images": [],
+      "no_broken_images": true,
+      "lechiller_present": true,
+      "lechiller_loads_ok": true,
+      "no_horizontal_scroll": true,
+      "scroll_width": 375,
+      "viewport_width": 375,
+      "tap_targets_small_count": 32,
+      "tap_targets_small_examples": [
+        {
+          "tag": "A",
+          "text": "TrueCalling",
+          "w": 26,
+          "h": 26
+        },
+        {
+          "tag": "A",
+          "text": "\u05d4\u05d3\u05d2\u05de\u05d4\u05d4\u05d6\u05de\u05d9\u05e0\u05d5 \u05d4\u05d3\u05d2\u05de\u05d4",
+          "w": 71,
+          "h": 36
+        },
+        {
+          "tag": "BUTTON",
+          "text": "",
+          "w": 40,
+          "h": 40
+        },
+        {
+          "tag": "BUTTON",
+          "text": "\u05d7\u05d9\u05e4\u05d5\u05e9",
+          "w": 248,
+          "h": 33
+        },
+        {
+          "tag": "BUTTON",
+          "text": "\u05d4\u05e4\u05e2\u05dc \u05e9\u05d5\u05d1",
+          "w": 105,
+          "h": 30
+        }
+      ],
+      "tap_targets_ok": false,
+      "rtl_dir_attr": "rtl",
+      "html_lang": "he",
+      "rtl_correct": true,
+      "he_logo_strip_present": false,
+      "he_pricing_card_present": false,
+      "he_roi_section_present": false,
+      "trust_strip_compliance_data": false,
+      "roi_calculator_present": true,
+      "carousel_animated": true,
+      "image_formats": {
+        "total": 1,
+        "webp": 0,
+        "avif": 0,
+        "png": 1,
+        "jpg": 0,
+        "sample_webp": [],
+        "sample_avif": []
+      },
+      "modern_image_ratio": 0.0,
+      "h1_above_fold": true,
+      "h1_text": "\u05ea\u05d5\u05db\u05e0\u05ea \u05d4\u05e1\u05d5\u05e8\u05e1\u05d9\u05e0\u05d2 \u05de\u05d1\u05d5\u05e1\u05e1\u05ea \u05d4-AI \u05e9\u05de\u05d2\u05d9\u05d9\u05e1\u05ea \u05d1\u05d3\u05d9\u05d5\u05e7.",
+      "cta_above_fold": false
+    },
+    "http_status": 200,
+    "screenshot": "/Users/raphaelbouaziz/nouveu site/docs/seo-audit-2/screenshots/he_mobile.png"
+  },
+  "en_book-a-demo_mobile": {
+    "url": "https://truecalling.ai/en/book-a-demo",
+    "viewport": "mobile",
+    "checks": {
+      "above_fold_not_blank": true,
+      "broken_images": [],
+      "no_broken_images": true,
+      "lechiller_present": false,
+      "lechiller_loads_ok": null,
+      "no_horizontal_scroll": true,
+      "scroll_width": 375,
+      "viewport_width": 375,
+      "tap_targets_small_count": 20,
+      "tap_targets_small_examples": [
+        {
+          "tag": "A",
+          "text": "TrueCalling",
+          "w": 26,
+          "h": 26
+        },
+        {
+          "tag": "A",
+          "text": "DemoBook a demo",
+          "w": 70,
+          "h": 36
+        },
+        {
+          "tag": "BUTTON",
+          "text": "",
+          "w": 40,
+          "h": 40
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "w": 36,
+          "h": 36
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "w": 36,
+          "h": 36
+        }
+      ],
+      "tap_targets_ok": false,
+      "trust_strip_compliance_data": true,
+      "roi_calculator_present": true,
+      "carousel_animated": null,
+      "image_formats": {
+        "total": 0,
+        "webp": 0,
+        "avif": 0,
+        "png": 0,
+        "jpg": 0,
+        "sample_webp": [],
+        "sample_avif": []
+      },
+      "modern_image_ratio": 0.0,
+      "h1_above_fold": false,
+      "h1_text": "Book your demo.",
+      "cta_above_fold": true
+    },
+    "http_status": 200,
+    "screenshot": "/Users/raphaelbouaziz/nouveu site/docs/seo-audit-2/screenshots/en_book-a-demo_mobile.png"
+  },
+  "en_blog_ai-sourcing-guide-2026_mobile": {
+    "url": "https://truecalling.ai/en/blog/ai-sourcing-guide-2026",
+    "viewport": "mobile",
+    "checks": {
+      "above_fold_not_blank": true,
+      "broken_images": [],
+      "no_broken_images": true,
+      "lechiller_present": false,
+      "lechiller_loads_ok": null,
+      "no_horizontal_scroll": true,
+      "scroll_width": 375,
+      "viewport_width": 375,
+      "tap_targets_small_count": 27,
+      "tap_targets_small_examples": [
+        {
+          "tag": "A",
+          "text": "TrueCalling",
+          "w": 26,
+          "h": 26
+        },
+        {
+          "tag": "A",
+          "text": "DemoBook a demo",
+          "w": 70,
+          "h": 36
+        },
+        {
+          "tag": "BUTTON",
+          "text": "",
+          "w": 40,
+          "h": 40
+        },
+        {
+          "tag": "A",
+          "text": "All articles",
+          "w": 84,
+          "h": 20
+        },
+        {
+          "tag": "A",
+          "text": "TrueCalling Editorial",
+          "w": 122,
+          "h": 15
+        }
+      ],
+      "tap_targets_ok": false,
+      "trust_strip_compliance_data": true,
+      "roi_calculator_present": true,
+      "carousel_animated": null,
+      "image_formats": {
+        "total": 0,
+        "webp": 0,
+        "avif": 0,
+        "png": 0,
+        "jpg": 0,
+        "sample_webp": [],
+        "sample_avif": []
+      },
+      "modern_image_ratio": 0.0,
+      "h1_above_fold": true,
+      "h1_text": "AI Sourcing in 2026: The Complete Guide for Recruiters (Methods, Tools, Examples)",
+      "cta_above_fold": true
+    },
+    "http_status": 200,
+    "screenshot": "/Users/raphaelbouaziz/nouveu site/docs/seo-audit-2/screenshots/en_blog_ai-sourcing-guide-2026_mobile.png"
+  }
+}

@@ -414,16 +414,18 @@ function RoiField({
 }
 
 /* Infinite-scrolling logo carousel.
-   Track renders items twice and translates by -50% to loop seamlessly.
-   IMPORTANT: spacing is on each ITEM (me-12), not the parent (gap-X) — a
-   parent gap injects 2n-1 gaps in the duplicated track, which breaks the
-   seamless wrap by one gap-width. With per-item trailing margin every half
-   is exactly n*(itemWidth + 48px) so -50% translation lands cleanly.
-   Works identically in LTR and RTL. */
+   Track renders items twice; CSS marquee translates by -50% for a seamless
+   loop. Spacing must be PER ITEM (mr-12) — parent gap-X breaks the loop by
+   one gap-width at the wrap-around. The carousel is forced to dir="ltr"
+   regardless of locale because (a) the brand names are Latin script, and
+   (b) RTL flex flips the duplicated-half order so translateX(-50%) doesn't
+   land on identical content — the loop visibly stutters. Logos always
+   scroll right-to-left, even on Hebrew. */
 function LogoCarousel({ items }: { items: string[] }) {
   const loop = [...items, ...items];
   return (
     <div
+      dir="ltr"
       className="group relative w-full max-w-3xl overflow-hidden"
       style={{
         WebkitMaskImage:
@@ -436,7 +438,7 @@ function LogoCarousel({ items }: { items: string[] }) {
         {loop.map((c, i) => (
           <span
             key={`${c}-${i}`}
-            className="me-12 shrink-0 text-sm font-semibold tracking-normal text-ink/55"
+            className="mr-12 shrink-0 text-sm font-semibold tracking-normal text-ink/55"
           >
             {c}
           </span>
