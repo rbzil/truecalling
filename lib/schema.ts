@@ -101,7 +101,14 @@ export type BlogPostingInput = {
   slug: string;
   publishedAt: string;
   modifiedAt?: string;
-  keyword?: string;
+  /**
+   * One or more keywords describing the article. Accepts a comma-separated
+   * string ("AI sourcing, recruiting, talent acquisition") or a pre-split
+   * array. The schema always emits a JSON array of strings, never a comma
+   * string — Google's BlogPosting / Article rich-results parser handles
+   * both but the array form is the spec-correct shape.
+   */
+  keyword?: string | string[];
   locale: Locale;
   image?: string;
   /** Named author for E-E-A-T. Falls back to Organization (@id) when absent. */
@@ -120,8 +127,16 @@ export type BlogPostingInput = {
  * - dateModified (recommended; falls back to datePublished)
  * - publisher.logo with explicit ImageObject + dimensions
  */
+function normalizeKeywords(k: string | string[] | undefined): string[] | undefined {
+  if (!k) return undefined;
+  const arr = Array.isArray(k) ? k : k.split(",").map((s) => s.trim());
+  const cleaned = arr.filter(Boolean);
+  return cleaned.length ? cleaned : undefined;
+}
+
 export function blogPostingSchema(input: BlogPostingInput) {
   const image = input.image ?? `${SITE_URL}/brand/truecalling-vertical.png`;
+  const keywords = normalizeKeywords(input.keyword);
   const author = input.author
     ? {
         "@type": "Person" as const,
@@ -153,7 +168,7 @@ export function blogPostingSchema(input: BlogPostingInput) {
         height: LOGO_HEIGHT,
       },
     },
-    keywords: input.keyword,
+    ...(keywords ? { keywords } : {}),
     inLanguage: input.locale,
     mainEntityOfPage: { "@type": "WebPage", "@id": input.url },
     url: input.url,

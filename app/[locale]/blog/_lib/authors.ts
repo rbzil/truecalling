@@ -24,7 +24,8 @@ export const authors = {
     name: "TrueCalling Editorial",
     role: "Talent Intelligence Team",
     bio: "The TrueCalling editorial team — recruiters, ML engineers and product folks who build EMILY and TrueFit 360. We write about AI sourcing, multichannel outreach and the day-to-day reality of modern Talent Acquisition.",
-    url: "https://truecalling.ai/en",
+    // url omitted on purpose: a Person.url is meant to be a personal bio
+    // page, not the home page. Re-add once /en/team/[author] pages exist.
     linkedin: "https://www.linkedin.com/company/truecalling-app",
     avatar: "/brand/truecalling-vertical.png",
   },

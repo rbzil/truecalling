@@ -46,6 +46,8 @@ export const blogEnabledLocales: readonly Locale[] = ["fr", "en"] as const;
 ---------------------------------------------------------- */
 export type RouteKey =
   | "home"
+  | "features"
+  | "pricing"
   | "book-a-demo"
   | "contact"
   | "faq"
@@ -60,6 +62,8 @@ export type RouteKey =
  * app/[locale]/ uses this slug. Middleware rewrites localized URLs to it.
  */
 export const canonicalSlug: Record<Exclude<RouteKey, "home">, string> = {
+  features: "features",
+  pricing: "pricing",
   "book-a-demo": "book-a-demo",
   contact: "contact",
   faq: "faq",
@@ -81,6 +85,26 @@ export const canonicalSlug: Record<Exclude<RouteKey, "home">, string> = {
 export const localizedSlug: Record<RouteKey, Record<Locale, string>> = {
   home: {
     fr: "", en: "", he: "", "pt-BR": "", es: "", de: "", it: "", nl: "",
+  },
+  features: {
+    fr: "fonctionnalites",
+    en: "features",
+    he: "features",
+    "pt-BR": "funcionalidades",
+    es: "caracteristicas",
+    de: "funktionen",
+    it: "funzionalita",
+    nl: "functies",
+  },
+  pricing: {
+    fr: "tarifs",
+    en: "pricing",
+    he: "pricing",
+    "pt-BR": "precos",
+    es: "precios",
+    de: "preise",
+    it: "prezzi",
+    nl: "prijzen",
   },
   "book-a-demo": {
     fr: "reserver-une-demo",

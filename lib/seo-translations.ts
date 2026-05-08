@@ -14,6 +14,90 @@ type Meta = { title: string; description: string };
 type SubRoute = Exclude<RouteKey, "home" | "blog">;
 
 export const seoMeta: Record<SubRoute, Record<Locale, Meta>> = {
+  features: {
+    en: {
+      title: "Features",
+      description:
+        "TrueCalling features — EMILY AI sourcing copilot, TrueFit 360 candidate matching, multichannel outreach (WhatsApp, email, phone), and ATS sync.",
+    },
+    fr: {
+      title: "Fonctionnalités",
+      description:
+        "Les fonctionnalités TrueCalling — copilote IA EMILY pour le sourcing, matching candidat TrueFit 360, outreach multicanal (WhatsApp, email, téléphone) et synchronisation ATS.",
+    },
+    de: {
+      title: "Funktionen",
+      description:
+        "TrueCalling-Funktionen — EMILY-KI-Sourcing-Copilot, TrueFit-360-Kandidatenmatching, Multichannel-Outreach (WhatsApp, E-Mail, Telefon) und ATS-Sync.",
+    },
+    es: {
+      title: "Características",
+      description:
+        "Características de TrueCalling — copiloto IA EMILY para sourcing, matching de candidatos TrueFit 360, outreach multicanal (WhatsApp, email, teléfono) y sincronización ATS.",
+    },
+    it: {
+      title: "Funzionalità",
+      description:
+        "Le funzionalità di TrueCalling — copilot IA EMILY per il sourcing, matching candidati TrueFit 360, outreach multicanale (WhatsApp, email, telefono) e sync ATS.",
+    },
+    nl: {
+      title: "Functies",
+      description:
+        "TrueCalling-functies — EMILY AI-sourcing-copilot, TrueFit 360 kandidaatmatching, multichannel-outreach (WhatsApp, e-mail, telefoon) en ATS-sync.",
+    },
+    "pt-BR": {
+      title: "Funcionalidades",
+      description:
+        "Funcionalidades do TrueCalling — copiloto IA EMILY para sourcing, matching de candidatos TrueFit 360, outreach multicanal (WhatsApp, email, telefone) e sync ATS.",
+    },
+    he: {
+      title: "Features",
+      description:
+        "TrueCalling features — EMILY AI sourcing copilot, TrueFit 360 candidate matching, multichannel outreach (WhatsApp, email, phone), and ATS sync.",
+    },
+  },
+  pricing: {
+    en: {
+      title: "Pricing",
+      description:
+        "TrueCalling pricing plans — Starter at $595/user/mo, Core at $895, Enterprise on quote. Book a demo to try it free with 1 sample job and 20 candidate matches. No credit card required.",
+    },
+    fr: {
+      title: "Tarifs",
+      description:
+        "Tarifs TrueCalling — Starter à 595 $/utilisateur/mois, Core à 895 $, Enterprise sur devis. Réservez une démo pour tester avec 1 poste d'exemple et 20 candidats matchés. Sans carte bancaire.",
+    },
+    de: {
+      title: "Preise",
+      description:
+        "TrueCalling-Preise — Starter ab 595 $/Nutzer/Monat, Core 895 $, Enterprise auf Anfrage. Buchen Sie eine Demo und testen Sie mit 1 Beispiel-Stelle und 20 Top-Kandidaten. Keine Kreditkarte nötig.",
+    },
+    es: {
+      title: "Precios",
+      description:
+        "Precios de TrueCalling — Starter 595 $/usuario/mes, Core 895 $, Enterprise a medida. Reserva una demo para probarlo con 1 puesto de ejemplo y 20 candidatos. Sin tarjeta de crédito.",
+    },
+    it: {
+      title: "Prezzi",
+      description:
+        "Prezzi TrueCalling — Starter 595 $/utente/mese, Core 895 $, Enterprise su preventivo. Prenota una demo per provarlo con 1 posizione di esempio e 20 candidati. Nessuna carta richiesta.",
+    },
+    nl: {
+      title: "Prijzen",
+      description:
+        "TrueCalling-prijzen — Starter $595/gebruiker/maand, Core $895, Enterprise op aanvraag. Boek een demo en test met 1 voorbeeldvacature en 20 kandidaten. Geen creditcard nodig.",
+    },
+    "pt-BR": {
+      title: "Preços",
+      description:
+        "Preços TrueCalling — Starter $595/usuário/mês, Core $895, Enterprise sob orçamento. Agende uma demo e teste com 1 vaga de exemplo e 20 candidatos. Sem cartão de crédito.",
+    },
+    he: {
+      title: "Pricing",
+      description:
+        "TrueCalling pricing — Starter $595/user/mo, Core $895, Enterprise on quote. Book a demo to try it with 1 sample job and 20 candidate matches. No credit card required.",
+    },
+  },
   "book-a-demo": {
     en: {
       title: "Book a demo",
