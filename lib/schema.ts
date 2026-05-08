@@ -175,6 +175,30 @@ export function blogPostingSchema(input: BlogPostingInput) {
   };
 }
 
+export type FaqEntry = { question: string; answer: string };
+
+/**
+ * FAQPage schema. Per Google's Aug 2023 update, FAQ rich results in SERPs
+ * are restricted to government and healthcare sites. On a commercial SaaS
+ * site this WILL NOT render a SERP rich snippet — but it still benefits
+ * AI/LLM citation surfaces (Google AIO, ChatGPT Search, Perplexity, Bing
+ * Copilot) which read structured data to ground their answers.
+ */
+export function faqPageSchema(faqs: FaqEntry[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: f.answer,
+      },
+    })),
+  };
+}
+
 /** Stringify + escape `</script>` so it's safe in dangerouslySetInnerHTML. */
 export function jsonLd(obj: unknown): string {
   return JSON.stringify(obj).replace(/</g, "\\u003c");

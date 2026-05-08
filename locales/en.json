@@ -264,7 +264,7 @@
   "faq_q2": "How does AI sourcing work at TrueCalling?",
   "faq_a2": "You describe the role in natural language. EMILY, our AI copilot, analyzes the brief, queries relevant talent pools and applies over a hundred criteria (skills, context, soft skills) to surface a shortlist ranked by matching score. AI sourcing reduces time-to-hire by immediately targeting the most relevant profiles.",
   "faq_q3": "Which channels can I use to contact candidates — WhatsApp, email, phone?",
-  "faq_a3": "WhatsApp, email and phone, from the same interface. It's our signature: multichannel outreach where each candidate is reached on the channel where they're most likely to reply. WhatsApp hits 98% open rate vs 20% for email — that's why it's central at TrueCalling. Messages are pre-drafted based on the profile and role, and follow-ups are automated.",
+  "faq_a3": "WhatsApp, email and phone, from the same interface. It's our signature: multichannel outreach where each candidate is reached on the channel where they're most likely to reply. WhatsApp hits 90 % open rate vs 20% for email — that's why it's central at TrueCalling. Messages are pre-drafted based on the profile and role, and follow-ups are automated.",
   "faq_q4": "Does TrueCalling integrate with my ATS (Lever, Greenhouse, Recruitee, Teamtailor, Workable)?",
   "faq_a4": "Yes. The Core plan includes one ATS integration and the Enterprise plan offers unlimited integrations. Sourced candidates and their interactions sync automatically with your existing pipeline — TrueCalling enriches your ATS, doesn't replace it.",
   "faq_q5": "What does an AI sourcing software like TrueCalling cost and is there a trial?",
