@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { type Locale, locales } from "@/lib/i18n-config";
-import { buildAlternates } from "@/lib/seo-metadata";
+import { buildAlternates, OG_IMAGES } from "@/lib/seo-metadata";
 import { getSeoMeta } from "@/lib/seo-translations";
 
 export async function generateMetadata({
@@ -26,8 +26,9 @@ export async function generateMetadata({
       url: alternates.canonical as string,
       locale: locale.replace("-", "_"),
       siteName: "TrueCalling",
+      images: [...OG_IMAGES],
     },
-    twitter: { card: "summary_large_image", title, description },
+    twitter: { card: "summary_large_image", title, description, images: [OG_IMAGES[0].url] },
     robots: { index: true, follow: true },
   };
 }

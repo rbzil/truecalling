@@ -8,7 +8,7 @@ import {
   locales,
   blogEnabledLocales,
 } from "@/lib/i18n-config";
-import { buildAlternates } from "@/lib/seo-metadata";
+import { buildAlternates, OG_IMAGES } from "@/lib/seo-metadata";
 import { breadcrumbSchema, jsonLd } from "@/lib/schema";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/SiteNavbar";
@@ -38,7 +38,10 @@ export async function generateMetadata({
       description: dict.blog_meta_desc,
       url: alternates.canonical as string,
       locale: params.locale,
+      siteName: "TrueCalling",
+      images: [...OG_IMAGES],
     },
+    twitter: { card: "summary_large_image", title: dict.blog_meta_title, description: dict.blog_meta_desc, images: [OG_IMAGES[0].url] },
   };
 }
 
