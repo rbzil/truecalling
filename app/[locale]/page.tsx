@@ -974,6 +974,7 @@ function HowItWorks() {
             <span className="bg-gradient-to-r from-accent via-pink-400 to-accent bg-clip-text text-transparent">
               TrueCalling
             </span>
+            {t("how_h2_b") ? <>{" "}{t("how_h2_b")}</> : null}
           </motion.h2>
           <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-ink-muted">
             {t("how_subtitle")}
