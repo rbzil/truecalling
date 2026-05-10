@@ -1,92 +1,99 @@
 # .github/workflows/seo-blog-autopilot.yml
 #
-# Déclenche Claude Code automatiquement chaque dimanche et jeudi
-# pour générer 2 articles SEO, les traduire et ouvrir une PR.
+# Twice a week (Sun + Thu, 8am UTC), generate 2 SEO articles in EN + FR via
+# Claude API and open a PR for human review.
+#
+# Required secret:
+#   ANTHROPIC_API_KEY  — Anthropic Claude API key (set in repo Secrets)
+#
+# The default GITHUB_TOKEN is enough for branch push + PR creation since the
+# workflow has `permissions: contents: write, pull-requests: write`.
 
 name: SEO Blog Autopilot
 
 on:
   schedule:
-    # Dimanche à 8h UTC (11h Israël)
-    - cron: '0 8 * * 0'
-    # Jeudi à 8h UTC (11h Israël)
-    - cron: '0 8 * * 4'
-
-  # Permet aussi de le lancer manuellement depuis GitHub si besoin
+    - cron: '0 8 * * 0'   # Sunday 08:00 UTC
+    - cron: '0 8 * * 4'   # Thursday 08:00 UTC
   workflow_dispatch:
+    inputs:
+      articles_per_run:
+        description: 'Number of articles to generate'
+        required: false
+        default: '2'
+      dry_run:
+        description: 'Set to "1" to skip writing files (debug only)'
+        required: false
+        default: '0'
 
 permissions:
   contents: write
   pull-requests: write
 
 jobs:
-  seo-blog:
+  autopilot:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      - name: Install Claude Code
-        run: npm install -g @anthropic-ai/claude-code
+      - name: Install deps
+        run: npm ci
 
-      - name: Run SEO Blog Autopilot
+      - name: Run autopilot
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ARTICLES_PER_RUN: ${{ inputs.articles_per_run || '2' }}
+          DRY_RUN: ${{ inputs.dry_run || '0' }}
+        run: node scripts/seo-blog-autopilot.mjs
+
+      - name: Verify build still passes
+        if: ${{ inputs.dry_run != '1' }}
+        run: npm run build
+
+      - name: Configure git
+        if: ${{ inputs.dry_run != '1' }}
         run: |
+          git config user.name "truecalling-blog-bot"
+          git config user.email "blog-bot@truecalling.ai"
+
+      - name: Create branch + commit + push
+        if: ${{ inputs.dry_run != '1' }}
+        id: commit
+        run: |
+          set -euo pipefail
           DATE=$(date +%Y-%m-%d)
-          DAY_NAME=$(date +%A)
+          BRANCH="blog/${DATE}-autopilot"
+          if git ls-remote --exit-code --heads origin "$BRANCH" > /dev/null 2>&1; then
+            BRANCH="${BRANCH}-$(date +%H%M)"
+          fi
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+          git checkout -b "$BRANCH"
+          git add app/[locale]/blog/_lib/articles.fr.tsx app/[locale]/blog/_lib/articles.en.tsx
+          git commit -m "feat(blog): autopilot — ${DATE} articles"
+          git push origin "$BRANCH"
 
-          claude --print --dangerously-skip-permissions \
-            "Tu es l'agent SEO autopilot de TrueCalling AI. Aujourd'hui c'est ${DAY_NAME} ${DATE}.
-
-            WORKFLOW À EXÉCUTER — chaque étape est auto-validée, pas d'attente humaine :
-
-            ÉTAPE 1 — MOTS-CLÉS
-            - Lis les rapports SEO disponibles dans le repo (cherche dans reports/, seo/, analytics/, ou tout fichier pertinent).
-            - Extrais les mots-clés prioritaires (volume élevé, difficulté faible, pertinence HR/AI/talent).
-            - Lis les articles existants du blog pour éviter la cannibalisation.
-
-            ÉTAPE 2 — SUJETS (EN)
-            - Génère 2 sujets d'articles en anglais.
-            - Chaque sujet cible 1 mot-clé principal + 2-3 secondaires.
-            - Angle original, intention de recherche claire.
-
-            ÉTAPE 3 — RÉDACTION (EN)
-            Pour chaque article, crée un fichier markdown avec :
-            - Titre H1 SEO (< 60 car.), meta description (< 155 car.)
-            - 800-1500 mots, structure H2/H3, intro + conclusion avec CTA
-            - 2-3 liens internes vers des pages existantes du site
-            - Slug URL propre
-
-            ÉTAPE 4 — TRADUCTIONS
-            Traduis chaque article EN vers : FR, DE, ES, IT, NL, PT-BR, HE.
-            - Adapte les meta (pas de traduction littérale).
-            - Garde les termes techniques en EN si c'est l'usage local.
-            - Pour HE : assure-toi que le balisage RTL est correct.
-            - Respecte la structure de dossiers existante du blog.
-
-            ÉTAPE 5 — GIT & PR
-            - Crée la branche : blog/${DATE}
-            - Commit chaque article + ses traductions séparément.
-            - Messages de commit conventionnels : feat(blog): add ...
-            - Ouvre UNE Pull Request récapitulative avec :
-              - Liste des articles et langues
-              - Mots-clés ciblés
-              - Checklist SEO
-
-            ÉTAPE 6 — LOG
-            Dans la PR, ajoute une section 'Décisions SEO' expliquant :
-            - Pourquoi ces sujets ont été choisis
-            - Quels mots-clés ont été priorisés et pourquoi
-            - Ajustements faits par rapport au cycle précédent
-
-            COMMENCE MAINTENANT. Auto-valide chaque étape."
+      - name: Open PR
+        if: ${{ inputs.dry_run != '1' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ steps.commit.outputs.branch }}
+        run: |
+          set -euo pipefail
+          DATE=$(date +%Y-%m-%d)
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "Autopilot — ${DATE} blog articles" \
+            --body-file /tmp/autopilot-pr-body.md

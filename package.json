@@ -23,6 +23,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.95.1",
     "@tailwindcss/typography": "^0.5.19",
     "@types/negotiator": "^0.6.4",
     "@types/node": "^20.14.0",
