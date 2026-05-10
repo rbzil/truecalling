@@ -1,0 +1,92 @@
+# .github/workflows/seo-blog-autopilot.yml
+#
+# Déclenche Claude Code automatiquement chaque dimanche et jeudi
+# pour générer 2 articles SEO, les traduire et ouvrir une PR.
+
+name: SEO Blog Autopilot
+
+on:
+  schedule:
+    # Dimanche à 8h UTC (11h Israël)
+    - cron: '0 8 * * 0'
+    # Jeudi à 8h UTC (11h Israël)
+    - cron: '0 8 * * 4'
+
+  # Permet aussi de le lancer manuellement depuis GitHub si besoin
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  seo-blog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Run SEO Blog Autopilot
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          DATE=$(date +%Y-%m-%d)
+          DAY_NAME=$(date +%A)
+
+          claude --print --dangerously-skip-permissions \
+            "Tu es l'agent SEO autopilot de TrueCalling AI. Aujourd'hui c'est ${DAY_NAME} ${DATE}.
+
+            WORKFLOW À EXÉCUTER — chaque étape est auto-validée, pas d'attente humaine :
+
+            ÉTAPE 1 — MOTS-CLÉS
+            - Lis les rapports SEO disponibles dans le repo (cherche dans reports/, seo/, analytics/, ou tout fichier pertinent).
+            - Extrais les mots-clés prioritaires (volume élevé, difficulté faible, pertinence HR/AI/talent).
+            - Lis les articles existants du blog pour éviter la cannibalisation.
+
+            ÉTAPE 2 — SUJETS (EN)
+            - Génère 2 sujets d'articles en anglais.
+            - Chaque sujet cible 1 mot-clé principal + 2-3 secondaires.
+            - Angle original, intention de recherche claire.
+
+            ÉTAPE 3 — RÉDACTION (EN)
+            Pour chaque article, crée un fichier markdown avec :
+            - Titre H1 SEO (< 60 car.), meta description (< 155 car.)
+            - 800-1500 mots, structure H2/H3, intro + conclusion avec CTA
+            - 2-3 liens internes vers des pages existantes du site
+            - Slug URL propre
+
+            ÉTAPE 4 — TRADUCTIONS
+            Traduis chaque article EN vers : FR, DE, ES, IT, NL, PT-BR, HE.
+            - Adapte les meta (pas de traduction littérale).
+            - Garde les termes techniques en EN si c'est l'usage local.
+            - Pour HE : assure-toi que le balisage RTL est correct.
+            - Respecte la structure de dossiers existante du blog.
+
+            ÉTAPE 5 — GIT & PR
+            - Crée la branche : blog/${DATE}
+            - Commit chaque article + ses traductions séparément.
+            - Messages de commit conventionnels : feat(blog): add ...
+            - Ouvre UNE Pull Request récapitulative avec :
+              - Liste des articles et langues
+              - Mots-clés ciblés
+              - Checklist SEO
+
+            ÉTAPE 6 — LOG
+            Dans la PR, ajoute une section 'Décisions SEO' expliquant :
+            - Pourquoi ces sujets ont été choisis
+            - Quels mots-clés ont été priorisés et pourquoi
+            - Ajustements faits par rapport au cycle précédent
+
+            COMMENCE MAINTENANT. Auto-valide chaque étape."
