@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useT, useLocalizedHref } from "../../_i18n/locale-context";
+import { useRegion } from "../../_region/region-context";
+import { REGION_PRICES, formatPrice } from "@/lib/region-data";
 import { Navbar, CTAButton } from "@/components/SiteNavbar";
 import { faqPageSchema, jsonLd } from "@/lib/schema";
 
@@ -30,12 +32,14 @@ type Tier = {
 export default function PricingPage() {
   const t = useT();
   const href = useLocalizedHref();
+  const region = useRegion();
+  const prices = REGION_PRICES[region];
 
   const tiers: Tier[] = [
     {
       id: "starter",
       name: "Starter",
-      price: "$595",
+      price: formatPrice(prices.starter, region),
       unit: t("pricing_per_user"),
       tagline: t("starter_tagline"),
       features: [
@@ -53,7 +57,7 @@ export default function PricingPage() {
     {
       id: "core",
       name: "Core",
-      price: "$895",
+      price: formatPrice(prices.core, region),
       unit: t("pricing_per_user"),
       tagline: t("core_tagline"),
       features: [

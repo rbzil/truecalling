@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 import { locales, rtlLocales, type Locale } from "@/lib/i18n-config";
 import { getDictionary } from "@/lib/get-dictionary";
 import { buildAlternates, OG_IMAGES } from "@/lib/seo-metadata";
+import { getRegion } from "@/lib/region";
 import { Providers } from "../providers";
+import { RegionDebugSwitcher } from "../_region/region-debug-switcher";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export function generateStaticParams() {
@@ -48,9 +50,10 @@ export default async function LocaleLayout({
 
   const dictionary = await getDictionary(locale);
   const dir = rtlLocales.includes(locale) ? "rtl" : "ltr";
+  const region = getRegion();
 
   return (
-    <Providers locale={locale} dictionary={dictionary}>
+    <Providers locale={locale} dictionary={dictionary} region={region}>
       {/* Organization + WebSite schemas live in the root layout so they
          render once site-wide rather than per locale. Per-page schemas
          (SoftwareApplication on home, BlogPosting on articles, BreadcrumbList
@@ -58,6 +61,7 @@ export default async function LocaleLayout({
       <div dir={dir} lang={locale}>
         {children}
         <SiteFooter />
+        <RegionDebugSwitcher />
       </div>
     </Providers>
   );

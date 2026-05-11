@@ -60,42 +60,42 @@ export const seoMeta: Record<SubRoute, Record<Locale, Meta>> = {
     en: {
       title: "Pricing",
       description:
-        "TrueCalling pricing plans — Starter at $595/user/mo, Core at $895, Enterprise on quote. Book a demo to try it free with 1 sample job and 20 candidate matches. No credit card required.",
+        "TrueCalling pricing plans — Starter from €595/user/mo, Core from €895, Enterprise on quote. Regional pricing applies. Book a demo to try it with 1 sample job and 20 candidate matches.",
     },
     fr: {
       title: "Tarifs",
       description:
-        "Tarifs TrueCalling — Starter à 595 $/utilisateur/mois, Core à 895 $, Enterprise sur devis. Réservez une démo pour tester avec 1 poste d'exemple et 20 candidats matchés. Sans carte bancaire.",
+        "Tarifs TrueCalling — Starter dès 595 €/utilisateur/mois, Core dès 895 €, Enterprise sur devis. Tarifs régionaux. Réservez une démo pour tester avec 1 poste d'exemple et 20 candidats matchés.",
     },
     de: {
       title: "Preise",
       description:
-        "TrueCalling-Preise — Starter ab 595 $/Nutzer/Monat, Core 895 $, Enterprise auf Anfrage. Buchen Sie eine Demo und testen Sie mit 1 Beispiel-Stelle und 20 Top-Kandidaten. Keine Kreditkarte nötig.",
+        "TrueCalling-Preise — Starter ab 595 €/Nutzer/Monat, Core ab 895 €, Enterprise auf Anfrage. Regionale Preise. Buchen Sie eine Demo und testen Sie mit 1 Beispiel-Stelle und 20 Top-Kandidaten.",
     },
     es: {
       title: "Precios",
       description:
-        "Precios de TrueCalling — Starter 595 $/usuario/mes, Core 895 $, Enterprise a medida. Reserva una demo para probarlo con 1 puesto de ejemplo y 20 candidatos. Sin tarjeta de crédito.",
+        "Precios de TrueCalling — Starter desde 595 €/usuario/mes, Core desde 895 €, Enterprise a medida. Precios regionales. Reserva una demo para probarlo con 1 puesto de ejemplo y 20 candidatos.",
     },
     it: {
       title: "Prezzi",
       description:
-        "Prezzi TrueCalling — Starter 595 $/utente/mese, Core 895 $, Enterprise su preventivo. Prenota una demo per provarlo con 1 posizione di esempio e 20 candidati. Nessuna carta richiesta.",
+        "Prezzi TrueCalling — Starter da 595 €/utente/mese, Core da 895 €, Enterprise su preventivo. Prezzi regionali. Prenota una demo per provarlo con 1 posizione di esempio e 20 candidati.",
     },
     nl: {
       title: "Prijzen",
       description:
-        "TrueCalling-prijzen — Starter $595/gebruiker/maand, Core $895, Enterprise op aanvraag. Boek een demo en test met 1 voorbeeldvacature en 20 kandidaten. Geen creditcard nodig.",
+        "TrueCalling-prijzen — Starter vanaf €595/gebruiker/maand, Core vanaf €895, Enterprise op aanvraag. Regionale prijzen. Boek een demo en test met 1 voorbeeldvacature en 20 kandidaten.",
     },
     "pt-BR": {
       title: "Preços",
       description:
-        "Preços TrueCalling — Starter $595/usuário/mês, Core $895, Enterprise sob orçamento. Agende uma demo e teste com 1 vaga de exemplo e 20 candidatos. Sem cartão de crédito.",
+        "Preços TrueCalling — Starter a partir de €595/usuário/mês, Core a partir de €895, Enterprise sob orçamento. Preços regionais. Agende uma demo e teste com 1 vaga e 20 candidatos.",
     },
     he: {
       title: "Pricing",
       description:
-        "TrueCalling pricing — Starter $595/user/mo, Core $895, Enterprise on quote. Book a demo to try it with 1 sample job and 20 candidate matches. No credit card required.",
+        "TrueCalling pricing — Starter from €595/user/mo, Core from €895, Enterprise on quote. Regional pricing applies. Book a demo to try it with 1 sample job and 20 candidate matches.",
     },
   },
   "book-a-demo": {
