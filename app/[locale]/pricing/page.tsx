@@ -170,7 +170,7 @@ export default function PricingPage() {
       </section>
 
       {/* Tier cards */}
-      <section className="relative px-5 pb-14 sm:px-8 sm:pb-20">
+      <section className="relative px-5 pb-6 sm:px-8 sm:pb-10">
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
             {tiers.map((tier) => (
@@ -224,6 +224,11 @@ export default function PricingPage() {
               </article>
             ))}
           </div>
+
+          {/* Legal disclaimer — indicative prices, regional grid, E&OE */}
+          <p className="mx-auto mt-10 max-w-3xl text-center text-[11.5px] leading-relaxed text-ink-muted/80">
+            {t("pricing_disclaimer")}
+          </p>
         </div>
       </section>
 

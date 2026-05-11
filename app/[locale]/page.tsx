@@ -2750,6 +2750,11 @@ function Pricing() {
             </motion.div>
           ))}
         </div>
+
+        {/* Legal disclaimer — indicative prices, regional grid, E&OE */}
+        <p className="mx-auto mt-10 max-w-3xl text-center text-[11.5px] leading-relaxed text-ink-muted/80">
+          {t("pricing_disclaimer")}
+        </p>
       </div>
     </section>
   );

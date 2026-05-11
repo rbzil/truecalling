@@ -291,6 +291,8 @@
   "contact_message_label": "Messaggio",
   "contact_message_placeholder": "Il tuo bisogno, il contesto, lo stack…",
   "contact_min_chars": "Almeno 10 caratteri",
+  "contact_error_generic": "Qualcosa è andato storto. Riprova o scrivi a patrick@truecalling.ai.",
+  "pricing_disclaimer": "Prezzi indicativi, soggetti a variazioni senza preavviso. Una griglia regionale si applica in base al paese di fatturazione. Il prezzo finale è fissato nell'ordine. Salvo errori e omissioni.",
   "contact_no_resale": "I tuoi dati non vengono mai venduti.",
   "contact_submit": "Invia messaggio",
   "contact_submitting": "Invio…",

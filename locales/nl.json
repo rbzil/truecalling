@@ -291,6 +291,8 @@
   "contact_message_label": "Bericht",
   "contact_message_placeholder": "Je behoefte, context, stack…",
   "contact_min_chars": "Minstens 10 tekens",
+  "contact_error_generic": "Er ging iets mis. Probeer het opnieuw of schrijf naar patrick@truecalling.ai.",
+  "pricing_disclaimer": "Prijzen onder voorbehoud, kunnen zonder aankondiging wijzigen. Een regionale prijsindeling geldt afhankelijk van het factureringsland. De definitieve prijs wordt vastgelegd in de bestelling. Onder voorbehoud van fouten en omissies.",
   "contact_no_resale": "Je gegevens worden nooit verkocht.",
   "contact_submit": "Bericht versturen",
   "contact_submitting": "Verzenden…",
