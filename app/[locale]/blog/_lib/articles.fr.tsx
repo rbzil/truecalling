@@ -2044,7 +2044,468 @@ const Article10Content: ReactNode = (
   </>
 );
 
+const Article11Content: ReactNode = (
+  <>
+    <p>
+      <strong>Générer une shortlist de candidats</strong> qualifiés en moins de 10 minutes, à partir
+      d&apos;un simple brief, n&apos;a plus rien de futuriste en 2026 — c&apos;est même devenu un
+      standard pour les équipes Talent qui veulent passer un cap. Un bon copilote IA lit votre fiche
+      de poste, interroge les bons viviers, score chaque profil sur des critères explicables et vous
+      remet une liste de 10 à 20 candidats prête à contacter. Voici, étape par étape, comment
+      générer une shortlist candidats IA qui tient ses promesses — et ce qui distingue une vraie
+      shortlist d&apos;un simple tas de profils mal triés.
+    </p>
+
+    <h2>Shortlist candidats IA : la définition qui compte</h2>
+    <p>
+      Une <strong>shortlist candidats IA</strong>, ce n&apos;est pas un export brut de LinkedIn ni un
+      classement par mots-clés. C&apos;est une liste de 10 à 20 profils maximum, sélectionnés par un
+      modèle qui a lu le poste, comparé chaque candidat sur plusieurs dimensions et justifié son
+      classement. Vous devez pouvoir cliquer sur n&apos;importe quel profil et comprendre, en deux
+      lignes, pourquoi il est là.
+    </p>
+    <p>
+      La différence avec une &quot;recherche IA&quot; sans scoring explicable, c&apos;est que la
+      shortlist est <em>actionnable</em> : vous savez qui contacter en premier, dans quel ordre, et
+      avec quel angle.
+    </p>
+
+    <h2>Les 4 étapes pour générer une shortlist en moins de 10 minutes</h2>
+
+    <h3>Étape 1 — Décrire le poste en langage naturel (2 minutes)</h3>
+    <p>
+      Oubliez les booléens. Vous écrivez 3 à 6 phrases qui décrivent le poste comme à un collègue :
+      séniorité, stack, secteur, contraintes (localisation, temps plein/partiel, langues). Plus le
+      brief est précis, plus la shortlist sera dense. Exemple :
+    </p>
+    <ul>
+      <li>
+        &quot;Senior Backend Engineer Go, 6 ans d&apos;expérience minimum, idéalement dans une
+        scale-up B2B SaaS européenne, basé à Paris ou full-remote France, à l&apos;aise avec
+        Kubernetes et la production critique.&quot;
+      </li>
+    </ul>
+    <p>
+      EMILY traduit ce brief en une requête sémantique multi-sources et lance l&apos;exploration sur
+      LinkedIn, GitHub et nos bases enrichies.
+    </p>
+
+    <h3>Étape 2 — Laisser l&apos;IA explorer et scorer (4 à 6 minutes)</h3>
+    <p>
+      Le moteur ramène 200 à 400 profils pertinents, puis applique le score TrueFit 360 à chacun. Le
+      score décompose la pertinence sur quatre axes : compétences techniques, contexte
+      d&apos;expérience, soft signals, et disponibilité estimée. Chaque score est explicable —
+      cliquez sur un candidat et vous voyez pourquoi il est à 87/100 ou à 64/100.
+    </p>
+    <p>
+      Cette phase tourne pendant que vous prenez un café. Aucune intervention humaine n&apos;est
+      requise.
+    </p>
+
+    <h3>Étape 3 — Filtrer la shortlist finale (1 à 2 minutes)</h3>
+    <p>
+      L&apos;IA propose 30 à 40 candidats au-dessus du seuil de pertinence. Vous gardez les 10 à 20
+      meilleurs en quelques clics, en éliminant les profils trop séniors, mal localisés ou
+      visiblement déjà bien lotis dans leur poste actuel. Le copilote vous guide sur les 5 à 10
+      candidats à prioriser en premier.
+    </p>
+
+    <h3>Étape 4 — Lancer l&apos;outreach (1 minute)</h3>
+    <p>
+      EMILY rédige un premier message personnalisé pour chaque candidat de la shortlist — sur le
+      canal préféré (WhatsApp, email, téléphone). Vous relisez, vous validez, vous envoyez. C&apos;est
+      à ce moment que la shortlist devient un pipeline réel.
+    </p>
+
+    <h2>Ce qui distingue une vraie shortlist d&apos;une fausse</h2>
+    <ul>
+      <li>
+        <strong>Une vraie shortlist est explicable.</strong> Chaque ligne s&apos;ouvre sur une
+        justification de score.
+      </li>
+      <li>
+        <strong>Une vraie shortlist est courte.</strong> 10 à 20 profils, pas 200. Sinon ce
+        n&apos;est plus une shortlist, c&apos;est une recherche.
+      </li>
+      <li>
+        <strong>Une vraie shortlist est priorisée.</strong> Le top 5 est identifié, pas noyé dans la
+        masse.
+      </li>
+      <li>
+        <strong>Une vraie shortlist est actionnable.</strong> Vous savez qui contacter, sur quel
+        canal et avec quel angle.
+      </li>
+      <li>
+        <strong>Une vraie shortlist est régénérable.</strong> Vous pouvez itérer si la qualité ne
+        suit pas, sans repartir de zéro.
+      </li>
+    </ul>
+
+    <h2>Cas concret : Senior Product Manager B2B SaaS, shortlist en 8 minutes</h2>
+    <p>
+      Une équipe Talent française cherche un Senior Product Manager B2B SaaS pour un poste à Paris,
+      bilingue FR/EN, idéalement avec une expérience growth :
+    </p>
+    <ul>
+      <li>Brief tapé en 90 secondes.</li>
+      <li>EMILY ramène 312 profils pertinents en 4 minutes.</li>
+      <li>TrueFit 360 score les 312 profils en moins de 2 minutes.</li>
+      <li>Le recruteur garde 14 profils au-dessus de 78/100.</li>
+      <li>EMILY génère 14 messages WhatsApp personnalisés en 45 secondes.</li>
+      <li>Total : 8 minutes du brief au pipeline.</li>
+    </ul>
+    <p>
+      Sur ces 14 candidats, 9 répondent en moins de 48 heures. Cinq entretiens lancés en première
+      semaine. Le poste est pourvu en 19 jours, contre une médiane interne de 41 jours pour les
+      postes équivalents l&apos;année précédente.
+    </p>
+
+    <h2>Les 3 erreurs qui ruinent une shortlist IA</h2>
+    <ol>
+      <li>
+        <strong>Brief trop vague.</strong> &quot;Un bon développeur full-stack&quot; ne donnera
+        jamais une shortlist exploitable. Donnez du contexte (stack, séniorité, secteur).
+      </li>
+      <li>
+        <strong>Vouloir une shortlist trop large.</strong> Si vous gardez 50 profils, vous
+        n&apos;avez plus de shortlist : vous avez une longue file d&apos;attente. Le ROI est dans la
+        sélection serrée.
+      </li>
+      <li>
+        <strong>Ne pas itérer sur les profils refusés.</strong> Si vous écartez 5 profils du top 10,
+        dites pourquoi à l&apos;IA. La shortlist suivante sera meilleure.
+      </li>
+    </ol>
+
+    <h2>Les outils pour générer une shortlist IA en 2026</h2>
+    <ul>
+      <li>
+        <strong>TrueCalling</strong> : copilote EMILY, score TrueFit 360 explicable, shortlist en 5
+        à 10 minutes, outreach intégré multicanal.
+      </li>
+      <li>
+        <strong>HireSweet</strong> : génération de shortlist tech orientée scale-ups françaises,
+        moins d&apos;explicabilité sur le score.
+      </li>
+      <li>
+        <strong>LinkedIn Recruiter</strong> : retourne des résultats mais sans réelle priorisation
+        IA — vous devez encore trier vous-même.
+      </li>
+      <li>
+        <strong>SeekOut / hireEZ</strong> : forte profondeur de base, mais plutôt orientés
+        entreprises US.
+      </li>
+    </ul>
+    <p>
+      Pour creuser le fonctionnement du score derrière la shortlist, voyez notre article sur le{" "}
+      <Link
+        href="/blog/score-matching-candidat-poste-ia"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        score de matching candidat-poste
+      </Link>
+      .
+    </p>
+
+    <h2>Combien de temps gagner concrètement</h2>
+    <p>
+      Sur 100 postes ouverts par an, le passage d&apos;une shortlist manuelle (45 à 90 min par
+      poste, soit 75 à 150 heures par an) à une shortlist IA (8 à 12 min par poste, soit 13 à 20
+      heures par an) représente entre 60 et 130 heures de travail pur de sourcing rendues. À 60 €
+      coût-recruteur par heure, c&apos;est entre 3 600 € et 7 800 € d&apos;économie annuelle par
+      recruteur — avant même de compter le gain en time-to-hire. Pour mesurer ce gain end-to-end,
+      voyez notre guide{" "}
+      <Link
+        href="/blog/time-to-hire-7-leviers-2026"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        time-to-hire : 7 leviers concrets en 2026
+      </Link>
+      .
+    </p>
+
+    <h2>Conclusion : la shortlist est le nouveau brief</h2>
+    <p>
+      <strong>Générer une shortlist candidats IA</strong> en 10 minutes change la posture du
+      recruteur : on ne &quot;cherche&quot; plus, on &quot;décide&quot;. Le sourcing devient un acte
+      court et répétable, et la valeur ajoutée du recruteur se déplace vers la qualité du brief,
+      l&apos;arbitrage et la relation candidat. C&apos;est exactement le scénario que rendent
+      possible les copilotes IA bien conçus comme EMILY.
+    </p>
+    <p>
+      Pour voir une shortlist générée en direct sur un de vos postes ouverts,{" "}
+      <Link href="/" className="text-accent underline-offset-4 hover:underline">
+        réservez une démo TrueCalling
+      </Link>
+      .
+    </p>
+
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+      <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
+      <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
+        Une shortlist générée en direct, sur l&apos;un de vos vrais postes
+      </h3>
+      <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
+        On vous montre, brief en main, comment EMILY remonte 10 à 20 candidats scorés en moins de 10
+        minutes. Démo guidée de 20 à 30 minutes.
+      </p>
+      <div className="mt-5">
+        <Link
+          href="/reserver-une-demo"
+          className="inline-flex h-11 items-center gap-2 rounded-full bg-accent px-5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(233,30,140,0.35)] transition-colors hover:bg-accent/90 cursor-pointer"
+        >
+          Réserver une démo
+        </Link>
+      </div>
+    </div>
+  </>
+);
+
+const Article12Content: ReactNode = (
+  <>
+    <p>
+      L&apos;<strong>intégration ATS sourcing</strong> est devenue le sujet n°1 des équipes Talent
+      qui adoptent un outil de sourcing IA en 2026. Pour une raison simple : un copilote IA qui ne
+      parle pas à votre ATS crée plus de problèmes qu&apos;il n&apos;en résout. Doubles saisies,
+      pipeline cassé, historique candidat perdu, conformité RGPD bancale. À l&apos;inverse, une
+      intégration ATS bien faite transforme le sourcing IA en couche d&apos;orchestration qui
+      enrichit votre stack existante au lieu de la remplacer. Voici comment réussir l&apos;intégration
+      avec Greenhouse, Lever, Recruitee, Teamtailor ou Workable sans casser votre process.
+    </p>
+
+    <h2>Pourquoi l&apos;intégration ATS est non négociable en sourcing IA</h2>
+    <p>
+      Un outil de sourcing IA qui vit en silo, c&apos;est trois problèmes garantis :
+    </p>
+    <ul>
+      <li>
+        <strong>Doublons candidats.</strong> Vous re-contactez un profil que votre collègue avait
+        déjà sourcé il y a 3 mois — voire un candidat qui était déjà en finale chez vous.
+      </li>
+      <li>
+        <strong>Historique perdu.</strong> L&apos;échange WhatsApp ou email que vous lancez n&apos;est
+        visible nulle part dans l&apos;ATS. Si un autre recruteur reprend le poste, il repart de
+        zéro.
+      </li>
+      <li>
+        <strong>Conformité RGPD floue.</strong> Sans synchronisation, vous gérez deux registres de
+        traitement, deux opt-outs, deux droits d&apos;accès. Le risque CNIL monte vite.
+      </li>
+    </ul>
+    <p>
+      Une <strong>intégration ATS sourcing</strong> bien conçue règle les trois en transformant
+      l&apos;outil de sourcing en moteur amont qui pousse dans votre pipeline existant — sans
+      jamais le remplacer.
+    </p>
+
+    <h2>Ce qu&apos;une bonne intégration ATS doit faire</h2>
+    <ol>
+      <li>
+        <strong>Pousser automatiquement chaque candidat sourcé</strong> dans le bon poste de
+        l&apos;ATS, à la bonne étape du pipeline (typiquement &quot;sourced&quot; ou &quot;new
+        lead&quot;).
+      </li>
+      <li>
+        <strong>Synchroniser les interactions</strong> WhatsApp, email, téléphone vers la fiche
+        candidat de l&apos;ATS — un message envoyé via EMILY apparaît dans Greenhouse comme une
+        activité tracée.
+      </li>
+      <li>
+        <strong>Détecter les doublons</strong> à l&apos;import : si un candidat existe déjà dans
+        votre ATS, l&apos;outil de sourcing le signale et propose de continuer ou de stopper.
+      </li>
+      <li>
+        <strong>Respecter le statut candidat</strong> : un profil &quot;ne pas recontacter&quot; ou
+        &quot;refus définitif&quot; dans l&apos;ATS ne ressort jamais dans la shortlist IA.
+      </li>
+      <li>
+        <strong>Synchroniser les opt-outs RGPD</strong> dans les deux sens. Si un candidat se
+        désinscrit via une séquence outreach, son statut bascule dans l&apos;ATS.
+      </li>
+    </ol>
+
+    <h2>Greenhouse, Lever, Recruitee, Teamtailor, Workable : ce qui change</h2>
+
+    <h3>Greenhouse</h3>
+    <p>
+      L&apos;API Greenhouse Harvest est complète et stable. Une bonne <strong>intégration ATS
+      sourcing</strong> permet de pousser le candidat dans la bonne &quot;job application&quot;,
+      d&apos;ajouter les sources personnalisées (&quot;EMILY / WhatsApp&quot;) et de tracer chaque
+      interaction. Attention aux permissions : le compte de service utilisé doit avoir accès aux
+      jobs sourcing-eligible.
+    </p>
+
+    <h3>Lever</h3>
+    <p>
+      L&apos;API Lever est très fluide pour le push de candidats avec tags et sources. Le mapping
+      &quot;sourcing stage&quot; → étape Lever fonctionne bien. Limitation à connaître : Lever
+      gère le consentement candidat différemment selon les régions, à câbler proprement dès le
+      premier import.
+    </p>
+
+    <h3>Recruitee</h3>
+    <p>
+      Recruitee accepte sans difficulté les imports de candidats avec champs custom et tagging.
+      Idéal pour les équipes qui veulent matérialiser une &quot;couche sourcing&quot; sans
+      perturber leur pipeline Recruitee. Attention aux quotas API en plan Smart vs Lead.
+    </p>
+
+    <h3>Teamtailor</h3>
+    <p>
+      Teamtailor expose une API moderne et bien documentée. Le scénario classique : EMILY pousse
+      les candidats sourcés en stage &quot;Inbox&quot; ou stage custom dédiée au sourcing IA. Le
+      candidat suit ensuite le workflow Teamtailor habituel.
+    </p>
+
+    <h3>Workable</h3>
+    <p>
+      Workable supporte un import enrichi via API. À surveiller : le mapping des
+      &quot;disqualification reasons&quot; côté Workable doit être propre, sinon vous perdez en
+      qualité de feedback côté outil de sourcing.
+    </p>
+
+    <h2>Cas concret : intégration Greenhouse + TrueCalling sur 80 postes ouverts</h2>
+    <p>
+      Une scale-up B2B SaaS française de 300 personnes utilise Greenhouse comme source unique de
+      vérité. Avant intégration TrueCalling : 35 % de candidats sourcés en double avec
+      l&apos;équipe interne, perte d&apos;environ 4 heures par recruteur et par semaine en
+      réconciliation manuelle. Après intégration TrueCalling Harvest API :
+    </p>
+    <ul>
+      <li>0 doublon non détecté en 6 semaines.</li>
+      <li>100 % des messages WhatsApp et email tracés dans Greenhouse.</li>
+      <li>4 heures hebdo récupérées par recruteur (5 recruteurs = 20 h / semaine).</li>
+      <li>Time-to-hire moyen passé de 38 à 24 jours sur les postes pilotes.</li>
+    </ul>
+
+    <h2>Les 5 questions à poser à un éditeur avant d&apos;acheter</h2>
+    <ol>
+      <li>
+        <strong>L&apos;intégration ATS est-elle native ou via Zapier ?</strong> Zapier suffit pour
+        un POC, pas pour un déploiement.
+      </li>
+      <li>
+        <strong>La détection de doublons est-elle automatique ?</strong> Sur quels critères (email,
+        LinkedIn ID, fuzzy matching) ?
+      </li>
+      <li>
+        <strong>Le sens de synchro est-il bidirectionnel ?</strong> Si un candidat change de stage
+        dans l&apos;ATS, l&apos;outil de sourcing le sait-il ?
+      </li>
+      <li>
+        <strong>Les opt-outs RGPD remontent-ils ?</strong> Test à faire en démo.
+      </li>
+      <li>
+        <strong>Combien d&apos;intégrations ATS sont incluses dans le plan ?</strong> Une seule ?
+        Illimitées ?
+      </li>
+    </ol>
+
+    <h2>Coût caché d&apos;une intégration mal pensée</h2>
+    <p>
+      Une mauvaise intégration coûte cher : entre 4 et 8 heures hebdo de réconciliation par
+      recruteur, 12 à 20 % de candidats traités en double, et un risque RGPD non négligeable.
+      Multiplié par 5 recruteurs sur 12 mois, vous parlez de plus de 1 000 heures perdues — soit
+      l&apos;équivalent du salaire chargé d&apos;un demi-recruteur. La &quot;gratuité&quot; d&apos;un
+      outil sans intégration ATS native n&apos;est jamais vraiment gratuite. Pour creuser
+      l&apos;impact business, voyez notre article{" "}
+      <Link
+        href="/blog/automatiser-sourcing-sans-deshumaniser"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        automatiser le sourcing sans déshumaniser
+      </Link>
+      .
+    </p>
+
+    <h2>Plan d&apos;intégration en 4 étapes</h2>
+    <ol>
+      <li>
+        <strong>Semaine 1 — Audit du pipeline ATS actuel.</strong> Étapes, statuts, champs custom,
+        sources, règles GDPR.
+      </li>
+      <li>
+        <strong>Semaine 2 — Mapping et compte de service.</strong> Création du compte API
+        Greenhouse/Lever/Recruitee, mapping des étapes, choix des sources.
+      </li>
+      <li>
+        <strong>Semaine 3 — Tests sur 1 à 2 postes pilotes.</strong> Vérification doublons, opt-outs,
+        statut, sync interactions.
+      </li>
+      <li>
+        <strong>Semaine 4 — Rollout sur tous les postes ouverts.</strong> Formation recruteurs, plan
+        de monitoring hebdo.
+      </li>
+    </ol>
+
+    <h2>Conclusion : l&apos;intégration ATS, c&apos;est le multiplicateur</h2>
+    <p>
+      L&apos;<strong>intégration ATS sourcing</strong> n&apos;est pas un détail technique :
+      c&apos;est le facteur multiplicateur de votre stack. Un excellent outil de sourcing IA sans
+      intégration ATS produit du bruit. Avec intégration ATS native, il devient le moteur amont qui
+      rend votre pipeline existant 2 à 3 fois plus efficace. C&apos;est exactement ce que TrueCalling
+      a conçu avec ses intégrations natives Greenhouse, Lever, Recruitee, Teamtailor et Workable.
+    </p>
+    <p>
+      Pour voir l&apos;intégration en action avec votre ATS,{" "}
+      <Link href="/" className="text-accent underline-offset-4 hover:underline">
+        réservez une démo TrueCalling
+      </Link>
+      .
+    </p>
+
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+      <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
+      <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
+        Intégrez TrueCalling à votre ATS sans casser votre pipeline
+      </h3>
+      <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
+        On vous montre l&apos;intégration native Greenhouse, Lever, Recruitee ou Teamtailor — push,
+        sync, dédupe, opt-outs. Démo guidée de 20 à 30 minutes, sur votre vrai pipeline.
+      </p>
+      <div className="mt-5">
+        <Link
+          href="/reserver-une-demo"
+          className="inline-flex h-11 items-center gap-2 rounded-full bg-accent px-5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(233,30,140,0.35)] transition-colors hover:bg-accent/90 cursor-pointer"
+        >
+          Réserver une démo
+        </Link>
+      </div>
+    </div>
+  </>
+);
+
 export const articles: Article[] = [
+  {
+    slug: "generer-shortlist-candidats-ia-10-minutes",
+    canonicalId: "generate-candidate-shortlist-ai",
+    title: "Générer une shortlist de candidats avec l'IA en moins de 10 minutes : la méthode complète",
+    description:
+      "Générer une shortlist candidats IA en 10 minutes : méthode en 4 étapes, cas concret Senior PM en 8 minutes, et les 3 erreurs qui ruinent une shortlist.",
+    excerpt:
+      "Du brief à 14 candidats scorés en 8 minutes : la méthode complète pour générer une shortlist candidats IA actionnable, sans tomber dans le bruit.",
+    keyword: "générer shortlist candidats IA",
+    category: "Sourcing IA",
+    publishedAt: "2026-05-11",
+    readingMinutes: 7,
+    homepageAnchor: "Générer ma première shortlist avec TrueCalling",
+    content: Article11Content,
+  },
+  {
+    slug: "integration-ats-sourcing-ia-greenhouse-lever",
+    canonicalId: "ats-integration-ai-sourcing",
+    title: "Intégration ATS et sourcing IA : comment connecter Greenhouse, Lever ou Recruitee sans casser votre process",
+    description:
+      "Intégration ATS sourcing IA : ce qu'une bonne intégration doit faire, ce qui change avec Greenhouse, Lever, Recruitee, Teamtailor et Workable, et un plan d'intégration en 4 semaines.",
+    excerpt:
+      "Une intégration ATS sourcing bien faite récupère 4 heures hebdo par recruteur et passe le time-to-hire de 38 à 24 jours. Le guide complet pour 2026.",
+    keyword: "intégration ATS sourcing",
+    category: "Tooling",
+    publishedAt: "2026-05-05",
+    readingMinutes: 7,
+    homepageAnchor: "Voir l'intégration ATS TrueCalling",
+    content: Article12Content,
+  },
   {
     slug: "sourcing-ia-guide-2026",
     canonicalId: "ai-sourcing-guide-2026",
