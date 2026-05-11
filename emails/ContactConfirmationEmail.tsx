@@ -200,7 +200,7 @@ export function ContactConfirmationEmail({
   const dir = isRtl ? "rtl" : "ltr";
   const blogPath = data.locale === "fr" ? "/fr/blog" : "/en/blog";
   const homePath = `/${data.locale}`;
-  const supportEmail = "patrick@truecalling.ai";
+  const supportEmail = "contact@truecalling.ai";
   const firstName = firstNameFrom(data.name);
 
   return (

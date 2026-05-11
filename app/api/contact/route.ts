@@ -10,12 +10,13 @@ import { ContactConfirmationEmail } from "@/emails/ContactConfirmationEmail";
 /* ============================================================
    POST /api/contact
    Receives the lightweight contact-form payload, sends:
-     1. Internal notification → patrick@truecalling.ai
+     1. Internal notification → contact@truecalling.ai
      2. Localized auto-reply  → visitor
    ============================================================ */
 
-// Hardcoded per product spec — all contact form mail goes to Patrick.
-const CONTACT_RECIPIENT = "patrick@truecalling.ai";
+// Hardcoded per product spec — all contact form mail goes to the
+// general contact inbox.
+const CONTACT_RECIPIENT = "contact@truecalling.ai";
 
 const CONFIRMATION_SUBJECT_BY_LOCALE: Record<string, string> = {
   fr: "Votre message à TrueCalling — bien reçu",

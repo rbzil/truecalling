@@ -484,20 +484,20 @@ function SidePanel() {
     {
       icon: <MailIcon />,
       label: t("contact_channel_email"),
-      value: "patrick@truecalling.ai",
-      href: "mailto:patrick@truecalling.ai",
+      value: "contact@truecalling.ai",
+      href: "mailto:contact@truecalling.ai",
     },
     {
       icon: <SalesIcon />,
       label: t("contact_channel_sales"),
-      value: "alexandre@truecalling.ai",
-      href: "mailto:alexandre@truecalling.ai",
+      value: "sales@truecalling.ai",
+      href: "mailto:sales@truecalling.ai",
     },
     {
       icon: <SupportIcon />,
       label: t("contact_channel_support"),
-      value: "yarone@truecalling.ai",
-      href: "mailto:yarone@truecalling.ai",
+      value: "infos@truecalling.ai",
+      href: "mailto:infos@truecalling.ai",
     },
   ];
   return (
