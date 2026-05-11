@@ -3,7 +3,7 @@
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
-import { useT } from "../../_i18n/locale-context";
+import { useT, useLocale } from "../../_i18n/locale-context";
 import { Navbar } from "../../../components/SiteNavbar";
 
 /* ----- Animation primitives ----- */
@@ -78,6 +78,7 @@ function Section() {
 
 function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => void }) {
   const t = useT();
+  const { locale } = useLocale();
   const SUBJECTS = [
     t("contact_subj_product"),
     t("contact_subj_pricing"),
@@ -94,6 +95,7 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
   });
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setForm((s) => ({ ...s, [k]: v }));
@@ -113,9 +115,34 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
     ev.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 700));
-    setSubmitting(false);
-    onDone({ name: form.name, email: form.email });
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          subject: form.subject,
+          message: form.message.trim(),
+          honeypot: "",
+          locale,
+        }),
+      });
+      const body = (await res.json().catch(() => null)) as
+        | { success: boolean }
+        | null;
+      if (!res.ok || !body?.success) {
+        setSubmitError(t("contact_error_generic"));
+        setSubmitting(false);
+        return;
+      }
+      setSubmitting(false);
+      onDone({ name: form.name, email: form.email });
+    } catch {
+      setSubmitError(t("contact_error_generic"));
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -240,6 +267,16 @@ function FormCard({ onDone }: { onDone: (d: { name: string; email: string }) => 
             />
             {errors.message && <p className="mt-1.5 text-[11px] text-rose-400">{errors.message}</p>}
           </motion.div>
+
+          {submitError && (
+            <motion.div
+              variants={fadeUp}
+              role="alert"
+              className="rounded-lg border border-rose-500/40 bg-rose-500/10 px-3.5 py-2.5 text-[12.5px] text-rose-200"
+            >
+              {submitError}
+            </motion.div>
+          )}
 
           <motion.div
             variants={fadeUp}

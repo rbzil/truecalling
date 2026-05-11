@@ -287,6 +287,8 @@
   "contact_message_label": "Message",
   "contact_message_placeholder": "Your need, context, stack…",
   "contact_min_chars": "At least 10 characters",
+  "contact_error_generic": "Something went wrong. Please try again or write to patrick@truecalling.ai.",
+  "pricing_disclaimer": "Indicative prices, subject to change without notice. Regional pricing applies based on the billing country. Final pricing is set in the order form. E&OE.",
   "contact_no_resale": "Your data is never sold.",
   "contact_submit": "Send message",
   "contact_submitting": "Sending…",

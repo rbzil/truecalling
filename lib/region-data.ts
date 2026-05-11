@@ -20,11 +20,11 @@ export const REGION_PRICES: Record<
   Region,
   { starter: number; core: number; symbol: string; currency: string }
 > = {
-  EU:           { starter: 595, core: 895,  symbol: "€", currency: "EUR" },
-  US:           { starter: 795, core: 1095, symbol: "$", currency: "USD" },
-  APAC_PREMIUM: { starter: 695, core: 995,  symbol: "$", currency: "USD" },
-  APAC_VOLUME:  { starter: 495, core: 795,  symbol: "$", currency: "USD" },
-  AFRICA:       { starter: 395, core: 695,  symbol: "$", currency: "USD" },
+  EU:           { starter: 595, core: 895, symbol: "€", currency: "EUR" },
+  US:           { starter: 595, core: 895, symbol: "$", currency: "USD" },
+  APAC_PREMIUM: { starter: 695, core: 995, symbol: "$", currency: "USD" },
+  APAC_VOLUME:  { starter: 495, core: 795, symbol: "$", currency: "USD" },
+  AFRICA:       { starter: 395, core: 695, symbol: "$", currency: "USD" },
 };
 
 /** Render a tier amount with thousands grouping: 1095 -> "1,095". */
