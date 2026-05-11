@@ -57,7 +57,12 @@ export function websiteSchema() {
 }
 
 /** Home-page only. */
-export function softwareApplicationSchema(locale: Locale, description: string) {
+export function softwareApplicationSchema(
+  locale: Locale,
+  description: string,
+  offers?: { priceCurrency: string; lowPrice: number; highPrice: number },
+) {
+  const o = offers ?? { priceCurrency: "EUR", lowPrice: 595, highPrice: 895 };
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -71,9 +76,9 @@ export function softwareApplicationSchema(locale: Locale, description: string) {
     publisher: { "@id": ORG_ID },
     offers: {
       "@type": "AggregateOffer",
-      priceCurrency: "USD",
-      lowPrice: "595",
-      highPrice: "895",
+      priceCurrency: o.priceCurrency,
+      lowPrice: String(o.lowPrice),
+      highPrice: String(o.highPrice),
       offerCount: "3",
     },
   };

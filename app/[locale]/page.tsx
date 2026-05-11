@@ -11,6 +11,8 @@ import {
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useT, useLocalizedHref, useLocale } from "../_i18n/locale-context";
+import { useRegion } from "../_region/region-context";
+import { REGION_PRICES, formatPrice } from "@/lib/region-data";
 import { SITE_URL } from "@/lib/seo-metadata";
 import { getLocalizedPath, type Locale } from "@/lib/i18n-config";
 import { softwareApplicationSchema, breadcrumbSchema, jsonLd } from "@/lib/schema";
@@ -26,6 +28,8 @@ import { NewsletterPopup } from "../../components/NewsletterPopup";
 
 export default function Page() {
   const { locale, t } = useLocale();
+  const region = useRegion();
+  const regionPrices = REGION_PRICES[region];
   const description = `${t("hero_subtitle_line1")} ${t("hero_subtitle_line2")}`;
   const homeUrl = `${SITE_URL}${getLocalizedPath("home", locale)}`;
 
@@ -34,7 +38,13 @@ export default function Page() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: jsonLd(softwareApplicationSchema(locale, description)),
+          __html: jsonLd(
+            softwareApplicationSchema(locale, description, {
+              priceCurrency: regionPrices.currency,
+              lowPrice: regionPrices.starter,
+              highPrice: regionPrices.core,
+            }),
+          ),
         }}
       />
       <script
@@ -2630,12 +2640,13 @@ function XSmallIcon() {
 function Pricing() {
   const t = useT();
   const href = useLocalizedHref();
-  const [annual, setAnnual] = useState(false);
+  const region = useRegion();
+  const prices = REGION_PRICES[region];
 
   const TIERS = [
     {
       name: "Starter",
-      priceMonthly: 595 as number | null,
+      priceMonthly: prices.starter as number | null,
       tagline: t("starter_tagline"),
       features: [
         t("starter_f1"), t("starter_f2"), t("starter_f3"), t("starter_f4"),
@@ -2647,7 +2658,7 @@ function Pricing() {
     },
     {
       name: "Core",
-      priceMonthly: 895 as number | null,
+      priceMonthly: prices.core as number | null,
       tagline: t("core_tagline"),
       features: [t("core_f1"), t("core_f2"), t("core_f3"), t("core_f4")],
       cta: t("cta_book_demo"),
@@ -2683,10 +2694,6 @@ function Pricing() {
           <motion.p variants={fadeUp} className="mx-auto mt-5 max-w-xl text-lg text-ink-muted">
             {t("pricing_subtitle")}
           </motion.p>
-
-          <motion.div variants={fadeUp} className="mt-8 inline-flex items-center gap-3">
-            <BillingToggle annual={annual} onChange={setAnnual} />
-          </motion.div>
         </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-3 lg:items-stretch">
@@ -2717,7 +2724,7 @@ function Pricing() {
                 ) : (
                   <>
                     <span className="text-4xl font-semibold tracking-tighter2 sm:text-5xl">
-                      ${annual ? Math.round(tier.priceMonthly * 0.8) : tier.priceMonthly}
+                      {formatPrice(tier.priceMonthly, region)}
                     </span>
                     <span className="text-sm text-ink-muted">{t("pricing_per_user")}</span>
                   </>
@@ -2745,59 +2752,6 @@ function Pricing() {
         </div>
       </div>
     </section>
-  );
-}
-
-function BillingToggle({ annual, onChange }: { annual: boolean; onChange: (v: boolean) => void }) {
-  const t = useT();
-  return (
-    <div
-      role="radiogroup"
-      aria-label={t("pricing_billing_aria")}
-      className="inline-flex items-center gap-2 rounded-full border border-ink/[0.08] bg-ink/[0.03] p-1 backdrop-blur-md"
-    >
-      <button
-        type="button"
-        role="radio"
-        aria-checked={!annual}
-        onClick={() => onChange(false)}
-        className={`relative cursor-pointer rounded-full px-4 py-1.5 text-sm transition-colors ${
-          !annual ? "text-bg" : "text-ink-muted hover:text-ink"
-        }`}
-      >
-        {!annual && (
-          <motion.span
-            layoutId="bill-pill"
-            className="absolute inset-0 rounded-full bg-ink"
-            transition={{ type: "spring", stiffness: 300, damping: 28 }}
-          />
-        )}
-        <span className="relative">{t("pricing_monthly")}</span>
-      </button>
-      <button
-        type="button"
-        role="radio"
-        aria-checked={annual}
-        onClick={() => onChange(true)}
-        className={`relative cursor-pointer rounded-full px-4 py-1.5 text-sm transition-colors ${
-          annual ? "text-bg" : "text-ink-muted hover:text-ink"
-        }`}
-      >
-        {annual && (
-          <motion.span
-            layoutId="bill-pill"
-            className="absolute inset-0 rounded-full bg-ink"
-            transition={{ type: "spring", stiffness: 300, damping: 28 }}
-          />
-        )}
-        <span className="relative inline-flex items-center gap-1.5">
-          {t("pricing_annual")}
-          <span className="rounded-full bg-accent/15 px-1.5 py-0.5 text-[10px] font-semibold text-accent">
-            -20%
-          </span>
-        </span>
-      </button>
-    </div>
   );
 }
 
