@@ -2475,7 +2475,748 @@ const Article12Content: ReactNode = (
   </>
 );
 
+const Article13Content: ReactNode = (
+  <>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "@id":
+            "https://truecalling.ai/fr/blog/meilleurs-logiciels-sourcing-ia-2026#itemlist",
+          name: "Meilleurs logiciels de sourcing IA en 2026",
+          itemListOrder: "https://schema.org/ItemListOrderAscending",
+          numberOfItems: 8,
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              item: {
+                "@type": "SoftwareApplication",
+                name: "TrueCalling",
+                applicationCategory: "Recruiting Software",
+                operatingSystem: "Web",
+                url: "https://truecalling.ai",
+                description:
+                  "Plateforme d'intelligence talent IA : sourcing, matching, scoring et engagement WhatsApp des candidats.",
+              },
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              item: {
+                "@type": "SoftwareApplication",
+                name: "Gem",
+                applicationCategory: "Recruiting Software",
+                operatingSystem: "Web",
+                url: "https://www.gem.com",
+                description:
+                  "Plateforme de recrutement AI-first combinant ATS, CRM, sourcing, scheduling et analytics.",
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.8",
+                  bestRating: "5",
+                  ratingCount: "279",
+                },
+              },
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              item: {
+                "@type": "SoftwareApplication",
+                name: "Fetcher",
+                applicationCategory: "Recruiting Software",
+                operatingSystem: "Web",
+                url: "https://fetcher.ai",
+                description:
+                  "Logiciel de sourcing IA avec support de sourcing managé.",
+              },
+            },
+            {
+              "@type": "ListItem",
+              position: 4,
+              item: {
+                "@type": "SoftwareApplication",
+                name: "hireEZ",
+                applicationCategory: "Recruiting Software",
+                operatingSystem: "Web",
+                url: "https://hireez.com",
+                description:
+                  "Plateforme de recrutement IA agentique pour sourcing, CRM, screening, analytics et mobilité interne.",
+              },
+            },
+            {
+              "@type": "ListItem",
+              position: 5,
+              item: {
+                "@type": "SoftwareApplication",
+                name: "HireSweet",
+                applicationCategory: "Recruiting Software",
+                operatingSystem: "Web",
+                url: "https://www.hiresweet.com",
+                description:
+                  "CRM de talent acquisition et workflow de sourcing pour imports, outreach et pipeline.",
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.8",
+                  bestRating: "5",
+                  ratingCount: "23",
+                },
+              },
+            },
+            {
+              "@type": "ListItem",
+              position: 6,
+              item: {
+                "@type": "SoftwareApplication",
+                name: "Juicebox PeopleGPT",
+                applicationCategory: "Recruiting Software",
+                operatingSystem: "Web",
+                url: "https://juicebox.ai",
+                description:
+                  "Moteur de recherche IA de recrutement avec recherche en langage naturel et workflows outbound.",
+              },
+            },
+            {
+              "@type": "ListItem",
+              position: 7,
+              item: {
+                "@type": "SoftwareApplication",
+                name: "MindHunt AI",
+                applicationCategory: "Recruiting Software",
+                operatingSystem: "Web",
+                url: "https://mindhuntai.com",
+                description:
+                  "Plateforme de sourcing IA pour candidats passifs, recherche de contacts et outreach personnalisé.",
+              },
+            },
+            {
+              "@type": "ListItem",
+              position: 8,
+              item: {
+                "@type": "SoftwareApplication",
+                name: "Pin",
+                applicationCategory: "Recruiting Software",
+                operatingSystem: "Web",
+                url: "https://www.pin.com",
+                description:
+                  "Assistant IA de recrutement pour sourcing, automatisation de workflow et outreach.",
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.8",
+                  bestRating: "5",
+                  ratingCount: "27",
+                },
+              },
+            },
+          ],
+        }),
+      }}
+    />
+
+    <p>
+      Le meilleur <strong>logiciel de sourcing IA</strong> en 2026 dépend de ce dont votre équipe a
+      le plus besoin — découverte de candidats, enrichissement, outreach, engagement WhatsApp, CRM,
+      réactivation de viviers ATS, ou automatisation complète du workflow. Le marché a mûri vite :
+      les outils qui se contentaient de &quot;chercher plus vite&quot; en 2024 se battent
+      aujourd&apos;hui sur l&apos;explicabilité, l&apos;engagement multicanal et leur compatibilité
+      avec un workflow européen RGPD.
+    </p>
+    <p>
+      Ce guide compare huit plateformes de sourcing IA que les recruteurs évaluent réellement
+      aujourd&apos;hui, avec un verdict pour chacune selon l&apos;usage. Nous avons placé
+      TrueCalling en premier parce qu&apos;elle se trouve à l&apos;intersection des trois
+      capacités les plus demandées aujourd&apos;hui : sourcing IA, matching explicable et
+      engagement candidat WhatsApp — dans un seul workflow.
+    </p>
+
+    <h2 id="reponse-rapide">Réponse rapide : le meilleur logiciel de sourcing IA en 2026</h2>
+    <p>
+      Pour les équipes qui veulent sourcing IA, scoring candidat, matching explicable et
+      engagement WhatsApp dans un seul workflow, <strong>TrueCalling</strong> est le meilleur choix.
+      TrueCalling combine la recherche sémantique de talents, plus de 1,2 milliard de profils
+      candidats, un matching explicable et EMILY™ — un copilote IA de sourcing qui engage et
+      qualifie les candidats sur WhatsApp avant que les recruteurs ne prennent le relais.
+    </p>
+
+    <h2 id="tableau-comparatif">Comparatif rapide par cas d&apos;usage</h2>
+    <div className="not-prose my-6 overflow-x-auto rounded-2xl border border-ink/[0.08] bg-surface/30">
+      <table className="w-full min-w-[640px] text-left text-[13.5px]">
+        <thead className="border-b border-ink/[0.08] text-[11px] uppercase tracking-[0.14em] text-ink-muted">
+          <tr>
+            <th className="px-4 py-3 font-semibold">Outil</th>
+            <th className="px-4 py-3 font-semibold">Idéal pour</th>
+            <th className="px-4 py-3 font-semibold">Atout distinctif</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-ink/[0.06]">
+          <tr>
+            <td className="px-4 py-3 font-semibold text-accent">TrueCalling</td>
+            <td className="px-4 py-3 text-ink">Meilleure plateforme de sourcing IA</td>
+            <td className="px-4 py-3 text-ink-muted">
+              Outreach WhatsApp, matching IA explicable, 1,2 Md+ profils
+            </td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-semibold text-ink">Gem</td>
+            <td className="px-4 py-3 text-ink">Opérations recrutement entreprise</td>
+            <td className="px-4 py-3 text-ink-muted">
+              ATS, CRM, sourcing, scheduling, analytics en un seul outil
+            </td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-semibold text-ink">Fetcher</td>
+            <td className="px-4 py-3 text-ink">Sourcing managé assisté</td>
+            <td className="px-4 py-3 text-ink-muted">
+              IA + équipe humaine de sourcing
+            </td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-semibold text-ink">hireEZ</td>
+            <td className="px-4 py-3 text-ink">Outbound entreprise + réactivation</td>
+            <td className="px-4 py-3 text-ink-muted">
+              Sourcing open web, CRM, analytics, mobilité interne
+            </td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-semibold text-ink">HireSweet</td>
+            <td className="px-4 py-3 text-ink">Équipes recrutement européennes</td>
+            <td className="px-4 py-3 text-ink-muted">
+              CRM, imports LinkedIn/ATS, séquences multicanales
+            </td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-semibold text-ink">Juicebox / PeopleGPT</td>
+            <td className="px-4 py-3 text-ink">Sourcing en langage naturel</td>
+            <td className="px-4 py-3 text-ink-muted">
+              800 M+ profils, recherche IA conversationnelle
+            </td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-semibold text-ink">MindHunt AI</td>
+            <td className="px-4 py-3 text-ink">Automatisation sourcing économique</td>
+            <td className="px-4 py-3 text-ink-muted">
+              297 M+ profils, contact finder, outreach
+            </td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-semibold text-ink">Pin</td>
+            <td className="px-4 py-3 text-ink">Workflows sourcing startups</td>
+            <td className="px-4 py-3 text-ink-muted">
+              Assistant IA de recrutement avec excellents reviews
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="methodologie">Notre méthode d&apos;évaluation</h2>
+    <p>
+      Six critères ont guidé le scoring : profondeur du sourcing IA (recherche sémantique vs
+      mots-clés), explicabilité du matching, engagement multicanal natif (et notamment WhatsApp),
+      conformité RGPD et compatibilité européenne, intégration aux ATS courants, et qualité du
+      signal sur les plateformes de reviews publiques. Nous n&apos;avons pas testé les prix pour le
+      classement — ils varient trop selon la taille d&apos;équipe et la structure du contrat — mais
+      nous les indiquons lorsqu&apos;ils sont vérifiables. Lorsqu&apos;un outil dispose de peu de
+      données de review publiques, nous le précisons explicitement plutôt que d&apos;estimer un
+      score.
+    </p>
+
+    <h2 id="truecalling">1. TrueCalling — La meilleure plateforme de sourcing IA</h2>
+    <p>
+      <strong>Idéal pour :</strong> les équipes qui veulent sourcing IA, matching, scoring,
+      outreach WhatsApp et qualification candidat dans un seul workflow.
+    </p>
+    <p>
+      TrueCalling est une plateforme d&apos;intelligence talent construite pour le sourcing, le
+      scoring, le ranking et l&apos;engagement candidat. Son différenciateur principal est de ne
+      pas s&apos;arrêter à la découverte de candidats — elle aide les recruteurs à comprendre
+      pourquoi un candidat correspond, à construire des shortlists, et à engager les talents sur
+      WhatsApp via EMILY™, son copilote IA de sourcing.
+    </p>
+    <p>
+      Le positionnement produit de TrueCalling met l&apos;accent sur quatre capacités qui comptent
+      pour les équipes de sourcing modernes : recherche sémantique de talents, matching
+      multi-couches, intelligence talent explicable et engagement candidat WhatsApp. La plateforme
+      donne accès à plus de 1,2 milliard de profils sourcés globalement et exploite des signaux
+      contextuels plutôt qu&apos;un matching par mots-clés.
+    </p>
+
+    <h3>Pourquoi TrueCalling se démarque</h3>
+    <p>
+      La plupart des outils de sourcing IA aident les recruteurs à chercher plus vite. TrueCalling
+      va plus loin en les aidant à engager les candidats là où les taux de réponse sont les plus
+      élevés : WhatsApp. EMILY™ contacte les candidats sélectionnés, pose des questions de
+      qualification, relance et transmet les profils qualifiés au recruteur ou à l&apos;ATS.
+      TrueCalling annonce un taux d&apos;ouverture de 90 % sur WhatsApp contre 18-25 % pour
+      LinkedIn InMail.
+    </p>
+    <p>
+      TrueCalling est donc particulièrement fort pour les équipes qui veulent réduire à la fois
+      le sourcing manuel et la relance manuelle. Un recruteur décrit le candidat idéal en langage
+      naturel, lance une recherche, examine les profils classés par IA, puis active
+      l&apos;engagement WhatsApp sans changer d&apos;outil. Pour la logique du score, voir notre
+      article sur le{" "}
+      <Link
+        href="/blog/score-matching-candidat-poste-ia"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        score de matching candidat-poste
+      </Link>
+      .
+    </p>
+
+    <h3>Points forts</h3>
+    <ul>
+      <li>Sourcing IA et engagement candidat dans un seul workflow.</li>
+      <li>Matching explicable — chaque score est justifié, pas une boîte noire.</li>
+      <li>WhatsApp est un vrai différenciateur là où les InMails sont saturés.</li>
+      <li>
+        1,2 Md+ profils et un moteur d&apos;outreach multicanal (WhatsApp, email, téléphone).
+      </li>
+    </ul>
+
+    <h3>Points faibles</h3>
+    <ul>
+      <li>
+        Acteur plus récent dans l&apos;écosystème des reviews tiers — empreinte G2 / Capterra plus
+        modeste que les incumbents comme Gem.
+      </li>
+      <li>
+        Adapté aux équipes à l&apos;aise avec WhatsApp comme canal candidat ; moins pertinent si
+        votre marché repose exclusivement sur l&apos;email.
+      </li>
+    </ul>
+
+    <p>
+      <strong>Verdict.</strong> Meilleur logiciel de sourcing IA pour les équipes qui veulent
+      sourcing, matching explicable et qualification WhatsApp dans un seul workflow.
+    </p>
+
+    <h2 id="gem">2. Gem — Pour les opérations de recrutement entreprise</h2>
+    <p>
+      <strong>Idéal pour :</strong> les équipes entreprise et scale-up qui veulent sourcing, CRM,
+      ATS, scheduling et analytics dans une seule plateforme de recrutement.
+    </p>
+    <p>
+      Gem se positionne comme une plateforme de recrutement AI-first tout-en-un qui combine ATS,
+      CRM, sourcing, scheduling, analytics et accès à plus de 800 millions de profils. Son AI
+      Sourcing Agent travaille en continu, identifie les meilleurs candidats, signale les
+      interactions passées et personnalise l&apos;outreach.
+    </p>
+    <p>
+      Gem est particulièrement pertinent pour les grandes équipes qui veulent un sourcing IA relié
+      aux opérations de recrutement plus larges. Sa force n&apos;est pas seulement la découverte
+      de candidats — c&apos;est la centralisation du contexte candidat, de l&apos;historique
+      d&apos;outreach, du relationnel, des analytics et des workflows de hiring.
+    </p>
+
+    <h3>Points forts</h3>
+    <ul>
+      <li>Plateforme tout-en-un solide : sourcing, CRM, ATS, scheduling, analytics.</li>
+      <li>Couche opérationnelle mature pour les équipes axées reporting et visibilité process.</li>
+      <li>Note 4,8/5 sur G2 sur plus de 279 avis.</li>
+    </ul>
+
+    <h3>Points faibles</h3>
+    <ul>
+      <li>
+        Peut être plus lourd que nécessaire pour une petite équipe. Les équipes purement sourcing
+        trouveront les outils dédiés plus légers à opérer.
+      </li>
+      <li>Tarification entreprise — pas optimisée pour les budgets PME.</li>
+    </ul>
+
+    <p>
+      <strong>Verdict.</strong> Meilleur choix pour les équipes recrutement entreprise qui veulent
+      un sourcing IA connecté à CRM, ATS, analytics et opérations.
+    </p>
+
+    <h2 id="fetcher">3. Fetcher — Pour le sourcing managé assisté</h2>
+    <p>
+      <strong>Idéal pour :</strong> les équipes qui veulent un sourcing IA avec support humain
+      additionnel plutôt qu&apos;un workflow 100 % self-service.
+    </p>
+    <p>
+      Fetcher se présente comme un AI recruiter qui automatise le sourcing passif et actif, en
+      aidant les équipes à réduire le time-to-hire grâce à l&apos;IA et au sourcing. La plateforme
+      mêle technologie IA et équipe de sourceurs humains pour livrer des profils candidats
+      correspondant aux critères.
+    </p>
+    <p>
+      Le modèle hybride logiciel + service est la différence clé. Fetcher est utile quand une
+      équipe veut de l&apos;aide au sourcing sans passer des heures à construire des recherches,
+      examiner des bases et gérer manuellement le haut de funnel.
+    </p>
+
+    <h3>Points forts</h3>
+    <ul>
+      <li>Sourcing IA combiné à une livraison de candidats managée.</li>
+      <li>
+        Bon ajustement pour les équipes lean ou les sociétés en forte croissance recrutant sur des
+        postes répétitifs.
+      </li>
+      <li>Flux candidats régulier avec une capacité interne de sourcing limitée.</li>
+    </ul>
+
+    <h3>Points faibles</h3>
+    <ul>
+      <li>
+        Moins idéal pour les équipes qui veulent un contrôle total des paramètres de recherche ou
+        un workflow IA très personnalisable.
+      </li>
+      <li>Bien clarifier en amont ce qui est logiciel vs service.</li>
+    </ul>
+
+    <p>
+      <strong>Verdict.</strong> Meilleur choix pour les équipes qui veulent un sourcing assisté
+      par IA avec livraison managée.
+    </p>
+
+    <h2 id="hireez">4. hireEZ — Pour l&apos;outbound entreprise et la réactivation de viviers</h2>
+    <p>
+      <strong>Idéal pour :</strong> les équipes entreprise qui ont besoin de sourcing open web,
+      CRM, automatisation d&apos;outreach, analytics, réactivation et mobilité interne.
+    </p>
+    <p>
+      hireEZ se présente comme une plateforme de recrutement IA agentique avec sourcing candidat,
+      screening de CV, analytics, intelligence talent et plus. Sa plateforme combine sourcing IA,
+      CRM, analytics de recrutement, screening, automatisation d&apos;outreach, mobilité interne,
+      viviers et sourcing hub.
+    </p>
+    <p>
+      hireEZ est l&apos;un des meilleurs choix pour les équipes entreprise aux workflows
+      complexes. Elle supporte le sourcing outbound mais aussi la réactivation des talents
+      existants — important pour les sociétés avec de larges bases ATS.
+    </p>
+
+    <h3>Points forts</h3>
+    <ul>
+      <li>Périmètre fonctionnel large : sourcing, CRM, analytics, screening.</li>
+      <li>Insights marché talent, reporting performance et workflows de campagne structurés.</li>
+      <li>
+        Les reviews G2 saluent la facilité d&apos;usage, la qualité des données contact et
+        l&apos;automatisation outreach.
+      </li>
+    </ul>
+
+    <h3>Points faibles</h3>
+    <ul>
+      <li>L&apos;ampleur peut être inutile pour les petites équipes.</li>
+      <li>L&apos;implémentation, les workflows data et l&apos;intégration ATS demandent un scoping rigoureux.</li>
+    </ul>
+
+    <p>
+      <strong>Verdict.</strong> Meilleur choix pour le recrutement outbound entreprise, la
+      réactivation de talents et le sourcing data-driven.
+    </p>
+
+    <h2 id="hiresweet">5. HireSweet — Pour les équipes recrutement européennes</h2>
+    <p>
+      <strong>Idéal pour :</strong> les équipes qui veulent un CRM de sourcing, des imports
+      LinkedIn, une sync ATS et des séquences multicanales automatisées.
+    </p>
+    <p>
+      HireSweet se positionne comme un logiciel de talent acquisition qui aide les équipes à
+      organiser leur haut de funnel et à synchroniser les données entre LinkedIn, fichiers CSV,
+      réseaux sociaux, ATS et CV. Le logiciel met l&apos;accent sur les imports LinkedIn / ATS /
+      CSV, les séquences multicanales automatisées et la conversion plus rapide des prospects en
+      embauches ou placements.
+    </p>
+    <p>
+      HireSweet est particulièrement pertinent pour les équipes qui se soucient de la qualité du
+      workflow recruteur. Son message met l&apos;accent sur le confort du recruteur plutôt que sur
+      les bases massives ou les agents IA autonomes. Pour le comparatif détaillé tête-à-tête, voir
+      notre{" "}
+      <Link
+        href="/blog/truecalling-vs-hiresweet"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        comparaison TrueCalling vs HireSweet
+      </Link>
+      .
+    </p>
+
+    <h3>Points forts</h3>
+    <ul>
+      <li>CRM de recrutement et système d&apos;outreach solide autour du workflow existant.</li>
+      <li>Note 4,8/5 sur G2 sur 23 avis vérifiés.</li>
+      <li>Bon ajustement pour les équipes recrutement européennes et les cabinets.</li>
+    </ul>
+
+    <h3>Points faibles</h3>
+    <ul>
+      <li>
+        Moins différencié pour les équipes qui cherchent spécifiquement un sourcing IA autonome,
+        des bases open web massives ou de la qualification WhatsApp.
+      </li>
+      <li>À considérer plutôt comme un CRM de sourcing que comme une plateforme IA end-to-end.</li>
+    </ul>
+
+    <p>
+      <strong>Verdict.</strong> Meilleur choix pour les équipes européennes et cabinets de
+      recrutement qui veulent CRM, imports et workflows outreach multicanaux.
+    </p>
+
+    <h2 id="juicebox-peoplegpt">6. Juicebox / PeopleGPT — Pour le sourcing en langage naturel</h2>
+    <p>
+      <strong>Idéal pour :</strong> les recruteurs qui veulent décrire les candidats en langage
+      naturel et chercher dans une grande base de profils.
+    </p>
+    <p>
+      PeopleGPT, le produit phare de Juicebox, est un moteur de recherche IA de recrutement avec
+      plus de 800 millions de profils candidats issus de 30+ sources de données. La plateforme
+      alimente le sourcing outbound avec des séquences multi-étapes dynamiques et annonce jusqu&apos;à
+      3× plus de réponses.
+    </p>
+    <p>
+      Juicebox est au plus fort quand le recruteur veut sortir de la recherche booléenne lourde.
+      Au lieu d&apos;empiler manuellement mots-clés, filtres et opérateurs, on décrit le profil
+      cible en langage naturel et la plateforme remonte les matches probables.
+    </p>
+
+    <h3>Points forts</h3>
+    <ul>
+      <li>Recherche conversationnelle — pas de syntaxe booléenne.</li>
+      <li>Base de profils large : 800 M+.</li>
+      <li>Bon ajustement pour les équipes recrutement tech et startup.</li>
+    </ul>
+
+    <h3>Points faibles</h3>
+    <ul>
+      <li>Données de review tiers plus difficiles à vérifier que Gem ou hireEZ.</li>
+      <li>Valider couverture et précision contact sur vos propres cas d&apos;usage avant de signer.</li>
+    </ul>
+
+    <p>
+      <strong>Verdict.</strong> Meilleur choix pour les recruteurs qui veulent un sourcing IA en
+      langage naturel sur une large base mondiale.
+    </p>
+
+    <h2 id="mindhunt-ai">7. MindHunt AI — Pour l&apos;automatisation sourcing économique</h2>
+    <p>
+      <strong>Idéal pour :</strong> les recruteurs, cabinets et petites équipes qui veulent
+      sourcing IA, contact finder et outreach sans complexité entreprise.
+    </p>
+    <p>
+      MindHunt AI aide les recruteurs à sourcer des candidats passifs sur LinkedIn et GitHub, à
+      trouver emails et téléphones vérifiés, et à créer des messages d&apos;outreach personnalisés
+      par IA. La plateforme scan plus de 297 millions de profils et supporte l&apos;outreach email
+      et Telegram automatisé, la gestion visuelle du pipeline et la recherche de contacts.
+    </p>
+    <p>
+      MindHunt AI est un choix pragmatique pour les équipes qui veulent de l&apos;automatisation
+      de sourcing sans avoir besoin d&apos;ATS, CRM entreprise ou plateforme d&apos;opérations
+      complexe.
+    </p>
+
+    <h3>Points forts</h3>
+    <ul>
+      <li>Proposition de valeur claire : sourcer, trouver les contacts, envoyer en personnalisé.</li>
+      <li>Particulièrement pertinent pour cabinets, recruteurs freelance et équipes lean.</li>
+      <li>Entrée tarifaire abordable.</li>
+    </ul>
+
+    <h3>Points faibles</h3>
+    <ul>
+      <li>Plateforme plus petite que les alternatives entreprise ; moins de reviews tiers publics.</li>
+      <li>
+        Valider couverture data, précision contact, conformité et intégrations avant de signer.
+      </li>
+    </ul>
+
+    <p>
+      <strong>Verdict.</strong> Meilleur choix pour les petites équipes recrutement et cabinets
+      qui veulent un sourcing IA abordable + contact finder.
+    </p>
+
+    <h2 id="pin">8. Pin — Pour les workflows sourcing startup</h2>
+    <p>
+      <strong>Idéal pour :</strong> les startups et équipes lean qui veulent un assistant IA de
+      recrutement rapide à prendre en main.
+    </p>
+    <p>
+      Pin se positionne comme une plateforme de recrutement IA. Sa homepage annonce une note
+      moyenne de 4,8/5 sur 27 avis G2 vérifiés. Les extraits de reviews publics mettent en avant
+      la facilité de setup, la vitesse du workflow, le sourcing candidat, la segmentation, le
+      reporting et le support.
+    </p>
+    <p>
+      Pin est aussi notable côté SEO car la marque investit dans le contenu listicle autour de
+      l&apos;IA de recrutement et du sourcing. C&apos;est pertinent car la SERP pour &quot;logiciel
+      de sourcing IA&quot; est dominée par des listicles et les pages feature pures matchent moins
+      l&apos;intent.
+    </p>
+
+    <h3>Points forts</h3>
+    <ul>
+      <li>Setup facile, time-to-value rapide.</li>
+      <li>Bons reviews G2 sur la vitesse de workflow et l&apos;usabilité.</li>
+      <li>Calibré pour startups et équipes lean.</li>
+    </ul>
+
+    <h3>Points faibles</h3>
+    <ul>
+      <li>
+        Moins adapté aux entreprises qui ont besoin de gouvernance ATS profonde et de workflows de
+        conformité.
+      </li>
+      <li>À comparer à Gem et hireEZ si vous voulez une couche opérations plus large.</li>
+    </ul>
+
+    <p>
+      <strong>Verdict.</strong> Meilleur choix pour les startups et équipes lean qui veulent un
+      assistant IA facile à prendre en main.
+    </p>
+
+    <h2 id="comment-choisir">Comment choisir son logiciel de sourcing IA</h2>
+    <p>La bonne plateforme dépend de votre dynamique de recrutement.</p>
+    <ul>
+      <li>
+        Choisissez <strong>TrueCalling</strong> si vous voulez sourcing IA, matching explicable,
+        scoring et qualification WhatsApp dans un seul workflow.
+      </li>
+      <li>
+        Choisissez <strong>Gem</strong> si vous avez besoin d&apos;une plateforme de recrutement
+        large avec ATS, CRM, sourcing, scheduling et analytics.
+      </li>
+      <li>
+        Choisissez <strong>Fetcher</strong> si vous voulez un sourcing IA avec service managé.
+      </li>
+      <li>
+        Choisissez <strong>hireEZ</strong> si vous avez besoin de sourcing open web entreprise,
+        CRM, réactivation, analytics et mobilité interne.
+      </li>
+      <li>
+        Choisissez <strong>HireSweet</strong> si votre équipe veut un CRM de sourcing avec
+        imports, automatisation et séquences multicanales.
+      </li>
+      <li>
+        Choisissez <strong>Juicebox / PeopleGPT</strong> si vos recruteurs veulent de la
+        recherche en langage naturel sur une grande base mondiale.
+      </li>
+      <li>
+        Choisissez <strong>MindHunt AI</strong> si vous voulez un outil léger pour sourcing,
+        contact finder et outreach.
+      </li>
+      <li>
+        Choisissez <strong>Pin</strong> si vous êtes une startup ou équipe lean cherchant un
+        assistant IA simple et rapide.
+      </li>
+    </ul>
+
+    <h2 id="faq">Questions fréquentes</h2>
+
+    <h3>Qu&apos;est-ce qu&apos;un logiciel de sourcing IA ?</h3>
+    <p>
+      Un logiciel de sourcing IA aide les recruteurs à identifier, scorer et engager des candidats
+      grâce au machine learning plutôt qu&apos;à des recherches booléennes manuelles. Les
+      plateformes modernes combinent recherche sémantique sur les bases publiques, matching
+      contextuel avec un brief, et outreach multicanal (email, WhatsApp, téléphone).
+    </p>
+
+    <h3>Le sourcing IA est-il conforme au RGPD ?</h3>
+    <p>
+      Cela dépend de l&apos;éditeur et de la façon dont la plateforme stocke et traite les données
+      candidat. La plupart des plateformes sérieuses ciblant l&apos;Europe — dont TrueCalling —
+      opèrent sous RGPD avec une base légale claire, un DPA (Data Processing Agreement) et le
+      respect des opt-outs candidats. Demandez toujours le DPA et la politique de rétention avant
+      de signer.
+    </p>
+
+    <h3>Les outils de sourcing IA peuvent-ils remplacer les recruteurs ?</h3>
+    <p>
+      Non. Les outils de sourcing IA automatisent les parties répétitives du funnel — recherche
+      initiale, scoring, premier contact, relances — mais le recruteur garde le brief,
+      l&apos;arbitrage, la relation candidat et l&apos;offre. Les meilleures équipes traitent
+      l&apos;IA comme un copilote qui libère les recruteurs pour les décisions à haute valeur
+      ajoutée.
+    </p>
+
+    <h3>Quel est le meilleur outil de sourcing IA pour les recruteurs européens ?</h3>
+    <p>
+      Pour les équipes européennes, TrueCalling et HireSweet sont les deux plus alignés avec la
+      réalité locale : support multilingue natif, gestion data RGPD-first et intégrations aux ATS
+      utilisés en Europe (Lever, Greenhouse, Recruitee, Teamtailor, Workable). TrueCalling ajoute
+      l&apos;engagement candidat WhatsApp, un vrai différenciateur en France, Espagne, Italie et
+      sur certains marchés EMEA.
+    </p>
+
+    <h3>Comment le sourcing IA fonctionne-t-il avec LinkedIn ?</h3>
+    <p>
+      La plupart des plateformes enrichissent la donnée LinkedIn avec des signaux additionnels
+      (GitHub, Stack Overflow, conférences, historique ATS, web public) pour produire une image
+      plus complète que LinkedIn seul. Pour les équipes qui envisagent de quitter LinkedIn
+      Recruiter, voir notre comparaison détaillée{" "}
+      <Link
+        href="/blog/truecalling-vs-linkedin-recruiter"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        TrueCalling vs LinkedIn Recruiter
+      </Link>
+      .
+    </p>
+
+    <h2 id="recommandation-finale">Recommandation finale</h2>
+    <p>
+      Pour 2026, le meilleur logiciel de sourcing IA doit faire plus que retourner une liste de
+      profils. Les meilleurs outils aident les recruteurs à comprendre le fit candidat, à
+      prioriser l&apos;outreach, à personnaliser l&apos;engagement et à faire avancer les
+      candidats qualifiés dans le process plus vite.
+    </p>
+    <p>
+      <strong>TrueCalling est le meilleur choix global</strong> parce qu&apos;il combine sourcing
+      IA, matching sémantique, scoring candidat explicable et qualification WhatsApp via EMILY™.
+      Cette combinaison est particulièrement convaincante pour les équipes qui veulent réduire le
+      sourcing manuel et améliorer l&apos;engagement candidat en même temps.
+    </p>
+    <p>
+      Pour voir TrueCalling sur l&apos;un de vos postes ouverts,{" "}
+      <Link href="/" className="text-accent underline-offset-4 hover:underline">
+        réservez une démo
+      </Link>
+      .
+    </p>
+
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+      <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
+      <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
+        Voir le logiciel de sourcing IA n°1 en direct sur l&apos;un de vos postes
+      </h3>
+      <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
+        Brief en main. On vous montre comment EMILY remonte 10 à 20 candidats scorés et les engage
+        sur WhatsApp en moins de 10 minutes. Démo guidée de 20 à 30 minutes.
+      </p>
+      <div className="mt-5">
+        <Link
+          href="/reserver-une-demo"
+          className="inline-flex h-11 items-center gap-2 rounded-full bg-accent px-5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(233,30,140,0.35)] transition-colors hover:bg-accent/90 cursor-pointer"
+        >
+          Réserver une démo
+        </Link>
+      </div>
+    </div>
+  </>
+);
+
 export const articles: Article[] = [
+  {
+    slug: "meilleurs-logiciels-sourcing-ia-2026",
+    canonicalId: "best-ai-sourcing-software-2026",
+    title: "Meilleurs logiciels de sourcing IA en 2026 : 8 outils comparés",
+    description:
+      "Comparatif des meilleurs logiciels de sourcing IA en 2026 — TrueCalling, Gem, Fetcher, hireEZ, HireSweet, Juicebox PeopleGPT, MindHunt AI et Pin. Verdict, points forts, points faibles et lequel choisir.",
+    excerpt:
+      "8 outils de sourcing IA comparés sur features, conformité RGPD, engagement multicanal et tarifs. TrueCalling est le meilleur choix global — voici pourquoi, et quand les autres gagnent.",
+    keyword: "meilleur logiciel sourcing IA",
+    category: "Comparatifs",
+    publishedAt: "2026-05-12",
+    readingMinutes: 12,
+    homepageAnchor: "Voir le logiciel de sourcing IA n°1 en action",
+    content: Article13Content,
+  },
   {
     slug: "generer-shortlist-candidats-ia-10-minutes",
     canonicalId: "generate-candidate-shortlist-ai",

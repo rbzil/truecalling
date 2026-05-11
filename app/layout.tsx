@@ -42,7 +42,7 @@ const isProduction = process.env.VERCEL_ENV === "production";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: titleDefault, template: "%s · TrueCalling" },
+  title: { default: titleDefault, template: "TrueCalling · %s" },
   description,
   openGraph: {
     type: "website",

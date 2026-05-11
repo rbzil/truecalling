@@ -24,7 +24,10 @@ export async function generateMetadata({
   const alternates = buildAlternates("home", locale);
 
   return {
-    title: dict.hero_h1_a + " " + dict.hero_h1_b,
+    title: {
+      default: dict.hero_h1_a + " " + dict.hero_h1_b,
+      template: "TrueCalling · %s",
+    },
     description: dict.meta_description,
     alternates,
     openGraph: {
