@@ -13,7 +13,8 @@ import { subscribeToNewsletter } from "../app/actions/newsletter";
 
 /* ============================================================
    NewsletterPopup — auto-triggered modal with statistical hook
-   on the cost of bad hires + email signup (Beehiiv backend).
+   on the cost of bad hires + email signup (Supabase backend +
+   Resend welcome email).
 
    Triggers (whichever fires first):
    - 20s of presence on the page
@@ -35,7 +36,7 @@ const SCROLL_TRIGGER_PERCENT = 50;
 export function NewsletterPopup() {
   const t = useT();
   const href = useLocalizedHref();
-  const { isRTL } = useLocale();
+  const { locale, isRTL } = useLocale();
   const reduce = useReducedMotion();
 
   const [mounted, setMounted] = useState(false);
@@ -119,6 +120,8 @@ export function NewsletterPopup() {
     startTransition(async () => {
       const fd = new FormData();
       fd.append("email", email.trim());
+      fd.append("locale", locale);
+      fd.append("source", "popup_landing");
       const res = await subscribeToNewsletter(fd);
       setResult(res);
     });
