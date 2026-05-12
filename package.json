@@ -12,6 +12,7 @@
     "@formatjs/intl-localematcher": "^0.8.5",
     "@react-email/components": "^1.0.12",
     "@react-email/render": "^2.0.8",
+    "@supabase/supabase-js": "^2.105.4",
     "framer-motion": "^11.11.0",
     "lucide-react": "^1.14.0",
     "negotiator": "^1.0.0",
