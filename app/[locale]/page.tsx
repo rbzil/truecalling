@@ -1277,63 +1277,104 @@ function ATSBlock() {
           {/* TrueCalling node — shrink-0 so the logo column never
               compresses when the line stretches. */}
           <div className="flex shrink-0 flex-col items-center gap-2">
-            <span className="flex size-14 items-center justify-center rounded-xl bg-accent text-white shadow-[0_10px_30px_-8px_rgba(233,30,140,0.55)]">
-              <BoltIcon />
-            </span>
+            <div className="relative">
+              {/* Breathing halo behind the cube — pulses to suggest the
+                  node is "alive" and actively syncing. Offset to phase 0
+                  so it stays in sync with the right node. */}
+              <motion.span
+                aria-hidden
+                className="absolute -inset-1.5 rounded-2xl bg-accent/30"
+                style={{ filter: "blur(8px)" }}
+                animate={{ scale: [1, 1.18, 1], opacity: [0.35, 0.6, 0.35] }}
+                transition={{
+                  duration: 3.2,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                }}
+              />
+              <span className="relative flex size-14 items-center justify-center rounded-xl bg-accent text-white shadow-[0_10px_30px_-8px_rgba(233,30,140,0.55)]">
+                <BoltIcon />
+              </span>
+            </div>
             <div className="text-center">
               <div className="text-[14px] font-semibold">TrueCalling</div>
               <div className="text-[11.5px] text-ink-muted">{t("ats_node_tc_label")}</div>
             </div>
           </div>
 
-          {/* Animated sync line — 3 glowing pink dots flowing left to
-              right to evoke a continuous data stream between the
-              TrueCalling and ATS nodes. Width capped at 300px on sm+
-              so the line stays proportioned to the logos on wide
-              screens (was previously stretching to max-w-md = 448px,
-              which dwarfed the logos). */}
-          <div className="relative h-1.5 w-32 sm:w-auto sm:min-w-[80px] sm:max-w-[300px] sm:flex-1">
+          {/* Animated sync line — single gradient "scanner" that glides
+              across the rail with a soft trailing glow, evoking a
+              fiber-optic data pulse between TrueCalling and the ATS.
+              Replaces the previous 3-dot animation which read as too
+              decorative. Width capped at 300px on sm+ so the rail
+              stays proportioned to the logos on wide screens. */}
+          <div className="relative h-2 w-32 overflow-hidden rounded-full sm:w-auto sm:min-w-[80px] sm:max-w-[300px] sm:flex-1">
+            {/* Static rail — subtle base track */}
             <span
               aria-hidden
-              className="absolute inset-x-0 top-1/2 h-[2px] -translate-y-1/2 rounded-full"
+              className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 rounded-full bg-gradient-to-r from-transparent via-accent/25 to-transparent"
+            />
+            {/* Outer glow halo — wider, softer, trailing the scanner */}
+            <motion.span
+              aria-hidden
+              className="absolute top-1/2 h-2 w-24 -translate-y-1/2 rounded-full"
               style={{
                 background:
-                  "linear-gradient(90deg, transparent 0%, rgba(236,72,153,0.5) 50%, transparent 100%)",
+                  "radial-gradient(ellipse at center, rgba(233,30,140,0.55) 0%, rgba(233,30,140,0.18) 40%, transparent 70%)",
+                filter: "blur(2px)",
+              }}
+              initial={{ left: "-25%" }}
+              animate={{ left: "100%" }}
+              transition={{
+                duration: 3.2,
+                ease: [0.45, 0.05, 0.55, 0.95],
+                repeat: Infinity,
+                repeatDelay: 0.4,
               }}
             />
-            {[0, 0.83, 1.66].map((delay, i) => (
-              <motion.span
-                key={i}
-                aria-hidden
-                className="absolute size-1.5 rounded-full"
-                style={{
-                  top: "50%",
-                  background: "#ec4899",
-                  boxShadow:
-                    "0 0 8px #ec4899, 0 0 16px rgba(236,72,153,0.6)",
-                }}
-                initial={{ left: "0%", opacity: 0 }}
-                animate={{
-                  left: ["0%", "100%"],
-                  opacity: [0, 1, 1, 0],
-                  y: "-50%",
-                }}
-                transition={{
-                  duration: 2.5,
-                  ease: "linear",
-                  repeat: Infinity,
-                  delay,
-                  times: [0, 0.1, 0.9, 1],
-                }}
-              />
-            ))}
+            {/* Crisp inner pulse — bright thin core that leads */}
+            <motion.span
+              aria-hidden
+              className="absolute top-1/2 h-[2px] w-8 -translate-y-1/2 rounded-full"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent 0%, #ec4899 50%, transparent 100%)",
+                boxShadow: "0 0 12px rgba(233,30,140,0.85)",
+              }}
+              initial={{ left: "-8%" }}
+              animate={{ left: "100%" }}
+              transition={{
+                duration: 3.2,
+                ease: [0.45, 0.05, 0.55, 0.95],
+                repeat: Infinity,
+                repeatDelay: 0.4,
+              }}
+            />
           </div>
 
           {/* ATS node — shrink-0 so the logo column never compresses */}
           <div className="flex shrink-0 flex-col items-center gap-2">
-            <span className="flex size-14 items-center justify-center rounded-xl bg-accent text-[12px] font-bold text-white shadow-[0_10px_30px_-8px_rgba(233,30,140,0.55)]">
-              ATS
-            </span>
+            <div className="relative">
+              {/* Breathing halo behind the cube — phased by 1.6s
+                  (half the cycle) so it pulses opposite to the
+                  TrueCalling node, reinforcing the "data exchange"
+                  metaphor with the scanner line. */}
+              <motion.span
+                aria-hidden
+                className="absolute -inset-1.5 rounded-2xl bg-accent/30"
+                style={{ filter: "blur(8px)" }}
+                animate={{ scale: [1, 1.18, 1], opacity: [0.35, 0.6, 0.35] }}
+                transition={{
+                  duration: 3.2,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  delay: 1.6,
+                }}
+              />
+              <span className="relative flex size-14 items-center justify-center rounded-xl bg-accent text-[12px] font-bold text-white shadow-[0_10px_30px_-8px_rgba(233,30,140,0.55)]">
+                ATS
+              </span>
+            </div>
             <div className="text-center">
               <div className="text-[14px] font-semibold">ATS</div>
               <div className="text-[11.5px] text-ink-muted">{t("ats_node_ats_label")}</div>
