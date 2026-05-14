@@ -3201,7 +3201,513 @@ const Article13Content: ReactNode = (
   </>
 );
 
+const Article14Content: ReactNode = (
+  <>
+    <p>
+      Le <strong>sourcing passif</strong> est devenu le levier numéro un des équipes Talent en 2026.
+      Quand on sait que 73 % des professionnels actifs ne candidatent jamais spontanément aux offres
+      affichées, continuer à compter sur les candidats qui postulent revient à se priver des trois
+      quarts du marché. Ce guide explique ce qu&apos;est vraiment le sourcing passif aujourd&apos;hui,
+      pourquoi l&apos;IA change radicalement la donne, et la méthode pour engager efficacement des
+      candidats qui ne cherchent pas.
+    </p>
+
+    <h2>Sourcing passif : définition utile</h2>
+    <p>
+      Le <strong>sourcing passif</strong> consiste à identifier et engager des candidats qui ne sont
+      pas en recherche active de poste. Contrairement au sourcing actif (qui s&apos;adresse à des
+      candidats déjà sur le marché — réponse à une offre, mise à jour LinkedIn explicite,
+      candidature spontanée), le sourcing passif cible les profils satisfaits dans leur poste actuel
+      mais potentiellement ouverts à une bonne opportunité.
+    </p>
+    <p>
+      C&apos;est le pool le plus large et le plus stratégique du marché : moins concurrentiel, plus
+      qualitatif, mais aussi plus exigeant en méthode. Approcher un développeur senior heureux dans
+      sa scale-up n&apos;a rien à voir avec recontacter un candidat qui a postulé hier.
+    </p>
+
+    <h2>Les 4 niveaux d&apos;intention candidat</h2>
+    <p>
+      Avant de parler méthode, il faut distinguer 4 segments dans le pool passif :
+    </p>
+    <ol>
+      <li>
+        <strong>Heureux ferme.</strong> Aucune intention de bouger, signaux négatifs (promu
+        récemment, change de scope, lance un side project lié à son job). À éviter dans les
+        campagnes d&apos;outreach courtes.
+      </li>
+      <li>
+        <strong>Satisfait curieux.</strong> Pas en recherche, mais ouvert à une opportunité
+        spectaculaire. Représente ~40 % du pool passif. Cible principale du sourcing IA en 2026.
+      </li>
+      <li>
+        <strong>Latent.</strong> Frustration croissante sans recherche active. Signaux faibles :
+        commits open-source soudain plus nombreux, conférences extérieures, profil LinkedIn mis à
+        jour discrètement. Cible chaude.
+      </li>
+      <li>
+        <strong>Actif déguisé.</strong> Cherche mais ne le montre pas (peur d&apos;être repéré par
+        l&apos;employeur). 18 % du pool. Réagit très vite à un message bien tourné.
+      </li>
+    </ol>
+    <p>
+      Une plateforme de sourcing IA moderne distingue ces 4 niveaux en croisant signaux publics
+      (LinkedIn, GitHub, conférences, mises à jour de profil) et inférences ML. C&apos;est ce que
+      fait le score TrueFit 360 : pour chaque candidat, il estime non seulement la pertinence avec
+      le poste mais aussi le niveau d&apos;intention. Pour creuser, voyez notre article sur le{" "}
+      <Link
+        href="/blog/score-matching-candidat-poste-ia"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        score de matching candidat-poste
+      </Link>
+      .
+    </p>
+
+    <h2>Pourquoi l&apos;IA change tout en 2026</h2>
+    <p>
+      Le sourcing passif version 2018 — un recruteur, Boolean search LinkedIn, copier-coller du
+      même InMail à 100 profils — ne fonctionne plus. Trois raisons :
+    </p>
+    <ol>
+      <li>
+        <strong>Saturation de l&apos;InMail.</strong> Le taux de réponse moyen est passé de 22 % en
+        2018 à 8 % en 2026. Les profils tech reçoivent 12 à 18 InMails par semaine.
+      </li>
+      <li>
+        <strong>Augmentation des canaux.</strong> WhatsApp, email pro, GitHub, conférences,
+        podcasts : un candidat passif a 4 à 6 canaux actifs en moyenne, mais répond surtout sur
+        celui qu&apos;il préfère personnellement.
+      </li>
+      <li>
+        <strong>Exigence de personnalisation.</strong> Un message qui dit &quot;Bonjour Pierre,
+        j&apos;ai vu votre profil&quot; signale immédiatement le bot. Les meilleurs taux de réponse
+        sont désormais sur les messages qui référencent un signal récent et précis (commit, talk,
+        publication).
+      </li>
+    </ol>
+    <p>
+      L&apos;IA résout ces trois problèmes simultanément : elle trouve le bon canal candidat par
+      candidat, elle lit les signaux publics pour personnaliser à grande échelle, et elle évite
+      les canaux saturés. Sur WhatsApp, le taux d&apos;ouverture moyen reste à 90 % contre 20 %
+      pour l&apos;email — un écart qui change tout en sourcing passif.
+    </p>
+
+    <h2>La méthode TrueCalling en 5 étapes</h2>
+
+    <h3>Étape 1 — Définir le profil idéal en langage naturel (3 min)</h3>
+    <p>
+      Plus de booléen. Vous décrivez le poste comme à un collègue : séniorité, stack, secteur,
+      &quot;type de personne&quot; (startup vs scale-up, manager vs IC, etc.). EMILY traduit en
+      requête sémantique multi-sources.
+    </p>
+
+    <h3>Étape 2 — Laisser l&apos;IA explorer 1,2 milliard de profils (5 min)</h3>
+    <p>
+      Le moteur ne se limite pas à LinkedIn. Il croise GitHub, Stack Overflow, talks de
+      conférences, mentions presse et bases enrichies. C&apos;est crucial pour le sourcing passif :
+      les meilleurs profils sont rarement très actifs sur LinkedIn.
+    </p>
+
+    <h3>Étape 3 — Filtrer sur l&apos;intention, pas juste la pertinence</h3>
+    <p>
+      C&apos;est l&apos;étape qui distingue le sourcing passif amateur du professionnel. Vous
+      gardez les profils <strong>pertinents</strong> ET <strong>scorés comme satisfaits-curieux
+      ou latents</strong>. Les &quot;heureux fermes&quot; restent dans le vivier mais ne reçoivent
+      rien tout de suite.
+    </p>
+
+    <h3>Étape 4 — Personnaliser sur signal récent, pas sur titre de poste</h3>
+    <p>
+      Pour chaque candidat de votre shortlist, EMILY identifie un <strong>signal récent et
+      spécifique</strong> : commit sur tel repo open-source la semaine dernière, talk à telle
+      conférence, article publié, mise à jour de profil discrète. Le premier message référence ce
+      signal — c&apos;est ce qui transforme un message bot-like en conversation humaine.
+    </p>
+
+    <h3>Étape 5 — Multicanal et patient</h3>
+    <p>
+      Un candidat passif ne répond pas dans les 24 h. La séquence type qui convertit en 2026 :
+      WhatsApp (J0) → silence → email (J5) → silence → relance courte WhatsApp (J12). Stop dès la
+      première réponse positive. Pour creuser, voyez notre article{" "}
+      <Link
+        href="/blog/sourcing-multicanal-linkedin-ne-suffit-plus"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        sourcing multicanal au-delà de LinkedIn
+      </Link>
+      .
+    </p>
+
+    <h2>Cas concret : Senior Platform Engineer sourcé en 6 jours</h2>
+    <p>
+      Une scale-up B2B SaaS française cherche un Senior Platform Engineer Kubernetes, profil 7+ ans
+      d&apos;expérience, satisfait dans une scale-up parisienne. Sourcing 100 % passif :
+    </p>
+    <ul>
+      <li>Brief tapé en 3 minutes.</li>
+      <li>EMILY ramène 287 profils pertinents, 41 scorés satisfaits-curieux/latents.</li>
+      <li>Le recruteur garde 15 profils prioritaires.</li>
+      <li>EMILY rédige 15 messages WhatsApp référençant un signal récent.</li>
+      <li>9 réponses positives en 72 heures.</li>
+      <li>5 entretiens lancés.</li>
+      <li>Offre acceptée en 6 jours après le premier message.</li>
+    </ul>
+    <p>
+      Aucun de ces 15 candidats n&apos;avait postulé chez le client. Aucun n&apos;était en recherche
+      active. Le poste s&apos;est pourvu sans publier une seule offre publique.
+    </p>
+
+    <h2>Les 4 erreurs qui tuent le sourcing passif</h2>
+    <ol>
+      <li>
+        <strong>Templates identiques à toute la shortlist.</strong> Le candidat passif détecte
+        instantanément. Taux de réponse divisé par 4.
+      </li>
+      <li>
+        <strong>Ouverture trop directe.</strong> &quot;On recrute un Senior Engineer chez X, ça te
+        dit ?&quot; — le candidat passif n&apos;est pas en mode candidature, il ferme. Mieux :
+        contexte, signal, question ouverte.
+      </li>
+      <li>
+        <strong>Pression et relances agressives.</strong> Un candidat satisfait-curieux a besoin
+        de temps. Plus de 3 messages sans réponse = arrêt.
+      </li>
+      <li>
+        <strong>Ignorer le canal préféré.</strong> Continuer à InMailer un développeur qui
+        n&apos;ouvre plus LinkedIn, c&apos;est du temps perdu. Tester WhatsApp et email pro change
+        tout.
+      </li>
+    </ol>
+
+    <h2>Mesurer la performance d&apos;une campagne de sourcing passif</h2>
+    <p>
+      Les KPIs ne sont pas les mêmes qu&apos;en sourcing actif. Ce qu&apos;il faut suivre :
+    </p>
+    <ul>
+      <li>
+        <strong>Taux de réponse positif</strong> : objectif {">"} 35 % en sourcing passif IA bien
+        fait, vs 12 % en sourcing passif manuel.
+      </li>
+      <li>
+        <strong>Taux d&apos;ouverture par canal</strong> : WhatsApp {">"} 85 %, email pro {">"} 35
+        %, LinkedIn InMail {">"} 15 %.
+      </li>
+      <li>
+        <strong>Temps moyen au premier entretien</strong> : objectif {"<"} 8 jours.
+      </li>
+      <li>
+        <strong>Taux de désabonnement / plaintes</strong> : doit rester {"<"} 1 %.
+      </li>
+      <li>
+        <strong>Net Promoter Score candidat</strong> : interrogez-les après le process.
+      </li>
+    </ul>
+
+    <h2>Sourcing passif et RGPD : ce qu&apos;il faut respecter</h2>
+    <p>
+      Approcher un candidat passif via ses coordonnées professionnelles est légitime sous le RGPD
+      (intérêt légitime + finalité de recrutement), à condition de :
+    </p>
+    <ol>
+      <li>
+        Mentionner clairement la source dès le premier contact (&quot;j&apos;ai vu votre profil sur
+        LinkedIn / GitHub / etc.&quot;).
+      </li>
+      <li>Offrir un opt-out immédiat et visible.</li>
+      <li>
+        Ne pas stocker les données au-delà du nécessaire (typiquement 12 mois après la dernière
+        interaction).
+      </li>
+      <li>Pouvoir répondre à une demande d&apos;accès / suppression sous 30 jours.</li>
+    </ol>
+    <p>
+      Pour creuser l&apos;angle conformité, voyez notre article sur le{" "}
+      <Link
+        href="/blog/recrutement-whatsapp-rgpd-2026"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        recrutement WhatsApp et le RGPD
+      </Link>
+      .
+    </p>
+
+    <h2>Conclusion : le sourcing passif est devenu le sourcing tout court</h2>
+    <p>
+      En 2026, distinguer sourcing passif et actif a de moins en moins de sens. Les meilleures
+      équipes Talent traitent <strong>tous</strong> les candidats comme passifs par défaut :
+      personnalisation forte, multicanal, patience, respect du signal d&apos;intention. C&apos;est
+      ce qui fait passer les taux de réponse de 8 % à 35 %+ et le time-to-hire de 35 jours à 18
+      jours.
+    </p>
+    <p>
+      Pour voir TrueCalling sourcer des candidats passifs sur l&apos;un de vos vrais postes,{" "}
+      <Link href="/" className="text-accent underline-offset-4 hover:underline">
+        réservez une démo
+      </Link>
+      .
+    </p>
+
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+      <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
+      <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
+        Toucher des candidats qui ne cherchent pas, sur un de vos vrais postes
+      </h3>
+      <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
+        On vous montre comment EMILY identifie les candidats passifs satisfaits-curieux, personnalise
+        le premier message sur un signal récent et déclenche la conversation sur WhatsApp. Démo
+        guidée 20 à 30 min.
+      </p>
+      <div className="mt-5">
+        <Link
+          href="/reserver-une-demo"
+          className="inline-flex h-11 items-center gap-2 rounded-full bg-accent px-5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(233,30,140,0.35)] transition-colors hover:bg-accent/90 cursor-pointer"
+        >
+          Réserver une démo
+        </Link>
+      </div>
+    </div>
+  </>
+);
+
+const Article15Content: ReactNode = (
+  <>
+    <p>
+      Le recrutement IA a quitté la phase &quot;hype et expérimentation&quot; en 2024 pour entrer
+      en production massive en 2026. Les équipes Talent qui restent sur les méthodes 2022 paient
+      désormais un coût visible : time-to-hire deux fois plus long, taux de réponse divisé par
+      trois, profils ratés au profit de concurrents équipés. Voici les 7 mouvements à connaître
+      pour ne pas se faire distancer cette année.
+    </p>
+
+    <h2>1. La fin de l&apos;InMail comme canal dominant</h2>
+    <p>
+      Les chiffres 2026 sont sans appel : le taux de réponse moyen aux InMails LinkedIn est tombé à
+      8 %, contre 22 % en 2018. Les profils tech reçoivent 12 à 18 InMails par semaine — plus
+      personne ne les ouvre vraiment. À l&apos;inverse, WhatsApp affiche 90 % d&apos;ouverture sur
+      les messages de recrutement bien faits.
+    </p>
+    <p>
+      Le shift n&apos;est pas en cours : il est consommé. Les équipes qui restent 100 % LinkedIn en
+      2026 capturent les candidats déjà saturés par tout le monde. Pour creuser, voyez notre
+      article{" "}
+      <Link
+        href="/blog/sourcing-multicanal-linkedin-ne-suffit-plus"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        pourquoi LinkedIn seul ne suffit plus
+      </Link>
+      .
+    </p>
+
+    <h2>2. Le copilote IA remplace l&apos;agent IA autonome</h2>
+    <p>
+      2024 a vu fleurir les promesses d&apos;<strong>agents IA</strong> autonomes qui sourcent,
+      qualifient et embauchent à votre place. En 2026, le pendule est revenu : les meilleures
+      équipes Talent ont compris que l&apos;autonomie totale produit des erreurs coûteuses
+      (candidats mal qualifiés, messages bot-like, biais non détectés) et préfèrent le modèle{" "}
+      <strong>copilote</strong> : l&apos;IA fait 80 % du travail répétitif, le recruteur garde
+      l&apos;arbitrage final.
+    </p>
+    <p>
+      C&apos;est exactement le positionnement d&apos;EMILY chez TrueCalling. Pour la nuance entre
+      les deux modèles, voyez notre article sur l&apos;{" "}
+      <Link
+        href="/blog/agent-ia-sourcing-nouveau-standard"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        agent IA sourcing
+      </Link>
+      .
+    </p>
+
+    <h2>3. Le matching explicable devient la norme</h2>
+    <p>
+      Les outils de sourcing IA qui scoraient les candidats sans expliquer comment se font éjecter
+      en 2026. Trois forces convergent :
+    </p>
+    <ul>
+      <li>
+        <strong>Pression réglementaire EU AI Act</strong> : les systèmes de scoring candidat sont
+        classés &quot;high risk&quot; et doivent être auditables.
+      </li>
+      <li>
+        <strong>Demande recruteur</strong> : impossible de défendre une shortlist auprès du hiring
+        manager si on ne peut pas expliquer pourquoi un candidat est à 87/100.
+      </li>
+      <li>
+        <strong>Risque juridique</strong> : un biais non détectable dans un système opaque expose
+        à un risque discrimination significatif.
+      </li>
+    </ul>
+    <p>
+      Le score TrueFit 360 répond à cette exigence : chaque ligne du score se déplie. Voyez notre
+      article{" "}
+      <Link
+        href="/blog/score-matching-candidat-poste-ia"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        score de matching candidat-poste
+      </Link>
+      .
+    </p>
+
+    <h2>4. Le sourcing passif devient le sourcing par défaut</h2>
+    <p>
+      73 % des professionnels actifs ne candidatent jamais aux offres affichées. Continuer à miser
+      sur les candidatures spontanées en 2026, c&apos;est se priver des trois quarts du marché.
+      Toutes les équipes Talent performantes traitent désormais <strong>chaque candidat comme
+      passif par défaut</strong> : personnalisation forte, multicanal, patience, respect du signal
+      d&apos;intention. Pour creuser, voyez notre guide{" "}
+      <Link
+        href="/blog/sourcing-passif-candidats-non-actifs"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        sourcing passif
+      </Link>
+      .
+    </p>
+
+    <h2>5. WhatsApp prend la place d&apos;email pour l&apos;outreach candidat</h2>
+    <p>
+      En 2026, WhatsApp n&apos;est plus un canal &quot;émergent&quot; : c&apos;est <strong>le
+      canal principal</strong> pour le premier contact candidat sur le marché européen. Les
+      chiffres consolidés :
+    </p>
+    <ul>
+      <li>90 % de taux d&apos;ouverture (vs 20 % email, 8 % InMail).</li>
+      <li>Réponse médiane sous 4 heures (vs 32 heures email, 5 jours InMail).</li>
+      <li>Taux de réponse positif x 3 sur WhatsApp vs email pro pour le même candidat.</li>
+    </ul>
+    <p>
+      Le RGPD ne bloque pas WhatsApp en recrutement, il l&apos;encadre. Pour la liste des règles à
+      respecter, voyez notre article{" "}
+      <Link
+        href="/blog/recrutement-whatsapp-rgpd-2026"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        recrutement WhatsApp et RGPD
+      </Link>
+      .
+    </p>
+
+    <h2>6. La consolidation ATS + sourcing IA s&apos;accélère</h2>
+    <p>
+      Les équipes Talent qui faisaient cohabiter un ATS (Greenhouse, Lever, Recruitee) et un outil
+      de sourcing en silo ont compris en 2026 que le coût caché de la non-intégration est énorme :
+      35 % de candidats sourcés en double, 4 à 8 heures hebdo de réconciliation manuelle, risque
+      RGPD non négligeable.
+    </p>
+    <p>
+      Le standard 2026 : sourcing IA <strong>nativement intégré à l&apos;ATS</strong> via API
+      (Harvest pour Greenhouse, API REST pour Lever, etc.), sync bidirectionnelle, déduplication
+      automatique, opt-outs RGPD synchronisés. Pour creuser la mise en place,{" "}
+      <Link
+        href="/blog/integration-ats-sourcing-ia-greenhouse-lever"
+        className="text-accent underline-offset-4 hover:underline"
+      >
+        notre guide d&apos;intégration ATS
+      </Link>{" "}
+      détaille les 4 semaines de rollout.
+    </p>
+
+    <h2>7. La tarification régionale et la transparence prix montent en pression</h2>
+    <p>
+      Sur 2024-2025, les éditeurs SaaS recrutement appliquaient une grille unique mondiale (souvent
+      basée sur les prix US). En 2026, la pression buyers européens, APAC et Africa a forcé
+      l&apos;adoption d&apos;une <strong>tarification régionale</strong> : Europe à parité USD/EUR,
+      APAC en gamme intermédiaire, Afrique nettement en-dessous. La transparence prix progresse
+      aussi : les pages tarifs publiques avec montants chiffrés (pas seulement &quot;sur
+      devis&quot;) sont passées de 30 % à 65 % des outils du secteur en 18 mois.
+    </p>
+
+    <h2>Bonus : 3 mouvements à surveiller pour 2027</h2>
+    <ul>
+      <li>
+        <strong>Le scoring d&apos;intention candidat en temps réel</strong> : prédire la
+        probabilité qu&apos;un candidat satisfait-curieux devienne actif sous 90 jours, à partir
+        de signaux publics.
+      </li>
+      <li>
+        <strong>L&apos;outreach vocal automatisé</strong> : les premiers tests d&apos;agents
+        vocaux IA pour le premier contact candidat montrent des résultats prometteurs sur certains
+        secteurs (terrain, retail).
+      </li>
+      <li>
+        <strong>La régulation EU AI Act pleinement appliquée</strong> : à partir d&apos;août 2027,
+        les obligations transparence et audit deviennent contrôlables. Les outils non conformes
+        seront bannis du marché européen.
+      </li>
+    </ul>
+
+    <h2>Conclusion : 2026 est l&apos;année de la production</h2>
+    <p>
+      Si 2024 était l&apos;année de l&apos;expérimentation et 2025 celle des early adopters, 2026
+      est l&apos;année où le recrutement IA devient le standard B2B SaaS. Rester sur des méthodes
+      antérieures coûte désormais visible : candidats ratés, équipes Talent débordées, time-to-hire
+      qui dérive. Les 7 mouvements ci-dessus ne sont pas optionnels, ce sont des prérequis pour
+      rester compétitif.
+    </p>
+    <p>
+      Pour voir comment TrueCalling intègre ces 7 mouvements dans un workflow unique,{" "}
+      <Link href="/" className="text-accent underline-offset-4 hover:underline">
+        réservez une démo
+      </Link>
+      .
+    </p>
+
+    <div className="not-prose mt-12 rounded-2xl border border-ink/[0.08] bg-surface/40 p-7 backdrop-blur-md">
+      <div className="text-[11px] uppercase tracking-[0.2em] text-accent">Passez à l&apos;action</div>
+      <h3 className="mt-2 text-2xl font-semibold tracking-tight text-ink">
+        Mettre votre stack au niveau 2026 sur un de vos vrais postes
+      </h3>
+      <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
+        Brief en main, on vous montre les 7 mouvements en action : copilote IA, matching
+        explicable, sourcing passif, WhatsApp, intégration ATS. Démo guidée 20 à 30 min.
+      </p>
+      <div className="mt-5">
+        <Link
+          href="/reserver-une-demo"
+          className="inline-flex h-11 items-center gap-2 rounded-full bg-accent px-5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(233,30,140,0.35)] transition-colors hover:bg-accent/90 cursor-pointer"
+        >
+          Réserver une démo
+        </Link>
+      </div>
+    </div>
+  </>
+);
+
 export const articles: Article[] = [
+  {
+    slug: "sourcing-passif-candidats-non-actifs",
+    canonicalId: "passive-candidate-sourcing-2026",
+    title: "Sourcing passif en 2026 : comment toucher les candidats qui ne cherchent pas",
+    description:
+      "Sourcing passif IA : méthode TrueCalling en 5 étapes pour identifier et engager les candidats satisfaits mais ouverts, avec cas concret Senior Platform Engineer sourcé en 6 jours.",
+    excerpt:
+      "73 % des actifs ne candidatent jamais. La méthode complète pour les atteindre quand même : 4 niveaux d'intention, signal récent, WhatsApp, et 35 %+ de taux de réponse.",
+    keyword: "sourcing passif",
+    category: "Sourcing IA",
+    publishedAt: "2026-05-13",
+    readingMinutes: 8,
+    homepageAnchor: "Sourcer des candidats passifs avec TrueCalling",
+    content: Article14Content,
+  },
+  {
+    slug: "tendances-recrutement-ia-2026",
+    canonicalId: "ai-recruiting-trends-2026",
+    title: "Tendances recrutement IA 2026 : 7 mouvements à connaître pour ne pas se faire distancer",
+    description:
+      "7 tendances recrutement IA 2026 : fin de l'InMail, copilote vs agent IA, matching explicable, sourcing passif par défaut, WhatsApp, intégration ATS native, tarification régionale.",
+    excerpt:
+      "2026 est l'année de la production massive du recrutement IA. Les 7 mouvements à connaître pour rester compétitif et les 3 à surveiller pour 2027.",
+    keyword: "tendances recrutement IA 2026",
+    category: "Sourcing IA",
+    publishedAt: "2026-05-12",
+    readingMinutes: 8,
+    homepageAnchor: "Voir les 7 mouvements 2026 en action avec TrueCalling",
+    content: Article15Content,
+  },
   {
     slug: "meilleurs-logiciels-sourcing-ia-2026",
     canonicalId: "best-ai-sourcing-software-2026",
