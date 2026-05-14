@@ -1,6 +1,7 @@
 "use server";
 
 import { z } from "zod";
+import { headers } from "next/headers";
 import { Resend } from "resend";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { NewsletterWelcomeEmail } from "@/emails/NewsletterWelcomeEmail";
@@ -59,6 +60,15 @@ export async function subscribeToNewsletter(
     return { success: false, error: "GENERIC" };
   }
 
+  // Capture lightweight context. We deliberately do NOT store the raw
+  // IP (GDPR — personal data, requires legal basis + retention policy).
+  // The two-letter country code from the edge is enough for analytics
+  // and is considered non-identifying.
+  const h = headers();
+  const ipCountry =
+    h.get("x-vercel-ip-country") || h.get("cf-ipcountry") || null;
+  const userAgent = h.get("user-agent") || null;
+
   // Upsert behavior: store every signup attempt, but never duplicate
   // an email (unique index on lower(email) in the DB). If they already
   // exist, the conflict is swallowed silently — we still consider the
@@ -72,6 +82,8 @@ export async function subscribeToNewsletter(
       utm_source: "popup_landing",
       utm_medium: "website",
       utm_campaign: "newsletter_signup",
+      ip_country: ipCountry,
+      user_agent: userAgent,
     });
 
   if (error) {
